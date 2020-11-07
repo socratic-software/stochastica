@@ -1,0 +1,1662 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <meta name="author" content="I.T. Young & R. Ligteringen">
+      
+      <link rel="shortcut icon" href="images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.0.2">
+    
+    
+      
+        <title>6. Filtering of Stochastic Signals - Introduction to Stochastic Signal Processing</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.38780c08.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.3f72e892.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Georgia:300,400,400i,700%7CCourier&display=fallback">
+        <style>body,input{font-family:"Georgia",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Courier",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="css/extra.css">
+    
+      <link rel="stylesheet" href="css/imgtxt.css">
+    
+      <link rel="stylesheet" href="css/tables.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#filtering-of-stochastic-signals" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <!-- Application header -->
+<header class="md-header" data-md-component="header">
+
+  <!-- Top-level navigation -->
+  <nav class="md-header-nav md-grid" aria-label="Header">
+
+    <!-- Link to home -->
+    <a
+      href="."
+      title="Introduction to Stochastic Signal Processing"
+      class="md-header-nav__button md-logo"
+      aria-label="Introduction to Stochastic Signal Processing"
+    >
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+<!-- 
+  Insert an <img> here as an alternative for the standard logo if desired.
+  Then comment out the above two lines
+ <img src="images/favicon.png" style="margin-top:5px; border: 0px solid lime; border-radius:5px; width:120%; height: auto;" />
+ -->
+
+    </a>
+
+    <!-- Button to open drawer -->
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+
+    <!-- Header title -->
+    <div class="md-header-nav__title" data-md-component="header-title">
+          
+            
+              <a href="#jumpToBottom">
+                <span class="md-header-nav__topic">
+                  Introduction to Stochastic Signal Processing
+                </span>
+                <span class="md-header-nav__topic">
+                  6. Filtering of Stochastic Signals
+                </span>
+              </a>
+            
+          
+    </div>
+
+    <!-- Button to open search dialogue -->
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+
+      <!-- Search interface -->
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    <!-- Repository containing source -->
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Introduction to Stochastic Signal Processing" class="md-nav__button md-logo" aria-label="Introduction to Stochastic Signal Processing">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+<!-- 
+  Insert an <img> here as an alternative for the standard logo if desired.
+  Then comment out the above two lines
+ <img src="images/favicon.png" style="margin-top:5px; border: 0px solid lime; border-radius:5px; width:120%; height: auto;" />
+ -->
+
+    </a>
+    Introduction to Stochastic Signal Processing
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_1.html" class="md-nav__link">
+      1. How to use this iBook
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_2.html" class="md-nav__link">
+      2. Prologue
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_3.html" class="md-nav__link">
+      3. Introduction
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_4.html" class="md-nav__link">
+      4. Characterization of Random Signals
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_5.html" class="md-nav__link">
+      5. Correlations and Spectra
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        6. Filtering of Stochastic Signals
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="Chap_6.html" class="md-nav__link md-nav__link--active">
+      6. Filtering of Stochastic Signals
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#interpretation-of-the-convolution-result" class="md-nav__link">
+    Interpretation of the convolution result
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-mean" class="md-nav__link">
+    The mean
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-autocorrelation-function" class="md-nav__link">
+    The autocorrelation function
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-cross-correlation-function" class="md-nav__link">
+    The cross-correlation function
+  </a>
+  
+    <nav class="md-nav" aria-label="The cross-correlation function">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-a-world-of-random-events-a-case-study" class="md-nav__link">
+    Example: A world of random events - a case study
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problems" class="md-nav__link">
+    Problems
+  </a>
+  
+    <nav class="md-nav" aria-label="Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-61" class="md-nav__link">
+    Problem 6.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-62" class="md-nav__link">
+    Problem 6.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-63" class="md-nav__link">
+    Problem 6.3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-64" class="md-nav__link">
+    Problem 6.4
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-65" class="md-nav__link">
+    Problem 6.5
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-66" class="md-nav__link">
+    Problem 6.6
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#laboratory-exercises" class="md-nav__link">
+    Laboratory Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Laboratory Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-61" class="md-nav__link">
+    Laboratory Exercise 6.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-62" class="md-nav__link">
+    Laboratory Exercise 6.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-63" class="md-nav__link">
+    Laboratory Exercise 6.3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-64" class="md-nav__link">
+    Laboratory Exercise 6.4
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-65" class="md-nav__link">
+    Laboratory Exercise 6.5
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-66" class="md-nav__link">
+    Laboratory Exercise 6.6
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-67" class="md-nav__link">
+    Laboratory Exercise 6.7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-68" class="md-nav__link">
+    Laboratory Exercise 6.8
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_7.html" class="md-nav__link">
+      7. The Langevin Equation – A Case Study
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_8.html" class="md-nav__link">
+      8. Characterizing Signal-to-Noise Ratios
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_9.html" class="md-nav__link">
+      9. The Matched Filter
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_10.html" class="md-nav__link">
+      10. The Wiener filter
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_11.html" class="md-nav__link">
+      11. Aspects of Estimation
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_12.html" class="md-nav__link">
+      12. Spectral Estimation
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_13.html" class="md-nav__link">
+      Appendices
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="info.html" class="md-nav__link">
+      Information
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#interpretation-of-the-convolution-result" class="md-nav__link">
+    Interpretation of the convolution result
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-mean" class="md-nav__link">
+    The mean
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-autocorrelation-function" class="md-nav__link">
+    The autocorrelation function
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-cross-correlation-function" class="md-nav__link">
+    The cross-correlation function
+  </a>
+  
+    <nav class="md-nav" aria-label="The cross-correlation function">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-a-world-of-random-events-a-case-study" class="md-nav__link">
+    Example: A world of random events - a case study
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problems" class="md-nav__link">
+    Problems
+  </a>
+  
+    <nav class="md-nav" aria-label="Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-61" class="md-nav__link">
+    Problem 6.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-62" class="md-nav__link">
+    Problem 6.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-63" class="md-nav__link">
+    Problem 6.3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-64" class="md-nav__link">
+    Problem 6.4
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-65" class="md-nav__link">
+    Problem 6.5
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-66" class="md-nav__link">
+    Problem 6.6
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#laboratory-exercises" class="md-nav__link">
+    Laboratory Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Laboratory Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-61" class="md-nav__link">
+    Laboratory Exercise 6.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-62" class="md-nav__link">
+    Laboratory Exercise 6.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-63" class="md-nav__link">
+    Laboratory Exercise 6.3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-64" class="md-nav__link">
+    Laboratory Exercise 6.4
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-65" class="md-nav__link">
+    Laboratory Exercise 6.5
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-66" class="md-nav__link">
+    Laboratory Exercise 6.6
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-67" class="md-nav__link">
+    Laboratory Exercise 6.7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-68" class="md-nav__link">
+    Laboratory Exercise 6.8
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="filtering-of-stochastic-signals">Filtering of Stochastic Signals<a class="headerlink" href="#filtering-of-stochastic-signals" title="Permanent link">&para;</a></h1>
+<p>We now have the tools necessary to describe what happens when a stochastic signal is processed through a linear, time-invariant (LTI) system. These tools consist of measures on the random signals which describe and<em>/</em>or characterize the signals. The two most important of these are the mean value of the signal and the autocorrelation function of the signal. Further, we can characterize the relation between two random signals through the cross-correlation function. In all of our discussions <em>we will assume that our random processes are complex as well as ergodic (and thus stationary)</em>.</p>
+<p>We recall that:</p>
+<div class="" id="eq:review_acorr">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.1)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{\varphi _{xx}}[k]}&amp;{ = E\left\{ {x[n]\,{x^*}[n + k]} \right\}}\\
+{\,\,\,}&amp;{ = \! &lt; x[n]\,{x^*}[n + k] &gt; \;}\\
+{\,\,\,}&amp;\begin{array}{l}
+ = \mathop {\lim }\limits_{N \to \infty } \frac{1}{{2N + 1}}\sum\limits_{n =  - N}^{ + N} {x[n]\,{x^*}[n + k]} \\
+\,\,\,
+\end{array}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="" id="eq:review_crosscorr">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.2)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+\begin{array}{*{20}{l}}
+{{\varphi _{xy}}[k]}&amp;{ = E\left\{ {x[n]\,{y^*}[n + k]} \right\}}\\
+{\,\,\,}&amp;{ = \! &lt; x[n]\,{y^*}[n + k] &gt; \;}\\
+{\,\,\,}&amp;{ = \mathop {\lim }\limits_{N \to \infty } \frac{1}{{2N + 1}}\sum\limits_{n =  - N}^{ + N} {x[n]\,{y^*}[n + k]} }
+\end{array}\\
+\,\,\,
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="" id="eq:review_mean">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.3)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{m_x}}&amp;{ = E\left\{ {x[n]} \right\} = \! &lt; x[n] &gt; }\\
+{\,\,\,}&amp;{ = \mathop {\lim }\limits_{N \to \infty } \frac{1}{{2N + 1}}\sum\limits_{n =  - N}^{ + N} {x[n]} }
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>To understand what happens when stochastic signals are processed by LTI
+systems, let us begin with discrete-time convolution.</p>
+<h2 id="interpretation-of-the-convolution-result">Interpretation of the convolution result<a class="headerlink" href="#interpretation-of-the-convolution-result" title="Permanent link">&para;</a></h2>
+<p>First we can say that the relation between input and output is still
+given by the convolution sum, that is, we can write the input as:</p>
+<div class="" id="eq:review_conv1">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.4)</td>
+<td class="eqTableEq">
+<div>$$x[n] = \sum\limits_{k =  - \infty }^{ + \infty } {x[k]\,\delta [n - k]}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The total signal is a weighted sum of unit impulse functions where the
+weights <span class="arithmatex">\(\left\{ {x[k]} \right\}\)</span> have random values according to some probability
+function. The basic concepts of convolution theory, as argued below,
+still hold. As a reminder of what <a href="Chap_6.html#eq:review_conv1">Equation 6.4</a> means, see <a href="Chap_3.html#fig3_1">Figure 3.1</a>.  </p>
+<p>The deterministic impulse function <span class="arithmatex">\(\delta [n]\)</span> produces the impulse response
+<span class="arithmatex">\(h[n]\)</span> from the LTI system. A delayed version <span class="arithmatex">\(\delta [n - k]\)</span> produces a delayed output <span class="arithmatex">\(h[n - k].\)</span> Multiplication of the input by a scale factor produces multiplication of
+the output by the same factor <em>even if that factor is a random variable</em>.</p>
+<p>Thus <span class="arithmatex">\(x[k]\,\delta [n - k]\)</span> will produce <span class="arithmatex">\(x[k]\,h[n - k]\)</span> as an output.
+Because the input <span class="arithmatex">\(x[n]\)</span> can be expressed as the sum of inputs of this
+form, we can apply the linearity conditions, <a href="Chap_4.html#eq:additive">Equation 4.13</a> and <a href="Chap_4.html#eq:homogeneous">Equation 4.14</a>, to write the output as:</p>
+<div class="" id="eq:review_conv2">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.5)</td>
+<td class="eqTableEq">
+<div>$$y[n] = \sum\limits_{k =  - \infty }^{ + \infty } {x[k]\,h[n - k]}  = x[n] \otimes h[n]$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The model for this situation is shown in <a href="#fig:filt_noise">Figure 6.1</a>.</p>
+<figure class="figaltcap fullsize" id="fig:filt_noise"><img src="images/Fig_6_1.gif" /><figcaption><strong>Figure 6.1:</strong> A stochastic signal <span class="arithmatex">\(x\lbrack n\rbrack\)</span> filtered by a deterministic LTI filter <span class="arithmatex">\(h\lbrack n\rbrack\)</span> to produce a stochastic output signal <span class="arithmatex">\(y\lbrack n\rbrack\)</span>.</figcaption>
+</figure>
+<p>It is easy to see from <a href="Chap_6.html#eq:review_conv2">Equation 6.5</a> that <span class="arithmatex">\(y[n]\)</span> will be a stochastic signal
+if <span class="arithmatex">\(x[n]\)</span> is a stochastic signal. The questions now arise:</p>
+<ol>
+<li>If the input mean is <span class="arithmatex">\({m_x},\)</span> what is the output mean <span class="arithmatex">\({m_y}?\)</span></li>
+<li>If the input autocorrelation function is <span class="arithmatex">\({\varphi _{xx}}[k],\)</span> what form does the output autocorrelation function <span class="arithmatex">\({\varphi _{yy}}[k]\)</span> have?</li>
+<li>Assuming that the input is stationary, is the output also stationary?</li>
+</ol>
+<h2 id="the-mean">The mean<a class="headerlink" href="#the-mean" title="Permanent link">&para;</a></h2>
+<p>Using the standard definition we have:</p>
+<div class="" id="eq:filt_mean1">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.6)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{m_y}}&amp;{ = E\left\{ {y[n]} \right\} = E\left\{ {\sum\limits_{k =  - \infty }^{ + \infty } {x[k]\,h[n - k]} } \right\}}\\
+{\,\,\,}&amp;{ = \sum\limits_{k =  - \infty }^{ + \infty } {E\left\{ {x[k]\,h[n - k]} \right\}} }
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>This last statement is true because, as we have observed earlier in <a href="Chap_4.html#eq:additive">Equation 4.13</a>, the averaging operator (or expectation operator) distributes over addition.</p>
+<p>Only the weights <span class="arithmatex">\(\left\{ {x[k]} \right\}\)</span> are random variables. The impulse response,
+<span class="arithmatex">\(h[n],\)</span> of the LTI system is <em>not</em> random and the term <span class="arithmatex">\(h[n - k]\)</span> is a
+constant with respect to the averaging process over the random variable
+<span class="arithmatex">\(x[k].\)</span> We can, therefore, rewrite this equation as:</p>
+<div class="" id="eq:filt_mean2">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.7)</td>
+<td class="eqTableEq">
+<div>$${m_y} = \sum\limits_{k =  - \infty }^{ + \infty } {E\left\{ {x[k]\,h[n - k]} \right\}}  = \sum\limits_{k =  - \infty }^{ + \infty } {E\left\{ {x[k]} \right\}\,} h[n - k]$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Because the random process <span class="arithmatex">\(\left\{ {x[k]} \right\}\)</span> is stationary (independent of <span class="arithmatex">\(n\)</span>)
+we have:</p>
+<div class="" id="eq:filt_mean3">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.8)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{m_y}}&amp;{ = \sum\limits_{k =  - \infty }^{ + \infty } {E\left\{ {x[k]} \right\}h[n - k]}  = \sum\limits_{k =  - \infty }^{ + \infty } {{m_x}h[n - k]} }\\
+{\,\,\,}&amp;{ = {m_x}\sum\limits_{k =  - \infty }^{ + \infty } {h[n - k]} }
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Using the Fourier transform of the impulse response <span class="arithmatex">\(H(\Omega ) = {\mathscr{F}}\left\{ {h[n]} \right\}\)</span> (<a href="Chap_3.html#eq:fourtranspair">Equation 3.3</a>), this expression simplifies to:</p>
+<div class="mainresult" id="eq:filt_mean4">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.9)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{m_y}}&amp;{ = {m_x}\sum\limits_{k =  - \infty }^{ + \infty } {h[n - k]}  = {m_x}\sum\limits_{n =  - \infty }^{ + \infty } {h[n]} }\\
+{\,\,\,}&amp;{ = {m_x}H(\Omega  = 0)}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p><em>What does this mean?</em> From our knowledge of LTI filter theory, the expression <span class="arithmatex">\({m_y} = {m_x}H(\Omega  = 0)\)</span> makes sense. The expression says the average value of the input random signal is multiplied by the constant gain factor—the gain at (<span class="arithmatex">\(\Omega  = 0\)</span>)—of the linear filter. Because the average value is, indeed, just a constant (DC) value, the non-fluctuating component, this is a realistic result. Note that <span class="arithmatex">\(H(\Omega ),\)</span> <span class="arithmatex">\({m_x}\)</span> and <span class="arithmatex">\({m_y}\)</span> are all complex in this derivation.</p>
+<p>We also see through this derivation that, because the input average is
+stationary, the output average is also stationary.</p>
+<h2 id="the-autocorrelation-function">The autocorrelation function<a class="headerlink" href="#the-autocorrelation-function" title="Permanent link">&para;</a></h2>
+<p>The development of the output correlation proceeds along similar lines:</p>
+<div class="" id="eq:filt_acorr1">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.10)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+{\varphi _{yy}}[n,n + k] = E\left\{ {y[n]{y^*}[n + k]} \right\}\\
+\,\,\,\,\,\,\,\, = E\left\{ {\left( {\sum\limits_{m  =  - \infty }^{ + \infty } {h[m ]x[n - m ]} } \right)\left( {\sum\limits_{r =  - \infty }^{ + \infty } {{h^*}[r]{x^*}[n + k - r]} } \right)} \right\}\\
+\,\,\,\,\,\,\,\, = E\left\{ {\sum\limits_{m  =  - \infty }^{ + \infty } {\sum\limits_{r =  - \infty }^{ + \infty } {h[m ]{h^*}[r]x[n - m ]{x^*}[n + k - r]} } } \right\}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Using the distributive property once again:</p>
+<div class="" id="eq:filt_acorr2">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.11)</td>
+<td class="eqTableEq">
+<div>$${\varphi _{yy}}[n,n + k] = \sum\limits_{m  =  - \infty }^{ + \infty } {\sum\limits_{r =  - \infty }^{ + \infty } {h[m ]{h^*}[r]E\left\{ {x[n - m ]{x^*}[n + k - r]} \right\}} }$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The term within the expectation braces <span class="arithmatex">\(E\left\{  \bullet  \right\}\)</span> yields <span class="arithmatex">\({\varphi _{xx}}[k + m - r]\)</span> producing:</p>
+<div class="" id="eq:filt_acorr3">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.12)</td>
+<td class="eqTableEq">
+<div>$${\varphi _{yy}}[n,n + k] = \sum\limits_{m  =  - \infty }^{ + \infty } {\sum\limits_{r =  - \infty }^{ + \infty } {h[m ]{h^*}[r]{\varphi _{xx}}[k + m  - r]} }$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Because <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(r\)</span> in <a href="Chap_6.html#eq:filt_acorr3">Equation 6.12</a> are simply dummy variables that
+disappear when the two sums are performed, the result of the double sum,
+<span class="arithmatex">\({\varphi _{yy}},\)</span> will only be a function of <span class="arithmatex">\(k\)</span> and, of course, the precise forms of
+the impulse response <span class="arithmatex">\(h[n]\)</span> and the autocorrelation function <span class="arithmatex">\({\varphi _{xx}}.\)</span></p>
+<p>If the right side of <a href="Chap_6.html#eq:filt_acorr3">Equation 6.12</a> is only a function of <span class="arithmatex">\(k\)</span> then the left
+side is only a function of <span class="arithmatex">\(k,\)</span> as well, and we have:</p>
+<div class="" id="eq:filt_acorr4">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.13)</td>
+<td class="eqTableEq">
+<div>$${\varphi _{yy}}[n,n + k] = {\varphi _{yy}}[k] = \sum\limits_{m =  - \infty }^{ + \infty } {\sum\limits_{r =  - \infty }^{ + \infty } {h[m ]{h^*}[r]{\varphi _{xx}}[k + m - r]} }$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>From this we can conclude that if <span class="arithmatex">\({\varphi _{xx}}[ \bullet ]\)</span> is stationary then <span class="arithmatex">\({\varphi _{yy}}[ \bullet ]\)</span> is stationary. We can go further. If we set <span class="arithmatex">\(n = r - m,\)</span> then:</p>
+<div class="" id="eq:filt_acorr5">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.14)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{\varphi _{yy}}[k]}&amp;{ = \sum\limits_{m =  - \infty }^{ + \infty } {\sum\limits_{n =  - \infty }^{ + \infty } {h[m]{h^*}[m + n]{\varphi _{xx}}[k - n]} } }\\
+{\,\,\,}&amp;{ = \sum\limits_{n =  - \infty }^{ + \infty } {{\varphi _{xx}}[k - n]} \left( {\sum\limits_{m =  - \infty }^{ + \infty } {h[m]{h^*}[m + n]} } \right)}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>We recognize from ordinary (deterministic) signal processing theory that
+the term within parentheses is the autocorrelation of the impulse
+response. If this autocorrelation is <span class="arithmatex">\({\varphi _{hh}}[m]\)</span> then:</p>
+<div class="mainresult" id="eq:filt_acorr6">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.15)</td>
+<td class="eqTableEq">
+<div>$${\varphi _{yy}}[k] = \sum\limits_{m =  - \infty }^{ + \infty } {{\varphi _{xx}}[k - m]} {\varphi _{hh}}[m] = {\varphi _{xx}}[k] \otimes {\varphi _{hh}}[k]$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Our conclusion is that the autocorrelation of the output is stationary
+and is the convolution of the autocorrelation function of the (random)
+input signal with the autocorrelation function of the (deterministic)
+impulse response.</p>
+<h2 id="the-cross-correlation-function">The cross-correlation function<a class="headerlink" href="#the-cross-correlation-function" title="Permanent link">&para;</a></h2>
+<p>Finally we can derive the cross-correlation between the input and output
+as:</p>
+<div class="" id="eq:filt_crosscorr1">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.16)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{\varphi _{xy}}[k]}&amp;{ = E\left\{ {x[n]{y^*}[n + k]} \right\}}\\
+{\,\,\,}&amp;{ = E\left\{ {x[n]\left( {\sum\limits_{m =  - \infty }^{ + \infty } {{h^*}[m ]{x^*}[n + k - m]} } \right)} \right\}}\\
+{\,\,\,}&amp;{ = \sum\limits_{m =  - \infty }^{ + \infty } {{h^*}[m ]E\left\{ {x[n]{x^*}[n + k - m]} \right\}} }
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Once again, the term within the expectation braces gives the stationary
+autocorrelation function <span class="arithmatex">\({\varphi _{xx}}[k - m].\)</span> Continuing,</p>
+<div class="mainresult" id="eq:filt_crosscorr2">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.17)</td>
+<td class="eqTableEq">
+<div>$${\varphi _{xy}}[k] = \sum\limits_{m =  - \infty }^{ + \infty } {{h^*}[m]} {\varphi _{hh}}[k - m] = {h^*}[k] \otimes {\varphi _{xx}}[k]$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The cross-correlation function is stationary and is the convolution of the complex conjugate of the (deterministic) impulse response with the autocorrelation function
+of the (random) input signal.</p>
+<p>We can now express the Fourier transforms of <span class="arithmatex">\({\varphi _{xx}}[k]\)</span> and <span class="arithmatex">\({\varphi _{yy}}[k]\)</span> in terms of known quantities.</p>
+<div class="" id="eq:filt_crosspds1">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.18)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{S_{yy}}(\Omega )}&amp;{ = {\mathscr{F}}\left\{ {{\varphi _{yy}}[k]} \right\} = {\mathscr{F}}\left\{ {{\varphi _{xx}}[k] \otimes {\varphi _{hh}}[k]} \right\}}\\
+{\,\,\,}&amp;{ = {S_{xx}}(\Omega )\;{S_{hh}}(\Omega )}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>But using the result from Fourier theory that <span class="arithmatex">\({\mathscr{F}}\left\{ {{h^*}[n]} \right\} = {H^*}\left( { - \Omega } \right)\)</span> gives:</p>
+<div class="" id="eq:filt_crosspds2">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.19)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{S_{hh}}(\Omega )}&amp;{ = {\mathscr{F}}\left\{ {\sum\limits_{m =  - \infty }^{ + \infty } {h[m]{h^*}[m + n]} } \right\}}\\
+{\,\,\,}&amp;{ = H( - \Omega )\;{H^*}( - \Omega ) = {{\left| {H( - \Omega )} \right|}^2}}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Therefore,</p>
+<div class="mainresult" id="eq:filt_crosspds3">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.20)</td>
+<td class="eqTableEq">
+<div>$${S_{yy}}(\Omega ) = {\left| {H( - \Omega )} \right|^2}{S_{xx}}(\Omega )$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>If the impulse response <span class="arithmatex">\(h[n]\)</span> of the deterministic system is <em>real</em>, then this is equivalent to:</p>
+<div class="specialresult" id="eq:filt_crosspds4">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.21)</td>
+<td class="eqTableEq">
+<div>$${S_{yy}}(\Omega ) = {\left| {H(\Omega )} \right|^2}{S_{xx}}(\Omega )$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Returning to the complex form of <span class="arithmatex">\(h[n],\)</span> the cross power density
+spectrum can be similarly shown to be:</p>
+<div class="mainresult" id="eq:filt_crosspds5">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.22)</td>
+<td class="eqTableEq">
+<div>$${S_{xy}}(\Omega ) = {H^*}( - \Omega ){S_{xx}}(\Omega )$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Again, if the impulse response <span class="arithmatex">\(h[n]\)</span> of the deterministic system is <em>real</em>, then this is equivalent to:</p>
+<div class="specialresult" id="eq:filt_crosspds6">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.23)</td>
+<td class="eqTableEq">
+<div>$${S_{xy}}(\Omega ) = H(\Omega ){S_{xx}}(\Omega )$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Based upon the use of these results we are now in a position to provide
+an interpretation of the power spectrum <span class="arithmatex">\({S_{xx}}(\Omega ).\)</span></p>
+<p>We see from <a href="Chap_5.html#eq:meansqpos">Equation 5.3</a> that for <span class="arithmatex">\(k = 0\)</span>:</p>
+<div class="" id="eq:powerpos0">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.24)</td>
+<td class="eqTableEq">
+<div>$${\varphi _{xx}}[0] = E\left\{ {x[n]{x^*}[n]} \right\}\; = E\left\{ {{{\left| {x[n]} \right|}^2}} \right\}\; \ge 0$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Similarly <span class="arithmatex">\({\varphi _{yy}}[k] \ge 0\)</span> and</p>
+<div class="" id="eq:powerpos1">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.25)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{\varphi _{yy}}[0]}&amp;{ = \frac{1}{{2\pi }}\int\limits_{ - \pi }^{ + \pi } {{S_{yy}}(\Omega )} d\Omega }\\
+{\,\,\,}&amp;{ = \frac{1}{{2\pi }}\int\limits_{ - \pi }^{ + \pi } {{{\left| {H( - \Omega )} \right|}^2}{S_{xx}}(\Omega )} d\Omega }
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Let <span class="arithmatex">\(H(\Omega )\)</span> be a (complex) bandpass filter (as shown in <a href="#fig:filt_power">Figure 6.2</a>) such
+that within the pass-band the spectrum <span class="arithmatex">\({S_{xx}}(\Omega )\)</span> is essentially constant.</p>
+<figure class="figaltcap fullsize" id="fig:filt_power"><img src="images/Fig_6_2.png" /><figcaption><strong>Figure 6.2:</strong> Power spectrum <span class="arithmatex">\({S_{xx}}(\Omega )\)</span> (n dark red) and a linear, bandpass filter <span class="arithmatex">\({\left| {H(\Omega )} \right|^2}\)</span> (in dark green). The filter has width <span class="arithmatex">\(\Delta \Omega\)</span> and is centered at <span class="arithmatex">\({\Omega _o}.\)</span></figcaption>
+</figure>
+<p>For complex random processes <span class="arithmatex">\({\varphi _{xx}}[k] = \varphi _{xx}^*[ - k],\)</span> <a href="Chap_5.html#eq:autoeven">Equation 5.5</a>, which means that <span class="arithmatex">\({S_{xx}}(\Omega )\)</span> is <em>real</em> <a href="Chap_5.html#eq:proveSreal">Equation 5.26</a>. For a sufficiently small passband <span class="arithmatex">\(\Delta \Omega,\)</span> we can write:</p>
+<div class="" id="eq:powerpos2">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.26)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{\varphi _{yy}}[0]}&amp;{ = \frac{1}{{2\pi }}{S_{yy}}(\Omega  = {\Omega _0})\Delta \Omega }&amp;{ \ge 0}\\
+{\,\,\,}&amp;{ = \frac{1}{{2\pi }}{{\left| {H( - {\Omega _0})} \right|}^2}{S_{xx}}({\Omega _0})\Delta \Omega }&amp;{ \ge 0}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Because <span class="arithmatex">\({S_{xx}}(\Omega )\)</span> is real, we immediately have that</p>
+<div class="" id="eq:powerpos3">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.27)</td>
+<td class="eqTableEq">
+<div>$${S_{xx}}({\Omega _0}) \ge 0$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>for all choices of <span class="arithmatex">\({\Omega _0}.\)</span></p>
+<p>Further <span class="arithmatex">\({\left| {y[n]} \right|^2}\)</span> is (by definition) the instantaneous power in a signal
+(including random signals) and thus <span class="arithmatex">\({\varphi _{yy}}[0] = E\left\{ {{{\left| {y[n]} \right|}^2}} \right\}\)</span> is the expected power in the output signal at any instant. This means that:</p>
+<div class="" id="eq:powerpos4">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.28)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{\varphi _{yy}}[0]}&amp;{ = \frac{1}{{2\pi }}{S_{yy}}({\Omega _0})\Delta \Omega }\\
+{\,\,\,}&amp;{ = \frac{1}{{2\pi }}{{\left| {H( - {\Omega _0})} \right|}^2}{S_{xx}}({\Omega _0})\Delta \Omega }
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>has the unit of power [Watts]. <span class="arithmatex">\({S_{xx}}(\Omega )\)</span> like <span class="arithmatex">\({S_{yy}}(\Omega )\)</span>
+is, therefore, expressed in Watts per unit frequency [Watts/Hz] and is thus a <em>power density spectrum</em>.</p>
+<p>Other interesting and useful results can also be derived at this point:</p>
+<p>1) We would like to show that the maximum value of the autocorrelation
+function occurs at <span class="arithmatex">\(k = 0.\)</span> We begin with:</p>
+<div class="" id="eq:max_acorr1">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.29)</td>
+<td class="eqTableEq">
+<div>$${\varphi _{xx}}[k] = \frac{1}{{2\pi }}\int\limits_{ - \pi }^{ + \pi } {{S_{xx}}(\Omega )} {e^{j\Omega k}}d\Omega$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Taking the absolute value of both sides:</p>
+<div class="" id="eq:max_acorr2">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.30)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{\left| {{\varphi _{xx}}[k]} \right|}&amp;{ = \frac{1}{{2\pi }}\left| {\int\limits_{ - \pi }^{ + \pi } {{S_{xx}}(\Omega )} {e^{j\Omega k}}d\Omega } \right|}\\
+{\,\,\,}&amp;{ \le \frac{1}{{2\pi }}\int\limits_{ - \pi }^{ + \pi } {\left| {{S_{xx}}(\Omega )} \right|} \left| {{e^{j\Omega k}}} \right|d\Omega }
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The inequality holds because the absolute value of an integral is always
+less than (or equal to) the integral of the absolute value. This is easy
+to see if we consider the integral as a way of measuring the area under
+a curve. The total area will be greater if we first make all contributions positive.</p>
+<p>Because <span class="arithmatex">\(\left| {{e^{j\Omega k}}} \right| = 1\)</span> and because the power spectrum is real
+and everywhere positive, <a href="Chap_6.html#eq:powerpos3">Equation 6.27</a>, we have:</p>
+<div class="" id="eq:max_acorr3">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.31)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{\left| {{\varphi _{xx}}[k]} \right|}&amp;{ \le \frac{1}{{2\pi }}\int\limits_{ - \pi }^{ + \pi } {\left| {{S_{xx}}(\Omega )} \right|} d\Omega }\\
+{\,\,\,}&amp;{ = \frac{1}{{2\pi }}\int\limits_{ - \pi }^{ + \pi } {{S_{xx}}(\Omega )} d\Omega  = {\varphi _{xx}}[0]}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Finally,</p>
+<div class="mainresult" id="eq:max_acorr4">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.32)</td>
+<td class="eqTableEq">
+<div>$$\left| {{\varphi _{xx}}[k]} \right| \le {\varphi _{xx}}[0]$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>An alternative (and instructive) way to prove this result is developed
+in <a href="#problem-66">Problem 6.6</a>.</p>
+<p>2) We might well ask under what circumstance can there be another value
+of <span class="arithmatex">\(k\)</span> such that <span class="arithmatex">\(\left| {{\varphi _{xx}}[k]} \right| = {\varphi _{xx}}[0].\)</span> The most common situation where equality is achieved is when the autocorrelation
+function contains a periodic component. That is, if
+<span class="arithmatex">\({\varphi _{xx}}[k] = {\varphi _{xx}}[k + K]\)</span> then the maximum value will be repeated every <span class="arithmatex">\(K\)</span> time instances. This is illustrated in the case study, <a href="Chap_5.html#\varphi _{TT">Figure 5.6a</a>. There are more elaborate ways of describing this situation but this will suffice for our introductory level.</p>
+<p>3) Finally we can determine a bound on the average output power <span class="arithmatex">\({\varphi _{yy}}[0]\)</span> given the average input power and the LTI filter characteristic <span class="arithmatex">\(H(\Omega ).\)</span></p>
+<div class="" id="eq:power_out1">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.33)</td>
+<td class="eqTableEq">
+<div>$$E\left\{ {{{\left| {y[n]} \right|}^2}} \right\} = {\varphi _{yy}}[0] = \frac{1}{{2\pi }}\int\limits_{ - \pi }^{ + \pi } {{{\left| {H( - \Omega )} \right|}^2}{S_{xx}}(\Omega )d\Omega }$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Let <span class="arithmatex">\({\Omega _m}\)</span> be the frequency at which the filter has its maximum gain
+<span class="arithmatex">\(\left| {H( - {\Omega _m})} \right|.\)</span> This implies:</p>
+<div class="" id="eq:power_out2">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.34)</td>
+<td class="eqTableEq">
+<div>$$E\left\{ {{{\left| {y[n]} \right|}^2}} \right\} \le \frac{{{{\left| {H( - {\Omega _m})} \right|}^2}}}{{2\pi }}\int\limits_{ - \pi }^{ + \pi } {{S_{xx}}(\Omega )d\Omega }$$</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="mainresult" id="eq:power_out3">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.35)</td>
+<td class="eqTableEq">
+<div>$${\varphi _{yy}}[0] \le {\left| {H( - {\Omega _m})} \right|^2}{\varphi _{xx}}[0]$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The average output power will attain the maximum if and only if</p>
+<div class="" id="eq:power_out4">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.36)</td>
+<td class="eqTableEq">
+<div>$${S_{xx}}(\Omega ) = B\delta (\Omega  - {\Omega _m}) + B\delta (\Omega  + {\Omega _m})$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>that is, if <span class="arithmatex">\({\varphi _{xx}}[k]\)</span> is of the form <span class="arithmatex">\(\cos \left( {{\Omega _m}k} \right).\)</span> This follows directly from <a href="Chap_6.html#eq:power_out1">Equation 6.33</a> and <a href="Chap_6.html#eq:power_out2">Equation 6.34</a>. The only way for the maximum to
+be achieved is if all the spectral power is concentrated at the
+frequencies <span class="arithmatex">\(\pm {\Omega _m}\)</span> where the filter has its maxima.</p>
+<h4 id="example-a-world-of-random-events-a-case-study">Example: A world of random events - a case study<a class="headerlink" href="#example-a-world-of-random-events-a-case-study" title="Permanent link">&para;</a></h4>
+<p>The relationship described in <a href="Chap_6.html#eq:max_acorr4">Equation 6.32</a> might seem like a rather abstract result. In this example, we hope to show that use of the result can lead to useful insights into complex systems. The data shown in <a href="#fig:IraqKuwait_1a">Figure 6.3</a> are the price at the “wellhead” of a barrel of oil (“Brent crude”), <span class="arithmatex">\(c[n],\)</span> and the price of a liter of refined automobile gasoline (benzine) at the “pump” <span class="arithmatex">\(g[n].\)</span> The graphs show the development of the price over a period of months.</p>
+<figcaption style="color:#2c5272;">
+(<i>a</i>) <i>Brent oil price per barrel starting 1 Jan 1990</i>
+</figcaption>
+
+<figure class="figaltcap fullsize" id="fig:IraqKuwait_1a"><img src="images/Fig_6_3_T.png" /><figcaption> </figcaption>
+</figure>
+<figcaption style="color:#2c5272;">
+(<i>b</i>) <i>Brent price 2 Aug 1990 ± 30 days</i>
+</figcaption>
+
+<figure class="figaltcap fullsize" id="fig:IraqKuwait_1b"><img src="images/Fig_6_3_M.png" /><figcaption></figcaption>
+</figure>
+<figcaption style="color:#2c5272;">
+(<i>c</i>) <i>Gasoline price per liter starting 1 Jan 1990</i>
+</figcaption>
+
+<figure class="figaltcap fullsize" id="fig:IraqKuwait_1c"><img src="images/Fig_6_3_B.png" /><figcaption><strong>Figure 6.3:</strong> Price evolution of crude oil <span class="arithmatex">\(c[n\rbrack\)</span> and refined gasoline <span class="arithmatex">\(g[n\rbrack\)</span> (<em>a</em>) Barrel price from 1 January 1990 to 16 October 1990 (289 days). The day of the event is indicated by the arrow. (<em>b</em>) Daily price evolution <em>surrounding</em> 2 August 1990, that is, day 214 ± 30 days, (<em>c</em>) Liter price (to consumers) from 1 January 1990 to 16 October 1990 (289 days). The day of the event is indicated by the arrow.</figcaption>
+</figure>
+<p>On 2 August 1990, the 214th day of that year, an event occurred in the
+Middle East that influenced the world-wide price of crude oil. The steep
+rise in price of a barrel of oil, shown in the middle panel of <a href="#fig:IraqKuwait_1a">Figure 6.3</a>, attests to this. An increase in the price of a liter of gasoline at
+retail distribution points would also follow from this. The question we
+pose is: what is the <em>delay</em> between a rise in prices at the wellhead and
+a rise in prices at the “pump”? How many days does it take before the
+price rises in the retail sale of gasoline?</p>
+<p>To answer this we assume that the price of gasoline <span class="arithmatex">\(g[n]\)</span> is a delayed version, that is function, of the price of crude oil <span class="arithmatex">\(c[n].\)</span> But this cannot be expressed as simply <span class="arithmatex">\(g[n] = c[n - k].\)</span> Between these two prices are complicated processes, some industrial and some marketplace. Nevertheless, one cannot help but being struck by the similarity of the
+top and bottom curves in <a href="#fig:IraqKuwait_1a">Figure 6.3</a>.</p>
+<p>The cross-correlation between the two prices, under the assumption that the major effect is a time delay, can help us find the answer. Assuming that the system is a pure time delay, <span class="arithmatex">\(h[n] = \delta [n - k],\)</span> and using <a href="Chap_6.html#eq:filt_crosscorr2">Equation 6.17</a> gives:</p>
+<div class="" id="eq:IraqKuwait_delay1">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.37)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{\varphi _{cg}}[k]}&amp;{ = {h^*}[k] \otimes {\varphi _{cc}}[k] = \delta [n - k] \otimes {\varphi _{cc}}[k]}\\
+{\,\,\,}&amp;{ = {\varphi _{cc}}[n - k]}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>A simple substitution, <span class="arithmatex">\(m = n - k,\)</span> allows us to rewrite this as</p>
+<div class="" id="eq:IraqKuwait_delay2">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.38)</td>
+<td class="eqTableEq">
+<div>$${\varphi _{cg}}[n - m] = {\varphi _{cc}}[m]$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Applying <a href="Chap_6.html#eq:max_acorr4">Equation 6.32</a> to <a href="Chap_6.html#eq:IraqKuwait_delay2">Equation 6.38</a> means that, given the model of a simple
+delay element, the time <span class="arithmatex">\(m = 0\)</span> when the <em>autocorrelation</em> is a maximum is the same as the time <span class="arithmatex">\(m = n\)</span> when the <em>cross-correlation</em> is a maximum. The cross-correlation is illustrated in <a href="#fig:IraqKuwait_2">Figure 6.4</a>.</p>
+<figure class="figaltcap fullsize" id="fig:IraqKuwait_2"><img src="images/Fig_6_4.png" /><figcaption><strong>Figure 6.4:</strong> Cross-correlation <span class="arithmatex">\({\varphi _{cg}}[k\rbrack\)</span> between the crude oil price and the gasoline pump price over an interval of 51 days. Day 0 is 2 August 1990, day 214 of the year. The position of maximum correlation is indicated by the arrow.</figcaption>
+</figure>
+<p>The time at which the maximum occurs is day 18. Our estimate for the time delay between the wellhead and the gasoline pump, in the midst of all the stochastic variations and the (over)simplification of the model, is 18 days.</p>
+<h2 class="problems" id="problems">Problems<a class="headerlink" href="#problems" title="Permanent link">&para;</a></h2>
+<h3 id="problem-61">Problem 6.1<a class="headerlink" href="#problem-61" title="Permanent link">&para;</a></h3>
+<p>The input to a discrete-time, LTI system is a stochastic signal, <span class="arithmatex">\(x[n].\)</span> At each time
+step the output is <span class="arithmatex">\(+ \delta [n - k]\)</span> with probability <span class="arithmatex">\(p\)</span> or <span class="arithmatex">\(- \delta [n - k]\)</span> with
+probability <span class="arithmatex">\(1 - p.\)</span> Thus we can write:</p>
+<div class="arithmatex">\[x[n] = \sum\limits_{k = --\infty }^{ + \infty } {{a_k}\delta [n - k]}\]</div>
+<p>where</p>
+<div class="arithmatex">\[{a_k} = \left\{ {\begin{array}{*{20}{l}}
+{ + 1}&amp;{{\mathop{\rm with}\nolimits} \,probability\,p}\\
+{ - 1}&amp;{{\mathop{\rm with}\nolimits} \,probability\,1 - p}
+\end{array}} \right.\]</div>
+<p>The LTI system has <span class="arithmatex">\(h[n] = {\left( {\frac{1}{4}} \right)^n}u[n].\)</span>  </p>
+<ol>
+<li>Draw and label one possible stochastic signal <span class="arithmatex">\(x[n]\)</span> from this random process.</li>
+<li>Draw and label <span class="arithmatex">\(y[n]\)</span> the output signal corre­sponding to your choice of <span class="arithmatex">\(x[n].\)</span></li>
+<li>Determine <span class="arithmatex">\({m_y} = E\left\{ {y[n]} \right\}.\)</span> Your answer should not contain any integrals or summations.</li>
+<li>Determine <span class="arithmatex">\({\varphi _{yy}}[k = 0] = {\left. {E\left\{ {y[n]\,{y^*}[n + k]} \right\}} \right|_{k = 0}}.\)</span></li>
+</ol>
+<h3 id="problem-62">Problem 6.2<a class="headerlink" href="#problem-62" title="Permanent link">&para;</a></h3>
+<p>The impulse response of a discrete-time, LTI system is given by:</p>
+<div class="arithmatex">\[h[n] = 3\delta [n] - 8{\left( {\frac{1}{3}} \right)^{n - 1}}u[n - 1]\]</div>
+<p>The input signal is a real, ergodic signal <span class="arithmatex">\(x[n]\)</span> where:</p>
+<div class="arithmatex">\[{\varphi _{xx}}[k] = E\left\{ {x[n]\,{x^*}[n + k]} \right\} = {\left( {\frac{1}{3}} \right)^{ - \left| k \right|}}\]</div>
+<p>The output signal of the LTI system is <span class="arithmatex">\(y[n].\)</span></p>
+<ol>
+<li>Determine <span class="arithmatex">\({m_y} = E\left\{ {y[n]} \right\}.\)</span></li>
+<li>Determine <span class="arithmatex">\({\varphi _{yy}}[k] = E\left\{ {y[n]\,{y^*}[n + k]} \right\}.\)</span></li>
+</ol>
+<h3 id="problem-63">Problem 6.3<a class="headerlink" href="#problem-63" title="Permanent link">&para;</a></h3>
+<p><em>Discuss the following proposition:</em></p>
+<p>The function <span class="arithmatex">\(f[k]\)</span> given below <em>cannot</em> be the auto-correlation
+function of a stochastic signal.</p>
+<div class="arithmatex">\[f[k] = \left\{ {\begin{array}{*{20}{l}}
+1&amp;{\left| k \right| \le 7}\\
+0&amp;{\left| k \right| &gt; 7}
+\end{array}} \right.\]</div>
+<h3 id="problem-64">Problem 6.4<a class="headerlink" href="#problem-64" title="Permanent link">&para;</a></h3>
+<p>When the discrete-time input signal <span class="arithmatex">\(x[n]\)</span> is white noise with
+autocorrelation function <span class="arithmatex">\({\varphi _{xx}}[k] = \delta [k],\)</span> the output signal from
+an LTI system is ergodic with power spectral density:</p>
+<div class="arithmatex">\[{S_{yy}}(\Omega ) = \frac{9}{{13 - 12\cos (\Omega )}}\]</div>
+<ol>
+<li>Determine two possible causal, LTI filters <span class="arithmatex">\({H_1}\left( \Omega  \right)\)</span> and <span class="arithmatex">\({H_2}\left( \Omega  \right)\)</span> that could lead to this output power density spectrum.</li>
+<li>Given either of the filters, <span class="arithmatex">\({H_1}\left( \Omega  \right)\)</span> or <span class="arithmatex">\({H_2}\left( \Omega  \right),\)</span> from part (<em>a</em>), determine another, different noise signal <span class="arithmatex">\(q[n]\)</span> that would yield the same <span class="arithmatex">\({S_{yy}}(\Omega )\)</span> as given in part (<em>a</em>).</li>
+</ol>
+<h3 id="problem-65">Problem 6.5<a class="headerlink" href="#problem-65" title="Permanent link">&para;</a></h3>
+<p>An ergodic process, <span class="arithmatex">\(x[n],\)</span> is input to an LTI system with impulse
+response <span class="arithmatex">\(h[n]\)</span> and Fourier transform <span class="arithmatex">\(H(\Omega ).\)</span> The output is <span class="arithmatex">\(y[n].\)</span> It is
+known that <span class="arithmatex">\(h[n = 0] \ne 0.\)</span></p>
+<p><em>Discuss the following proposition:</em></p>
+<p>If the mean of the input <span class="arithmatex">\(E\left\{ {x[n]} \right\} = {m_x} \ne 0\)</span> then <span class="arithmatex">\(E\left\{ {y[n]} \right\} = {m_y} \ne 0.\)</span></p>
+<h3 id="problem-66">Problem 6.6<a class="headerlink" href="#problem-66" title="Permanent link">&para;</a></h3>
+<p>Consider the following expression for a real, ergodic signal <span class="arithmatex">\(x[n]\)</span>:</p>
+<div class="" id="eq:second_proof">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(6.39)</td>
+<td class="eqTableEq">
+<div>$$E\left\{ {{{\left| {x[n] \pm x[n + k]} \right|}^2}} \right\} \geqslant 0$$</div>
+</td>
+</tr>
+</table>
+</div>
+<ol>
+<li>Why is this expected value non-negative?</li>
+<li>Use this expression to prove <a href="Chap_6.html#eq:max_acorr4">Equation 6.32</a>.</li>
+</ol>
+<h2 class="labexp" id="laboratory-exercises">Laboratory Exercises<a class="headerlink" href="#laboratory-exercises" title="Permanent link">&para;</a></h2>
+<h3 id="laboratory-exercise-61">Laboratory Exercise 6.1<a class="headerlink" href="#laboratory-exercise-61" title="Permanent link">&para;</a></h3>
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_6.1a.html'>
+                <img src='images/CorrPsdSnd.gif' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        We now have the tools to analyze and discuss noise processes. We start with 
+        “white noise”. 
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+<h3 id="laboratory-exercise-62">Laboratory Exercise 6.2<a class="headerlink" href="#laboratory-exercise-62" title="Permanent link">&para;</a></h3>
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_6.2.html'>
+                <img src='images/CorrPsdSnd.gif' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        We continue the analysis and discussion of noise processes. We start with 
+        “binary noise”, a process that can be generated by flipping a coin. 
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+<h3 id="laboratory-exercise-63">Laboratory Exercise 6.3<a class="headerlink" href="#laboratory-exercise-63" title="Permanent link">&para;</a></h3>
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_6.3a.html'>
+                <img src='images/CorrPsdSnd.gif' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        Can you estimate the parameters of real, ergodic noise processes based upon 
+        information from their number of samples <i>N</i>, their estimated autocorrelation function 
+        ${\varphi _{ \bullet  \bullet }}[k]$, and/or their estimated power spectral density 
+        ${S_{ \bullet  \bullet }}(\Omega ).$ 
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+<h3 id="laboratory-exercise-64">Laboratory Exercise 6.4<a class="headerlink" href="#laboratory-exercise-64" title="Permanent link">&para;</a></h3>
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_6.4a.html'>
+                <img src='images/CorrAndPSDIconSlider.gif' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        When studying stochastic processes you not only have the mathematical tools we 
+        have presented, you also have your eyes and ears. 
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+<h3 id="laboratory-exercise-65">Laboratory Exercise 6.5<a class="headerlink" href="#laboratory-exercise-65" title="Permanent link">&para;</a></h3>
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_6.5a.html'>
+                <img src='images/CorrAndPSDIconSlider.gif' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        We continue studying stochastic processes using the mathematical tools we 
+        have presented and your eyes and ears. 
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+<h3 id="laboratory-exercise-66">Laboratory Exercise 6.6<a class="headerlink" href="#laboratory-exercise-66" title="Permanent link">&para;</a></h3>
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_6.6a.html'>
+                <img src='images/CorrAndPSDIconSlider.gif' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        We continue studying stochastic processes using the mathematical tools we 
+        have presented and your eyes and ears. 
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+<h3 id="laboratory-exercise-67">Laboratory Exercise 6.7<a class="headerlink" href="#laboratory-exercise-67" title="Permanent link">&para;</a></h3>
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_6.7a.html'>
+                <img src='images/CorrAndPSDIconSlider.gif' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        Let us explore the effect that filtering has on various types of noise. As 
+        tools, we will use the noise signal itself, its amplitude distribution, its 
+        autocorrelation function, its power density spectrum, and your eyes and ears. 
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+<h3 id="laboratory-exercise-68">Laboratory Exercise 6.8<a class="headerlink" href="#laboratory-exercise-68" title="Permanent link">&para;</a></h3>
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_6.8.html'>
+                <img src='images/CorrPsdSnd.gif' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        How much information can you glean from the mathematical tools we have developed? 
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+<!-- 
+### Laboratory Exercise 6.9
+
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_6.9.html'>
+                <img src='images/CorrelationMic.gif' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        Your device is not simply a microphone; it is a complex system involving digital 
+        electronics, analog electronics, and speakers. The tools that we have developed can, 
+        nevertheless, be useful in understanding and quantifying the behavior of your device.
+        </td>
+    </tr>
+</table>
+ -->
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+
+<footer class="md-footer" id="jumpToBottom">
+
+  <!-- Link to previous and/or next page -->
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        <!-- Link to previous page -->
+        
+          <a
+            href="Chap_5.html"
+            title="5. Correlations and Spectra"
+            class="md-footer-nav__link md-footer-nav__link--prev"
+            rel="prev"
+          >
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                5. Correlations and Spectra
+              </div>
+            </div>
+          </a>
+        
+
+        <!-- Link to next page -->
+        
+          <a
+            href="Chap_7.html"
+            title="7. The Langevin Equation – A Case Study"
+            class="md-footer-nav__link md-footer-nav__link--next"
+            rel="next"
+          >
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                7. The Langevin Equation – A Case Study
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+</footer>
+      
+    </div>
+    
+      <script src="assets/javascripts/vendor.77e55a48.min.js"></script>
+      <script src="assets/javascripts/bundle.9554a270.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+
+	<script src="js/polyfill/index.js"></script>
+	<script src="search/search_index.js"></script>
+
+
+      <script>
+        app = initialize({
+          base: ".",
+          features: [],
+          search: Object.assign({
+            worker: "assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="js/extra.js"></script>
+      
+        <script src="js/SSPextra.js"></script>
+      
+        <script src="js/mathjax_3_generic_conf.js"></script>
+      
+        <script src="js/mathjax/tex-svg.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,868 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <meta name="author" content="I.T. Young & R. Ligteringen">
+      
+      <link rel="shortcut icon" href="images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.0.2">
+    
+    
+      
+        <title>Appendices - Introduction to Stochastic Signal Processing</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.38780c08.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.3f72e892.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Georgia:300,400,400i,700%7CCourier&display=fallback">
+        <style>body,input{font-family:"Georgia",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Courier",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="css/extra.css">
+    
+      <link rel="stylesheet" href="css/imgtxt.css">
+    
+      <link rel="stylesheet" href="css/tables.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#appendices" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <!-- Application header -->
+<header class="md-header" data-md-component="header">
+
+  <!-- Top-level navigation -->
+  <nav class="md-header-nav md-grid" aria-label="Header">
+
+    <!-- Link to home -->
+    <a
+      href="."
+      title="Introduction to Stochastic Signal Processing"
+      class="md-header-nav__button md-logo"
+      aria-label="Introduction to Stochastic Signal Processing"
+    >
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+<!-- 
+  Insert an <img> here as an alternative for the standard logo if desired.
+  Then comment out the above two lines
+ <img src="images/favicon.png" style="margin-top:5px; border: 0px solid lime; border-radius:5px; width:120%; height: auto;" />
+ -->
+
+    </a>
+
+    <!-- Button to open drawer -->
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+
+    <!-- Header title -->
+    <div class="md-header-nav__title" data-md-component="header-title">
+          
+            
+              <a href="#jumpToBottom">
+                <span class="md-header-nav__topic">
+                  Introduction to Stochastic Signal Processing
+                </span>
+                <span class="md-header-nav__topic">
+                  Appendices
+                </span>
+              </a>
+            
+          
+    </div>
+
+    <!-- Button to open search dialogue -->
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+
+      <!-- Search interface -->
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    <!-- Repository containing source -->
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Introduction to Stochastic Signal Processing" class="md-nav__button md-logo" aria-label="Introduction to Stochastic Signal Processing">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+<!-- 
+  Insert an <img> here as an alternative for the standard logo if desired.
+  Then comment out the above two lines
+ <img src="images/favicon.png" style="margin-top:5px; border: 0px solid lime; border-radius:5px; width:120%; height: auto;" />
+ -->
+
+    </a>
+    Introduction to Stochastic Signal Processing
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_1.html" class="md-nav__link">
+      1. How to use this iBook
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_2.html" class="md-nav__link">
+      2. Prologue
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_3.html" class="md-nav__link">
+      3. Introduction
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_4.html" class="md-nav__link">
+      4. Characterization of Random Signals
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_5.html" class="md-nav__link">
+      5. Correlations and Spectra
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_6.html" class="md-nav__link">
+      6. Filtering of Stochastic Signals
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_7.html" class="md-nav__link">
+      7. The Langevin Equation – A Case Study
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_8.html" class="md-nav__link">
+      8. Characterizing Signal-to-Noise Ratios
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_9.html" class="md-nav__link">
+      9. The Matched Filter
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_10.html" class="md-nav__link">
+      10. The Wiener filter
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_11.html" class="md-nav__link">
+      11. Aspects of Estimation
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_12.html" class="md-nav__link">
+      12. Spectral Estimation
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Appendices
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="Chap_13.html" class="md-nav__link md-nav__link--active">
+      Appendices
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#appendix-i-mean-square-error-minimization" class="md-nav__link">
+    Appendix I: Mean-Square Error Minimization
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix-ii-the-discrete-time-uncertainty-principle" class="md-nav__link">
+    Appendix II: The Discrete-Time Uncertainty Principle
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="info.html" class="md-nav__link">
+      Information
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#appendix-i-mean-square-error-minimization" class="md-nav__link">
+    Appendix I: Mean-Square Error Minimization
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#appendix-ii-the-discrete-time-uncertainty-principle" class="md-nav__link">
+    Appendix II: The Discrete-Time Uncertainty Principle
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="appendices">Appendices<a class="headerlink" href="#appendices" title="Permanent link">&para;</a></h1>
+<h2 id="appendix-i-mean-square-error-minimization">Appendix I: Mean-Square Error Minimization<a class="headerlink" href="#appendix-i-mean-square-error-minimization" title="Permanent link">&para;</a></h2>
+<p>We wish to estimate a random variable <span class="arithmatex">\(x\)</span> as a linear combination <span class="arithmatex">\({x_e}\)</span> of other random
+variables <span class="arithmatex">\(r.\)</span> The weighting coefficients in the linear combination are <span class="arithmatex">\(h.\)</span> These coefficients are <em>not</em> random. The linear combination is:</p>
+<div class="" id="eq:Ap1eq1">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(13.1)</td>
+<td class="eqTableEq">
+<div>$${x_e} = \sum\limits_k {{h_k}{r_k}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The difference between the estimated value <span class="arithmatex">\({x_e}\)</span> and the true value <span class="arithmatex">\(x\)</span> represents the error of the estimation procedure <span class="arithmatex">\(error = {x_e} - x.\)</span> If this term is greater than zero we have an overestimate and if it less than zero we have an underestimate. We will consider both cases as equally objectionable. To accomplish this we consider the squared
+error <span class="arithmatex">\({\left( {{x_e} - x} \right)^2}.\)</span> The <em>mean-square error</em> is then given by:</p>
+<div class="" id="eq:Ap1eq2">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(13.2)</td>
+<td class="eqTableEq">
+<div>$$e = E\left\{ {{{\left( {{x_e} - x} \right)}^2}} \right\} = E\left\{ {{{\left( {\sum\limits_k {{h_k}{r_k}}  - x} \right)}^2}} \right\}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>We seek the value of the coefficient set <span class="arithmatex">\(h\)</span> that minimizes this
+mean-square error. Taking the derivative with respect to one of the
+coefficients <span class="arithmatex">\({{h_i}}\)</span> gives:</p>
+<div class="mainresult" id="eq:Ap1eq3">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(13.3)</td>
+<td class="eqTableEq">
+<div>$$0 = \frac{{\partial e}}{{\partial {h_i}}} = \left( {\frac{{\partial e}}{{\partial q}}} \right)\left( {\frac{{\partial q}}{{\partial {h_i}}}} \right) = 2E\left\{ {\left( {\sum\limits_k {{h_k}{r_k} - x} } \right){r_i}} \right\}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>where we have (temporarily) set <span class="arithmatex">\(q = \left( {\sum\nolimits_k {{h_k}{r_k} - x} } \right).\)</span> Note the critical step of exchanging the order of differentiation <span class="arithmatex">\(\partial \left(  \bullet  \right)/\partial {h_i}\)</span> and expectation <span class="arithmatex">\(E\left\{  \bullet  \right\}.\)</span> See <a href="Chap_4.html#eq:additive">Equation 4.13</a> and <a href="Chap_4.html#eq:homogeneous">Equation 4.14</a>.</p>
+<p>The result in <a href="Chap_13.html#eq:Ap1eq3">Equation 13.3</a> must be simultaneously applied for every coefficient <span class="arithmatex">\({h_i}\)</span> to produce the minimum mean-square error. This leads to a set of simultaneous equations which in some textbooks (Papoulis<sup id="fnref:papoulis1977"><a class="footnote-ref" href="#fn:papoulis1977">1</a></sup>) is formulated as a vector equation. In that vector
+formulation the data vector <span class="arithmatex">\({\bf{r}}\)</span> is <em>orthogonal</em> to the error vector, <span class="arithmatex">\({\bf{e}} = {{\bf{x}}_{\bf{e}}} - {\bf{x}},\)</span> as their inner product—as exemplified by <a href="Chap_13.html#eq:Ap1eq3">Equation 13.3</a>—is zero. We, however, shall use the formulation shown above.</p>
+<h2 id="appendix-ii-the-discrete-time-uncertainty-principle">Appendix II: The Discrete-Time Uncertainty Principle<a class="headerlink" href="#appendix-ii-the-discrete-time-uncertainty-principle" title="Permanent link">&para;</a></h2>
+<p>We begin with a discrete-time signal <span class="arithmatex">\(x[n]\)</span> whose Fourier transform exists and is given by <span class="arithmatex">\(X(\Omega ) = {\mathscr{F}}\left\{ {x[n]} \right\}.\)</span> We note that <span class="arithmatex">\(X(\Omega  - \pi ) = X(\Omega  + \pi )\)</span>; the spectrum is periodic.</p>
+<p>We will make use of Parseval’s relation in both discrete and continuous time, <a href="Chap_13.html#eq:Ap2eq1">Equation 13.4</a>. </p>
+<div class="" id="eq:Ap2eq1">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(13.4)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{\sum\limits_{n =  - \infty }^{ + \infty } {{{\left| {x[n]} \right|}^2} = \frac{1}{{2\pi }}\int\limits_{ - \pi }^{ + \pi } {{{\left| {X(\Omega )} \right|}^2}d\Omega } } }\\
+{\int\limits_{ - \infty }^{ + \infty } {{{\left| {x(t)} \right|}^2}dt}  = \frac{1}{{2\pi }}\int\limits_{ - \infty }^{ + \infty } {{{\left| {X(\omega )} \right|}^2}d\omega } }
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Without loss of generality we assume that:</p>
+<div class="" id="eq:Ap2eq2">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(13.5)</td>
+<td class="eqTableEq">
+<div>$$\sum\limits_{n =  - \infty }^{ + \infty } {{{\left| {x[n]} \right|}^2}}  = 1$$</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="" id="eq:Ap2eq3">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(13.6)</td>
+<td class="eqTableEq">
+<div>$$\sum\limits_{n =  - \infty }^{ + \infty } {n{{\left| {x[n]} \right|}^2}}  = 0$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>These two assumptions mean that the terms <span class="arithmatex">\(\left\{ {{{\left| {x[n]} \right|}^2}} \right\}\)</span> are real, positive, and normalized for all <span class="arithmatex">\(n.\)</span> They can be thought of as probabilities (<a href="Chap_13.html#eq:Ap2eq2">Equation 13.5</a>) and that the average value of these probabilities is zero (<a href="Chap_13.html#eq:Ap2eq3">Equation 13.6</a>). The general case, where the average is not zero, can be treated with a straightforward change of variable. Our proof is based upon the one given in Folland<sup id="fnref:folland1992"><a class="footnote-ref" href="#fn:folland1992">2</a></sup>. We start with the definitions of the squared signal-duration <a href="Chap_13.html#eq:Ap2eq4">Equation 13.7</a> and the squared signal-bandwidth <a href="Chap_13.html#eq:Ap2eq5">Equation 13.8</a>.</p>
+<div class="" id="eq:Ap2eq4">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(13.7)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{{\left( {\Delta {n_{rms}}} \right)}^2}}&amp;{ = \left( {\sum\limits_{n =  - \infty }^{ + \infty } {{n^2}{{\left| {x[n]} \right|}^2}} } \right)/\sum\limits_{n =  - \infty }^{ + \infty } {{{\left| {x[n]} \right|}^2}} }\\
+{\,\,\,}&amp;{ = \sum\limits_{n =  - \infty }^{ + \infty } {{n^2}{{\left| {x[n]} \right|}^2}} }
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="" id="eq:Ap2eq5">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(13.8)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{{\left( {\Delta {\Omega _{rms}}} \right)}^2}}&amp;{ = \left( {\int\limits_{ - \pi }^{ + \pi } {{\Omega ^2}{{\left| {X(\Omega )} \right|}^2}d\Omega } } \right)/\left( {\int\limits_{ - \pi }^{ + \pi } {{{\left| {X(\Omega )} \right|}^2}d\Omega } } \right)}\\
+{\,\,\,}&amp;{ = \frac{1}{{2\pi }}\int\limits_{ - \pi }^{ + \pi } {{\Omega ^2}{{\left| {X(\Omega )} \right|}^2}d\Omega } }
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>We intend to show that:</p>
+<div class="" id="eq:Ap2eq6">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(13.9)</td>
+<td class="eqTableEq">
+<div>$${\left( {\Delta {n_{rms}}} \right)^2}{\left( {\Delta {\Omega _{rms}}} \right)^2} \ge \frac{1}{4}\,\,\,\,\, \Rightarrow \,\,\,\,\,\left( {\Delta {n_{rms}}} \right)\left( {\Delta {\Omega _{rms}}} \right) \ge \frac{1}{2}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>We begin by forming a continuous and piecewise-smooth, continuous-time signal <span class="arithmatex">\(y(t)\)</span> from the discrete-time signal <span class="arithmatex">\(x[n].\)</span> By construction, <span class="arithmatex">\(y(t = k) = x[k]\)</span> with a sampling interval of <span class="arithmatex">\(T = 1.\)</span></p>
+<div class="" id="eq:Ap2eq7">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(13.10)</td>
+<td class="eqTableEq">
+<div>$$y(t) = \sum\limits_{n =  - \infty }^{ + \infty } {x[n]{\rm{sinc}}(t - n)}  = \sum\limits_{n =  - \infty }^{ + \infty } {x[n]\frac{{\sin \left( {\pi (t - n)} \right)}}{{\pi (t - n)}}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The sinc function is chosen so that its Fourier transform is the ideal lowpass filter given in <a href="Chap_13.html#eq:Ap2eq8">Equation 13.11</a>.</p>
+<div class="" id="eq:Ap2eq8">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(13.11)</td>
+<td class="eqTableEq">
+<div>$${\mathscr{F}}\left\{ {\frac{{\sin (\pi t)}}{{\pi t}}} \right\} = \left\{ {\begin{array}{*{20}{l}}
+1&amp;{\left| \omega  \right| &lt; \pi }\\
+0&amp;{\left| \omega  \right| &gt; \pi }
+\end{array}} \right.$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Using  <span class="arithmatex">\(T = 1\)</span> implies that:</p>
+<div class="" id="eq:Ap2eq9">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(13.12)</td>
+<td class="eqTableEq">
+<div>$$Y(\omega ) = {\mathscr{F}}\left\{ {y(t)} \right\} = \left\{ {\begin{array}{*{20}{l}}
+{X(\Omega  = \omega )}&amp;{\left| \omega  \right| &lt; \pi }\\
+0&amp;{\left| \omega  \right| &gt; \pi }
+\end{array}} \right.$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>In words, the ideal lowpass filter guarantees that <span class="arithmatex">\(Y(\omega )\)</span> is the baseband spectrum of the periodic spectrum <span class="arithmatex">\(X(\Omega ).\)</span></p>
+<p>For the proof of the Uncertainty Principle, it is essential that <span class="arithmatex">\(y(t)\)</span> is square-integrable, that it is in <span class="arithmatex">\({L^2}.\)</span> This follows from:</p>
+<div class="" id="eq:Ap2eq10">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(13.13)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+\int\limits_{ - \infty }^{ + \infty } {{{\left| {y(t)} \right|}^2}dt} \\
+\,\,\,\,\,\, = \int\limits_{ - \infty }^{ + \infty } {\left( {\sum\limits_{n =  - \infty }^{ + \infty } {x[n]{\rm{sinc}}(t - n)} } \right){{\left( {\sum\limits_{k =  - \infty }^{ + \infty } {x[k]{\rm{sinc}}(t - k)} } \right)}^*}dt} \\
+\,\,\,\,\, = \sum\limits_{n =  - \infty }^{ + \infty } {\sum\limits_{k =  - \infty }^{ + \infty } {x[n]} } {x^*}[k]\int\limits_{ - \infty }^{ + \infty } {{\rm{sinc}}(t - n){\rm{sinc}}(t - k)dt} \\
+\,\,\,\,\, = \sum\limits_{n =  - \infty }^{ + \infty } {{{\left| {x[n]} \right|}^2} = 1} 
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>We use the orthonormality of the sinc functions and the assumption in <a href="Chap_13.html#eq:Ap2eq2">Equation 13.5</a> to reach the last line in <a href="Chap_13.html#eq:Ap2eq10">Equation 13.13</a>. We conclude that <span class="arithmatex">\(y(t)\)</span> is, indeed, in <span class="arithmatex">\({L^2}.\)</span>  </p>
+<p>The two signals <span class="arithmatex">\(ty(t)\)</span> and <span class="arithmatex">\(y'(t),\)</span> which we will now use, are either in <span class="arithmatex">\({L^2}\)</span> or they are not. The situation when they are not in <span class="arithmatex">\({L^2}\)</span> will be discussed later. In fact, whether or not <span class="arithmatex">\(ty(t)\)</span> or <span class="arithmatex">\(y'(t)\)</span> is in <span class="arithmatex">\({L^2},\)</span> the Uncertainty Principle is satisfied.</p>
+<p>If they are in <span class="arithmatex">\({L^2},\)</span> then the Folland technique can be directly applied to <span class="arithmatex">\(\int {ty(t){y^*}(t)dt}\)</span> leading to:</p>
+<div class="" id="eq:Ap2eq11">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(13.14)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{\int\limits_{ - \infty }^{ + \infty } {{{\left| {y(t)} \right|}^2}dt} }&amp;{ =  - 2{\mathop{\rm Re}\nolimits} \left\{ {\int\limits_{ - \infty }^{ + \infty } {{{\left( {ty(t)} \right)}^*}y'(t)dt} } \right\} + \left. {t{{\left| {y(t)} \right|}^2}} \right|_{ - \infty }^{ + \infty }}\\
+{\,\,\,}&amp;{ =  - 2{\mathop{\rm Re}\nolimits} \left\{ {\int\limits_{ - \infty }^{ + \infty } {{{\left( {ty(t)} \right)}^*}y'(t)dt} } \right\}}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Because of the way <span class="arithmatex">\(y(t)\)</span> is formed <a href="Chap_13.html#eq:Ap2eq7">Equation 13.10</a>, the term <span class="arithmatex">\(t{\left| {y(t)} \right|^2}\)</span> in the first line of <a href="Chap_13.html#eq:Ap2eq11">Equation 13.14</a> vanishes at <span class="arithmatex">\(t =  \pm \infty.\)</span> Applying the Cauchy-Schwartz
+inequality then leads to<sup id="fnref:follandsapproach"><a class="footnote-ref" href="#fn:follandsapproach">3</a></sup>:</p>
+<div class="" id="eq:Ap2eq12">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(13.15)</td>
+<td class="eqTableEq">
+<div>$${\left( {\int\limits_{ - \infty }^{ + \infty } {{{\left| {y(t)} \right|}^2}dt} } \right)^2} \le 4\left( {\int\limits_{ - \infty }^{ + \infty } {{t^2}{{\left| {y(t)} \right|}^2}dt} } \right)\left( {\int\limits_{ - \infty }^{ + \infty } {{{\left| {y'(t)} \right|}^2}dt} } \right)$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>which means:</p>
+<div class="" id="eq:Ap2eq13">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(13.16)</td>
+<td class="eqTableEq">
+<div>$$\left( {\int\limits_{ - \infty }^{ + \infty } {{t^2}{{\left| {y(t)} \right|}^2}dt} } \right)\left( {\int\limits_{ - \infty }^{ + \infty } {{{\left| {y'(t)} \right|}^2}dt} } \right) \ge \frac{1}{4}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>We now use the Fourier property <span class="arithmatex">\(y'(t) = {\mathscr{F}^{ - 1}}\left\{ {j\omega Y\left( \omega  \right)} \right\},\)</span> Parseval’s relation <a href="Chap_13.html#eq:Ap2eq1">Equation 13.4</a>, and the relation between the continuous-time spectrum <span class="arithmatex">\(Y(\omega )\)</span> and the discrete-time spectrum <span class="arithmatex">\(X(\Omega )\)</span> given in <a href="Chap_13.html#eq:Ap2eq9">Equation 13.12</a>. From <a href="Chap_13.html#eq:Ap2eq9">Equation 13.12</a> and <a href="Chap_13.html#eq:Ap2eq5">Equation 13.8</a> we have:</p>
+<div class="" id="eq:Ap2eq14">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(13.17)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{\int\limits_{ - \infty }^{ + \infty } {{{\left| {y'(t)} \right|}^2}dt} }&amp;{ = \frac{1}{{2\pi }}\int\limits_{ - \infty }^{ + \infty } {{\omega ^2}{{\left| {Y(\omega )} \right|}^2}d\omega } }\\
+{\,\,\,}&amp;{ = \frac{1}{{2\pi }}\int\limits_{ - \pi }^{ + \pi } {{\Omega ^2}{{\left| {X(\Omega )} \right|}^2}d\Omega } }\\
+{\,\,\,}&amp;{ = {{\left( {\Delta {\Omega _{rms}}} \right)}^2}}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Substituting in <a href="Chap_13.html#eq:Ap2eq13">Equation 13.16</a> gives:</p>
+<div class="" id="eq:Ap2eq15">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(13.18)</td>
+<td class="eqTableEq">
+<div>$$\left( {\int\limits_{ - \infty }^{ + \infty } {{t^2}{{\left| {y(t)} \right|}^2}dt} } \right){\left( {\Delta {\Omega _{rms}}} \right)^2} \ge \frac{1}{4}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>It only remains to show that <span class="arithmatex">\(\int {{t^2}{{\left| {y(t)} \right|}^2}} dt =\)</span> <span class="arithmatex">\(\sum {{n^2}{{\left| {x[n]} \right|}^2} = }\)</span> <span class="arithmatex">\({\left( {\Delta {n_{rms}}} \right)^2}.\)</span>  </p>
+<p>We know that <span class="arithmatex">\(y(t)\)</span> is bandlimited because of the way it is formed, <a href="Chap_13.html#eq:Ap2eq7">Equation 13.10</a>. Again using Parseval’s relation <a href="Chap_13.html#eq:Ap2eq1">Equation 13.4</a> and the relation between the continuous-time spectrum <span class="arithmatex">\(Y(\omega )\)</span> and the discrete-time spectrum <span class="arithmatex">\(X(\Omega )\)</span> given in <a href="Chap_13.html#eq:Ap2eq9">Equation 13.12</a>, this implies that <span class="arithmatex">\(ty(t)\)</span> is also bandlimited and that the “energy” in <span class="arithmatex">\(ty(t)\)</span> is given by:</p>
+<div class="" id="eq:Ap2eq16">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(13.19)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{\int\limits_{ - \infty }^{ + \infty } {{t^2}{{\left| {y(t)} \right|}^2}dt} }&amp;{ = \frac{1}{{2\pi }}\int\limits_{ - \infty }^{ + \infty } {{\omega ^2}{{\left| {Y(\omega )} \right|}^2}d\omega } }\\
+{\,\,\,}&amp;{ = \frac{1}{{2\pi }}\int\limits_{ - \pi }^{ + \pi } {{\omega ^2}{{\left| {Y(\omega )} \right|}^2}d\omega } }\\
+{\,\,\,}&amp;{ = \frac{1}{{2\pi }}\int\limits_{ - \pi }^{ + \pi } {{\Omega ^2}{{\left| {X(\Omega )} \right|}^2}d\Omega } }\\
+{\,\,\,}&amp;{ = \sum\limits_{n =  - \infty }^{ + \infty } {{n^2}{{\left| {x[n]} \right|}^2}} }\\
+{\,\,\,}&amp;{ = {{\left( {\Delta {n_{rms}}} \right)}^2}}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Throughout this derivation we use <span class="arithmatex">\(T = 1\)</span> which is the proper value for analyzing the Uncertainty Principle. Should we wish to use this result in other applications where the sampling interval could be shorter, a higher sampling frequency, then the appropriate formulation is:</p>
+<div class="" id="eq:Ap2eq17">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(13.20)</td>
+<td class="eqTableEq">
+<div>$$\frac{1}{T}\int\limits_{ - \infty }^{ + \infty } {{t^2}{{\left| {y(t)} \right|}^2}dt}  = \sum\limits_{n =  - \infty }^{ + \infty } {{n^2}{{\left| {x[n]} \right|}^2}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Substituting the result in <a href="Chap_13.html#eq:Ap2eq16">Equation 13.19</a> into <a href="Chap_13.html#eq:Ap2eq15">Equation 13.18</a> leads to the desired result:</p>
+<div class="mainresult" id="eq:Ap2eq18">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(13.21)</td>
+<td class="eqTableEq">
+<div>$${\left( {\Delta {n_{rms}}} \right)^2}{\left( {\Delta {\Omega _{rms}}} \right)^2} \ge \frac{1}{4}\,\,\,\,\, \Rightarrow \,\,\,\,\,\left( {\Delta {n_{rms}}} \right)\left( {\Delta {\Omega _{rms}}} \right) \ge \frac{1}{2}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>We return to the discussion of the two signals <span class="arithmatex">\(ty(t)\)</span> and <span class="arithmatex">\(y'(t)\)</span> when either of the signals is not in <span class="arithmatex">\({L^2}.\)</span> If <span class="arithmatex">\(ty(t)\)</span> is not in <span class="arithmatex">\({L^2}\)</span> then, from <a href="Chap_13.html#eq:Ap2eq16">Equation 13.19</a>, we have that <span class="arithmatex">\({\left( {\Delta {n_{rms}}} \right)^2}\)</span> is unbounded and <a href="Chap_13.html#eq:Ap2eq18">Equation 13.21</a> is automatically satisfied. Similarly if <span class="arithmatex">\(y'(t)\)</span> is not in <span class="arithmatex">\({L^2}\)</span> then, from <a href="Chap_13.html#eq:Ap2eq14">Equation 13.17</a>, <span class="arithmatex">\({\left( {\Delta {\Omega _{rms}}} \right)^2}\)</span> is unbounded and <a href="Chap_13.html#eq:Ap2eq18">Equation 13.21</a> is again satisfied.</p>
+<h1 id="epilogue">Epilogue<a class="headerlink" href="#epilogue" title="Permanent link">&para;</a></h1>
+<p>Our goal in this iBook has been twofold. First, we have attempted to
+present the basic concepts of stochastic (random) signal processing in
+the setting of discrete-time signal processing and with a number of
+examples that indicate the power of this approach. Second, we have tried
+to make use of modern technology to change a textbook from a static
+entity to a dynamic one. The ability to <em>hear</em> signals before and after
+processing, the ability to <em>see</em> the dynamics of signal processing and
+the possibility to <em>link</em> to the outside world can, we believe, improve
+the learning process.</p>
+<p>In the end, the best description of the goal of a textbook was given by
+<a href="https://en.wikipedia.org/wiki/Lee_Yuk-wing">Professor Y.W. Lee</a>
+of the Massachusetts Institute of Technology when he
+wrote<sup id="fnref:lee1960"><a class="footnote-ref" href="#fn:lee1960">4</a></sup>: “In writing this book I have been guided by
+the idea that a teacher should not attempt to cover the subject of study
+but should attempt to uncover it for the student.”</p>
+<p style="text-align:right;">
+<br>
+Ted Young
+<br>
+Ronald Ligteringen
+<br>
+Delft, The Netherlands
+<br>
+July, 2020</p>
+
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:papoulis1977">
+<p>Papoulis, A. (1977). Signal Analysis. New York, McGraw-Hill&#160;<a class="footnote-backref" href="#fnref:papoulis1977" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:folland1992">
+<p>Folland, G. B. (1992). Fourier Analysis and its Applications. Pacific Grove, California, Wadsworth $ Brooks/Cole&#160;<a class="footnote-backref" href="#fnref:folland1992" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:follandsapproach">
+<p>The essential part of Folland’s approach starts with integration-by-parts: <span class="arithmatex">\(\int {u(t)v'(t)dt = }\)</span> <span class="arithmatex">\(u(t)v(t) -\)</span><span class="arithmatex">\(\int {v(t)u'(t)dt}.\)</span> We then set <span class="arithmatex">\(u(t) = t{y^*}(t)\)</span> and <span class="arithmatex">\(v'(t) = y'(t).\)</span> Careful application of the integration rule—together with the observation that <span class="arithmatex">\(q(t) + {q^*}(t) = 2\operatorname{Re} \left\{ {q(t)} \right\}\)</span> and that for any complex <span class="arithmatex">\(q,\)</span> <span class="arithmatex">\(\operatorname{Re} \left\{ q \right\} \leqslant \left| q \right|\)</span>—yields the desired result.&#160;<a class="footnote-backref" href="#fnref:follandsapproach" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:lee1960">
+<p>Lee, Y. W. (1960). Statistical Theory of Communication. New York, John Wiley &amp; Sons&#160;<a class="footnote-backref" href="#fnref:lee1960" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+
+<footer class="md-footer" id="jumpToBottom">
+
+  <!-- Link to previous and/or next page -->
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        <!-- Link to previous page -->
+        
+          <a
+            href="Chap_12.html"
+            title="12. Spectral Estimation"
+            class="md-footer-nav__link md-footer-nav__link--prev"
+            rel="prev"
+          >
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                12. Spectral Estimation
+              </div>
+            </div>
+          </a>
+        
+
+        <!-- Link to next page -->
+        
+          <a
+            href="info.html"
+            title="Information"
+            class="md-footer-nav__link md-footer-nav__link--next"
+            rel="next"
+          >
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                Information
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+</footer>
+      
+    </div>
+    
+      <script src="assets/javascripts/vendor.77e55a48.min.js"></script>
+      <script src="assets/javascripts/bundle.9554a270.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+
+	<script src="js/polyfill/index.js"></script>
+	<script src="search/search_index.js"></script>
+
+
+      <script>
+        app = initialize({
+          base: ".",
+          features: [],
+          search: Object.assign({
+            worker: "assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="js/extra.js"></script>
+      
+        <script src="js/SSPextra.js"></script>
+      
+        <script src="js/mathjax_3_generic_conf.js"></script>
+      
+        <script src="js/mathjax/tex-svg.js"></script>
+      
+    
+  </body>
+</html>

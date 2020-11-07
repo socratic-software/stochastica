@@ -1,0 +1,699 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <meta name="author" content="I.T. Young & R. Ligteringen">
+      
+      <link rel="shortcut icon" href="images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.0.2">
+    
+    
+      
+        <title>1. How to use this iBook - Introduction to Stochastic Signal Processing</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.38780c08.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.3f72e892.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Georgia:300,400,400i,700%7CCourier&display=fallback">
+        <style>body,input{font-family:"Georgia",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Courier",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="css/extra.css">
+    
+      <link rel="stylesheet" href="css/imgtxt.css">
+    
+      <link rel="stylesheet" href="css/tables.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#how-to-use-this-ibook" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <!-- Application header -->
+<header class="md-header" data-md-component="header">
+
+  <!-- Top-level navigation -->
+  <nav class="md-header-nav md-grid" aria-label="Header">
+
+    <!-- Link to home -->
+    <a
+      href="."
+      title="Introduction to Stochastic Signal Processing"
+      class="md-header-nav__button md-logo"
+      aria-label="Introduction to Stochastic Signal Processing"
+    >
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+<!-- 
+  Insert an <img> here as an alternative for the standard logo if desired.
+  Then comment out the above two lines
+ <img src="images/favicon.png" style="margin-top:5px; border: 0px solid lime; border-radius:5px; width:120%; height: auto;" />
+ -->
+
+    </a>
+
+    <!-- Button to open drawer -->
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+
+    <!-- Header title -->
+    <div class="md-header-nav__title" data-md-component="header-title">
+          
+            
+              <a href="#jumpToBottom">
+                <span class="md-header-nav__topic">
+                  Introduction to Stochastic Signal Processing
+                </span>
+                <span class="md-header-nav__topic">
+                  1. How to use this iBook
+                </span>
+              </a>
+            
+          
+    </div>
+
+    <!-- Button to open search dialogue -->
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+
+      <!-- Search interface -->
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    <!-- Repository containing source -->
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Introduction to Stochastic Signal Processing" class="md-nav__button md-logo" aria-label="Introduction to Stochastic Signal Processing">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+<!-- 
+  Insert an <img> here as an alternative for the standard logo if desired.
+  Then comment out the above two lines
+ <img src="images/favicon.png" style="margin-top:5px; border: 0px solid lime; border-radius:5px; width:120%; height: auto;" />
+ -->
+
+    </a>
+    Introduction to Stochastic Signal Processing
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        1. How to use this iBook
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="Chap_1.html" class="md-nav__link md-nav__link--active">
+      1. How to use this iBook
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#highlighting" class="md-nav__link">
+    Highlighting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outside-this-device" class="md-nav__link">
+    Outside this device
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-around" class="md-nav__link">
+    Getting around
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sound-of-music" class="md-nav__link">
+    Sound of music
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#at-the-movies" class="md-nav__link">
+    At the movies
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enhanced-experience" class="md-nav__link">
+    Enhanced experience
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_2.html" class="md-nav__link">
+      2. Prologue
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_3.html" class="md-nav__link">
+      3. Introduction
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_4.html" class="md-nav__link">
+      4. Characterization of Random Signals
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_5.html" class="md-nav__link">
+      5. Correlations and Spectra
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_6.html" class="md-nav__link">
+      6. Filtering of Stochastic Signals
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_7.html" class="md-nav__link">
+      7. The Langevin Equation – A Case Study
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_8.html" class="md-nav__link">
+      8. Characterizing Signal-to-Noise Ratios
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_9.html" class="md-nav__link">
+      9. The Matched Filter
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_10.html" class="md-nav__link">
+      10. The Wiener filter
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_11.html" class="md-nav__link">
+      11. Aspects of Estimation
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_12.html" class="md-nav__link">
+      12. Spectral Estimation
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_13.html" class="md-nav__link">
+      Appendices
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="info.html" class="md-nav__link">
+      Information
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#highlighting" class="md-nav__link">
+    Highlighting
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#outside-this-device" class="md-nav__link">
+    Outside this device
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-around" class="md-nav__link">
+    Getting around
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#sound-of-music" class="md-nav__link">
+    Sound of music
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#at-the-movies" class="md-nav__link">
+    At the movies
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#enhanced-experience" class="md-nav__link">
+    Enhanced experience
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <p class="inspiringquote">To hear is to forget.        <br />
+To see is to remember.        <br />
+To do is to learn!        <br />
+&hellip;Chinese proverb</p>
+<h1 id="how-to-use-this-ibook">How to use this iBook<a class="headerlink" href="#how-to-use-this-ibook" title="Permanent link">&para;</a></h1>
+<p>This textbook is being prepared in the context of modern electronic publishing. By that we mean that modern digital technology&mdash;such as the Internet, an iPad<sup id="fnref:apple_trade"><a class="footnote-ref" href="#fn:apple_trade">1</a></sup> or Android<sup id="fnref:android_trade"><a class="footnote-ref" href="#fn:android_trade">2</a></sup> tablet, a smartphone, and a laptop or desktop computer&mdash;makes it possible to present not only text, equations, and figures but dynamic illustrations, audio samples, both internal and external links to relevant material, and interactive laboratory experiments. Extensive use of these possibilities is made in this iBook. This “user’s guide” describes how you can make use of these possibilities.</p>
+<p>This edition is primarily intended for use with a browser such as Safari, Firefox, Chrome, or Opera on a laptop or desktop computer. You can, of course, use this edition through a browser on a tablet or smartphone. The 26 Laboratory Experiments in this edition involve the use of the screen, speakers, keyboard, and a graphical user interface (GUI).</p>
+<p>An extended version of this iBook with an additional 32 Laboratory Experiments for a total of 58 experiments makes use of the microphone and camera that can be found on tablets and smartphones. The current implementation of this extended version is free and can be found <a href="https://apps.apple.com/us/app/stochastic-signal-processing/id1450268179?ls=1">here</a>.</p>
+<h2 id="highlighting">Highlighting<a class="headerlink" href="#highlighting" title="Permanent link">&para;</a></h2>
+<p>Main results will be highlighted with a background in <a class="mainresult" href="">pink</a> and special cases of main results will be highlighted with a background in <a class="specialresult" href="">yellow</a>.  </p>
+<p class="mainresult">$$
+\begin{aligned}
+{S_{yy}}(\Omega ) = {\left| {H( - \Omega )}
+\right|^2}{S_{xx}}(\Omega )\;
+\end{aligned}
+$$</p>
+<p class="specialresult">$$
+\begin{aligned}
+{S_{yy}}(\Omega ) = {\left| {H(\Omega )}
+\right|^2}{S_{xx}}(\Omega )\;
+\end{aligned}
+$$</p>
+<p>Special cases might result, for example, when we consider only real signals or systems. In general we will consider that all signals and systems are complex, having both a real and an imaginary part. When the special case of a real signal or real system is being considered, it will be explicitly stated.  </p>
+<h2 id="outside-this-device">Outside this device<a class="headerlink" href="#outside-this-device" title="Permanent link">&para;</a></h2>
+<p>Occasionally, references will be made to other sources of information through an external <em>link</em>. Click <a href="http://www.imphys.tudelft.nl/">here</a> to see an example. When you are finished viewing the external material, return to this iBook and it should continue at the place where you left off.</p>
+<h2 id="getting-around">Getting around<a class="headerlink" href="#getting-around" title="Permanent link">&para;</a></h2>
+<p>Endnotes are also linked within the iBook. When you see an endnote indicator<sup id="fnref:endnote"><a class="footnote-ref" href="#fn:endnote">3</a></sup>, you can click on it and be taken to the note which is at the end of the chapter. When you want to jump to the homework problems or the laboratory exercises at the end of a chapter, tap the top of the screen.</p>
+<h2 id="sound-of-music">Sound of music<a class="headerlink" href="#sound-of-music" title="Permanent link">&para;</a></h2>
+<p>Dynamic examples, specifically music and animations, have been built into this iBook. To <em>hear</em> the results of various operations on a stochastic signal, &ldquo;click&rdquo; on the &ldquo;playback&rdquo; icon (<img src="images/play_triangle1.png" style="vertical-align:middle;">) and the sound will be played. This is a good way to test and adjust the sound level of your iBook.  </p>
+<table class="imgtxt" style="margin:1em auto; padding-top:10px;">
+    <tr>
+        <td style="width:auto; vertical-align:middle; text-align:center;">
+            <audio controls><source src="media/Paganini_Original.wav" type="audio/mpeg"></audio>
+        </td>
+    </tr>
+</table>
+
+<figcaption style="margin: 0px 30px;">
+<b>Audio 1.1:</b> Click the play triangle ( <img src="images/play_triangle1.png" style="vertical-align:middle;">) to hear a brief selection of Paganini.
+</figcaption>
+
+<h2 id="at-the-movies">At the movies<a class="headerlink" href="#at-the-movies" title="Permanent link">&para;</a></h2>
+<p>Animations and movies will be used to illustrate various aspects of stochastic signal processing. In laboratory exercises, for example, you will need to whistle. This famous film clip is taken from the wonderful 1944 Warner Brothers film <em>&ldquo;To Have and Have Not&rdquo;</em> which starred Humphrey Bogart and Lauren Bacall. This clip is used under the <em>fair use</em> copyright policy<sup id="fnref:us_copyright_act"><a class="footnote-ref" href="#fn:us_copyright_act">4</a></sup>.  </p>
+<table class="imgtxt" style="margin:1em auto;">
+    <tr>
+        <td style="width:auto; vertical-align:middle; text-align:center;">
+            <video id="theVideo" src="media/Just Whistle.m4v" 
+                poster="media/Just_Whistle-poster.jpg" width=100% controls 
+                onended="rewind()" style="border: 2px solid rgb(174,24,16)" 
+                playsinline webkit-playsinline></video>
+        </td>
+    </tr>
+</table>
+
+<figcaption style="margin: 0px 30px;">
+<b>Movie 1.1:</b> Click the play triangle ( <img src="images/play_triangle1.png" style="vertical-align:middle;">) to learn how to whistle.
+</figcaption>
+
+<h2 id="enhanced-experience">Enhanced experience<a class="headerlink" href="#enhanced-experience" title="Permanent link">&para;</a></h2>
+<p>And to prevent the reader from falling into an etymological lacuna, it is possible to &ldquo;point&rdquo; to a word and then be offered a definition through a dictionary.</p>
+<!-- 
+## Laboratory Exercises {: .labexp }
+
+### Laboratory Exercise 1.1
+
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_1.1.html'>
+                <img src='images/mic_80.png' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+            In this first exercise we want you to familiarize yourself with the interactive
+            possibilities of your iBook. Click on the icon to the left to start.
+        </td>
+    </tr>
+</table>
+ -->
+
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:apple_trade">
+<p>iPad is a trademark of Apple Inc., registered in the U.S. and other countries.&#160;<a class="footnote-backref" href="#fnref:apple_trade" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:android_trade">
+<p>Android is a trademark of Google LLC.&#160;<a class="footnote-backref" href="#fnref:android_trade" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:endnote">
+<p>If you click on the return arrow at the end of this sentence (or if not available at the number prepending this text), you will return to your previous position in the chapter.&#160;<a class="footnote-backref" href="#fnref:endnote" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:us_copyright_act">
+<p>U.S. Copyright Act, S 107: Notwithstanding the provisions of sections 106 and 106A, the fair use of a copyrighted work, including such use by reproduction in copies or phonorecords or by any other means specified by that section, for purposes such as criticism, comment, news reporting, teaching (including multiple copies for classroom use), scholarship, or research, is not an infringement of copyright. In determining whether the use made of a work in any particular case is a fair use the factors to be considered shall include - (1) the purpose and character of the use, including whether such use is of a commercial nature or is for nonprofit educational purposes; (2) the nature of the copyrighted work; (3) the amount and substantiality of the portion used in relation to the copyrighted work as a whole; and (4) the effect of the use upon the potential market for or value of the copyrighted work. The fact that a work is unpublished shall not itself bar a finding of fair use if such finding is made upon consideration of all the above factors.&#160;<a class="footnote-backref" href="#fnref:us_copyright_act" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+
+<footer class="md-footer" id="jumpToBottom">
+
+  <!-- Link to previous and/or next page -->
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        <!-- Link to previous page -->
+        
+          <a
+            href="index.html"
+            title="Home"
+            class="md-footer-nav__link md-footer-nav__link--prev"
+            rel="prev"
+          >
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                Home
+              </div>
+            </div>
+          </a>
+        
+        <!-- Link to next page -->
+        
+          <a
+            href="Chap_2.html"
+            title="2. Prologue"
+            class="md-footer-nav__link md-footer-nav__link--next"
+            rel="next"
+          >
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                2. Prologue
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+</footer>
+      
+    </div>
+    
+      <script src="assets/javascripts/vendor.77e55a48.min.js"></script>
+      <script src="assets/javascripts/bundle.9554a270.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+
+	<script src="js/polyfill/index.js"></script>
+	<script src="search/search_index.js"></script>
+
+
+      <script>
+        app = initialize({
+          base: ".",
+          features: [],
+          search: Object.assign({
+            worker: "assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="js/extra.js"></script>
+      
+        <script src="js/SSPextra.js"></script>
+      
+        <script src="js/mathjax_3_generic_conf.js"></script>
+      
+        <script src="js/mathjax/tex-svg.js"></script>
+      
+    
+  </body>
+</html>

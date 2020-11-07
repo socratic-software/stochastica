@@ -1,0 +1,1684 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <meta name="author" content="I.T. Young & R. Ligteringen">
+      
+      <link rel="shortcut icon" href="images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.0.2">
+    
+    
+      
+        <title>11. Aspects of Estimation - Introduction to Stochastic Signal Processing</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.38780c08.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.3f72e892.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Georgia:300,400,400i,700%7CCourier&display=fallback">
+        <style>body,input{font-family:"Georgia",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Courier",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="css/extra.css">
+    
+      <link rel="stylesheet" href="css/imgtxt.css">
+    
+      <link rel="stylesheet" href="css/tables.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#aspects-of-estimation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <!-- Application header -->
+<header class="md-header" data-md-component="header">
+
+  <!-- Top-level navigation -->
+  <nav class="md-header-nav md-grid" aria-label="Header">
+
+    <!-- Link to home -->
+    <a
+      href="."
+      title="Introduction to Stochastic Signal Processing"
+      class="md-header-nav__button md-logo"
+      aria-label="Introduction to Stochastic Signal Processing"
+    >
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+<!-- 
+  Insert an <img> here as an alternative for the standard logo if desired.
+  Then comment out the above two lines
+ <img src="images/favicon.png" style="margin-top:5px; border: 0px solid lime; border-radius:5px; width:120%; height: auto;" />
+ -->
+
+    </a>
+
+    <!-- Button to open drawer -->
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+
+    <!-- Header title -->
+    <div class="md-header-nav__title" data-md-component="header-title">
+          
+            
+              <a href="#jumpToBottom">
+                <span class="md-header-nav__topic">
+                  Introduction to Stochastic Signal Processing
+                </span>
+                <span class="md-header-nav__topic">
+                  11. Aspects of Estimation
+                </span>
+              </a>
+            
+          
+    </div>
+
+    <!-- Button to open search dialogue -->
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+
+      <!-- Search interface -->
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    <!-- Repository containing source -->
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Introduction to Stochastic Signal Processing" class="md-nav__button md-logo" aria-label="Introduction to Stochastic Signal Processing">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+<!-- 
+  Insert an <img> here as an alternative for the standard logo if desired.
+  Then comment out the above two lines
+ <img src="images/favicon.png" style="margin-top:5px; border: 0px solid lime; border-radius:5px; width:120%; height: auto;" />
+ -->
+
+    </a>
+    Introduction to Stochastic Signal Processing
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_1.html" class="md-nav__link">
+      1. How to use this iBook
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_2.html" class="md-nav__link">
+      2. Prologue
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_3.html" class="md-nav__link">
+      3. Introduction
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_4.html" class="md-nav__link">
+      4. Characterization of Random Signals
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_5.html" class="md-nav__link">
+      5. Correlations and Spectra
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_6.html" class="md-nav__link">
+      6. Filtering of Stochastic Signals
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_7.html" class="md-nav__link">
+      7. The Langevin Equation – A Case Study
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_8.html" class="md-nav__link">
+      8. Characterizing Signal-to-Noise Ratios
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_9.html" class="md-nav__link">
+      9. The Matched Filter
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_10.html" class="md-nav__link">
+      10. The Wiener filter
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        11. Aspects of Estimation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="Chap_11.html" class="md-nav__link md-nav__link--active">
+      11. Aspects of Estimation
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#maximum-likelihood-estimation" class="md-nav__link">
+    Maximum-likelihood estimation
+  </a>
+  
+    <nav class="md-nav" aria-label="Maximum-likelihood estimation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-estimating-the-poisson-rate" class="md-nav__link">
+    Example: Estimating the Poisson rate
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#but-is-it-a-good-estimate" class="md-nav__link">
+    But is it a “good” estimate?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estimating-the-mean" class="md-nav__link">
+    Estimating the mean
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estimating-the-autocorrelation-function" class="md-nav__link">
+    Estimating the autocorrelation function
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-good-is-our-estimator" class="md-nav__link">
+    How good is our estimator?
+  </a>
+  
+    <nav class="md-nav" aria-label="How good is our estimator?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#langevin-redux" class="md-nav__link">
+    Langevin redux
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trouble-in-paradise" class="md-nav__link">
+    Trouble in paradise
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problems" class="md-nav__link">
+    Problems
+  </a>
+  
+    <nav class="md-nav" aria-label="Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-111" class="md-nav__link">
+    Problem 11.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-112" class="md-nav__link">
+    Problem 11.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-113" class="md-nav__link">
+    Problem 11.3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-114" class="md-nav__link">
+    Problem 11.4
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-115" class="md-nav__link">
+    Problem 11.5
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-116" class="md-nav__link">
+    Problem 11.6
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-117" class="md-nav__link">
+    Problem 11.7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-118" class="md-nav__link">
+    Problem 11.8
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-119" class="md-nav__link">
+    Problem 11.9
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-1110" class="md-nav__link">
+    Problem 11.10
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#laboratory-exercises" class="md-nav__link">
+    Laboratory Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Laboratory Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-111" class="md-nav__link">
+    Laboratory Exercise 11.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-112" class="md-nav__link">
+    Laboratory Exercise 11.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-113" class="md-nav__link">
+    Laboratory Exercise 11.3
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_12.html" class="md-nav__link">
+      12. Spectral Estimation
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_13.html" class="md-nav__link">
+      Appendices
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="info.html" class="md-nav__link">
+      Information
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#maximum-likelihood-estimation" class="md-nav__link">
+    Maximum-likelihood estimation
+  </a>
+  
+    <nav class="md-nav" aria-label="Maximum-likelihood estimation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-estimating-the-poisson-rate" class="md-nav__link">
+    Example: Estimating the Poisson rate
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#but-is-it-a-good-estimate" class="md-nav__link">
+    But is it a “good” estimate?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estimating-the-mean" class="md-nav__link">
+    Estimating the mean
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#estimating-the-autocorrelation-function" class="md-nav__link">
+    Estimating the autocorrelation function
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-good-is-our-estimator" class="md-nav__link">
+    How good is our estimator?
+  </a>
+  
+    <nav class="md-nav" aria-label="How good is our estimator?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#langevin-redux" class="md-nav__link">
+    Langevin redux
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#trouble-in-paradise" class="md-nav__link">
+    Trouble in paradise
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problems" class="md-nav__link">
+    Problems
+  </a>
+  
+    <nav class="md-nav" aria-label="Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-111" class="md-nav__link">
+    Problem 11.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-112" class="md-nav__link">
+    Problem 11.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-113" class="md-nav__link">
+    Problem 11.3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-114" class="md-nav__link">
+    Problem 11.4
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-115" class="md-nav__link">
+    Problem 11.5
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-116" class="md-nav__link">
+    Problem 11.6
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-117" class="md-nav__link">
+    Problem 11.7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-118" class="md-nav__link">
+    Problem 11.8
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-119" class="md-nav__link">
+    Problem 11.9
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-1110" class="md-nav__link">
+    Problem 11.10
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#laboratory-exercises" class="md-nav__link">
+    Laboratory Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Laboratory Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-111" class="md-nav__link">
+    Laboratory Exercise 11.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-112" class="md-nav__link">
+    Laboratory Exercise 11.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-113" class="md-nav__link">
+    Laboratory Exercise 11.3
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="aspects-of-estimation">Aspects of Estimation<a class="headerlink" href="#aspects-of-estimation" title="Permanent link">&para;</a></h1>
+<p>In this and the next chapter we will look at the problem of estimating the parameters of a stochastic process from experimental data. That is, how to estimate:</p>
+<div class="" id="eq:Eeq1">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.1)</td>
+<td class="eqTableEq">
+<div>$${m_x} = E\left\{ {x[n]} \right\} = \; &lt; x[n] &gt;$$</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="" id="eq:Eeq2">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.2)</td>
+<td class="eqTableEq">
+<div>$${\varphi _{xx}}[k] = E\left\{ {x[n]{x^*}[n + k]} \right\} = \; &lt; x[n]{x^*}[n + k] &gt;$$</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="" id="eq:Eeq3">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.3)</td>
+<td class="eqTableEq">
+<div>$${S_{xx}}(\Omega ) = {\mathscr{F}}\left\{ {{\varphi _{xx}}[k]} \right\}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>There is a formal theory of estimation that addresses a variety of issues and the development of that theory can be quite complicated. An introduction can be found in van den Bos<sup id="fnref:bos2007"><a class="footnote-ref" href="#fn:bos2007">1</a></sup>. Instead we look at a few simple criteria. To estimate the mean of a process given <span class="arithmatex">\(N\)</span> samples, we might, for example, use one of the following:</p>
+<p><em>arithmetic mean:</em></p>
+<div class="" id="eq:Eeq4">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.4)</td>
+<td class="eqTableEq">
+<div>$${\mu _A} = \,\, &lt; x[n]{ &gt; _A}\; = \frac{1}{N}\sum\limits_{n = 0}^{N - 1} {x[n]}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p><em>geometric mean:</em></p>
+<div class="" id="eq:Eeq5">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.5)</td>
+<td class="eqTableEq">
+<div>$${\mu _G} = \,\,\, &lt; x[n]{ &gt; _G}\; = {\left( {\prod\limits_{n = 0}^{N - 1} {x[n]} } \right)^{1/N}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p><em>harmonic mean:</em></p>
+<div class="" id="eq:Eeq6">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.6)</td>
+<td class="eqTableEq">
+<div>$${\mu _H} = \,\,\, &lt; x[n]{ &gt; _H}\; = N{\left( {\sum\limits_{n = 0}^{N - 1} {\frac{1}{{x[n]}}} } \right)^{ - 1}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>These three ways of defining a mean are collectively referred to as the <a href="https://en.wikipedia.org/wiki/Pythagorean_means">Pythagorean means</a> and, as one might expect, there are useful relationships among the three.</p>
+<p>From experience we expect that <a href="Chap_11.html#eq:Eeq4">Equation 11.4</a> will be the preferred form and, in fact, this can be shown from “maximum likelihood” estimation theory under many hypotheses. There are, however, numerous examples that can be found in finance, economics, the social sciences, and the physical sciences where one of the other two means is to be preferred. Let us
+look at how a choice is made.</p>
+<h2 id="maximum-likelihood-estimation">Maximum-likelihood estimation<a class="headerlink" href="#maximum-likelihood-estimation" title="Permanent link">&para;</a></h2>
+<p>We assume that <span class="arithmatex">\(N\)</span> independent measurements have been made of an ergodic random process that is described by the probability distribution <span class="arithmatex">\(p({x_i}|\theta )\)</span> where <span class="arithmatex">\(\theta\)</span> is a parameter of the distribution. In the case of coin flipping that parameter might be <span class="arithmatex">\(\theta = p = p(Heads)\)</span> as described in <a href="Chap_4.html">Chapter 4</a>.</p>
+<p>The joint distribution of these <span class="arithmatex">\(N\)</span> measurements is given by
+<span class="arithmatex">\(p\left( {{x_1},{x_2},{x_3},\,...\,,{x_N}|\theta } \right).\)</span> But because of the independence of these <span class="arithmatex">\(N\)</span> measurements we can rewrite this using <a href="Chap_3.html#eq:label14">Equation 3.8</a> as:</p>
+<div class="" id="eq:Eeq7">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.7)</td>
+<td class="eqTableEq">
+<div>$$p({x_1},{x_2},{x_3},...,{x_N}|\theta ) = \prod\limits_{i = 1}^N {p({x_i}|\theta )}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Given all of these measurements, the question is: How do we estimate <span class="arithmatex">\(\theta?\)</span> There are a variety of estimation criteria and the one we choose is <a href="https://en.wikipedia.org/wiki/Maximum_likelihood">maximum-likelihood estimation</a>, ML-estimation. In this approach we choose the value of <span class="arithmatex">\(\theta  = {\theta _{ML}}\)</span> such that  </p>
+<div class="" id="eq:Eeq8">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.8)</td>
+<td class="eqTableEq">
+<div>$$p\left( {{x_1},{x_2},{x_3},\,...\,,{x_N}|{\theta _{ML}}} \right) \geqslant p\left( {{x_1},{x_2},{x_3},\,...\,,{x_N}|{\theta _o}} \right)$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>where <span class="arithmatex">\({\theta _{ML}} \ne {\theta _o}.\)</span> In words, the ML-estimate of the parameter <span class="arithmatex">\(\theta\)</span> is the estimate that gives the maximum probability (likelihood) of collecting the data that we have just acquired. To see how this is used in practice let us look at a specific example.</p>
+<h4 id="example-estimating-the-poisson-rate">Example: Estimating the Poisson rate<a class="headerlink" href="#example-estimating-the-poisson-rate" title="Permanent link">&para;</a></h4>
+<p>In this example we refer to the Poisson random process defined in <a href="Chap_8.html#snr-for-signals-and-systems-with-poisson-noise">Chapter 8</a>. We repeat the definition of the Poisson probability distribution:</p>
+<div class="" id="eq:Eeq9">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.9)</td>
+<td class="eqTableEq">
+<div>$$p(n|\lambda T) = \frac{{{{\left( {\lambda T} \right)}^n}{e^{ - \lambda T}}}}{{n!}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>where <span class="arithmatex">\(\lambda\)</span> is the number of events per unit “time” and <span class="arithmatex">\(T\)</span> is the duration of an observation window. We see that <span class="arithmatex">\(\theta  = \lambda T.\)</span></p>
+<p>To find the ML-estimate of <span class="arithmatex">\(\theta\)</span> given <span class="arithmatex">\(N\)</span> measurements of, say, photon emission <span class="arithmatex">\(\left\{ {{n_1},{n_2},\,...\,,{n_N}|\theta } \right\}\)</span> we use the result in <a href="Chap_11.html#eq:Eeq7">Equation 11.7</a> to write the <em>likelihood function</em> <span class="arithmatex">\(L(\theta )\)</span>:</p>
+<div class="" id="eq:Eeq10">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.10)</td>
+<td class="eqTableEq">
+<div>$$L(\theta ) = \prod\limits_{i = 1}^N {p({n_i}|\theta )}  = \prod\limits_{i = 1}^N {\frac{{{\theta ^{{n_i}}}{e^{ - \theta }}}}{{{n_i}!}}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>We seek the value of <span class="arithmatex">\(\theta\)</span> that maximizes <span class="arithmatex">\(L(\theta ).\)</span> At first glance this might
+seem like an intractable problem. One of the standard procedures—a.k.a. “tricks of the trade”—can, however, be applied.</p>
+<p>It is not difficult to show that if <span class="arithmatex">\({\theta _{ML}}\)</span> maximizes <span class="arithmatex">\(\ln \left[ {L(\theta )} \right]\)</span>—where <span class="arithmatex">\(\ln\)</span> is the natural logarithm function—then it maximizes <span class="arithmatex">\(L(\theta )\)</span> as well. See <a href="#problem-111">Problem 11.1</a>. Applying this gives:</p>
+<div class="" id="eq:Eeq11">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.11)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{\ln \left[ {L(\theta )} \right]}&amp;{ = \ln \left[ {\prod\limits_{i = 1}^N {\frac{{{\theta ^{{n_i}}}{e^{ - \theta }}}}{{{n_i}!}}} } \right] = \sum\limits_{i = 1}^N {\ln } \left[ {\frac{{{\theta ^{{n_i}}}{e^{ - \theta }}}}{{{n_i}!}}} \right]}\\
+{\,\,\,}&amp;{ = \sum\limits_{i = 1}^N {{n_i}\ln } \left( \theta  \right) - \sum\limits_{i = 1}^N \theta   - \sum\limits_{i = 1}^N {n!} }
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>To find the maximum (extremum actually) we set the derivative with
+respect to <span class="arithmatex">\(\theta\)</span> to zero.</p>
+<div class="" id="eq:Eeq12">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.12)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{\frac{{\partial \ln \left[ {L(\theta )} \right]}}{{\partial \theta }}}&amp;{ = \frac{\partial }{{\partial \theta }}\left( {\sum\limits_{i = 1}^N {{n_i}\ln } \left( \theta  \right) - \sum\limits_{i = 1}^N \theta   - \sum\limits_{i = 1}^N {n!} } \right)}\\
+{\,\,\,}&amp;{ = \frac{1}{\theta }\sum\limits_{i = 1}^N {{n_i}}  - N = 0}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>(How would you show that this extremum is a maximum as opposed to a minimum or saddle point?) Solving for <span class="arithmatex">\(\theta\)</span> gives the ML-estimate:</p>
+<div class="" id="eq:Eeq13">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.13)</td>
+<td class="eqTableEq">
+<div>$$\frac{1}{\theta }\sum\limits_{i = 1}^N {{n_i}}  - N = 0\,\,\,\,\,\,\, \Rightarrow \,\,\,\,\,\,{\theta _{ML}} = \frac{1}{N}\sum\limits_{i = 1}^N {{n_i}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The ML-estimate of the parameter <span class="arithmatex">\(\theta  = \lambda T\)</span> is simply the <em>arithmetic</em> average
+(<span class="arithmatex">\({\mu _A}\)</span>) of the measurements. Other examples can be found in <a href="#problem-112">Problem 11.2</a>.</p>
+<h2 id="but-is-it-a-good-estimate">But is it a “good” estimate?<a class="headerlink" href="#but-is-it-a-good-estimate" title="Permanent link">&para;</a></h2>
+<p>In a given formula such as <a href="Chap_11.html#eq:Eeq4">Equation 11.4</a> we might also ask:</p>
+<ol>
+<li>On the average does the formula give the “right” answer?</li>
+<li>If we take a very large number of samples will our estimation error
+become smaller?<a class="indentlist" href=""></a>  </li>
+</ol>
+<p>With regard to the first question we introduce a concept that is central to obtaining good estimates: the concept of <em>bias</em>. Formally if <span class="arithmatex">\(a\)</span> is a (deterministic) parameter of a random process and <span class="arithmatex">\(\hat a\)</span> is the estimate of <span class="arithmatex">\(a\)</span> then the bias <span class="arithmatex">\(B\)</span> is:</p>
+<div class="" id="eq:Eeq14">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.14)</td>
+<td class="eqTableEq">
+<div>$$B = E\left\{ {\hat a} \right\} - a$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>We should remember that <span class="arithmatex">\(\hat a\)</span> is a random variable because it is a function of random data. If <span class="arithmatex">\(B &gt; 0\)</span> we have an overestimate of <span class="arithmatex">\(a\)</span> and if <span class="arithmatex">\(B &lt; 0\)</span> we have an underestimate. We define an <em>unbiased estimate</em> as one that has <span class="arithmatex">\(B = 0.\)</span> An unbiased estimate is desirable because it means that the estimate will be neither consistently too high nor
+consistently too low. Continuing, we define the mean-square error between the parameter and its estimate as</p>
+<div class="" id="eq:Eeq15">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.15)</td>
+<td class="eqTableEq">
+<div>$$e = E\left\{ {{{\left( {\hat a - a} \right)}^2}} \right\}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>We will show in <a href="#problem-115">Problem 11.5</a> that choosing an unbiased estimate (<span class="arithmatex">\(B = 0\)</span>) can, under certain circumstances, minimize the mean-square error measure. In <a href="#problem-116">Problem 11.6</a> and <a href="#problem-117">Problem 11.7</a> we will show that this is not always the case. When it is the case, the estimators are referred to as <em>minimum-variance unbiased estimators</em> (<a href="https://en.wikipedia.org/wiki/Minimum-variance_unbiased_estimator">MVUE</a>).</p>
+<p>An unbiased estimate—whether it is minimum-variance or not—is frequently referred to as an <em>accurate</em> estimate.</p>
+<p>In reformulating the second question we see that the central issue is convergence. It should be obvious that if the value of a parameter <span class="arithmatex">\(\theta\)</span> is <span class="arithmatex">\(2/\pi\)</span>—see <a href="https://en.wikipedia.org/wiki/Buffon%27s_needle">Buffon&rsquo;s needle</a>—and we have <span class="arithmatex">\(N = 37\)</span> samples from an experiment designed to estimate <span class="arithmatex">\(\theta,\)</span> then it will not be possible to get the exact value. By increasing <span class="arithmatex">\(N,\)</span> however, we would hope to improve our estimate.</p>
+<p>In other words, we would like the error, as we continue to use more data in our estimate, to go to zero. Formally, we want <span class="arithmatex">\(\sigma _a^2 \to 0\)</span> as the number of samples <span class="arithmatex">\(N \to \infty.\)</span> That is, the variance (or its square root, the standard deviation) of the estimate should go to zero as the number of samples becomes very large. As the variance of the estimate goes to zero, we describe the estimate as becoming more <em>precise</em>. If in the limit as <span class="arithmatex">\(N \to \infty\)</span> both the bias and the variance go to zero, we say that the estimate is <em>consistent</em><sup id="fnref:consistent"><a class="footnote-ref" href="#fn:consistent">2</a></sup>. This type of behavior is illustrated in <a href="#fig:fig_Est1">Figure 11.1</a>.  </p>
+<figure class="figaltcap fullsize" id="fig:fig_Est1"><img src="images/Fig_11_1.png" /><figcaption><strong>Figure 11.1:</strong> The convergence of an estimate <span class="arithmatex">\(\hat a\)</span> to <span class="arithmatex">\(a\)</span> as the number of samples <span class="arithmatex">\(N\)</span> involved in the estimation procedure increases. As <span class="arithmatex">\(N\)</span> increases the uncertainty in the estimate, as measured by the standard deviation, decreases. The <strong><font color="#00bb00">green</font></strong> curve is for the number of samples <span class="arithmatex">\({N_3},\)</span> the <strong><font color="red">red</font></strong> curve for <span class="arithmatex">\({N_2}\)</span> and the <strong><font color="blue">blue</font></strong> curve for <span class="arithmatex">\({N_1}\)</span> where <span class="arithmatex">\({N_3} &gt; {N_2} &gt; {N_1}.\)</span></figcaption>
+</figure>
+<p>A convenient way to remember the concepts of accuracy and precision and to distinguish between them is through a (hypothetical) game of darts where the goal is to throw <span class="arithmatex">\(N\)</span> darts such that each one lands in the center of the dart board, in the “bullseye”. This is illustrated in <a href="#fig:fig_Est2">Figure 11.2</a>.  </p>
+<figure class="figaltcap fullsize" id="fig:fig_Est2"><img src="images/Fig_11_2.gif" /><figcaption><strong>Figure 11.2:</strong> (<em>left</em>) Placement of five darts by one player showing <strong>high accuracy but low precision</strong>. (<em>right</em>) Placement of five darts by a second player showing <strong>low accuracy but high precision</strong>.</figcaption>
+</figure>
+<p>The “intuitive” meanings of the words <em>accurate</em> and <em>precise</em> are illustrated here and intended to serve as a permanent reminder.  </p>
+<h2 id="estimating-the-mean">Estimating the mean<a class="headerlink" href="#estimating-the-mean" title="Permanent link">&para;</a></h2>
+<p>As an example consider <span class="arithmatex">\({m_x} = E\left\{ {x[n]} \right\}.\)</span> We look at the arithmetic
+estimate for <span class="arithmatex">\({m_x}\)</span> given by:</p>
+<div class="" id="eq:Eeq16">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.16)</td>
+<td class="eqTableEq">
+<div>$$&lt; x[n] &gt; \; = \frac{1}{N}\sum\limits_{n = 0}^{N - 1} {x[n]}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>We determine the bias as follows:</p>
+<div class="" id="eq:Eeq17">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.17)</td>
+<td class="eqTableEq">
+<div>$$E\left\{ { &lt; x[n] &gt; } \right\}\; = \frac{1}{N}\sum\limits_{n = 0}^{N - 1} {E\left\{ {x[n]} \right\}}  = {m_x}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="" id="eq:Eeq18">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.18)</td>
+<td class="eqTableEq">
+<div>$$B = E\left\{ { &lt; x[n] &gt; } \right\} - {m_x} = {m_x} - {m_x} = 0$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Thus the arithmetic mean generates an unbiased estimate of the true mean. The variance, <span class="arithmatex">\(Var( \bullet ),\)</span> of the estimate is:</p>
+<div class="" id="eq:Eeq19">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.19)</td>
+<td class="eqTableEq">
+<div>$$\sigma _N^2 = Var\left\{ {\frac{1}{N}\sum\limits_{n = 0}^{N - 1} {x[n]} } \right\} = \frac{1}{{{N^2}}}\sum\limits_{n = 0}^{N - 1} {Var\left\{ {x[n]} \right\}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>This right-most term follows from the assumption that the data samples <span class="arithmatex">\(\{ x[n]\}\)</span> are statistically independent of one another. Continuing,</p>
+<div class="" id="eq:Eeq20">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.20)</td>
+<td class="eqTableEq">
+<div>$$\sigma _N^2 = \frac{1}{{{N^2}}}\sum\limits_{n = 0}^{N - 1} {\sigma _x^2}  = \frac{1}{{{N^2}}}N\sigma _x^2 = \frac{{\sigma _x^2}}{N}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Thus, as the number of samples <span class="arithmatex">\(N \to \infty,\)</span> the variance of the estimate goes to zero as <span class="arithmatex">\(1/N.\)</span> Because the bias <span class="arithmatex">\(B\)</span> is zero and the variance goes to zero for large <span class="arithmatex">\(N,\)</span> we see that the estimate for the mean of a random process based upon <a href="Chap_11.html#eq:Eeq16">Equation 11.16</a> is a consistent estimate.</p>
+<p>An illustration of how the estimate shown in <a href="#fig:fig_Est1">Figure 11.1</a> converges to a final value is shown in <a href="#movie111">Movie 11.1</a>.</p>
+<table class="imgtxt" style="margin:1em auto;" id="movie111">
+    <tr>
+        <td style="width:auto; vertical-align:middle; text-align:center;">
+            <video id="theVideo" src="media/Consistent_Estimate.m4v" 
+                poster="media/PosterMovie_11.1.png" width=100% controls 
+                onended="rewind()" style="border: 2px solid rgb(174,24,16)"></video> 
+        </td>
+    </tr>
+</table>
+
+<figcaption style="margin: 0px 30px;">
+<b>Movie 11.1:</b> Convergence of the estimate of a parameter as the number of samples $N$ increases. Note that the estimate is biased—an overestimate—but approaches the true value as $N \to \infty.$ The estimate is <i>asymptotically unbiased</i>. Further, the variance decreases as $N$ increases.
+</figcaption>
+
+<h2 id="estimating-the-autocorrelation-function">Estimating the autocorrelation function<a class="headerlink" href="#estimating-the-autocorrelation-function" title="Permanent link">&para;</a></h2>
+<p>We now look at a more difficult problem, that of estimating the autocorrelation function of a real, random process starting from statistically independent data samples. Formally,</p>
+<div class="" id="eq:Eeq21">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.21)</td>
+<td class="eqTableEq">
+<div>$${\varphi _{xx}}[k] = E\left\{ {x[n]{x^*}[n + k]} \right\} = \;E\left\{ {x[n]x[n + k]} \right\}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>If <span class="arithmatex">\(N\)</span> samples of <span class="arithmatex">\(\{ x[n]\}\)</span> are available then only <span class="arithmatex">\(N - |k|\)</span> samples
+are available to compute the average of the product <span class="arithmatex">\(x[n]\,x[n + k].\)</span> This is illustrated graphically in <a href="#fig:fig_Est3">Figure 11.3</a> and represents the fact that the number of overlaps between <span class="arithmatex">\(x[n]\)</span> and <span class="arithmatex">\(x[n + k]\)</span> will be <span class="arithmatex">\(N - \left| k \right|.\)</span>  </p>
+<figure class="figaltcap fullsize" id="fig:fig_Est3"><img src="images/Fig_11_3.png" /><figcaption><strong>Figure 11.3:</strong> (<em>top</em>) The original signal <span class="arithmatex">\(x[n\rbrack.\)</span> (<em>bottom</em>) The shifted version <span class="arithmatex">\(x[n - k\rbrack.\)</span> The overlap has the width <span class="arithmatex">\(N - |k|\)</span> and the region is indicated in <strong><font color="#ff8000">orange</font></strong>.</figcaption>
+</figure>
+<p>A dynamic rendering of the overlap that occurs during the calculation of
+the correlation is shown in <a href="#movie112">Movie 11.2</a>.  </p>
+<table class="imgtxt" style="margin:1em auto;" id="movie112">
+    <tr>
+        <td style="width:auto; vertical-align:middle; text-align:center;">
+            <video id="theVideo" src="media/Overlapping_Windows.m4v" 
+                poster="media/PosterMovie_11.2.png" width=100% controls 
+                onended="rewind()" style="border: 2px solid rgb(174,24,16)"></video>
+        </td>
+    </tr>
+</table>
+
+<figcaption style="margin: 0px 30px;">
+<b>Movie 11.2:</b> As the autocorrelation of a finite duration signal is computed, the number of samples that overlap changes but is limited to $N - \left| k \right|.$
+</figcaption>
+
+<p>To estimate the mean of a parameter, we will use our result above, <a href="Chap_11.html#eq:Eeq16">Equation 11.16</a>, applied to: </p>
+<div class="" id="eq:Eeq22">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.22)</td>
+<td class="eqTableEq">
+<div>$${c_{xx}}[k] = \frac{1}{{N - \left| k \right|}}\sum\limits_{n = 0}^{N - \left| k \right| - 1} {x[n]x[n + k]}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The variable <span class="arithmatex">\(k\)</span> can be positive or negative but there will still be only <span class="arithmatex">\(N - \left| k \right|\)</span> overlaps.</p>
+<h2 id="how-good-is-our-estimator">How good is our estimator?<a class="headerlink" href="#how-good-is-our-estimator" title="Permanent link">&para;</a></h2>
+<p>The estimate of <span class="arithmatex">\({\varphi _{xx}}[k]\)</span> is <span class="arithmatex">\({c_{xx}}[k].\)</span> Our first question is: Is this <em>estimate</em> unbiased? The bias is given by:</p>
+<div class="" id="eq:Eeq23">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.23)</td>
+<td class="eqTableEq">
+<div>$$B = E\left\{ {{c_{xx}}[k]} \right\} - {\varphi _{xx}}[k]$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Using <a href="Chap_11.html#eq:Eeq23">Equation 11.23</a>:</p>
+<div class="" id="eq:Eeq24">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.24)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+B&amp;{ = E\left\{ {\frac{1}{{N - \left| k \right|}}\sum\limits_{n = 0}^{N - \left| k \right| - 1} {x[n]x[n + k]} } \right\} - {\varphi _{xx}}[k]}\\
+{\,\,\,}&amp;{ = \frac{1}{{N - \left| k \right|}}\sum\limits_{n = 0}^{N - \left| k \right| - 1} {E\left\{ {x[n]x[n + k]} \right\}}  - {\varphi _{xx}}[k]}\\
+{\,\,\,}&amp;{ = \frac{1}{{N - \left| k \right|}}\sum\limits_{n = 0}^{N - \left| k \right| - 1} {{\varphi _{xx}}[k]}  - {\varphi _{xx}}[k]}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>If <span class="arithmatex">\(\left| k \right| &lt; N\)</span> we have <span class="arithmatex">\(B = 0,\)</span> an unbiased estimate. Our next question concerns the issue of whether <span class="arithmatex">\({c_{xx}}[k]\)</span> forms a consistent estimate of <span class="arithmatex">\({\varphi _{xx}}[k].\)</span> Since we know that the estimate is unbiased, it remains to be shown that the variance of the estimate goes to zero as the number of data samples <span class="arithmatex">\(N\)</span> increases. The variance of the estimate, <span class="arithmatex">\(Var\{ {c_{xx}}[k]\},\)</span> is given (for large <span class="arithmatex">\(N\)</span>) by:</p>
+<div class="" id="eq:Eeq25">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.25)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{Var\{ {c_{xx}}[k]\}  \approx \frac{N}{{{{\left( {N - \left| k \right|} \right)}^2}}}\, \times }\\
+{\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\left( {\sum\limits_{m =  - \infty }^{ + \infty } {\left( {\varphi _{xx}^2[m] + {\varphi _{xx}}[m + k]{\varphi _{xx}}[m - k]} \right)} } \right)}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>where formal derivation of the term under the summation is too complicated (and tedious) to be worked out in detail here; see Bartlett<sup id="fnref:bartlett1946"><a class="footnote-ref" href="#fn:bartlett1946">3</a></sup> and Jenkins<sup id="fnref:jenkins1998"><a class="footnote-ref" href="#fn:jenkins1998">4</a></sup>, instead. We now define a function</p>
+<div class="" id="eq:Eeq26">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.26)</td>
+<td class="eqTableEq">
+<div>$$\Phi [k] = \sum\limits_{m =  - \infty }^{ + \infty } {\left( {\varphi _{xx}^2[m] + {\varphi _{xx}}[m + k]{\varphi _{xx}}[m - k]} \right)}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>which leads to:  </p>
+<div class="" id="eq:Eeq27">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.27)</td>
+<td class="eqTableEq">
+<div>$$Var\{ {c_{xx}}[k]\}  \approx \frac{N}{{{{\left( {N - \left| k \right|} \right)}^2}}}\Phi [k]$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Let us look at <span class="arithmatex">\(\Phi [k]\)</span> in more detail. It consists of two terms:  </p>
+<div class="" id="eq:Eeq28">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.28)</td>
+<td class="eqTableEq">
+<div>$$\Phi [k] = \sum\limits_{m =  - \infty }^{ + \infty } {\varphi _{xx}^2[m]}  + \sum\limits_{m =  - \infty }^{ + \infty } {{\varphi _{xx}}[m + k]{\varphi _{xx}}[m - k]}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The first term, assuming it converges, is a positive, real number and independent of <span class="arithmatex">\(k.\)</span> The remark that it is real follows from our assumption at the beginning of a section in <a href="Chap_11.html#estimating-the-autocorrelation-function">Chapter 11</a>. The second term is even in <span class="arithmatex">\(k\)</span> as a simple substitution of <span class="arithmatex">\(- k\)</span> shows. This means that <span class="arithmatex">\(\Phi [k]\)</span> is even.</p>
+<p>Further, the second term is itself an autocorrelation. Remembering our remarks at the beginning of <a href="Chap_5.html#correlations-simple-and-complex">Chapter 5</a>, the second term is the autocorrelation of the deterministic correlation function with itself! Using <a href="Chap_6.html#eq:max_acorr4">Equation 6.32</a>, this means the maximum value of <span class="arithmatex">\(\Phi [k]\)</span> is given by:</p>
+<div class="" id="eq:Eeq29">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.29)</td>
+<td class="eqTableEq">
+<div>$${\Phi _{\max }} = 2\sum\limits_{m =  - \infty }^{ + \infty } {\varphi _{xx}^2[m]} \,\, \ge \,\,\Phi [k]\,\,\,\,\,\,\,\,\,\,\,\,\,\,\left| k \right| &lt; N$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Other aspects of <span class="arithmatex">\(\Phi [k]\)</span> will be considered in <a href="#problem-119">Problem 11.9</a>.</p>
+<p>To better appreciate the behavior of <span class="arithmatex">\(\Phi [k]\)</span> and how that influences the variance of the estimate of the autocorrelation function <span class="arithmatex">\(Var\{ {c_{xx}}[k]\},\)</span> let us look at one specific example.</p>
+<h3 id="langevin-redux">Langevin redux<a class="headerlink" href="#langevin-redux" title="Permanent link">&para;</a></h3>
+<p>In our case-study of the Langevin equation we saw in <a href="Chap_7.html#eq:lveq7">Equation 7.14</a> that the theory-based autocorrelation function for the stochastic velocity process was given by:</p>
+<div class="" id="eq:Eeq30">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.30)</td>
+<td class="eqTableEq">
+<div>$${\varphi _{vv}}[k] = {\left( {\frac{1}{m}} \right)^2}\left( {\frac{{{F_o}}}{{1 - {\rho ^2}}}} \right){\rho ^{\left| k \right|}} = \frac{A}{{1 - {\rho ^2}}}{\rho ^{\left| k \right|}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>where <span class="arithmatex">\(0 &lt; \rho  = {e^{ - \lambda {T_s}/m}} &lt; 1\)</span> and the constant <span class="arithmatex">\(A = {F_o}/{m^2}.\)</span> Velocity data collected from this type of study would then represent the basis for estimating <span class="arithmatex">\({\varphi _{vv}}[k].\)</span> What can we expect from <span class="arithmatex">\({\Phi _{vv}}[k],\)</span> the velocity example of <span class="arithmatex">\(\Phi [k],\)</span> based upon this Langevin assumption?</p>
+<p>This first term in <a href="Chap_11.html#eq:Eeq28">Equation 11.28</a> can be computed directly and the result for <span class="arithmatex">\({\Phi _{vv}}[k]\)</span> becomes:</p>
+<div class="" id="eq:Eeq31">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.31)</td>
+<td class="eqTableEq">
+<div>$${\Phi _{vv}}[k] = \frac{{{A^2}(1 + {\rho ^2})}}{{{{(1 - {\rho ^2})}^3}}} + \sum\limits_{m =  - \infty }^{ + \infty } {{\varphi _{vv}}[m + k]{\varphi _{vv}}[m - k]} $$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Understanding the behavior of the second term can be gained by first plotting the various components <span class="arithmatex">\({\varphi _{vv}}[m + k],\)</span> <span class="arithmatex">\({\varphi _{vv}}[m - k],\)</span> and <span class="arithmatex">\({\varphi _{vv}}[m + k]{\varphi _{vv}}[m - k].\)</span> This is illustrated in <a href="#fig:fig_Est4">Figure 11.4</a>.</p>
+<figure class="figaltcap fullsize" id="fig:fig_Est4"><img src="images/Fig_11_4.png" /><figcaption><strong>Figure 11.4:</strong> (<strong><font color = "red">red</font></strong>) the function <span class="arithmatex">\({\varphi _{vv}}[m + k\rbrack,\)</span> (<strong><font color = "#00bb00">green</font></strong>) the function <span class="arithmatex">\({\varphi _{vv}}[m - k\rbrack,\)</span> and (<strong><font color = "blue">blue</font></strong>) the function <span class="arithmatex">\({\varphi _{vv}}[m + k\rbrack{\varphi _{vv}}[m - k\rbrack.\)</span> All are plotted for <span class="arithmatex">\(A = 1,\)</span> <span class="arithmatex">\(m = 5,\)</span> and <span class="arithmatex">\(\rho  = 0.9.\)</span></figcaption>
+</figure>
+<p>It is clear from <a href="#fig:fig_Est4">Figure 11.4</a> that <span class="arithmatex">\({\varphi _{vv}}[m + k]{\varphi _{vv}}[m - k]\)</span> is even in <span class="arithmatex">\(k\)</span> and even in <span class="arithmatex">\(m.\)</span> The former has already been proven; the latter will be proven in <a href="#problem-119">Problem 11.9</a>. A consequence of the even symmetry is that to find <span class="arithmatex">\({\Phi _{vv}}[k]\)</span> we need only solve the problem for <span class="arithmatex">\(k \ge 0.\)</span></p>
+<p>For <span class="arithmatex">\(0 \le k \le m,\)</span> we have <span class="arithmatex">\(m \pm k \ge 0\)</span> and it follows that:</p>
+<div class="" id="eq:Eeq32">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.32)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{\varphi _{vv}}[m + k]{\varphi _{vv}}[m - k]}&amp;{ = {{\left( {\frac{A}{{1 - {\rho ^2}}}} \right)}^2}{\rho ^{\left| {m + k} \right|}}{\rho ^{\left| {m - k} \right|}}}\\
+{\,\,\,}&amp;{ = {{\left( {\frac{A}{{1 - {\rho ^2}}}} \right)}^2}{\rho ^{m + k}}{\rho ^{m - k}} = {{\left( {\frac{A}{{1 - {\rho ^2}}}} \right)}^2}{\rho ^{2m}}}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>This is a constant independent of <span class="arithmatex">\(k\)</span> and explains the “flat behavior” observed for <span class="arithmatex">\(0 \le k \le m\)</span> in <a href="#fig:fig_Est4">Figure 11.4</a>.</p>
+<p>Following replacement of <span class="arithmatex">\(\left| {m - k} \right|\)</span> with <span class="arithmatex">\(\left| {k - m} \right|\)</span> and for <span class="arithmatex">\(0 \le m \le k,\)</span> we have <span class="arithmatex">\(k \pm m \ge 0.\)</span> It follows that:</p>
+<div class="" id="eq:Eeq33">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.33)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{\varphi _{vv}}[m + k]{\varphi _{vv}}[m - k]}&amp;{ = {{\left( {\frac{A}{{1 - {\rho ^2}}}} \right)}^2}{\rho ^{\left| {k + m} \right|}}{\rho ^{\left| {k - m} \right|}}}\\
+{\,\,\,}&amp;{ = {{\left( {\frac{A}{{1 - {\rho ^2}}}} \right)}^2}{\rho ^{k + m}}{\rho ^{k - m}} = {{\left( {\frac{A}{{1 - {\rho ^2}}}} \right)}^2}{\rho ^{2k}}}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>This is an exponentially decreasing function for <span class="arithmatex">\(k &gt; 0\)</span> and explains the behavior observed for <span class="arithmatex">\(0 \le m \le k\)</span> in <a href="#fig:fig_Est4">Figure 11.4</a>.</p>
+<p>To continue, we deconstruct the sum in <a href="Chap_11.html#eq:Eeq31">Equation 11.31</a> for <span class="arithmatex">\(k \ge 0\)</span> as follows:</p>
+<div class="" id="eq:Eeq34">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.34)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+\sum\limits_{m = 0}^{ + \infty } {{\varphi _{vv}}[m + k]{\varphi _{vv}}[m - k]}  = \underbrace {{\varphi _{vv}}[k]{\varphi _{vv}}[k]}_{m = 0}\,\, + \\
+\,\,\,\,\,\,\,\,\,\underbrace {\sum\limits_{m = 1}^k {{\varphi _{vv}}[m + k]{\varphi _{vv}}[m - k]} }_{0 &lt; m \le k}\,\,\, + \\
+\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\underbrace {\sum\limits_{m = k + 1}^{ + \infty } {{\varphi _{vv}}[m + k]{\varphi _{vv}}[m - k]} }_{k &lt; m \le \infty }
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Substituting the various terms we have already found:</p>
+<div class="" id="eq:Eeq35">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.35)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+\sum\limits_{m = 0}^{ + \infty } {{\varphi _{vv}}[m + k]{\varphi _{vv}}[m - k]}  = \underbrace {{{\left( {\frac{A}{{1 - {\rho ^2}}}} \right)}^2}{\rho ^{2k}}}_{m = 0}\,\, + \\
+\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\underbrace {\sum\limits_{m = 1}^k {{{\left( {\frac{A}{{1 - {\rho ^2}}}} \right)}^2}{\rho ^{2k}}} }_{0 &lt; m \le k} + \underbrace {\sum\limits_{m = k + 1}^{ + \infty } {{{\left( {\frac{A}{{1 - {\rho ^2}}}} \right)}^2}{\rho ^{2m}}} }_{k &lt; m \le \infty }
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The two sums in <a href="Chap_11.html#eq:Eeq35">Equation 11.35</a> converge yielding for <span class="arithmatex">\(k \ge 0\)</span>:</p>
+<div class="" id="eq:Eeq36">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.36)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+\sum\limits_{m = 0}^{ + \infty } {{\varphi _{vv}}[m + k]{\varphi _{vv}}[m - k]}  = {\left( {\frac{A}{{1 - {\rho ^2}}}} \right)^2}{\rho ^{2k}}\,\, + \\
+\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,{\left( {\frac{A}{{1 - {\rho ^2}}}} \right)^2}k{\rho ^{2k}} + {\left( {\frac{A}{{1 - {\rho ^2}}}} \right)^2}\frac{{{\rho ^{2(k + 1)}}}}{{1 - {\rho ^2}}}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Combining the even term for <span class="arithmatex">\(k &lt; 0\)</span> gives the final result:</p>
+<div class="" id="eq:Eeq37">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.37)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+{\Phi _{vv}}[k] = \frac{{{A^2}(1 + {\rho ^2})}}{{{{(1 - {\rho ^2})}^3}}} + {\left( {\frac{A}{{1 - {\rho ^2}}}} \right)^2}{\rho ^{2\left| k \right|}}\,\, + \\
+\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,2{\left( {\frac{A}{{1 - {\rho ^2}}}} \right)^2}\left| k \right|{\rho ^{2\left| k \right|}} + 2{\left( {\frac{A}{{1 - {\rho ^2}}}} \right)^2}\frac{{{\rho ^{2(\left| k \right| + 1)}}}}{{1 - {\rho ^2}}}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Rewriting these terms yields:</p>
+<div class="" id="eq:Eeq38">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.38)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+{\Phi _{vv}}[k] = \frac{{{A^2}}}{{{{(1 - {\rho ^2})}^3}}}\,\,\, \times \\
+\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\left( {1 + {\rho ^2} + (1 - 2\left| k \right|){\rho ^{2\left| k \right| + 2}} + (1 + 2\left| k \right|){\rho ^{2\left| k \right|}}} \right)
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>In <a href="#fig:fig_Est5">Figure 11.5</a> we show the behavior of the function <span class="arithmatex">\({\Phi _{vv}}[k]\)</span> for several
+values of the parameter <span class="arithmatex">\(\rho.\)</span></p>
+<figure class="figaltcap fullsize" id="fig:fig_Est5"><img src="images/Fig_11_5.png" /><figcaption><strong>Figure 11.5:</strong> Function <span class="arithmatex">\({\Phi _{vv}}[k\rbrack\)</span> for the estimate of the variance of the autocorrelation function of the Langevin velocity process. (<strong><font color = "#404040">grey</font></strong>) <span class="arithmatex">\({\Phi _{vv}}[k\rbrack\)</span> for <span class="arithmatex">\(\rho  = 0.9,\)</span> (<strong><font color = "blue">blue</font></strong>) <span class="arithmatex">\({\Phi _{vv}}[k\rbrack\)</span> for <span class="arithmatex">\(\rho  = 0.875,\)</span> (<strong><font color = "red">red</font></strong>) <span class="arithmatex">\({\Phi _{vv}}[k\rbrack\)</span> for <span class="arithmatex">\(\rho  = 0.85.\)</span> All are plotted for <span class="arithmatex">\(A = 1.\)</span></figcaption>
+</figure>
+<p>This continuation of the case study of the Langevin equation that was begun in <a href="Chap_7.html">Chapter 7</a> shows how the estimation of an important descriptor of that random process, the autocorrelation function, can be analyzed. The differential equation—and hence the resulting difference equation—was first order. See <a href="Chap_7.html#eq:langEqs1">Equation 7.1</a> and <a href="Chap_7.html#eq:deq_langEqs2">Equation 7.5</a>. As a consequence the results presented here are applicable for most first-order processes.</p>
+<h2 id="trouble-in-paradise">Trouble in paradise<a class="headerlink" href="#trouble-in-paradise" title="Permanent link">&para;</a></h2>
+<p>We return to our general remarks concerning the variance of the estimate of the autocorrelation function. If <span class="arithmatex">\(\Phi [k]\)</span> is bounded (as in the above example with <span class="arithmatex">\({\Phi _{\max }}\)</span> from <a href="Chap_11.html#eq:Eeq29">Equation 11.29</a>), that is, if <span class="arithmatex">\(\left| {\Phi [k]} \right| &lt; \infty\)</span> for all <span class="arithmatex">\(\left| k \right| &lt; N,\)</span> we might think that <a href="Chap_11.html#eq:Eeq27">Equation 11.27</a> implies that the variance goes to zero as <span class="arithmatex">\({N^{ - 1}}.\)</span> This, however, is not true for all values of <span class="arithmatex">\(k.\)</span> As <span class="arithmatex">\(\left| k \right| \to N\)</span> the variance diverges (blows-up) independent of how large <span class="arithmatex">\(N\)</span> is! Thus the estimate given in <a href="Chap_11.html#eq:Eeq22">Equation 11.22</a> is <em>not</em> consistent.</p>
+<p>We might try, instead, a different estimate of the autocorrelation function. Specifically,</p>
+<div class="" id="eq:Eeq39">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.39)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{{\hat c}_{xx}}[k]}&amp;{ = \frac{1}{N}\sum\limits_{n = 0}^{N - \left| k \right| - 1} {x[n]x[n + k]} }\\
+{\,\,\,}&amp;{ = \left( {\frac{{N - \left| k \right|}}{N}} \right){c_{xx}}[k]}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The simple relation between the two estimates for <span class="arithmatex">\({\varphi _{xx}}[k]\)</span> gives:</p>
+<div class="" id="eq:Eeq40">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.40)</td>
+<td class="eqTableEq">
+<div>$$E\left\{ {{{\hat c}_{xx}}[k]} \right\} = \left( {\frac{{N - \left| k \right|}}{N}} \right){\varphi _{xx}}[k]$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Clearly <span class="arithmatex">\({\hat c_{xx}}[k]\)</span> is a biased estimate, an <em>underestimate</em>. The variance, however, is</p>
+<div class="" id="eq:Eeq41">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.41)</td>
+<td class="eqTableEq">
+<div>$$Var\{ {\hat c_{xx}}[k]\}  = {\left( {\frac{{N - \left| k \right|}}{N}} \right)^2}Var\{ {c_{xx}}[k]\}  = \frac{1}{N}\Phi$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>which converges to zero as <span class="arithmatex">\(N \to \infty.\)</span> We are faced with a choice: if we choose
+<span class="arithmatex">\({c_{xx}}[k]\)</span> we have an estimate of <span class="arithmatex">\({\varphi _{xx}}[k]\)</span> that is unbiased but blows up
+(diverges) as <span class="arithmatex">\(\left| k \right| \to N.\)</span> This occurs because as <span class="arithmatex">\(\left| k \right|\)</span> approaches <span class="arithmatex">\(N,\)</span> there are very few overlapping data samples—see <a href="#movie112">Movie 11.2</a>—and thus the variance associated with the estimate is large. If we choose <span class="arithmatex">\({\hat c_{xx}}[k]\)</span> we have an estimate that converges nicely as <span class="arithmatex">\(N \to \infty\)</span> but is biased; it is an underestimate. Such a trade-off between desired properties is not uncommon in the estimation of parameters of stochastic signals.</p>
+<p>In this chapter we have looked at the estimation of the mean <a href="Chap_11.html#eq:Eeq1">Equation 11.1</a> and the correlation function <a href="Chap_11.html#eq:Eeq2">Equation 11.2</a>. In the next chapter we will consider the problem of estimating the power spectral density <a href="Chap_11.html#eq:Eeq3">Equation 11.3</a>.</p>
+<h2 class="problems" id="problems">Problems<a class="headerlink" href="#problems" title="Permanent link">&para;</a></h2>
+<h3 id="problem-111">Problem 11.1<a class="headerlink" href="#problem-111" title="Permanent link">&para;</a></h3>
+<p>We are given a function of <span class="arithmatex">\(x\)</span> that is non-negative, that is, <span class="arithmatex">\(f(x) \ge 0\)</span> for all <span class="arithmatex">\(x.\)</span></p>
+<p>Show that the values of <span class="arithmatex">\(x\)</span> for which <span class="arithmatex">\(\ln \left( {f(x)} \right)\)</span> has an extremum are also values of <span class="arithmatex">\(x\)</span> where <span class="arithmatex">\(f(x)\)</span> has an extremum.  </p>
+<h3 id="problem-112">Problem 11.2<a class="headerlink" href="#problem-112" title="Permanent link">&para;</a></h3>
+<p>The Gaussian (normal) probability density function is given by:  </p>
+<div class="arithmatex">\[p\left( {x\left|\,{\mu ,\sigma } \right.} \right) = \frac{1}{{\sqrt {2\pi } \sigma }}{e^{ - {{(x - \mu )}^2}/2{\sigma ^2}}}\]</div>
+<p>Determine a maximum-likelihood estimate for <span class="arithmatex">\(\mu\)</span> given <span class="arithmatex">\(N\)</span> data samples <span class="arithmatex">\(\left\{ {{x_1},{x_2},...,{x_N}} \right\}.\)</span> Assume that <span class="arithmatex">\(\sigma\)</span> is known.  </p>
+<h3 id="problem-113">Problem 11.3<a class="headerlink" href="#problem-113" title="Permanent link">&para;</a></h3>
+<p>We wish to determine if a coin is “fair”. We flip the coin <span class="arithmatex">\(N\)</span> times at 10:00 in the morning and write down the number of “Heads” <span class="arithmatex">\(n.\)</span> We then repeat this process for
+<span class="arithmatex">\(M\)</span> days.  </p>
+<ol>
+<li>What is the ML-estimate for the probability of Heads, <span class="arithmatex">\(p = p(Heads)?\)</span></li>
+<li>Why might the time of performing this experiment be relevant?<a class="indentlist" href=""></a>  </li>
+</ol>
+<h3 id="problem-114">Problem 11.4<a class="headerlink" href="#problem-114" title="Permanent link">&para;</a></h3>
+<p>The probability density function for the emission of the first photon from a fluorescent sample in the time interval <span class="arithmatex">\((0,t)\)</span> is given by:  </p>
+<div class="arithmatex">\[p\left( {t\left| {\,\lambda } \right.} \right) = \lambda t{e^{ - \lambda t}}\,\,\,\,\,\,\,\,t \geqslant 0\]</div>
+<p>We have a series of independent measurements for the emission times of first photons from identical molecules <span class="arithmatex">\(\left\{ {{t_1},{t_2},{t_3},...,{t_N}} \right\}.\)</span></p>
+<ol>
+<li>Determine the ML-estimate for <span class="arithmatex">\(\lambda.\)</span></li>
+<li>What is the relation between <span class="arithmatex">\({\lambda _{ML}}\)</span> from part (<em>a</em>) and the harmonic mean given in <a href="Chap_11.html#eq:Eeq6">Equation 11.6</a>?<a class="indentlist" href=""></a>  </li>
+</ol>
+<h3 id="problem-115">Problem 11.5<a class="headerlink" href="#problem-115" title="Permanent link">&para;</a></h3>
+<p>Let a random process have a parameter—for example the mean or variance—whose true (non-random) value is <span class="arithmatex">\(a\)</span> and whose estimate is <span class="arithmatex">\(\hat a.\)</span> The mean-square error associated with this estimate is given by <span class="arithmatex">\(e\)</span>:</p>
+<div class="" id="eq:Eeq42">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.42)</td>
+<td class="eqTableEq">
+<div>$$e = E\left\{ {{{\left( {\hat a - a} \right)}^2}} \right\}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Let <span class="arithmatex">\({\tilde a}\)</span> be the unbiased estimate of <span class="arithmatex">\(a,\)</span> that is <span class="arithmatex">\(B = E\left\{ {\tilde a} \right\} - a = 0.\)</span>  </p>
+<p>Show that if the goal is to minimize the mean-square error <span class="arithmatex">\(e,\)</span> then
+the best estimate for <span class="arithmatex">\(a\)</span> is the unbiased estimate, that is <span class="arithmatex">\(\hat a = \tilde a.\)</span>
+<em>Hint</em>: Consider replacing <span class="arithmatex">\({\left( {\hat a - a} \right)}\)</span> with <span class="arithmatex">\(\left( {\hat a - \tilde a + \tilde a - a} \right).\)</span></p>
+<h3 id="problem-116">Problem 11.6<a class="headerlink" href="#problem-116" title="Permanent link">&para;</a></h3>
+<p>We know from <a href="Chap_4.html#eq:var_stat">Equation 4.18</a> that for any random variable <span class="arithmatex">\(\theta\)</span> where the mean and variance exist (that is, are finite) we have <span class="arithmatex">\(Var\left( \theta  \right) = E\left\{ {{\theta ^2}} \right\} - {\left( {E\left\{ \theta  \right\}} \right)^2}.\)</span> If <span class="arithmatex">\({\theta _o}\)</span> is the true value of a parameter of a distribution, such as the mean or variance, and <span class="arithmatex">\(\theta\)</span> is an estimate of <span class="arithmatex">\({\theta _o}\)</span> based upon collected data, then <span class="arithmatex">\(\theta  - {\theta _o}\)</span> is also a random variable and we have:  </p>
+<div class="" id="eq:Eeq43">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.43)</td>
+<td class="eqTableEq">
+<div>$$Var(\theta  - {\theta _o}) = E\left\{ {{{(\theta  - {\theta _o})}^2}} \right\} - {\left( {E\left\{ {\theta  - {\theta _o}} \right\}} \right)^2}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Use this to show that:  </p>
+<div class="" id="eq:Eeq44">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.44)</td>
+<td class="eqTableEq">
+<div>$$e = Var(\theta ) + {B^2}(\theta )$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>where, as in <a href="Chap_11.html#eq:Eeq42">Equation 11.42</a>, <span class="arithmatex">\(e\)</span> is the mean square error in the estimate of <span class="arithmatex">\(\theta\)</span> and <span class="arithmatex">\(B\)</span> is the bias in the estimate. <em>Hint</em>: This might be a good time to review <a href="Chap_4.html#problem-44">Problem 4.4</a>.  </p>
+<h3 id="problem-117">Problem 11.7<a class="headerlink" href="#problem-117" title="Permanent link">&para;</a></h3>
+<p>Consider an ergodic Gaussian random process <span class="arithmatex">\(x\)</span> which, without loss of generality, is standardized. That is, <span class="arithmatex">\({\mu _x} = 0\)</span> and <span class="arithmatex">\({\sigma _x} = 1.\)</span> (See <a href="Chap_4.html#problem-49">Problem 4.9</a>.) We wish to estimate the variance of this process based upon <span class="arithmatex">\(N\)</span> samples. We propose an estimator of the form:  </p>
+<div class="" id="eq:Eeq45">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.45)</td>
+<td class="eqTableEq">
+<div>$$s_x^2 = \frac{1}{K}\sum\limits_{n = 1}^N {{{\left( {{x_n} -  &lt; x &gt; } \right)}^2}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>where <span class="arithmatex">\(&lt; x &gt;\)</span> is the arithmetic mean <a href="Chap_11.html#eq:Eeq4">Equation 11.4</a> of the <span class="arithmatex">\(N\)</span> samples of <span class="arithmatex">\(x.\)</span> In this problem we will explore the consequences of choosing different values for <span class="arithmatex">\(K.\)</span>  </p>
+<p>It can be shown that:  </p>
+<div class="" id="eq:Eeq46">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.46)</td>
+<td class="eqTableEq">
+<div>$$\frac{1}{{\sigma _x^2}}\sum\limits_{n = 1}^N {{{\left( {{x_n} -  &lt; x &gt; } \right)}^2}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>is a Chi-squared (<span class="arithmatex">\({\chi ^2}\)</span>) distributed random variable with <span class="arithmatex">\(N - 1\)</span> degrees-of-freedom (<i>dof</i>); see Cramér<sup id="fnref:cramer1946"><a class="footnote-ref" href="#fn:cramer1946">5</a></sup>. The mean and variance of a <span class="arithmatex">\({\chi ^2}\)</span> distributed random variable are <i>dof</i> and 2•<i>dof</i>, respectively.  </p>
+<ol>
+<li>Determine the bias <span class="arithmatex">\(B\)</span> associated with the estimate for the variance <span class="arithmatex">\(\sigma _x^2.\)</span></li>
+<li>How should <a href="Chap_11.html#eq:Eeq45">Equation 11.45</a> be modified if the estimate is to be unbiased, that is, <span class="arithmatex">\(B = 0?\)</span></li>
+<li>What is the variance associated with the estimate in <a href="Chap_11.html#eq:Eeq45">Equation 11.45</a>? What does this become if the unbiased version of <a href="Chap_11.html#eq:Eeq45">Equation 11.45</a> is used?</li>
+<li>Is the unbiased estimate of the variance a consistent estimator?</li>
+<li>Using <a href="Chap_11.html#eq:Eeq44">Equation 11.44</a>, what value of <span class="arithmatex">\(K\)</span> in <a href="Chap_11.html#eq:Eeq45">Equation 11.45</a> yields a minimum mean-square error <span class="arithmatex">\(e?\)</span> Is this the same value of <span class="arithmatex">\(K\)</span> that you found for an unbiased estimate in part (<em>b</em>) of this problem?</li>
+<li>Is <a href="Chap_11.html#eq:Eeq45">Equation 11.45</a> a minimum-variance unbiased estimator (MVUE)?<a class="indentlist" href=""></a>  </li>
+</ol>
+<h3 id="problem-118">Problem 11.8<a class="headerlink" href="#problem-118" title="Permanent link">&para;</a></h3>
+<p>The real, ergodic, stochastic signal <span class="arithmatex">\(x[n]\)</span> is characterized by a mean value of <span class="arithmatex">\({m_x} =  &lt; x[n] &gt;  = 0\)</span> and an autocorrelation <span class="arithmatex">\({\varphi _{xx}}[k] =  &lt; x[n]{x^*}[n + k] &gt;.\)</span> Let <span class="arithmatex">\(y[n] = A \bullet x[n]\)</span> where <span class="arithmatex">\(A\)</span> is a constant to be determined.</p>
+<ol>
+<li>Find the value of <span class="arithmatex">\(A\)</span> that minimizes <span class="arithmatex">\({\varphi _{ee}}[k]\)</span> where <span class="arithmatex">\(e[n] = y[n] - x[n - N]\)</span> for a fixed value of <span class="arithmatex">\(N.\)</span> That is, we wish <span class="arithmatex">\(y[n]\)</span> to be a least-mean-square <em>predictor</em> of <span class="arithmatex">\(x[n]\)</span> and <span class="arithmatex">\(e[n]\)</span> represents the error in the prediction at any given time.<a class="indentlist" href=""></a>  </li>
+</ol>
+<p>Discuss your result for the two extreme cases:</p>
+<ol start="2">
+<li><span class="arithmatex">\(N = 0\)</span></li>
+<li><span class="arithmatex">\(N &gt;&gt; 0\)</span> where we assume that <span class="arithmatex">\(x[n]\)</span> and <span class="arithmatex">\(x[n - N]\)</span> are essentially uncorrelated.<a class="indentlist" href=""></a>  </li>
+</ol>
+<h3 id="problem-119">Problem 11.9<a class="headerlink" href="#problem-119" title="Permanent link">&para;</a></h3>
+<p>We have from <a href="Chap_11.html#eq:Eeq26">Equation 11.26</a> that:</p>
+<div class="" id="eq:Eeq47">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.47)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{\Phi [k]}&amp;{ = \sum\limits_{m =  - \infty }^{ + \infty } {\left( {\varphi _{xx}^2[m] + {\varphi _{xx}}[m + k]{\varphi _{xx}}[m - k]} \right)} }\\
+{\,\,\,}&amp;{ = \sum\limits_{m =  - \infty }^{ + \infty } {\varphi _{xx}^2[m]}  + \sum\limits_{m =  - \infty }^{ + \infty } {{\varphi _{xx}}[m + k]{\varphi _{xx}}[m - k]} }
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<ol>
+<li>Assume that the random variable <span class="arithmatex">\(x\)</span> is real. Using <a href="Chap_5.html#eq:autoeven">Equation 5.5</a> prove that <span class="arithmatex">\({{\varphi _{xx}}[m + k]{\varphi _{xx}}[m - k]}\)</span> is even in <span class="arithmatex">\(m.\)</span></li>
+<li>As indicated in the text, the second term, which has the form <span class="arithmatex">\(\sum {{\varphi _{xx}}[m + k]{\varphi _{xx}}[m - k]},\)</span> is an autocorrelation function. Let us call it <span class="arithmatex">\({\psi _{xx}}[k].\)</span> Determine the power spectral density <span class="arithmatex">\({S_{\psi \psi }}(\Omega ) = {\mathscr{F}}\left\{ {{\psi _{xx}}[k]} \right\}\)</span> in terms of <span class="arithmatex">\({S_{xx}}(\Omega )\)</span> and <span class="arithmatex">\(X(\Omega ).\)</span></li>
+<li>Determine the maximum value of <span class="arithmatex">\({\Phi _{vv}}[k],\)</span> the complicated term involved in the variance of the estimate of the autocorrelation function of the Langevin velocity process. Your result should be in terms of <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\(\rho.\)</span> You might also want to review <a href="Chap_7.html#the-langevin-velocity-equation">Chapter 7</a> and <a href="Chap_7.html#tethered-particle-motion">Chapter 7</a>.</li>
+<li>You are required to keep <span class="arithmatex">\(N\)</span> and <span class="arithmatex">\(k\)</span> constant in <a href="Chap_11.html#eq:Eeq25">Equation 11.25</a> and you wish to decrease the variance of your estimate of the autocorrelation function of the Langevin velocity process in part (<em>c</em>). Should you raise or lower the <em>temperature</em> <span class="arithmatex">\(\Psi\)</span> at which an experiment is performed? Does your mathematical result agree with your physical intuition? Explain your reasoning. Again, you might want to review <a href="Chap_7.html">Chapter 7</a>.<a class="indentlist" href=""></a>  </li>
+</ol>
+<h3 id="problem-1110">Problem 11.10<a class="headerlink" href="#problem-1110" title="Permanent link">&para;</a></h3>
+<p>Show that for <span class="arithmatex">\(0 &lt; m \le k\)</span> that the term <span class="arithmatex">\({\varphi _{vv}}[m + k]{\varphi _{vv}}[m - k]\)</span> in <a href="Chap_11.html#eq:Eeq31">Equation 11.31</a> becomes:  </p>
+<div class="" id="eq:Eeq48">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(11.48)</td>
+<td class="eqTableEq">
+<div>$${\varphi _{vv}}[m + k]{\varphi _{vv}}[m - k] = {\left( {\frac{A}{{1 - {\rho ^2}}}} \right)^2}{\rho ^{2k}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p><em>Hint</em>: Use the evenness properties of <a href="#problem-119">Problem 11.9</a>.</p>
+<h2 class="labexp" id="laboratory-exercises">Laboratory Exercises<a class="headerlink" href="#laboratory-exercises" title="Permanent link">&para;</a></h2>
+<h3 id="laboratory-exercise-111">Laboratory Exercise 11.1<a class="headerlink" href="#laboratory-exercise-111" title="Permanent link">&para;</a></h3>
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_11.1.html'>
+                <img src='images/Histogram_80.png' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        There is more than just one “mean”. And depending upon the nature of an estimation problem, 
+        one may be more suitable than another. That is no mean feat.
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+<h3 id="laboratory-exercise-112">Laboratory Exercise 11.2<a class="headerlink" href="#laboratory-exercise-112" title="Permanent link">&para;</a></h3>
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_11.2.html'>
+                <img src='images/DartsIcon_80.gif' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        Is precision the same as accuracy? Answer the question now and then 
+        answer the question after the exercise. To start the exercise, click on 
+        the icon to the left.
+        </td>
+    </tr>
+</table>
+
+<h3 id="laboratory-exercise-113">Laboratory Exercise 11.3<a class="headerlink" href="#laboratory-exercise-113" title="Permanent link">&para;</a></h3>
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_11.3.html'>
+                <img src='images/RedBeetleIcon_80.png' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        Can you measure a distance of 1 mm with a ruler that is only marked in centimeters? Or how 
+        about the length of a bridge that is less than a mile long with an odometer that only reports 
+        whole (integer) miles?
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:bos2007">
+<p>van den Bos, A. (2007). Parameter Estimation for Scientists and Engineers. Hoboken, New Jersey, Wiley-Interscience&#160;<a class="footnote-backref" href="#fnref:bos2007" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:consistent">
+<p>The usual definition of “consistent” involves the convergence in probability of the estimate. By using the Tchebyshev inequality in probability theory it can be shown that the two definitions are equivalent.&#160;<a class="footnote-backref" href="#fnref:consistent" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:bartlett1946">
+<p>Bartlett, M. S. (1946). “On the theoretical specification and sampling properties of autocorrelated time series.” Journal of the Royal Statistical Society Suppplement, Vol. 8(1)&#160;<a class="footnote-backref" href="#fnref:bartlett1946" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:jenkins1998">
+<p>Jenkins, G. M. and D. G. Watts (1998). Spectral Analysis and Its Applications, Emerson Adams Press&#160;<a class="footnote-backref" href="#fnref:jenkins1998" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:cramer1946">
+<p>Cramér, H. (1946). Mathematical Methods of Statistics. Princeton, New Jersey, Princeton University Press, Section 18.1&#160;<a class="footnote-backref" href="#fnref:cramer1946" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+
+<footer class="md-footer" id="jumpToBottom">
+
+  <!-- Link to previous and/or next page -->
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        <!-- Link to previous page -->
+        
+          <a
+            href="Chap_10.html"
+            title="10. The Wiener filter"
+            class="md-footer-nav__link md-footer-nav__link--prev"
+            rel="prev"
+          >
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                10. The Wiener filter
+              </div>
+            </div>
+          </a>
+        
+
+        <!-- Link to next page -->
+        
+          <a
+            href="Chap_12.html"
+            title="12. Spectral Estimation"
+            class="md-footer-nav__link md-footer-nav__link--next"
+            rel="next"
+          >
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                12. Spectral Estimation
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+</footer>
+      
+    </div>
+    
+      <script src="assets/javascripts/vendor.77e55a48.min.js"></script>
+      <script src="assets/javascripts/bundle.9554a270.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+
+	<script src="js/polyfill/index.js"></script>
+	<script src="search/search_index.js"></script>
+
+
+      <script>
+        app = initialize({
+          base: ".",
+          features: [],
+          search: Object.assign({
+            worker: "assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="js/extra.js"></script>
+      
+        <script src="js/SSPextra.js"></script>
+      
+        <script src="js/mathjax_3_generic_conf.js"></script>
+      
+        <script src="js/mathjax/tex-svg.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,2245 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <meta name="author" content="I.T. Young & R. Ligteringen">
+      
+      <link rel="shortcut icon" href="images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.0.2">
+    
+    
+      
+        <title>7. The Langevin Equation – A Case Study - Introduction to Stochastic Signal Processing</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.38780c08.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.3f72e892.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Georgia:300,400,400i,700%7CCourier&display=fallback">
+        <style>body,input{font-family:"Georgia",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Courier",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="css/extra.css">
+    
+      <link rel="stylesheet" href="css/imgtxt.css">
+    
+      <link rel="stylesheet" href="css/tables.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#the-langevin-equation-a-case-study" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <!-- Application header -->
+<header class="md-header" data-md-component="header">
+
+  <!-- Top-level navigation -->
+  <nav class="md-header-nav md-grid" aria-label="Header">
+
+    <!-- Link to home -->
+    <a
+      href="."
+      title="Introduction to Stochastic Signal Processing"
+      class="md-header-nav__button md-logo"
+      aria-label="Introduction to Stochastic Signal Processing"
+    >
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+<!-- 
+  Insert an <img> here as an alternative for the standard logo if desired.
+  Then comment out the above two lines
+ <img src="images/favicon.png" style="margin-top:5px; border: 0px solid lime; border-radius:5px; width:120%; height: auto;" />
+ -->
+
+    </a>
+
+    <!-- Button to open drawer -->
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+
+    <!-- Header title -->
+    <div class="md-header-nav__title" data-md-component="header-title">
+          
+            
+              <a href="#jumpToBottom">
+                <span class="md-header-nav__topic">
+                  Introduction to Stochastic Signal Processing
+                </span>
+                <span class="md-header-nav__topic">
+                  7. The Langevin Equation – A Case Study
+                </span>
+              </a>
+            
+          
+    </div>
+
+    <!-- Button to open search dialogue -->
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+
+      <!-- Search interface -->
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    <!-- Repository containing source -->
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Introduction to Stochastic Signal Processing" class="md-nav__button md-logo" aria-label="Introduction to Stochastic Signal Processing">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+<!-- 
+  Insert an <img> here as an alternative for the standard logo if desired.
+  Then comment out the above two lines
+ <img src="images/favicon.png" style="margin-top:5px; border: 0px solid lime; border-radius:5px; width:120%; height: auto;" />
+ -->
+
+    </a>
+    Introduction to Stochastic Signal Processing
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_1.html" class="md-nav__link">
+      1. How to use this iBook
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_2.html" class="md-nav__link">
+      2. Prologue
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_3.html" class="md-nav__link">
+      3. Introduction
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_4.html" class="md-nav__link">
+      4. Characterization of Random Signals
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_5.html" class="md-nav__link">
+      5. Correlations and Spectra
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_6.html" class="md-nav__link">
+      6. Filtering of Stochastic Signals
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        7. The Langevin Equation – A Case Study
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="Chap_7.html" class="md-nav__link md-nav__link--active">
+      7. The Langevin Equation – A Case Study
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#from-t-to-n" class="md-nav__link">
+    From t to n
+  </a>
+  
+    <nav class="md-nav" aria-label="From t to n">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#impulse-invariant-sampling" class="md-nav__link">
+    Impulse-invariant sampling
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-big-is-big-how-small-is-small" class="md-nav__link">
+    How big is big? How small is small?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#choosing-the-sampling-period" class="md-nav__link">
+    Choosing the sampling period
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-langevin-velocity-equation" class="md-nav__link">
+    The Langevin velocity equation
+  </a>
+  
+    <nav class="md-nav" aria-label="The Langevin velocity equation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#autocorrelation-function" class="md-nav__link">
+    Autocorrelation function
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#power-spectral-density" class="md-nav__link">
+    Power spectral density
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#descriptive-statistics-mean-and-standard-deviation" class="md-nav__link">
+    Descriptive statistics – mean and standard deviation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-langevin-position-equation" class="md-nav__link">
+    The Langevin position equation
+  </a>
+  
+    <nav class="md-nav" aria-label="The Langevin position equation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#expected-value" class="md-nav__link">
+    Expected value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autocorrelation-function_1" class="md-nav__link">
+    Autocorrelation function
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#power-spectral-density_1" class="md-nav__link">
+    Power spectral density
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tethered-particle-motion" class="md-nav__link">
+    Tethered particle motion
+  </a>
+  
+    <nav class="md-nav" aria-label="Tethered particle motion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-big-is-big-how-small-is-small-redux" class="md-nav__link">
+    How big is big? How small is small? – redux
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#choosing-the-sampling-period_1" class="md-nav__link">
+    Choosing the sampling period
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expected-value_1" class="md-nav__link">
+    Expected value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autocorrelation-function_2" class="md-nav__link">
+    Autocorrelation function
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#power-spectral-density_2" class="md-nav__link">
+    Power spectral density
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#descriptive-statistic-variance" class="md-nav__link">
+    Descriptive statistic – variance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#one-step-further" class="md-nav__link">
+    One step further
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-case-study" class="md-nav__link">
+    Why this case study
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problems" class="md-nav__link">
+    Problems
+  </a>
+  
+    <nav class="md-nav" aria-label="Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-71" class="md-nav__link">
+    Problem 7.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-72" class="md-nav__link">
+    Problem 7.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-73" class="md-nav__link">
+    Problem 7.3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-74" class="md-nav__link">
+    Problem 7.4
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-75" class="md-nav__link">
+    Problem 7.5
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-76" class="md-nav__link">
+    Problem 7.6
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-77" class="md-nav__link">
+    Problem 7.7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-78" class="md-nav__link">
+    Problem 7.8
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-79" class="md-nav__link">
+    Problem 7.9
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-710" class="md-nav__link">
+    Problem 7.10
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-711" class="md-nav__link">
+    Problem 7.11
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_8.html" class="md-nav__link">
+      8. Characterizing Signal-to-Noise Ratios
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_9.html" class="md-nav__link">
+      9. The Matched Filter
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_10.html" class="md-nav__link">
+      10. The Wiener filter
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_11.html" class="md-nav__link">
+      11. Aspects of Estimation
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_12.html" class="md-nav__link">
+      12. Spectral Estimation
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_13.html" class="md-nav__link">
+      Appendices
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="info.html" class="md-nav__link">
+      Information
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#from-t-to-n" class="md-nav__link">
+    From t to n
+  </a>
+  
+    <nav class="md-nav" aria-label="From t to n">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#impulse-invariant-sampling" class="md-nav__link">
+    Impulse-invariant sampling
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-big-is-big-how-small-is-small" class="md-nav__link">
+    How big is big? How small is small?
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#choosing-the-sampling-period" class="md-nav__link">
+    Choosing the sampling period
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-langevin-velocity-equation" class="md-nav__link">
+    The Langevin velocity equation
+  </a>
+  
+    <nav class="md-nav" aria-label="The Langevin velocity equation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#autocorrelation-function" class="md-nav__link">
+    Autocorrelation function
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#power-spectral-density" class="md-nav__link">
+    Power spectral density
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#descriptive-statistics-mean-and-standard-deviation" class="md-nav__link">
+    Descriptive statistics – mean and standard deviation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-langevin-position-equation" class="md-nav__link">
+    The Langevin position equation
+  </a>
+  
+    <nav class="md-nav" aria-label="The Langevin position equation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#expected-value" class="md-nav__link">
+    Expected value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autocorrelation-function_1" class="md-nav__link">
+    Autocorrelation function
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#power-spectral-density_1" class="md-nav__link">
+    Power spectral density
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tethered-particle-motion" class="md-nav__link">
+    Tethered particle motion
+  </a>
+  
+    <nav class="md-nav" aria-label="Tethered particle motion">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-big-is-big-how-small-is-small-redux" class="md-nav__link">
+    How big is big? How small is small? – redux
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#choosing-the-sampling-period_1" class="md-nav__link">
+    Choosing the sampling period
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#expected-value_1" class="md-nav__link">
+    Expected value
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autocorrelation-function_2" class="md-nav__link">
+    Autocorrelation function
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#power-spectral-density_2" class="md-nav__link">
+    Power spectral density
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#descriptive-statistic-variance" class="md-nav__link">
+    Descriptive statistic – variance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#one-step-further" class="md-nav__link">
+    One step further
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-this-case-study" class="md-nav__link">
+    Why this case study
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problems" class="md-nav__link">
+    Problems
+  </a>
+  
+    <nav class="md-nav" aria-label="Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-71" class="md-nav__link">
+    Problem 7.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-72" class="md-nav__link">
+    Problem 7.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-73" class="md-nav__link">
+    Problem 7.3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-74" class="md-nav__link">
+    Problem 7.4
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-75" class="md-nav__link">
+    Problem 7.5
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-76" class="md-nav__link">
+    Problem 7.6
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-77" class="md-nav__link">
+    Problem 7.7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-78" class="md-nav__link">
+    Problem 7.8
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-79" class="md-nav__link">
+    Problem 7.9
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-710" class="md-nav__link">
+    Problem 7.10
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-711" class="md-nav__link">
+    Problem 7.11
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="the-langevin-equation-a-case-study">The Langevin Equation – A Case Study<a class="headerlink" href="#the-langevin-equation-a-case-study" title="Permanent link">&para;</a></h1>
+<p>In 1908 <a href="https://en.wikipedia.org/wiki/Paul_Langevin">Prof. Paul Langevin</a> described how a
+physical system modeled by a differential equation responds to a stochastic input. His work resulted in the concept of the <a href="https://en.wikipedia.org/wiki/Langevin_equation">Langevin equation</a>. A particle of mass <span class="arithmatex">\(m\)</span> is subject to random collision forces, <span class="arithmatex">\(f(t),\)</span> from many small, molecules. The term <span class="arithmatex">\(f(t)\)</span> is frequently described as the driving force. Further, the assumption is usually made that <span class="arithmatex">\(f(t)\)</span> results from a stationary random process with a Gaussian probability density function and an autocorrelation function of the form <span class="arithmatex">\({\varphi _{ff}}(\tau) = {F_o}\delta (\tau ).\)</span> Non-coincident time samples are uncorrelated. The mathematical description of <span class="arithmatex">\(f(t)\)</span> is a Gaussian, white-noise, ergodic process.</p>
+<p>The motion of the particle is held back (retarded) by a viscous, frictional force that is proportional to the velocity of the particle. The equation of motion can be written for the velocity as a function of time or the position as a function of time:</p>
+<div class="" id="eq:langEqs1">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.1)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+m\frac{{dv(t)}}{{dt}} = f(t) - \lambda v\\
+m\frac{{{d^2}x(t)}}{{d{t^2}}} = f(t) - \lambda \frac{{dx(t)}}{{dt}}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>where <span class="arithmatex">\(\lambda\)</span> is the viscous, damping coefficient and both <span class="arithmatex">\(m\)</span> and <span class="arithmatex">\(\lambda\)</span> are
+greater than zero. This <em>stochastic differential equation</em> describes <a href="https://en.wikipedia.org/wiki/Brownian_motion">Brownian motion</a>. We shall begin with the velocity, <span class="arithmatex">\(v(t),\)</span> and consider only one spatial dimension.</p>
+<p>In this case-study our intention is to illustrate how the tools we have developed can be used to analyze this random process. (See also <a href="#tethered-particle-motion">TPM</a>.) The tools, however, have been developed in the context of discrete-time so the first step is to transform this first-order differential equation into a difference equation. As so many problems are studied, simulated, measured, and controlled with digital systems, this is not an unreasonable first step.</p>
+<h2 id="from-t-to-n">From <i><font face="Georgia">t</font></i> to <i><font face="Palatino">n</font></i><a class="headerlink" href="#from-t-to-n" title="Permanent link">&para;</a></h2>
+<p>There are several procedures to transform a continuous-time LTI system—one that is based upon a linear differential equation with constant coefficients with input <span class="arithmatex">\(f(t)\)</span> and output <span class="arithmatex">\(v(t)\)</span> or <span class="arithmatex">\(x(t)\)</span>—into a discrete-time difference equation with input <span class="arithmatex">\(f[n]\)</span> and output <span class="arithmatex">\(v[n]\)</span> or <span class="arithmatex">\(x[n].\)</span> These include 1) impulse-invariant sampling, 2) backward-difference equation, and 3) bilinear transformation. For a thorough discussion of this topic see Section 10.8 of Oppenheim<sup id="fnref:oppenheim1993"><a class="footnote-ref" href="#fn:oppenheim1993">1</a></sup>.</p>
+<p>Which one of the three techniques should we use? All three have advantages and disadvantages. For the purpose of this textbook, we will use the impulse-invariant sampling as it is easy to understand and leads to expressions that are easy to analyze in a case-study such as this.</p>
+<h3 id="impulse-invariant-sampling">Impulse-invariant sampling<a class="headerlink" href="#impulse-invariant-sampling" title="Permanent link">&para;</a></h3>
+<p>If the impulse response is bandlimited, we sample the impulse response at an appropriate rate (above the Nyquist frequency) and then use <em>z</em>-transform techniques to produce the difference equation. Thus, if <span class="arithmatex">\(h(t)\)</span> is the bandlimited impulse response of a Langevin equation whose samples are <span class="arithmatex">\(h[n] = h\left( {n{T_s}} \right),\)</span> the transfer function will be given by:</p>
+<div class="" id="eq:zfilt_langEqs1">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.2)</td>
+<td class="eqTableEq">
+<div>$$H(z) = \sum\limits_{n =  - \infty }^{ + \infty } {h[n]{z^{ - n}} = } \sum\limits_{n =  - \infty }^{ + \infty } {h(n{T_s}){z^{ - n}}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>where <span class="arithmatex">\({T_s}\)</span> is the suitably-chosen sampling period. The associated sampling frequency is, thereby, <span class="arithmatex">\({\omega _s} = 2\pi /{T_s}.\)</span></p>
+<p>The impulse response of the differential equation for velocity in <a href="Chap_7.html#eq:langEqs1">Equation 7.1</a> is causal, stable, straightforward to determine, and given by:</p>
+<div class="" id="eq:impr_langEqs1">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.3)</td>
+<td class="eqTableEq">
+<div>$${h_v}(t) = \left( {\frac{1}{m}} \right){e^{ - \left( {\lambda t/m} \right)}}u(t) = \left( {\frac{1}{m}} \right){e^{ - \left( {t/\theta } \right)}}u(t)$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>We have introduced the time constant <span class="arithmatex">\(\theta  = m/\lambda\)</span> and will use it extensively. The sampled impulse response and its <em>z</em>-transform are given by:</p>
+<div class="" id="eq:zfilt_langEqs2">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.4)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+{h_v}[n] = \left( {\frac{1}{m}} \right){e^{ - \left( {\lambda {T_s}/m} \right)n}}u[n]\\
+{H_v}(z) = \frac{{V(z)}}{{F(z)}} = \sum\limits_{n =  - \infty }^{ + \infty } {\left( {\frac{1}{m}} \right){e^{ - \left( {\lambda {T_s}/m} \right)n}}u[n]\,{z^{ - n}}} \\
+{H_v}(z) = \left( {\frac{1}{m}} \right)\sum\limits_{n = 0}^{ + \infty } {{{\left( {{e^{ - \left( {\lambda {T_s}/m} \right)}}{z^{ - 1}}} \right)}^n}}  = \frac{{1/m}}{{1 - {e^{ - \left( {\lambda {T_s}/m} \right)}}{z^{ - 1}}}}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>with a region-of-convergence (ROC) given by <span class="arithmatex">\(\left| z \right| &gt; {e^{ - \lambda {T_s}/m}}.\)</span> This leads to the difference equation:</p>
+<div class="" id="eq:deq_langEqs2">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.5)</td>
+<td class="eqTableEq">
+<div>$$v[n] - \left( {{e^{ - \left( {\lambda {T_s}/m} \right)}}} \right)v[n - 1] = \left( {\frac{1}{m}} \right)f[n]$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>This is the discrete-time version of the Langevin equation, <a href="Chap_7.html#eq:langEqs1">Equation 7.1</a>. The input <span class="arithmatex">\(f[n]\)</span> is the Gaussian, white-noise process. See <a href="#problem-71">Problem 7.1</a> to explore an important issue related to <a href="Chap_7.html#eq:deq_langEqs2">Equation 7.5</a>.</p>
+<p>This all seems quite straightforward but we have neglected one significant detail. The impulse response must be bandlimited so that a finite <span class="arithmatex">\({T_s}\)</span> can be chosen. <em>But given a finite number of terms in the sum, no impulse response that is of the form</em> <span class="arithmatex">\(\sum\nolimits_k {{A_k}{e^{ - {s_k}t}}u(t)}\)</span> <em>can be bandlimited</em>. See <a href="#problem-72">Problem 7.2</a>.</p>
+<p>Unless the aliasing induced by the use of a finite sampling interval is negligible, the impulse invariant technique can lead to erroneous results and conclusions. This, in turn, implies that if we insist on using this technique we must sample at a very high rate. As we shall soon see, in the case of <a href="Chap_7.html#eq:impr_langEqs1">Equation 7.3</a>, a sampling frequency of
+<span class="arithmatex">\({\omega _s} \ge 200\left( {\lambda /m} \right) = 200/\theta\)</span> is warranted.</p>
+<h3 id="how-big-is-big-how-small-is-small">How big is big? How small is small?<a class="headerlink" href="#how-big-is-big-how-small-is-small" title="Permanent link">&para;</a></h3>
+<p>The Langevin equation is a description appropriate for a small particle that is being battered by even smaller particles. See Section 15.5 of Reif<sup id="fnref:reif1965"><a class="footnote-ref" href="#fn:reif1965">2</a></sup> for an elegant presentation of this model. To appreciate what this means let us examine the case of a gold sphere whose radius is 10 <span class="arithmatex">\(\mu\)</span>m in a water bath (test tube) at a temperature of
+<span class="arithmatex">\(\Psi\)</span> = 21 ºC. The radius of a water molecule is about 0.14 nm, about <span class="arithmatex">\({10^{ - 5}}\)</span>
+that of the gold particle.</p>
+<p>After a period of time the gold particle will sink to the bottom of the test tube under the force of gravity. The <a href="https://en.wikipedia.org/wiki/Stokes'_law#Terminal_Velocity_of_Sphere_Falling_in_a_Fluid">terminal velocity</a> of the gold particle is, however, only 4 mm/s so we will have a few seconds to perform our measurements. In that time we will focus on lateral motion (<span class="arithmatex">\(x\)</span>-direction) as opposed to axial (<span class="arithmatex">\(z\)</span>-direction) motion. In the time constant <span class="arithmatex">\(\theta  = m/\lambda\)</span> defined in <a href="Chap_7.html#eq:impr_langEqs1">Equation 7.3</a>, <span class="arithmatex">\(\lambda\)</span> is the damping factor and according to <a href="https://en.wikipedia.org/wiki/Stokes'_law">Stokes’ Law</a> given by:</p>
+<div class="" id="eq:Stokes1">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.6)</td>
+<td class="eqTableEq">
+<div>$$\lambda  = 6\pi \eta R$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The parameter <span class="arithmatex">\(\eta\)</span> is the dynamic viscosity of the fluid (water) and <span class="arithmatex">\(R\)</span> is the “hydrodynamic” radius of the particle (gold). Substituting the appropriate values (<span class="arithmatex">\(\eta  = 1.002\)</span> cP, <span class="arithmatex">\(R = 10\)</span> <span class="arithmatex">\(\mu\)</span>m, <span class="arithmatex">\(m = 81\)</span> ng) gives <span class="arithmatex">\(\lambda = 188.9\)</span> <span class="arithmatex">\(\mu\)</span>g/s and <span class="arithmatex">\(\theta\)</span> = 428 <span class="arithmatex">\(\mu\)</span>s. This is a long time compared to the average time interval between collisions of the gold sphere and water molecules which, to a rough approximation, is 10 fs. We can, therefore, consider the gold particle as being driven by a stochastic
+force with about <span class="arithmatex">\({10^{10}}\)</span> collisions in one time constant <span class="arithmatex">\(\theta.\)</span> These
+collisions with the gold sphere occur from all possible directions (4<span class="arithmatex">\(\pi\)</span> steradians) and the large number means that the <a href="https://en.wikipedia.org/wiki/Central_limit_theorem">Central Limit Theorem</a> applies and the driving force <span class="arithmatex">\(f(t),\)</span> the sum of all the independent collision forces, can be modeled as having a Gaussian amplitude distribution.</p>
+<h3 id="choosing-the-sampling-period">Choosing the sampling period<a class="headerlink" href="#choosing-the-sampling-period" title="Permanent link">&para;</a></h3>
+<p>Based upon a value for <span class="arithmatex">\(\theta\)</span> that we can calculate, we now look at the
+appropriate value of the sampling interval <span class="arithmatex">\({T_s}\)</span> for this example.</p>
+<p>The impulse response is not bandlimited so any sampling represents undersampling. As we shall see in <a href="#fig:sampchoices1c">Figure 7.1</a>, however, a finite choice for the sampling interval <span class="arithmatex">\({T_s}\)</span> can be justified and in practice will appear to be oversampling. The “Langevin filter” associated with <a href="Chap_7.html#eq:impr_langEqs1">Equation 7.3</a> has a lowpass characteristic:</p>
+<div class="" id="eq:lowpass1">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.7)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+{h_v}(t) = \left( {\frac{1}{m}} \right){e^{ - \left( {\lambda t/m} \right)}}u(t)\\
+\left| {{H_v}(\omega )} \right| = \left( {\frac{1}{m}} \right)\frac{1}{{\sqrt {{\omega ^2} + {{\left( {\lambda /m} \right)}^2}} }}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The frequency <span class="arithmatex">\({\omega _c}\)</span> at which the amplitude-squared is down by a factor of two from its value at <span class="arithmatex">\(\omega  = 0\)</span> is given by <span class="arithmatex">\({\omega _c} = \lambda /m\)</span> and might seem to qualify as a “highest” frequency. Using the Nyquist criterion and choosing <span class="arithmatex">\({\omega _s} = 2{\omega _c} = 2\lambda /m,\)</span> however, is not enough to avoid aliasing. To do so we must choose a higher frequency <span class="arithmatex">\({\omega _{\max }}\)</span> in the spectrum than <span class="arithmatex">\({\omega _c}.\)</span></p>
+<p>If we require that the filter amplitude-squared is down by a factor of 100 (not 2) from the filter value at <span class="arithmatex">\(\omega  = 0,\)</span> then <span class="arithmatex">\({\omega _{\max }} \simeq 10{\omega _c}.\)</span> The (Nyquist) sampling frequency is then approximated by <span class="arithmatex">\({\omega _s} = 2{\omega _{\max }} =\)</span><span class="arithmatex">\(2 \bullet 10{\omega _c} = 20\lambda /m.\)</span> This sampling issue is illustrated in <a href="#fig:sampchoices1c">Figure 7.1[a,b]</a>.</p>
+<figcaption style="color:#2c5272;">(<i>a</i>) <i>
+Sampling at ${\omega _s} = 2\pi /{T_s} = 2\lambda /m.$ Langevin filter spectrum in <b><font color="blue">blue</font></b>, sampled Langevin filter spectrum in <b><font color="darkred">dark red</font></b>
+</i></figcaption>
+
+<figure class="figaltcap fullsize" id="fig:sampchoices1a"><img src="images/Fig_7_1a.png" /><figcaption></figcaption>
+</figure>
+<figcaption style="color:#2c5272;">(<i>b</i>) <i>
+Sampling at ${\omega _s} = 2\pi /{T_s} = 20\lambda /m.$ Sampled Langevin filter spectrum
+</i></figcaption>
+
+<figure class="figaltcap fullsize" id="fig:sampchoices1b"><img src="images/Fig_7_1b.png" /><figcaption></figcaption>
+</figure>
+<figcaption style="color:#2c5272;">(<i>c</i>) <i>
+Sampling at ${\omega _s} = 2\pi /{T_s} = 200\lambda /m.$ Sampled Langevin filter spectrum
+</i></figcaption>
+
+<figure class="figaltcap fullsize" id="fig:sampchoices1c"><img src="images/Fig_7_1c.png" /><figcaption><strong>Figure 7.1:</strong> </b> Spectral magnitude <span class="arithmatex">\(\lvert {{H_v}\left( \omega  \right)} \rvert\)</span> displayed in <strong><font color="blue">blue</font></strong>. Spectrum after sampling at various frequencies <span class="arithmatex">\({\omega _s} = 2\pi /{T_s}\)</span> displayed in <strong><font color="darkred">dark red</font></strong>. Note the change in the scale of the frequency axes between the three graphs. For the numerical values presented in the text, the value of <span class="arithmatex">\(\lambda /m\)</span> = 2334 rad/s (371 Hz).</figcaption>
+</figure>
+<p>It should be clear that using a sampling frequency of <span class="arithmatex">\(2\lambda /m\)</span> or <span class="arithmatex">\(20\lambda /m\)</span>
+is insufficient to minimize aliasing. At <span class="arithmatex">\({\omega _s} = 200{\omega _c} = 200\lambda /m,\)</span> as illustrated in <a href="#fig:sampchoices1c">Figure 7.1c</a>, the aliasing is perhaps acceptable. This is the value that we shall use in the remainder of this case-study. The sampling interval is, therefore, chosen as <span class="arithmatex">\({T_s} = 2\pi /{\omega _s} = \pi m/100\lambda\)</span> = 13.4 <span class="arithmatex">\(\mu\)</span>s.</p>
+<p>The question of “what is acceptable” is a tricky one. Formally, there is
+no “highest frequency” and thus no Nyquist frequency. Practically, a
+sampling frequency as illustrated in <a href="#fig:sampchoices1c">Figure 7.1</a><a class="suffix_color" href="">c</a> means that the damage (distortion) caused by aliasing is confined to the highest frequencies
+where the signal energy is already quite small. If this energy is small
+compared to the noise levels at these same frequencies, then the choice
+of <span class="arithmatex">\({T_s}\)</span> can be considered “acceptable”. This is not a mathematical
+choice, however, but an engineering one. The comparison of signal energy
+and noise energy is the subject of <a href="Chap_8.html">Chapter 8</a>.</p>
+<h2 id="the-langevin-velocity-equation">The Langevin velocity equation<a class="headerlink" href="#the-langevin-velocity-equation" title="Permanent link">&para;</a></h2>
+<p>Let us begin with the velocity equation, its original form, and our difference equation based upon the impulse-invariant transformation:</p>
+<div class="" id="eq:lveq1">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.8)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{m\frac{{dv(t)}}{{dt}} + \lambda v(t) = f(t)}\\
+{v[n] - \left( {{e^{ - \left( {\lambda {T_s}/m} \right)}}} \right)v[n - 1] = \left( {\frac{1}{m}} \right)f[n]}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The driving force is Gaussian, white noise with the following characteristics:  </p>
+<div class="" id="eq:lveq2">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.9)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+{\varphi _{ff}}[k] = {F_o}\delta [k]\\
+{S_{ff}}(\Omega ) = {F_o}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>We now appeal to <a href="Chap_5.html#eq:autointhelimit">Equation 5.8</a>, <a href="Chap_5.html#eq:covariances">Equation 5.2</a>, and <a href="Chap_5.html#eq:varpos">Equation 5.4</a> which are summarized below:</p>
+<div class="" id="eq:lveq3">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.10)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+\mathop {\lim }\limits_{k \to \infty } \left\{ {{\varphi _{ff}}[k]} \right\} = {\left| {{m_f}} \right|^2}\\
+{\gamma _{ff}}[0] = {\varphi _{ff}}[0] - {\left| {{m_f}} \right|^2} = \sigma _f^2
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Substituting the values from <a href="Chap_7.html#eq:lveq2">Equation 7.9</a> into  <a href="Chap_7.html#eq:lveq3">Equation 7.10</a> yields the results
+that <span class="arithmatex">\({m_f} = \left\langle {f[n]} \right\rangle  = 0\)</span> and <span class="arithmatex">\({\sigma _f} = \sqrt {{F_o}}.\)</span> The average value of the driving force is zero. In this one-dimensional system there
+is—on the average—just as much force coming from the left as from the
+right. The standard deviation of the force is <span class="arithmatex">\(\sqrt {{F_o}}.\)</span> But this describes the input driving force. What are the characteristics of the random process that describes the particle velocity?</p>
+<h3 id="autocorrelation-function">Autocorrelation function<a class="headerlink" href="#autocorrelation-function" title="Permanent link">&para;</a></h3>
+<p>To answer this question we need to compute the autocorrelation of the
+velocity <span class="arithmatex">\({\varphi _{vv}}[k]\)</span> and its power spectral density
+<span class="arithmatex">\({S_{vv}}(\Omega ).\)</span> The autocorrelation follows from <a href="Chap_6.html#eq:filt_acorr6">Equation 6.15</a>, specifically <span class="arithmatex">\({\varphi _{vv}}[k] = {\varphi _{ff}}[k] \otimes {\varphi _{hh}}[k]\)</span> where <span class="arithmatex">\({\varphi _{hh}}[k]\)</span> is the autocorrelation function of the deterministic impulse response of the Langevin filter. That impulse response follows from  <a href="Chap_7.html#eq:lveq1">Equation 7.8</a> and is given by:</p>
+<div class="" id="eq:lveq4">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.11)</td>
+<td class="eqTableEq">
+<div>$${h_v}[n] = \left( {\frac{1}{m}} \right){e^{ - (\lambda {T_s}/m)n}}u[n] = \left( {\frac{1}{m}} \right){\rho ^n}u[n]$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>where we have set <span class="arithmatex">\(\rho  = {e^{ - \left( {\lambda {T_s}/m} \right)}}\)</span> and clearly <span class="arithmatex">\(0 &lt; \rho  &lt; 1.\)</span> It follows that:</p>
+<div class="" id="eq:lveq5">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.12)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{\varphi _{hh}}[k]}&amp;{ = {{\left( {\frac{1}{m}} \right)}^2}\sum\limits_{n = 0}^{ + \infty } {{\rho ^{2n + \left| k \right|}}} }\\
+{\,\,\,}&amp;{ = {{\left( {\frac{1}{m}} \right)}^2}\left( {\frac{1}{{1 - {\rho ^2}}}} \right){\rho ^{\left| k \right|}}}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>At this point you should notice some similarities to calculations performed in <a href="Chap_5.html#eq:acorr_window_1">Equation 5.18</a> and <a href="Chap_5.html#eq:acorr_window_2">Equation 5.19</a> including the use of the evenness of the autocorrelation function.</p>
+<h3 id="power-spectral-density">Power spectral density<a class="headerlink" href="#power-spectral-density" title="Permanent link">&para;</a></h3>
+<p>The power spectral density associated with the deterministic signal <span class="arithmatex">\(h[n],\)</span> <span class="arithmatex">\({S_{hh}}(\Omega ) = {\mathscr{F}}\left\{ {{\varphi _{hh}}[k]} \right\},\)</span> is given by:</p>
+<div class="" id="eq:lveq6">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.13)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{S_{hh}}(\Omega )}&amp;{ = {\mathscr{F}}\left\{ {{{\left( {\frac{1}{m}} \right)}^2}\left( {\frac{1}{{1 - {\rho ^2}}}} \right){\rho ^{\left| k \right|}}} \right\}}\\
+{\,\,\,}&amp;{ = {{\left( {\frac{1}{m}} \right)}^2}\left( {\frac{1}{{1 + {\rho ^2} - 2\rho \cos \Omega }}} \right)}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Note that the real and even autocorrelation function <span class="arithmatex">\({{\varphi _{hh}}[k]}\)</span> has led to a real and even power spectral density <span class="arithmatex">\({S_{hh}}(\Omega ).\)</span></p>
+<p>The next step is to calculate <span class="arithmatex">\({{\varphi _{vv}}[k]}\)</span> and <span class="arithmatex">\({S_{vv}}(\Omega )\)</span> but that is straightforward given <a href="Chap_6.html#eq:filt_acorr6">Equation 6.15</a> and <a href="Chap_7.html#eq:lveq2">Equation 7.9</a>.</p>
+<div class="" id="eq:lveq7">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.14)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{\varphi _{vv}}[k]}&amp;{ = {\varphi _{ff}}[k] \otimes {\varphi _{hh}}[k]}\\
+{\,\,\,}&amp;{ = {F_o}\delta [k] \otimes {\varphi _{hh}}[k] = {F_o}{\varphi _{hh}}[k]}\\
+{\,\,\,}&amp;{ = {{\left( {\frac{1}{m}} \right)}^2}\left( {\frac{{{F_o}}}{{1 - {\rho ^2}}}} \right){\rho ^{\left| k \right|}}}\\
+{\,\,\,}&amp;{\,\,\,}\\
+{{S_{vv}}(\Omega )}&amp;{ = {S_{ff}}(\Omega ){S_{hh}}(\Omega ) = {F_o}{S_{hh}}(\Omega )}\\
+{\,\,\,}&amp;{ = {{\left( {\frac{1}{m}} \right)}^2}\left( {\frac{{{F_o}}}{{1 + {\rho ^2} - 2\rho \cos \Omega }}} \right)}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>These two descriptions of the filtered random process—a white, Gaussian
+process filtered through the Langevin velocity equation—are illustrated
+in <a href="#fig:velgraphs1b">Figure 7.2</a>.</p>
+<figcaption style="color:#2c5272;">(<i>a</i>) <i>
+Autocorrelation ${{\varphi _{vv}}[k\rbrack}$ of the 1-D Langevin velocity process
+</i></figcaption>
+
+<figure class="figaltcap fullsize" id="fig:velgraphs1a"><img src="images/Fig_7_2_T.png" /><figcaption></figcaption>
+</figure>
+<figcaption style="color:#2c5272;">(<i>b</i>) <i>
+Power spectral density ${{S_{vv}}(\Omega )}$ of the 1-D Langevin velocity process
+</i></figcaption>
+
+<figure class="figaltcap fullsize" id="fig:velgraphs1b"><img src="images/Fig_7_2_B.png" /><figcaption><strong>Figure 7.2:</strong> The power spectral density is plotted for the baseband <span class="arithmatex">\(- \pi  \lt  \Omega  \le  + \pi.\)</span> Curves shown here are for two different values of <span class="arithmatex">\(\rho\)</span>: <span class="arithmatex">\(\rho  = 0.5\)</span> (shown in <strong><font color="darkred">dark red</font></strong>) and <span class="arithmatex">\(\rho  = 0.97\)</span>  (shown in <strong><font color="blue">blue</font></strong>). The latter choice will be encountered again, later in this chapter. All curves have been normalized to one at <span class="arithmatex">\(k = 0\)</span> and <span class="arithmatex">\(\Omega  = 0.\)</span></figcaption>
+</figure>
+<p>It should be clear that although the driving force is white noise, the
+velocity process is pink noise as described in <a href="Chap_5.html#example-pink-noise">Example: Pink Noise</a>.</p>
+<h3 id="descriptive-statistics-mean-and-standard-deviation">Descriptive statistics – mean and standard deviation<a class="headerlink" href="#descriptive-statistics-mean-and-standard-deviation" title="Permanent link">&para;</a></h3>
+<p>Having the autocorrelation function and the power spectral density, we can now calculate the mean and standard deviation of the filtered random process. There are two ways to arrive at the mean. We can use <a href="Chap_7.html#eq:lveq3">Equation 7.10</a> with <a href="Chap_7.html#eq:lveq5">Equation 7.12</a> and <a href="Chap_7.html#eq:lveq7">Equation 7.14</a> in which case we have:</p>
+<div class="" id="eq:lveq8">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.15)</td>
+<td class="eqTableEq">
+<div>$${\left| {{m_v}} \right|^2} = \mathop {\lim }\limits_{k \to \infty } \left\{ {{\varphi _{vv}}[k]} \right\} = 0$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>That is, the mean is 0. Alternatively, we can use <a href="Chap_6.html#eq:filt_mean4">Equation 6.9</a> and <a href="Chap_7.html#eq:zfilt_langEqs2">Equation 7.4</a> to give:</p>
+<div class="" id="eq:lveq9">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.16)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{m_v}}&amp;{ = {m_f}\,{H_v}(\Omega  = 0) = {m_f}\,{H_v}(z = 1)}\\
+{\,\,\,}&amp;{ = 0\left( {\frac{{1/m}}{{1 - {e^{ - (\lambda {T_s}/m)}}}}} \right) = 0}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Either way, a mean of zero makes sense. The driving force pushes the particle left and right and the Langevin equation smooths this motion. But the smoothing does not change the average velocity.</p>
+<p>The standard deviation comes from:</p>
+<div class="" id="eq:lveq10">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.17)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{\sigma _v^2}&amp;{ = {\gamma _{vv}}[0] = {\varphi _{vv}}[0] - {{\left| {{m_v}} \right|}^2}}&amp;{\,\,\,}\\
+{\,\,\,}&amp;{ = {\varphi _{vv}}[0] = {{\left( {\frac{1}{m}} \right)}^2}\left( {\frac{{{F_o}}}{{1 - {\rho ^2}}}} \right)}&amp; \Rightarrow \\
+{{\sigma _v}}&amp;{ = \frac{1}{m}\sqrt {\frac{{{F_o}}}{{1 - {e^{ - 2\lambda {T_s}/m}}}}} }&amp;{\,\,\,}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The standard deviation changes, something we should expect from the filtering associated with the Langevin equation and our experience with <!-- the laboratory exercises <a href="Chap_6.ht,ml#laboratory-exercise-65">Laboratory Exercise 6.5</a> through  --><a href="Chap_6.html#laboratory-exercise-61">Laboratory Exercise 6.1</a> in <a href="Chap_6.html">Chapter 6</a>.</p>
+<p>It is instructive to compare this discrete-time result to the continuous time result. We offer—without proof—that the various equations to describe the filtering of random processes and the calculation of various statistical descriptions are the same in continuous time as in discrete time. You are, of course, welcome to derive these results using the same methods we have used in the previous chapters. See <a href="#problem-73">Problem 7.3</a>.  </p>
+<p>Starting from <a href="Chap_7.html#eq:langEqs1">Equation 7.1</a> and <a href="Chap_7.html#eq:impr_langEqs1">Equation 7.3</a> we have the results summarized in <a href="#tbl:t01">Table 1</a>.</p>
+<!-- 
+Description | Continuous-time | Discrete-time
+---------------------------|----------------------|----------------------
+${h_v}$ | $\frac{1}{m}{e^{ - \lambda t/m}}u(t)$ | $\frac{1}{m}{\rho ^n}u[n]$
+${H_v}$|$\frac{1}{{ms + \lambda }}$|$\frac{1}{m}\left( {\frac{1}{{1 - \rho {z^{ - 1}}}}} \right)$
+${\varphi _{hh}}$|$\left( {\frac{1}{{2m\lambda }}} \right){e^{ - \lambda \lvert \tau  \rvert/m}}$|${\left( {\frac{1}{m}} \right)^2}\left( {\frac{1}{{1 - {\rho ^2}}}} \right){\rho ^{\lvert k \rvert}}$
+${\varphi _{vv}}$ | ${F_o}{\varphi _{hh}}(\tau )$ | ${F_o}{\varphi _{hh}}[k]$
+${S_{vv}}$|${\left( {\frac{1}{m}} \right)^2}\frac{{{F_o}}}{{{\omega ^2} + {{\left( {\lambda /m} \right)}^2}}}$|${\left( {\frac{1}{m}} \right)^2}\left( {\frac{{{F_o}}}{{1 + {\rho ^2} - 2\rho \cos \Omega }}} \right)$
+${\lvert {{m_v}} \rvert^2} = \mathop {\lim }\limits_{\tau ,\,k \to \infty } \left\{ {{\varphi _{vv}}} \right\}$|0|0
+$\begin{aligned}\sigma_v^2 &= \left( \varphi_{vv} - \lvert m_v \rvert^2 \right) \rvert_{\tau ,k = 0}\\ &= \langle v^2 \rangle \end{aligned}$|$\frac{{{F_o}}}{{2m\lambda }}$|${\left( {\frac{1}{m}} \right)^2}\left( {\frac{{{F_o}}}{{1 - {\rho ^2}}}} \right)$  
+ -->
+
+<div id="tbl:t01"></div>
+
+<table class="T7_1">
+
+<!--Header row -->
+<thead>
+<tr>
+<th><i><b>Description</b></i></th>
+<th><i><b>Continuous-time</b></i></th>
+<th><i><b>Discrete-time</b></i></th>
+</tr>
+</thead>
+
+<!-- Row 1 -->
+<tr>
+<td>${h_v}$</td>
+<td>$\frac{1}{m}{e^{ - \lambda t/m}}u(t)$</td>
+<td>$\frac{1}{m}{\rho ^n}u[n]$</td> 
+</tr>
+
+<!-- Row 2 -->
+<tr>
+<td>${H_v}$</td>
+<td>$\frac{1}{{ms + \lambda }}$</td>
+<td>$\frac{1}{m}\left( {\frac{1}{{1 - \rho {z^{ - 1}}}}} \right)$</td> 
+</tr>
+
+<!-- Row 3 -->
+<tr>
+<td>${\varphi _{hh}}$</td>
+<td>$\left( {\frac{1}{{2m\lambda }}} \right){e^{ - \lambda \lvert \tau  \rvert/m}}$</td>
+<td>${\left( {\frac{1}{m}} \right)^2}\left( {\frac{1}{{1 - {\rho ^2}}}} \right){\rho ^{\lvert k \rvert}}$</td> 
+</tr>
+
+<!-- Row 4 -->
+<tr>
+<td>${\varphi _{vv}}$</td>
+<td>${F_o}{\varphi _{hh}}(\tau )$</td>
+<td>${F_o}{\varphi _{hh}}[k]$</td> 
+</tr>
+
+<!-- Row 5 -->
+<tr>
+<td>${S_{vv}}$</td>
+<td>${\left( {\frac{1}{m}} \right)^2}\frac{{{F_o}}}{{{\omega ^2} + {{\left( {\lambda /m} \right)}^2}}}$</td>
+<td>${\left( {\frac{1}{m}} \right)^2}\left( {\frac{{{F_o}}}{{1 + {\rho ^2} - 2\rho \cos \Omega }}} \right)$</td>
+</tr>
+
+<!-- Row 6 -->
+<tr>
+<td>${\lvert {{m_v}} \rvert^2} = \mathop {\lim }\limits_{\tau ,\,k \to \infty } \left\{ {{\varphi _{vv}}} \right\}$</td>
+<td>0</td>
+<td>0</td> 
+</tr>
+
+<!-- Row 7 -->
+<tr>
+<td>$\begin{aligned}\sigma_v^2 &= \left( \varphi_{vv} - \lvert m_v \rvert^2 \right) \rvert_{\tau ,k = 0}\\ &= \langle v^2 \rangle \end{aligned}$</td>
+<td>$\frac{{{F_o}}}{{2m\lambda }}$</td>
+<td>${\left( {\frac{1}{m}} \right)^2}\left( {\frac{{{F_o}}}{{1 - {\rho ^2}}}} \right)$</td> 
+</tr>
+
+</table>
+
+<p><figcaption style="margin: 0px 30px;">
+<b>Table 7.1:</b> Comparison of continuous-time and discrete-time descriptions of the Langevin velocity process. The parameter <span class="arithmatex">\(\rho  = {e^{ - (\lambda {T_s}/m)}}.\)</span>
+</figcaption></p>
+<p>The result for the average value of the velocity is the same; the mean value of the velocity is zero. The result for the continuous-time standard deviation (or variance <span class="arithmatex">\(\sigma _{v,a}^2\)</span>) differs from the discrete-time standard deviation (or variance
+<span class="arithmatex">\(\sigma _{v,d}^2\)</span>) where “<span class="arithmatex">\(a\)</span>” stands for analog (continuous-time) and “<span class="arithmatex">\(d\)</span>” for digital (discrete-time).</p>
+<div class="" id="eq:lveq11">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.18)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{\sigma _{v,a}^2}&amp;{ = \frac{{{F_o}}}{{2m\lambda }}}\\
+{\sigma _{v,d}^2}&amp;{ = \frac{1}{{{m^2}}}\left( {\frac{{{F_o}}}{{1 - {\rho ^2}}}} \right) = \frac{1}{{{m^2}}}\left( {\frac{{{F_o}}}{{1 - {e^{ - 2\lambda {T_s}/m}}}}} \right)}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>We pay a price for using discrete-time techniques, the perhaps unexpected term <span class="arithmatex">\(1 - {\rho ^2}\)</span> in the denominator of <a href="Chap_7.html#eq:lveq11">Equation 7.18</a>. This term can, however, asymptotically resemble the term in <a href="#tbl:t01">Table 7.1</a>.</p>
+<p>As the sampling <em>rate</em> increases, as <span class="arithmatex">\({T_s} \to 0,\)</span> we have:</p>
+<div class="" id="eq:lveq12">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.19)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{\mathop {\lim }\limits_{{T_s} \to 0} \left\{ {\sigma _{v,d}^2} \right\}}&amp;{ = \mathop {\lim }\limits_{{T_s} \to 0} \left\{ {\frac{1}{{{m^2}}}\left( {\frac{{{F_o}}}{{1 - {e^{ - 2\lambda {T_s}/m}}}}} \right)} \right\}}\\
+{\,\,\,}&amp;{ \approx \frac{{{F_o}}}{{{m^2}}}\left( {\frac{1}{{1 - (1 - 2\lambda {T_s}/m)}}} \right)}\\
+{\,\,\,}&amp;{ \approx \frac{{{F_o}}}{{2m\lambda {T_s}}} = \frac{1}{{{T_s}}}\sigma _{v,a}^2}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Note that we have used the Taylor series linearization of <span class="arithmatex">\({\rho ^2}\)</span> as <span class="arithmatex">\({T_s} \to 0.\)</span> This suggests using a sampling interval such that <span class="arithmatex">\({T_s} &lt;  &lt; m/2\lambda  = \theta /2.\)</span> We have met this condition with our earlier choice of <span class="arithmatex">\({T_s} = 2\pi /{\omega _s} = \pi m/100\lambda.\)</span> We can then calculate the variance of the physical (analog) velocity process from our (digital) data, <span class="arithmatex">\(\sigma _{v,a}^2 = {T_s}\,\sigma _{v,d}^2.\)</span></p>
+<p>Before proceeding with the Langevin position equation, one more observation is in order. The variance of the continuous-time velocity is the mean-square velocity of the particle with mass <span class="arithmatex">\(m\)</span> in the water bath at temperature <span class="arithmatex">\(\Psi.\)</span> The battering of the particle by <a href="#how-big-is-big-how-small-is-small">water molecules</a> is caused by the thermal motion of the molecules. Even though the particle is in thermal equilibrium with its surroundings, the battering continues. From the <a href="https://en.wikipedia.org/wiki/Equipartition_theorem">Equipartition Theorem</a> of thermal physics we know that each degree-of-freedom of motion has as an average kinetic energy of <span class="arithmatex">\({k_B}\Psi /2\)</span> due to thermal effects—see Feynman<sup id="fnref:feynman1963"><a class="footnote-ref" href="#fn:feynman1963">3</a></sup>—where <span class="arithmatex">\({k_B} = 1.380658 \times {10^{ - 23}}\)</span> J/K is the Boltzmann constant. With <span class="arithmatex">\(K{E_x}\)</span> denoting the average kinetic energy of translational motion in the <span class="arithmatex">\(x\)</span> direction, this means:</p>
+<div class="" id="eq:lveq13">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.20)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{\frac{{{F_o}}}{{2m\lambda }}}&amp;{ = \sigma _{v,a}^2 = \left\langle {v_x^2} \right\rangle  = \frac{{2\,K{E_x}}}{m} = \frac{{{k_B}\Psi }}{m}\,\,\,\, \Rightarrow }\\
+{{F_o}}&amp;{ = 2\lambda {k_B}\Psi }
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The second line in <a href="Chap_7.html#eq:lveq13">Equation 7.20</a> is important. Based upon the dynamic viscosity, the equilibrium temperature, and the Boltzmann constant, we can assign a specific physical value to <span class="arithmatex">\({{F_o}},\)</span> a term that has, until now, been a simple scale factor.</p>
+<h2 id="the-langevin-position-equation">The Langevin position equation<a class="headerlink" href="#the-langevin-position-equation" title="Permanent link">&para;</a></h2>
+<p>At first glance one might expect that analyzing the Langevin position equation might simply be “more of the same”. As we shall see, however, this equation offers some important insights into phenomena such as Brownian motion.</p>
+<p>We start with the causal, stable position equation in continuous time:</p>
+<div class="" id="eq:lpeq1">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.21)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+m\frac{{{d^2}x(t)}}{{d{t^2}}} = f(t) - \lambda \frac{{dx(t)}}{{dt}}\\
+{H_x}(s) = \frac{1}{{m{s^2} + \lambda s}}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The impulse response <span class="arithmatex">\({h_x}(t)\)</span> follows from:</p>
+<div class="" id="eq:lpeq2">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.22)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+{H_x}(s) = \frac{1}{{m{s^2} + \lambda s}} = \frac{1}{\lambda }\left( {\frac{1}{s} - \frac{1}{{s + \lambda /m}}} \right)\,\,\,\,\, \Rightarrow \\
+{h_x}(t) = \frac{1}{\lambda }u(t) - \frac{1}{\lambda }{e^{ - \lambda t/m}}u(t)
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Using the impulse-invariant technique yields:</p>
+<div class="" id="eq:lpeq3">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.23)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{h_x}[n]}&amp;{ = \frac{1}{\lambda }u[n] - \frac{1}{\lambda }{{\left( {{e^{ - \lambda {T_s}/m}}} \right)}^n}u[n]}&amp;{}\\
+{\,\,\,}&amp;{ = \frac{1}{\lambda }u[n] - \frac{1}{\lambda }{\rho ^n}u[n]}&amp; \Rightarrow \\
+{{H_x}(z)}&amp;{ = \frac{{1{\rm{/}}\lambda }}{{1 - {z^{ - 1}}}} - \frac{{1{\rm{/}}\lambda }}{{1 - \rho {z^{ - 1}}}}}&amp;{}\\
+{\,\,\,}&amp;{ = \frac{1}{\lambda }\left( {\frac{{{z^{ - 1}}(1 - \rho )}}{{1 - {z^{ - 1}}(1 + \rho ) + \rho {z^{ - 2}}}}} \right)}&amp;{}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Again we have used <span class="arithmatex">\(\rho  = {e^{ - (\lambda {T_s}/m)}}.\)</span> The difference equation
+relating driving force <span class="arithmatex">\(f[n]\)</span> to position <span class="arithmatex">\(x[n]\)</span> is thus given by:</p>
+<div class="" id="eq:lpeq4">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.24)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+x[n] - (1 + \rho )x[n - 1] + \rho x[n - 2]\\
+\,\,\,\,\,\,\,\, = \left( {\frac{{1 - \rho }}{\lambda }} \right)f[n - 1]
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<h3 id="expected-value">Expected value<a class="headerlink" href="#expected-value" title="Permanent link">&para;</a></h3>
+<p>The average value of the position <span class="arithmatex">\({m_x},\)</span> using the property that <span class="arithmatex">\(\Omega  = 0\)</span>
+corresponds to <span class="arithmatex">\(z = {\left. {{e^{j\Omega }}} \right|_{\Omega  = 0}} = 1,\)</span> is straightforward to calculate:</p>
+<div class="" id="eq:lpeq5">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.25)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{m_x}}&amp;{ = {m_f}\,{H_x}(\Omega  = 0) = {m_f}\,{H_x}(z = 1)}\\
+{\,\,\,}&amp;{ = 0\left( {\frac{{1 - \rho }}{\lambda }} \right)\left( {\frac{1}{0}} \right) = indeterminate}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>What is happening here? First, this is <em>not</em> a consequence of the transformation from continuous time to discrete time. The value of <span class="arithmatex">\({H_x}(\omega )\)</span> is also indeterminate for <span class="arithmatex">\(\omega  = 0.\)</span> We can better understand this result if we look at the impulse response of the difference equation, <a href="Chap_7.html#eq:lpeq3">Equation 7.23</a>.</p>
+<div class="" id="eq:lpeq6">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.26)</td>
+<td class="eqTableEq">
+<div>$${h_x}[n] = \left( {\frac{1}{\lambda }} \right)u[n] - \left( {\frac{1}{\lambda }} \right){\rho ^n}u[n]$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The form of this impulse response brings us back to the discussion in <a href="Chap_5.html#a-digression">Chapter 5</a>. The first term is dependent on <span class="arithmatex">\(u[n]\)</span> whose Fourier transform—as we saw in <a href="Chap_5.html#eq:Fourier_step">Equation 5.21</a>—has singularities at <span class="arithmatex">\(\Omega  = 0.\)</span> It is these
+singularities that cause our problem.</p>
+<p>Nevertheless, our intuition suggests that the mean <span class="arithmatex">\({m_x}\)</span> should be zero. The random process associated with <span class="arithmatex">\(f[n]\)</span> has a zero mean, <span class="arithmatex">\({m_f} = \left\langle {f[n]} \right\rangle  = 0,\)</span> so the positive values should be “cancelled” by the negative values. As we have assumed that <span class="arithmatex">\(f[n]\)</span> has a Gaussian probability density function <span class="arithmatex">\(N\left( {\mu  = 0,\sigma  = \sqrt {{F_o}} } \right),\)</span> we can show that this is an example of a filtered <a href="https://en.wikipedia.org/wiki/Random_walk#Gaussian_random_walk">Gaussian random walk</a>.  </p>
+<p>The first term in <span class="arithmatex">\({h_x}[n]\)</span> in <a href="Chap_7.html#eq:lpeq6">Equation 7.26</a>, <span class="arithmatex">\({h_1}[n] = \left( {1/\lambda } \right)u[n]\)</span> implies that the position after <span class="arithmatex">\(n\)</span> steps involves the sum of that number of
+independent steps:</p>
+<div class="" id="eq:lpeq7">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.27)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{x_1}[n]}&amp;{ = \left( {\frac{1}{\lambda }} \right)u[n] \otimes f[n] = \left( {\frac{1}{\lambda }} \right)\sum\limits_{k =  - \infty }^{ + \infty } {f[k]u[n - k]} }\\
+{\,\,\,}&amp;{ = \left( {\frac{1}{\lambda }} \right)\sum\limits_{k = 0}^n {f[k]} }
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>We assume here that the particle with mass <span class="arithmatex">\(m\)</span> starts at position zero at time zero, <span class="arithmatex">\(x[0] = 0,\)</span> and that the random driving force starts at time zero, <span class="arithmatex">\(f[n] = 0\)</span> for <span class="arithmatex">\(n &lt; 0.\)</span> The term <span class="arithmatex">\(\sum\nolimits_k {f[k]}\)</span> represents the <em>sum</em> of <span class="arithmatex">\(n\)</span> independent, identically-distributed, Gaussian random variables: a Gaussian random walk. Random walks have been studied extensively and a lucid discussion can be found in Cox<sup id="fnref:cox1965"><a class="footnote-ref" href="#fn:cox1965">4</a></sup>.</p>
+<p>For a random walk where each step has an average value of zero, the expected value of the particle position after <span class="arithmatex">\(n\)</span> steps is likewise zero. The second term in <span class="arithmatex">\({h_x}[n]\)</span> in <a href="Chap_7.html#eq:lpeq6">Equation 7.26</a> is easier; the output of this component of the Langevin filter has a mean of zero. This can be seen through application of <a href="Chap_6.html#eq:filt_mean4">Equation 6.9</a> with <span class="arithmatex">\({m_f} = 0.\)</span></p>
+<p>By identifying the first term in <span class="arithmatex">\({h_x}[n]\)</span> (<a href="Chap_7.html#eq:lpeq6">Equation 7.26</a>) as a Gaussian random walk problem, we have demonstrated that the mean value of the position in the Langevin position equation is zero, <span class="arithmatex">\({m_x} = \left\langle {x[n]} \right\rangle  = 0.\)</span></p>
+<h3 id="autocorrelation-function_1">Autocorrelation function<a class="headerlink" href="#autocorrelation-function_1" title="Permanent link">&para;</a></h3>
+<p>We are now in a position to work with the autocorrelation function.
+Again we refer to the methodology developed in <a href="Chap_5.html#a-digression">Chapter 5</a> for a
+deterministic signal, specifically <a href="Chap_5.html#eq:asymp_signal">Equation 5.14</a>, and to the impulse response of the Langevin position equation, <a href="Chap_7.html#eq:lpeq6">Equation 7.26</a>. For the deterministic
+signal we had:</p>
+<div class="" id="eq:lpeq8">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.28)</td>
+<td class="eqTableEq">
+<div>$$x[n] = u[n] - {\left( {\frac{1}{2}} \right)^n}u[n]$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>and for the Langevin position equation:</p>
+<div class="" id="eq:lpeq9">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.29)</td>
+<td class="eqTableEq">
+<div>$${h_x}[n] = \left( {\frac{1}{\lambda }} \right)u[n] - \left( {\frac{1}{\lambda }} \right){\rho ^n}u[n]$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The similarity of the two equations should be clear. This means that, referring to <a href="Chap_5.html#eq:acorr_window_2">Equation 5.19</a> and using the windowing function <span class="arithmatex">\(w[n]\)</span> and <a href="Chap_7.html#eq:lveq7">Equation 7.14</a>, we can write the autocorrelation function as:</p>
+<div class="" id="eq:lpeq10">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.30)</td>
+<td class="eqTableEq">
+<div>$${\varphi _{xx}}[k] = \frac{{{F_o}}}{{{\lambda ^2}}}\left( {\mathop {\lim }\limits_{N \to \infty } N - \left| k \right| - \left( {\frac{{\rho  + {\rho ^2} + {\rho ^{\left| k \right| + 1}}}}{{1 - {\rho ^2}}}} \right)} \right)$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>In order to show that <span class="arithmatex">\({\varphi _{xx}}[k]\)</span> grows linearly with <span class="arithmatex">\(N\)</span> we do not replace it by its limit.</p>
+<p>The autocorrelation is displayed in <a href="#fig:posgraphs1">Figure 7.3</a>. It is important to realize that while it may look quite similar to <a href="Chap_5.html#fig:acorr_nasty_fig">Figure 5.2</a>, it differs in an important way. The example that was developed in <a href="Chap_5.html#a-digression">Chapter 5</a> was the autocorrelation function of a <em>deterministic</em> signal <span class="arithmatex">\(x[n].\)</span> The result in <a href="Chap_7.html#eq:lpeq10">Equation 7.30</a> is the autocorrelation function of the <em>stochastic</em> signal <span class="arithmatex">\(x[n]\)</span> found through the Langevin equation.  </p>
+<figure class="figaltcap fullsize" id="fig:posgraphs1"><img src="images/Fig_7_3.png" /><figcaption><strong>Figure 7.3:</strong> Autocorrelation function of <span class="arithmatex">\(x[n\rbrack\)</span> in <a href="Chap_7.html#eq:lpeq10">Equation 7.30</a> plotted for <span class="arithmatex">\(\left| k \right| &lt; 10.\)</span> The parameter <span class="arithmatex">\(\rho  = 1/2\)</span> and the value of <span class="arithmatex">\({\varphi _{xx}}[k = 0\rbrack = \left( {{F_o}/{\lambda ^2}} \right)\left( {N - 5/3)} \right).\)</span> <span class="arithmatex">\(N\)</span> describes the width of window <span class="arithmatex">\(w[n\rbrack\)</span> and in this calculation <span class="arithmatex">\(N = 20,000.\)</span></figcaption>
+</figure>
+<p>We have determined the mean value of the random process <span class="arithmatex">\({m_x} = \left\langle {x[n]} \right\rangle  = 0\)</span> and we now have the autocorrelation function of that random process in the form of <a href="Chap_7.html#eq:lpeq10">Equation 7.30</a>.</p>
+<h3 id="power-spectral-density_1">Power spectral density<a class="headerlink" href="#power-spectral-density_1" title="Permanent link">&para;</a></h3>
+<p>Starting from <a href="Chap_6.html#eq:filt_crosspds4">Equation 6.21</a> and <a href="Chap_7.html#eq:lpeq9">Equation 7.29</a> we can compute the power spectral density <span class="arithmatex">\({S_{xx}}(\Omega ).\)</span> See <a href="#problem-76">Problem 7.6</a>.</p>
+<div class="" id="eq:lpeq11">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.31)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{S_{xx}}(\Omega )}&amp;{ = {{\left| {{H_x}(\Omega )} \right|}^2}{S_{ff}}(\Omega )\; = {{\left| {{H_x}(\Omega )} \right|}^2}{F_o}}\\
+{\,\,\,}&amp;{ = \frac{{{F_o}{{(1 - \rho )}^2}{{\csc }^2}(\Omega /2)}}{{{{(2\lambda )}^2}(1 + {\rho ^2} - 2\rho \cos \Omega )}}}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>This result including its behavior at <span class="arithmatex">\(\Omega  = 0\)</span> is shown in <a href="#fig:posgraphs2">Figure 7.4</a>.</p>
+<figure class="figaltcap fullsize" id="fig:posgraphs2"><img src="images/Fig_7_4.png" /><figcaption><strong>Figure 7.4:</strong> Power spectral density <span class="arithmatex">\({S_{xx}}(\Omega )\)</span> of <span class="arithmatex">\(x[n\rbrack\)</span> in <a href="Chap_7.html#eq:lpeq11">Equation 7.31</a> plotted for the baseband <span class="arithmatex">\(- \pi  \lt  \Omega  \le  + \pi.\)</span> The parameter <span class="arithmatex">\(\rho  = 1/2\)</span> and the parameters <span class="arithmatex">\({F_0}\)</span> and <span class="arithmatex">\(\lambda\)</span> each equal one. The width of <span class="arithmatex">\(w[n\rbrack\)</span> in this calculation <span class="arithmatex">\(N = 20,000.\)</span></figcaption>
+</figure>
+<p>Using <a href="Chap_7.html#eq:lveq3">Equation 7.10</a> we can determine the variance—the <em>mean-square dispersion</em> <span class="arithmatex">\(\left\langle {{x^2}} \right\rangle\)</span>—of the random process.</p>
+<div class="" id="eq:lpeq12">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.32)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{\sigma _x^2}&amp;{ = {\gamma _{xx}}[0] = {\varphi _{xx}}[0] - {{\left| {{m_x}} \right|}^2} = {\varphi _{xx}}[0] - {0^2}}\\
+{\,\,\,}&amp;{ = \frac{{{F_o}}}{{{\lambda ^2}}}\left( {\mathop {\lim }\limits_{N \to \infty } N - \left( {\frac{{2\rho  + {\rho ^2}}}{{1 - {\rho ^2}}}} \right)} \right) = \left\langle {{x^2}} \right\rangle }
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The size of the window and the number of independent steps that are added together in <a href="Chap_7.html#eq:lpeq7">Equation 7.27</a> are the same, <span class="arithmatex">\(N.\)</span> This means that for large values of <span class="arithmatex">\(N,\)</span> the variance grows as <span class="arithmatex">\(N\)</span> and the standard deviation grows as <span class="arithmatex">\(\sqrt N.\)</span> This coincides with our knowledge of the Gaussian random walk and Brownian motion, an average displacement of zero and a standard deviation that grows as <span class="arithmatex">\(\sqrt N\)</span> and is, therefore, unbounded.</p>
+<p>To repeat what we mentioned in <a href="Chap_5.html#a-digression">Chapter 5</a>, the mathematics may indicate
+that we are dealing with an “ill-behaved” mathematical problem but this problem can, in fact, be a description of a real physical system and amenable to analysis and interpretation.</p>
+<p>As we saw in <a href="Chap_7.html#eq:lveq12">Equation 7.19</a>, examining what happens as the sampling rate increases, as <span class="arithmatex">\({T_s} \to 0,\)</span> can provide additional insight into the relation between the analog world and the digital world. Using the same linearization procedure yields:</p>
+<div class="" id="eq:lpeq13">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.33)</td>
+<td class="eqTableEq">
+<div>$$\sigma _x^2 = \frac{{{F_o}}}{{{\lambda ^2}}}\left( {\mathop {\lim }\limits_{N \to \infty } N - \left( {\frac{{3m}}{{2\lambda {T_s}}} - 2} \right)} \right)$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>In <a href="#fig:sampchoices1c">Figure 7.1</a>, we demonstrated that a sufficiently small value of the sampling interval is given by <span class="arithmatex">\({T_s} = \pi m/100\lambda.\)</span> The approximation that we are in a region where the <span class="arithmatex">\(\sqrt N\)</span> behavior dominates is thus given by:</p>
+<div class="" id="eq:lpeq14">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.34)</td>
+<td class="eqTableEq">
+<div>$$N &gt;  &gt; \frac{3}{2}\left( {\frac{m}{{\lambda {T_s}}}} \right) = \frac{{150}}{\pi }$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The total amount of time, <span class="arithmatex">\({T^*},\)</span> that passes before we are in this region is characterized by:</p>
+<div class="" id="eq:lpeq15">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.35)</td>
+<td class="eqTableEq">
+<div>$${T^*} &gt;  &gt; \frac{3}{2}\left( {\frac{m}{{\lambda {T_s}}}} \right){T_s} = \frac{3}{2}\left( {\frac{m}{\lambda }} \right) = \frac{3}{2}\theta$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>For the numerical example presented earlier where <span class="arithmatex">\(\theta  = 428\mu\)</span>s, this implies that starting at time zero where <span class="arithmatex">\(x[0] = 0,\)</span> Brownian motion with its <span class="arithmatex">\(\sqrt N\)</span> behavior will dominate the digital data when <span class="arithmatex">\({T^*} &gt;  &gt; 642\mu\)</span>s.</p>
+<p>As we saw with <a href="#tbl:t01">Table 7.1</a>, it can be instructive to compare our discrete-time results to their continuous-time counterparts. These are summarized in <a href="#tbl:t02">Table 7.2</a>.</p>
+<!-- 
+Description | Continuous-time | Discrete-time
+------------------------- | ---------------------- | ------------------
+${h_x}$      | $\frac{1}{\lambda }u(t) - \frac{1}{\lambda }{e^{ - \lambda t/m}}u(t)$ | $\frac{1}{\lambda }u[n] - \frac{1}{\lambda }{\left( {{e^{ - \lambda {T_s}/m}}} \right)^n}u[n]$
+${H_x}$      | $\frac{1}{{m{s^2} + \lambda s}}$ | $\frac{1}{\lambda }\left( {\frac{{{z^{ - 1}}(1 - \rho )}}{{1 - {z^{ - 1}}(1 + \rho ) + \rho {z^{ - 2}}}}} \right)$
+${\varphi _{hh}}$ | $\frac{1}{{{\lambda ^2}}}(\mathop {\lim }\limits_{T \to \infty } T - \lvert \tau  \rvert - \frac{m}{\lambda }(2 + {e^{ - \lambda \lvert \tau  \rvert/m}}))$ | $\frac{1}{{{\lambda ^2}}}(\mathop {\lim }\limits_{N \to \infty } N - \lvert k \rvert - (\frac{{\rho  + {\rho ^2} + {\rho ^{\lvert k \rvert + 1}}}}{{1 - {\rho ^2}}}))$
+${\varphi _{xx}}$ | ${F_o}{\varphi _{hh}}(\tau )$ | ${F_o}{\varphi _{hh}}[k]$
+${S_{xx}}$ | $\left( {\frac{1}{{{m^2}}}} \right)\left( {\frac{1}{{{\omega ^2}}}} \right)\frac{{{F_o}}}{{{\omega ^2} + {{\left( {\lambda /m} \right)}^2}}}$ | $\frac{{{{(1 - \rho )}^2}{{\csc }^2}(\Omega /2)}}{{{{(2\lambda )}^2}(1 + {\rho ^2} - 2\rho \cos \Omega )}}$
+${\lvert {{m_x}} \rvert^2} = \mathop {\lim }\limits_{\tau ,\,k \to \infty } \left\{ {{\varphi _{xx}}} \right\}$ | 0 | 0
+$\begin{aligned} \sigma _x^2 &= \left( \varphi _{xx} - \lvert m_x \rvert^2 \right) \rvert_{\tau ,k = 0} \\ &= \langle x^2 \rangle \end{aligned}$ | $\frac{{{F_o}}}{{{\lambda ^2}}}\left( {\mathop {\lim }\limits_{T \to \infty } T - \left( {\frac{{3m}}{\lambda }} \right)} \right)$ | $\frac{{{F_o}}}{{{\lambda ^2}}}\left( {\mathop {\lim }\limits_{N \to \infty } N - \left( {\frac{{2\rho  + {\rho ^2}}}{{1 - {\rho ^2}}}} \right)} \right)$
+ -->
+
+<div id="tbl:t02"></div>
+
+<table class="T7_2" >
+
+<!--Header row -->
+
+<thead>
+<tr>
+<th><i><b>Description</b></i></th>
+<th><i><b>Continuous-time</b></i></th>
+<th><i><b>Discrete-time</b></i></th>
+</tr>
+</thead>
+
+<!-- Row 1 -->
+
+<tr>
+<td>${h_x}$</td>
+<td>$\frac{1}{\lambda }u(t) - \frac{1}{\lambda }{e^{ - \lambda t/m}}u(t)$</td>
+<td>$\frac{1}{\lambda }u[n] - \frac{1}{\lambda }{\left( {{e^{ - \lambda {T_s}/m}}} \right)^n}u[n]$</td> 
+</tr>
+
+<!-- Row 2 -->
+
+<tr>
+<td>${H_x}$</td>
+<td> $\frac{1}{{m{s^2} + \lambda s}}$</td>
+<td>$\frac{1}{\lambda }\left( {\frac{{{z^{ - 1}}(1 - \rho )}}{{1 - {z^{ - 1}}(1 + \rho ) + \rho {z^{ - 2}}}}} \right)$</td> 
+</tr>
+
+<!-- Row 3 -->
+
+<tr>
+<td>${\varphi _{hh}}$</td>
+<td>$\frac{1}{{{\lambda ^2}}}(\mathop {\lim }\limits_{T \to \infty } T - \lvert \tau  \rvert$
+          <br>          
+$ - \frac{m}{\lambda }(2 + {e^{ - \lambda \lvert \tau  \rvert/m}}))$</td>
+<td>$\frac{1}{{{\lambda ^2}}}(\mathop {\lim }\limits_{N \to \infty } N - \lvert k \rvert$
+          <br>          
+$ - (\frac{{\rho  + {\rho ^2} + {\rho ^{\lvert k \rvert + 1}}}}{{1 - {\rho ^2}}}))$</td> 
+</tr>
+
+<!-- Row 4 -->
+
+<tr>
+<td>${\varphi _{xx}}$</td>
+<td>${F_o}{\varphi _{hh}}(\tau )$</td>
+<td>${F_o}{\varphi _{hh}}[k]$</td> 
+</tr>
+
+<!-- Row 5 -->
+
+<tr>
+<td>${S_{xx}}$</td>
+<td>$\left( {\frac{1}{{{m^2}}}} \right)\left( {\frac{1}{{{\omega ^2}}}} \right)\frac{{{F_o}}}{{{\omega ^2} + {{\left( {\lambda /m} \right)}^2}}}$</td>
+<td>$\frac{{{{(1 - \rho )}^2}{{\csc }^2}(\Omega /2)}}{{{{(2\lambda )}^2}(1 + {\rho ^2} - 2\rho \cos \Omega )}}$</td> 
+</tr>
+
+<!-- Row 6 -->
+
+<tr>
+<td>${\lvert {{m_x}} \rvert^2} = \mathop {\lim }\limits_{\tau ,\,k \to \infty } \left\{ {{\varphi _{xx}}} \right\}$</td>
+<td>0</td>
+<td>0</td> 
+</tr>
+
+<!-- Row 7 -->
+
+<tr>
+<td>$\begin{aligned}\sigma_x^2 &= \left( \varphi_{xx} - \lvert m_x \rvert^2 \right) \rvert_{\tau ,k = 0}\\ &= \langle x^2 \rangle \end{aligned}$</td>
+<td>$\frac{{{F_o}}}{{{\lambda ^2}}}\left( {\mathop {\lim }\limits_{T \to \infty } T - \left( {\frac{{3m}}{\lambda }} \right)} \right)$</td>
+<td>$\frac{{{F_o}}}{{{\lambda ^2}}}\left( {\mathop {\lim }\limits_{N \to \infty } N - \left( {\frac{{2\rho  + {\rho ^2}}}{{1 - {\rho ^2}}}} \right)} \right)$</td> 
+</tr>
+
+<p></table><br />
+<figcaption style="margin: 0px 30px;">
+<b>Table 7.2:</b> Comparison of continuous-time and discrete-time descriptions of the Langevin position process. The parameter <span class="arithmatex">\(\rho  = {e^{ - (\lambda {T_s}/m)}}.\)</span>
+</figcaption></p>
+<p>To compare the variance estimates as we did in <a href="Chap_7.html#eq:lveq12">Equation 7.19</a>, we look at the situation where <span class="arithmatex">\({T_s} \to 0.\)</span></p>
+<div class="" id="eq:lpeq16">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.36)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{\sigma _{x,a}^2}&amp;{ = \frac{{{F_o}}}{{{\lambda ^2}}}\left( {\mathop {\lim }\limits_{T \to \infty } T - \left( {\frac{{3m}}{\lambda }} \right)} \right)}\\
+{\sigma _{x,d}^2}&amp;{ = \frac{{{F_o}}}{{{\lambda ^2}}}\left( {\mathop {\lim }\limits_{N \to \infty } N - \left( {\frac{{3m}}{{2\lambda {T_s}}} - 2} \right)} \right)}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The results are similar to what we saw before. The <span class="arithmatex">\(\sqrt T\)</span> or <span class="arithmatex">\(\sqrt N\)</span> behavior of the standard deviation dominates after a sufficient observation time. Further, the relative behavior of the two variances can be described by <span class="arithmatex">\(\sigma _{x,a}^2 \propto {T_s}\sigma _{x,d}^2.\)</span></p>
+<p>This is the second time that we have seen this relation between the continuous-time and the discrete-time and it will appear in the next section as well. This may surprise you as it appears that the <em>units</em> of the stochastic variable are not compatible. If, on the left side, the variance has the unit <span class="arithmatex">\({\left( {m/s} \right)^2}\)</span> as in the velocity equation <a href="Chap_7.html#eq:lveq12">Equation 7.19</a>, then it should have that same unit for the variance on the right side as well. And the same holds for position. If on the left side, the variance has the unit <span class="arithmatex">\({m^2}\)</span> as in the position equation <a href="Chap_7.html#eq:lpeq16">Equation 7.36</a> then it should also be <span class="arithmatex">\({m^2}\)</span> for the variance on the right side. So how does the <span class="arithmatex">\({T_s}\)</span> fit in? We will explore this issue in <a href="#problem-78">Problem 7.8</a>.</p>
+<h2 id="tethered-particle-motion">Tethered particle motion<a class="headerlink" href="#tethered-particle-motion" title="Permanent link">&para;</a></h2>
+<p>While the Langevin equation was described more than 100 years ago, the concepts introduced are still used in modern studies. To further our appreciation for how the processing of stochastic signals can yield insights into, for example, the biophysical properties of DNA, let us look at how a variant of the Langevin equation is used.</p>
+<p>The motion of a gold particle in a fluid provides a mechanism to study the dynamic behavior of polymers such as double-stranded DNA (dsDNA). In dynamic studies one can see how DNA is affected by ionic concentrations (e.g. <span class="arithmatex">\({\rm{M}}{{\rm{g}}^{ +  + }}\)</span>) or by repair and maintenance proteins such as RecA. In the original model embodied in the Langevin equation, <a href="Chap_7.html#eq:langEqs1">Equation 7.1</a>, the particle is free to move in the fluid. If, however, the particle is attached to one end of a <a href="https://en.wikipedia.org/wiki/Polymer">polymer</a>—a macromolecule that is composed of a chain of essentially identical subunits—and the other end of the polymer is attached to a substrate, then the motion of the particle will no longer be free. This is referred to as <em>tethered particle motion</em> (TPM) and is illustrated in <a href="#fig:ftpm1">Figure 7.5</a>. See Lindner<sup id="fnref:lidner2009"><a class="footnote-ref" href="#fn:lidner2009">5</a></sup>.</p>
+<figure class="figaltcap fullsize" id="fig:ftpm1"><img src="images/Fig_7_5.gif" /><figcaption><strong>Figure 7.5:</strong> Tethered particle (<strong><font color="#ccad00">gold</font></strong>) attached to one end of a macromolecule (DNA) which, in turn, is attached to a substrate (<strong><font color="red">red</font></strong>). <i>Courtesy of Garini, Lindner et al, Bar Ilan University.</i></figcaption>
+</figure>
+<p>The tether constrains the particle from free motion through two mechanisms. First, the particle cannot move further away from the attachment point of the molecule than the total molecule length <span class="arithmatex">\(L.\)</span> If the molecule has a length of <span class="arithmatex">\(L = 1660\)</span> nm then the three-dimensional envelope of possible positions is a hemisphere of radius 1660 nm. (There
+is a small correction necessary because the particle cannot penetrate the substrate but we shall ignore this <em>volume exclusion</em> effect.)</p>
+<p>Second, within this hemisphere small displacements of the particle in the fluid due to thermal collisions with the water molecules are restrained by a spring-like (Hookean) force, <span class="arithmatex">\({f_{mol}} =  - kx\)</span> exerted by the macromolecule. This leads to the modification of the Langevin model presented in <a href="Chap_7.html#eq:langEqs1">Equation 7.1</a>:</p>
+<div class="" id="eq:tpm1">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.37)</td>
+<td class="eqTableEq">
+<div>$$m\frac{{{d^2}x(t)}}{{d{t^2}}} = f(t)\,\,\,\underbrace { - \lambda \frac{{dx(t)}}{{dt}}}_{frictional\,force}\,\,\,\underbrace { - kx}_{Hookean\,force}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>where <span class="arithmatex">\(k\)</span> is the spring constant associated with the macromolecule. The three parameters <span class="arithmatex">\(\left( {m,\lambda ,k} \right)\)</span> are all positive. Further, the first two deal with the particle and the fluid while the third one, <span class="arithmatex">\(k,\)</span> is a direct property of the macromolecular tether and thus experiments with the tethered particle can reveal properties of the macromolecule.</p>
+<p>A simulation of the three-dimensional motion involved is shown in <a href="#movie_7_1">Movie 7.1</a>. See Lindner<sup id="fnref2:lidner2009"><a class="footnote-ref" href="#fn:lidner2009">5</a></sup>.</p>
+<table class="imgtxt" style="margin:1em auto;" id="movie_7_1">
+    <tr>
+        <td style="width:auto; vertical-align:middle; text-align:center;">
+            <video id="theVideo" src="media/TPM_with_proteins.m4v" 
+                poster="media/PosterMovie_7.1.gif" width=100% controls 
+                onended="rewind()" style="border: 2px solid rgb(174,24,16)"></video> 
+        </td>
+    </tr>
+</table>
+
+<figcaption style="margin: 0px 30px;">
+<b>Movie 7.1:</b> Simulation of the motion of a tethered sphere. In the first part of 
+this simulation the DNA is unencumbered and moves through a large domain shown 
+in <b><font color="#00bb00">green</font></b>. In the second part of the simulation, two protein molecules attach themselves to the DNA and change the dynamics of the motion as indicated in <b><font color="blue">blue</font></b>. (Courtesy of Garini et al, Bar-Ilan University)
+</figcaption>
+
+<p>Real data as recorded from an <span class="arithmatex">\(R = 40\)</span> nm gold sphere through a darkfield microscope are shown in <a href="#movie_7_2">Movie 7.2</a>. See Dietrich<sup id="fnref:dietrich2009"><a class="footnote-ref" href="#fn:dietrich2009">6</a></sup>.</p>
+<table class="imgtxt" style="margin:1em auto;" id="movie_7_2">
+    <tr>
+        <td style="width:auto; vertical-align:middle; text-align:center;">
+            <video id="theVideo" src="media/Gold_particle_TPM.m4v" 
+                poster="media/PosterMovie_7.2.gif" width=100% controls 
+                onended="rewind()" style="border: 2px solid rgb(174,24,16)"></video> 
+        </td>
+    </tr>
+</table>
+
+<figcaption style="margin: 0px 30px;">
+<b>Movie 7.2:</b> Darkfield microscope movie recorded with a $50 \times$ objective lens with an $NA = 0.8.$ It is important to remember that you are viewing an object that is so small that it can be considered as a point source and thus the image is the point spread function, i.e. the optical impulse response. Nevertheless, the position of the gold particle can be determined to a precision of $\sigma  = 3$ nm. 
+</figcaption>
+
+<p>It is the Langevin equation extended with a spring force that describes the motion seen in <a href="#movie_7_1">Movie 7.1</a> and <a href="#movie_7_2">Movie 7.2</a>. The transfer function of the modified Langevin equation is:</p>
+<div class="" id="eq:tpm2">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.38)</td>
+<td class="eqTableEq">
+<div>$${H_x}(s) = \frac{1}{{m{s^2} + \lambda s + k}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>As in the  Langevin position equation, this is a second-order linear differential equation but this time containing the spring constant. This type of second-order system is well-known. See Section 6.5.2 of Oppenheim<sup id="fnref:oppenheim1996"><a class="footnote-ref" href="#fn:oppenheim1996">7</a></sup>. There are three types of possible behavior depending upon the value of the discriminant <span class="arithmatex">\({\left( {\lambda /2m} \right)^2} - \left( {k/m} \right).\)</span> These are:</p>
+<div class="" id="eq:tpm3">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.39)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{{\left( {\lambda /2m} \right)}^2} - \left( {k/m} \right) &gt; 0}&amp; \Rightarrow &amp;{overdamped\,system}\\
+{{{\left( {\lambda /2m} \right)}^2} - \left( {k/m} \right) = 0}&amp; \Rightarrow &amp;{critically\,damped\,system}\\
+{{{\left( {\lambda /2m} \right)}^2} - \left( {k/m} \right) &lt; 0}&amp; \Rightarrow &amp;{underdamped\,system}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>If the system is underdamped it will exhibit exponentially-decaying oscillatory behavior, something which is familiar to us in a mass-spring system. To focus our attention on a realistic system at this molecular scale, it is important to know which of the three situations in <a href="Chap_7.html#eq:tpm3">Equation 7.39</a> is the relevant one. We need to look at realistic values for
+<span class="arithmatex">\(\left( {m,\lambda ,k} \right).\)</span></p>
+<h3 id="how-big-is-big-how-small-is-small-redux">How big is big? How small is small? – redux<a class="headerlink" href="#how-big-is-big-how-small-is-small-redux" title="Permanent link">&para;</a></h3>
+<p>Various measurement modalities can be used to observe the motion of the particle. These can be based upon polystyrene beads that contain fluorescent dye and are observed with fluorescence microscopy, magnetic beads that can be manipulated and measured with magnetic fields (<a href="https://en.wikipedia.org/wiki/Magnetic_tweezers">magnetic tweezers</a>), and gold particles that can be observed with darkfield microscopy Dietrich<sup id="fnref2:dietrich2009"><a class="footnote-ref" href="#fn:dietrich2009">6</a></sup>. To continue our previous numerical example, let us look at gold particles (<span class="arithmatex">\(R = 40\)</span> nm) that are attached to DNA of 4882 bp (basepairs) with a total (contour) length of <span class="arithmatex">\(L = 1660\)</span> nm.</p>
+<p>This gold particle is significantly smaller than the one used <a href="#how-big-is-big-how-small-is-small">above</a> so several of the basic parameters are affected. The gold particle is <span class="arithmatex">\(285 \times\)</span> larger in radius than a water molecule. We can, therefore, continue to think of a big particle being battered by small molecules. The terminal velocity of a free gold particle is now 64 nm/s meaning that the particle will not sink to the bottom of the test chamber during the course of an experiment. The mass of the gold particle is <span class="arithmatex">\(m = 5.18\)</span> fg. The damping factor <span class="arithmatex">\(\lambda  = 6\pi \eta R = 7.55 \times {10^{ - 10}}\)</span> kg/s = 755 ng/s. The time constant <span class="arithmatex">\(\theta  = m/\lambda  = 6.86\)</span> ns. The smaller gold particle means a significantly shorter time constant for the simpler Langevin velocity analysis. Two of the three parameters in <a href="Chap_7.html#eq:tpm2">Equation 7.38</a> have now been estimated. The value for <span class="arithmatex">\(k\)</span> remains to be determined.</p>
+<p>There is an accepted model for the elasticity of DNA, the “worm-like chain model” (WLC). See Dietrich<sup id="fnref3:dietrich2009"><a class="footnote-ref" href="#fn:dietrich2009">6</a></sup> and Rubinstein<sup id="fnref:rubinstein2003"><a class="footnote-ref" href="#fn:rubinstein2003">8</a></sup>. This model says that for small displacements, <span class="arithmatex">\(x &lt;  &lt; L\)</span> the force exerted by the dsDNA on the particle is given by:</p>
+<div class="" id="eq:tpm4">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.40)</td>
+<td class="eqTableEq">
+<div>$${f_{mol}} =  - kx =  - \left( {\frac{{3{k_B}\Psi }}{{2PL}}} \right)x$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>where <span class="arithmatex">\(P\)</span> is the <em>persistence length</em> of the dsDNA molecule. The persistence length represents a way of approximating a polymer such as dsDNA as a collection of straight line segments each of length <span class="arithmatex">\(P.\)</span> Each segment is modeled as stiff and thus does not bend. According to the model, the change in direction of the polymer occurs at the juncture of
+two segments. A typical value of <span class="arithmatex">\(P\)</span> is 50 nm. We shall see later, in the experimental data in <a href="#fig:ftpm6">Figure 7.10</a>, that the displacement <span class="arithmatex">\(x\)</span> is on the order of a few nm while <span class="arithmatex">\(L\)</span> is 1660 nm justifying the use of <a href="Chap_7.html#eq:tpm4">Equation 7.40</a>. When measured at <span class="arithmatex">\(\Psi  = 21\)</span>°C and with <span class="arithmatex">\(L = 1660\)</span> nm the spring constant, using <a href="Chap_7.html#eq:tpm4">Equation 7.40</a>, is <span class="arithmatex">\(k = 0.073\)</span> pN/<span class="arithmatex">\(\mu\)</span>m. Using the values we have found for the three parameters yields:</p>
+<div class="" id="eq:tpm5">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.41)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+{\left( {\lambda /2m} \right)^2} - \left( {k/m} \right) = 5.32 \times {10^{15}}\,\,{\left( {{\rm{rad}}/{\rm{s}}} \right)^2} &gt; 0\\
+\,\,\,\,\,\,\,\,\, \Rightarrow underdamped\,system
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>This second-order system has two poles both of which are on the real axis in the <span class="arithmatex">\(s\)</span>-plane. A Bode (log-log) plot of the frequency response <span class="arithmatex">\(\left| {{H_x}(\omega )} \right|\)</span> of this biomolecular-mechanical system is shown in <a href="#fig:ftpm2">Figure 7.6</a>.  </p>
+<figure class="figaltcap fullsize" id="fig:ftpm2"><img src="images/Fig_7_6.png" /><figcaption><strong>Figure 7.6:</strong> Normalized Bode plot in <strong>black</strong> of the frequency response of the second-order system comprised of a gold particle attached to DNA which, in turn, is attached to a substrate. Note the slope change where the Bode curve with poles at <span class="arithmatex">\(\omega  = 100\)</span> rad/s and <span class="arithmatex">\(\omega  = {10^8}\)</span> rad/s deviates from a first-order, <strong><font color="darkred">dark red</font></strong>, dashed, straight-line approximation.</figcaption>
+</figure>
+<p>This system with two real poles, one at <span class="arithmatex">\(s =  - {\sigma _1} &lt; 0\)</span> and the other
+at <span class="arithmatex">\(s =  - {\sigma _2} &lt; 0,\)</span> has an impulse response given by:</p>
+<div class="" id="eq:tpm6">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.42)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{h_x}(t)}&amp;{ = \frac{1}{{\sqrt {{\lambda ^2} - 4km} }}\left( {{e^{ - {\sigma _1}t}} - {e^{ - {\sigma _2}t}}} \right)u(t)}&amp;{}\\
+{{\sigma _1}}&amp;{ = \left( {\frac{\lambda }{{2m}}} \right) - \sqrt {{{\left( {\frac{\lambda }{{2m}}} \right)}^2} - \left( {\frac{k}{m}} \right)} }&amp;{{\tau _1} = 1/{\sigma _1}}\\
+{{\sigma _2}}&amp;{ = \left( {\frac{\lambda }{{2m}}} \right) + \sqrt {{{\left( {\frac{\lambda }{{2m}}} \right)}^2} - \left( {\frac{k}{m}} \right)} }&amp;{{\tau _2} = 1/{\sigma _2}}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The time constants associated with each of these poles are as indicated. Note that since <span class="arithmatex">\({\sigma _1} &lt; {\sigma _2},\)</span> this means that <span class="arithmatex">\({\tau _1} &gt; {\tau _2}.\)</span> The numerical
+values associated with these time constants for the example presented above are <span class="arithmatex">\({\tau _1} = 10.3\)</span> ms and <span class="arithmatex">\({\tau _2} = 6.86\)</span> ns, an enormous difference.</p>
+<h3 id="choosing-the-sampling-period_1">Choosing the sampling period<a class="headerlink" href="#choosing-the-sampling-period_1" title="Permanent link">&para;</a></h3>
+<p>We are now in a position to choose the sampling period <span class="arithmatex">\({T_s}.\)</span> As in <a href="#fig:sampchoices1c">Figure 7.1</a>, we look at the effect of the sampling period on the spectrum of the sampled noise process. This is shown in <a href="#fig:ftpm3">Figure 7.7</a>.</p>
+<figcaption style="color:#2c5272;">(<i>a</i>) <i>
+Spectrum $\left| {{H_x}(\omega )} \right|$ of the extended Langevin filter with spring force (harmonic potential)
+</i></figcaption>
+
+<figure class="figaltcap fullsize"><img src="images/Fig_7_7a.png" /><figcaption></figcaption>
+</figure>
+<figcaption style="color:#2c5272;">(<i>b</i>) <i>
+${\omega _s} = 2\pi /{T_s} = 20{\omega _c}$
+</i></figcaption>
+
+<figure class="figaltcap fullsize"><img src="images/Fig_7_7b.png" /><figcaption></figcaption>
+</figure>
+<figcaption style="color:#2c5272;">(<i>c</i>) <i>
+${\omega _s} = 2\pi /{T_s} = 200{\omega _c}$
+</i></figcaption>
+
+<figure class="figaltcap fullsize" id="fig:ftpm3"><img src="images/Fig_7_7c.png" /><figcaption><strong>Figure 7.7:</strong> (<em>a</em>) Spectral magnitude of the extended Langevin filter <span class="arithmatex">\(\left| {{H_x}(\omega )} \right|.\)</span> (<em>b</em>, <em>c</em>) Spectrum after sampling at various frequencies <span class="arithmatex">\({\omega _s} = 2\pi /{T_s}.\)</span> The “cutoff” frequency <span class="arithmatex">\({\omega _c}\)</span> is defined in the text. Note the change in the scale of the frequency axes between the graphs.</figcaption>
+</figure>
+<p>Once again we use a definition of the “cutoff” frequency <span class="arithmatex">\({\omega _c}\)</span> as the
+frequency at which the amplitude-squared is down by a factor of two from
+its value at <span class="arithmatex">\(\omega  = 0.\)</span> This (ungainly) frequency is given by:</p>
+<div class="" id="eq:tpm7">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.43)</td>
+<td class="eqTableEq">
+<div>$${\omega _c} = \sqrt {\frac{k}{m} - \frac{{{\lambda ^2}}}{{2{m^2}}} + \frac{{\sqrt {8{k^2}{m^2} - 4km{\lambda ^2} + {\lambda ^4}} }}{{2{m^2}}}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>This is, as before, <em>not</em> the highest frequency; see <a href="#fig:ftpm3">Figure 7.7</a><a class="suffix_color" href="">a</a>. As we see in <a href="#fig:ftpm3">Figure 7.7</a><a class="suffix_color" href="">b</a>, choosing <span class="arithmatex">\({\omega _s} = 20{\omega _c}\)</span> is not enough to avoid aliasing. As shown in <a href="#fig:ftpm3">Figure 7.7</a><a class="suffix_color" href="">c</a>, however, choosing <span class="arithmatex">\({\omega _s} = 200{\omega _c}\)</span> results in a periodic spectrum with negligible aliasing. This, in turn corresponds to a sampling frequency of <span class="arithmatex">\({\omega _s} = 19409\)</span> rad/s  (<span class="arithmatex">\(\,{f_s} = 3089\)</span> Hz) and a sampling period of <span class="arithmatex">\({T_s} = 324\)</span> <span class="arithmatex">\(\mu\)</span>s. In studying the Langevin velocity equation (<a href="#fig:sampchoices1c">Figure 7.1</a>), the sampling frequency—also defined on the basis of a frequency where the spectrum-squared was down by a factor of two from its value at <span class="arithmatex">\(\omega  = 0\)</span>—was chosen to be <span class="arithmatex">\(200{\omega _c}.\)</span> In this extended equation, <span class="arithmatex">\(200{\omega _c}\)</span> is also required. This will be discussed in <a href="#problem-79">Problem 7.9</a>. We are now ready to transform the differential equation into a difference equation. Repeating the steps that we used earlier:</p>
+<div class="" id="eq:tpm8">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.44)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+m\frac{{{d^2}x(t)}}{{d{t^2}}} + \lambda \frac{{dx(t)}}{{dt}} + kx(t) = f(t)\,\\
+{h_x}(t) = \frac{1}{{\sqrt {{\lambda ^2} - 4km} }}\left( {{e^{ - {\sigma _1}t}} - {e^{ - {\sigma _2}t}}} \right)u(t)\\
+{h_x}[n] = {h_x}(n{T_s}) = \frac{1}{{\sqrt {{\lambda ^2} - 4km} }}\left( {{{\underbrace {\left( {{e^{ - {\sigma _1}{T_s}}}} \right)}_{{\rho _1}}}^n} - {{\underbrace {\left( {{e^{ - {\sigma _2}{T_s}}}} \right)}_{{\rho _2}}}^n}} \right)u[n]\\
+{h_x}[n] = \frac{1}{{\sqrt {{\lambda ^2} - 4km} }}\left( {\rho _1^n - \rho _2^n} \right)u[n]
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Note the definitions of <span class="arithmatex">\({\rho _1}\)</span> and <span class="arithmatex">\({\rho _2}\)</span> both of which meet the condition
+<span class="arithmatex">\(0 &lt; {\rho _1},{\rho _2} &lt; 1.\)</span> Further, we know from <a href="Chap_7.html#eq:tpm6">Equation 7.42</a> that <span class="arithmatex">\({\rho _1} \ne {\rho _2}.\)</span> Taking the <span class="arithmatex">\(z\)</span>-transform and then converting to a difference equation:</p>
+<div class="" id="eq:tpm9">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.45)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+{H_x}(z) = \frac{1}{{\sqrt {{\lambda ^2} - 4km} }}\left( {\frac{1}{{1 - {\rho _1}{z^{ - 1}}}} - \frac{1}{{1 - {\rho _2}{z^{ - 1}}}}} \right)\\
+\,\,\,\,\,\,\,\,\, = \frac{1}{{\sqrt {{\lambda ^2} - 4km} }}\left( {\frac{{({\rho _1} - {\rho _2}){z^{ - 1}}}}{{1 - ({\rho _1} + {\rho _2}){z^{ - 1}} + {\rho _1}{\rho _2}{z^{ - 2}}}}} \right)\,\,\,\,\, \Rightarrow \\
+\,\,\,\,\,\\
+x[n] - ({\rho _1} + {\rho _2})x[n - 1] + {\rho _1}{\rho _2}x[n - 2]\\
+\,\,\,\,\,\,\,\,\, = \left( {\frac{{({\rho _1} - {\rho _2})}}{{\sqrt {{\lambda ^2} - 4km} }}} \right)f[n - 1]
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<h3 id="expected-value_1">Expected value<a class="headerlink" href="#expected-value_1" title="Permanent link">&para;</a></h3>
+<p>Using <a href="Chap_6.html#eq:filt_mean4">Equation 6.9</a> we have:</p>
+<div class="" id="eq:tpm10">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.46)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{m_x}}&amp;{ = {m_f}{H_x}(\Omega  = 0) = {m_f}{H_x}(z = 1)}\\
+{\,\,\,}&amp;{ = 0\left( {\frac{1}{{\sqrt {{\lambda ^2} - 4km} }}} \right)\left( {\frac{{({\rho _1} - {\rho _2})}}{{1 - ({\rho _1} + {\rho _2}) + {\rho _1}{\rho _2}}}} \right)}\\
+{\,\,\,}&amp;{ = 0}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The mean position of the tethered particle remains zero. This should not be a surprise.</p>
+<h3 id="autocorrelation-function_2">Autocorrelation function<a class="headerlink" href="#autocorrelation-function_2" title="Permanent link">&para;</a></h3>
+<p>Starting from <a href="Chap_7.html#eq:tpm8">Equation 7.44</a>, we can compute the autocorrelation function <span class="arithmatex">\({\varphi _{xx}}[k]\)</span> using the same procedures that we used with <a href="Chap_7.html#eq:lpeq9">Equation 7.29</a> to obtain <a href="Chap_7.html#eq:lpeq10">Equation 7.30</a> but with the distinction that the computation is easier because the problem is well-behaved, that is,
+<span class="arithmatex">\(0 &lt; {\rho _1},{\rho _2} &lt; 1.\)</span></p>
+<div class="" id="eq:tpm11">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.47)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+{\varphi _{xx}}[k] = {F_o}\delta [k] \otimes {\varphi _{hh}}[k] = {F_o}\sum\limits_{n =  - \infty }^{ + \infty } {{h_x}[n]{h_x}[n + k]} \\
+\,\,\,\,\,\,\, = A\sum\limits_{n =  - \infty }^{ + \infty } {\left( {(\rho _1^n - \rho _2^n)(\rho _1^{n + k} - \rho _2^{n + k})u[n]u[n + k]} \right)} \\
+\,\,\,\,\,\,\, = A\frac{{({\rho _2} - {\rho _1})\left( {\rho _2^{1 + \left| k \right|}(1 - \rho _1^2) - \rho _1^{1 + \left| k \right|}(1 - \rho _2^2)} \right)}}{{(1 - \rho _1^2)(1 - {\rho _1}{\rho _2})(1 - \rho _2^2)}}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>where <span class="arithmatex">\(A = {F_o}/\left( {{\lambda ^2} - 4km} \right).\)</span> <a href="Chap_7.html#eq:tpm11">Equation 7.47</a> is complicated. Determining this final form of <span class="arithmatex">\({\varphi _{xx}}[k]\)</span> is, however, straightforward when we remember to use the property that the autocorrelation function is even. Notice that <a href="Chap_7.html#eq:lpeq10">Equation 7.30</a> can be considered as a special case of <a href="Chap_7.html#eq:tpm11">Equation 7.47</a> when <span class="arithmatex">\({\rho _1} = 1.\)</span></p>
+<h3 id="power-spectral-density_2">Power spectral density<a class="headerlink" href="#power-spectral-density_2" title="Permanent link">&para;</a></h3>
+<p>The power spectral density <span class="arithmatex">\({S_{xx}}(\Omega ) = {\mathscr{F}}\left\{ {{\varphi _{xx}}[k]} \right\}\)</span> can be computed from <a href="Chap_6.html#eq:filt_crosspds4">Equation 6.21</a> and <a href="Chap_7.html#eq:tpm9">Equation 7.45</a>.</p>
+<div class="" id="eq:tpm12">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.48)</td>
+<td class="eqTableEq">
+<div>$${S_{xx}}(\Omega ) = \left( {\frac{{{F_o}{{({\rho _1} - {\rho _2})}^2}}}{{({\lambda ^2} - 4km)}}} \right)\left( {\frac{1}{{(1 + \rho _1^2 - 2{\rho _1}\cos \Omega )(1 + \rho _2^2 - 2{\rho _2}\cos \Omega )}}} \right)$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The autocorrelation function <span class="arithmatex">\({\varphi _{xx}}[k]\)</span> and the power spectral density are shown in <a href="#fig:ftpm4">Figure 7.8</a>.</p>
+<figcaption style="color:#2c5272;">(<i>a</i>) <i>
+Autocorrelation ${{\varphi _{xx}}[k]}$ of the 1-D Langevin position process
+</i></figcaption>
+
+<figure class="figaltcap fullsize"><img src="images/Fig_7_8_T.png" /><figcaption></figcaption>
+</figure>
+<figcaption style="color:#2c5272;">(<i>b</i>) <i>
+Power spectral density ${{S_{xx}}(\Omega )}$ of the 1-D Langevin position process
+</i></figcaption>
+
+<figure class="figaltcap fullsize" id="fig:ftpm4"><img src="images/Fig_7_8_B.png" /><figcaption><strong>Figure 7.8:</strong>(<em>a</em>) Autocorrelation function <span class="arithmatex">\({\varphi _{xx}}[k\rbrack\)</span> of the TPM position. The amplitude at <span class="arithmatex">\(k = 0\)</span> has been normalized to one. (<em>b</em>) Power spectral density <span class="arithmatex">\({S_{xx}}(\Omega )\)</span> of the TPM position plotted for the baseband <span class="arithmatex">\(- \pi  \lt  \Omega  \le  + \pi.\)</span> The amplitude at <span class="arithmatex">\(\Omega  = 0\)</span> has been normalized to one. Both graphs are for the numerical values given in the text.</figcaption>
+</figure>
+<p>The numerical values that have been used to produce the graphs in <a href="#fig:ftpm4">Figure 7.8</a> are, as above, <span class="arithmatex">\(m = 5.18\)</span> fg, <span class="arithmatex">\(\lambda  = 755\)</span> ng/s, and <span class="arithmatex">\(k = 0.073\)</span> pN/<span class="arithmatex">\(\mu\)</span>m. This leads to poles at <span class="arithmatex">\({\sigma _1} = 97.1\)</span> rad/s (<span class="arithmatex">\(\approx k/\lambda\)</span>) and <span class="arithmatex">\({\sigma _2} = 1.5 \times {10^8}\)</span> rad/s (<span class="arithmatex">\(\approx \lambda /m\)</span>). The sampling period was chosen as
+<span class="arithmatex">\({T_s} = 2\pi /200{\omega _c} =\)</span> <span class="arithmatex">\(\pi /100{\sigma _1} = 324\)</span> <span class="arithmatex">\(\mu\)</span>s. See <a href="#fig:ftpm3">Figure 7.7</a>. This means a major “imbalance” between <span class="arithmatex">\({\rho _1}\)</span> and <span class="arithmatex">\({\rho _2}\)</span> with <span class="arithmatex">\({\rho _1}\)</span> = 0.97 and <span class="arithmatex">\({\rho _2} \approx 0.\)</span> See <a href="#problem-710">Problem 7.10</a>.</p>
+<h3 id="descriptive-statistic-variance">Descriptive statistic – variance<a class="headerlink" href="#descriptive-statistic-variance" title="Permanent link">&para;</a></h3>
+<p>As we saw in our analysis of the Langevin position equation, the mean-square dispersion <span class="arithmatex">\(\left\langle {{x^2}} \right\rangle\)</span> can provide useful information about a physical process. Further we have <span class="arithmatex">\({m_x} = 0\)</span> and from <a href="Chap_7.html#eq:lpeq12">Equation 7.32</a>:</p>
+<div class="" id="eq:tpm13">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.49)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+\left\langle {{x^2}} \right\rangle  = {\varphi _{xx}}[k = 0]\\
+\,\,\,\,\,\,\, = A\frac{{({\rho _2} - {\rho _1})\left( {{\rho _2}(1 - \rho _1^2) - {\rho _1}(1 - \rho _2^2)} \right)}}{{(1 - \rho _1^2)(1 - {\rho _1}{\rho _2})(1 - \rho _2^2)}}\\
+\,\,\,\,\,\,\, = \left( {\frac{{{F_o}}}{{{\lambda ^2} - 4km}}} \right)\frac{{{{({\rho _2} - {\rho _1})}^2}\left( {1 + {\rho _1}{\rho _2}} \right)}}{{(1 - \rho _1^2)(1 - {\rho _1}{\rho _2})(1 - \rho _2^2)}}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>From the definitions of <span class="arithmatex">\({\rho _1}\)</span> and <span class="arithmatex">\({\rho _2}\)</span> given in <a href="Chap_7.html#eq:tpm8">Equation 7.44</a>, we see that the
+mean-square dispersion is a function of the parameters <span class="arithmatex">\(\left( {m,\lambda ,k} \right)\)</span> and
+the sampling period <span class="arithmatex">\({T_s}.\)</span> If we substitute that into <a href="Chap_7.html#eq:tpm13">Equation 7.49</a> the expression becomes (too) complex to appreciate its meaning.</p>
+<p>In <a href="#tbl:t01">Table 7.1</a> and <a href="#tbl:t02">Table 7.2</a> we examined this type of expression to see what effect the conversion from continuous-time to discrete-time had on measures as important as <span class="arithmatex">\(\left\langle {{v^2}} \right\rangle\)</span> and <span class="arithmatex">\(\left\langle {{x^2}} \right\rangle\)</span> Let us repeat that now for TPM.</p>
+<p>In continuous-time <span class="arithmatex">\({m_x}\)</span> remains 0 and <span class="arithmatex">\({\left\langle {{x^2}} \right\rangle _a}\)</span> can be
+written as the simple expression:</p>
+<div class="" id="eq:tpm14">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.50)</td>
+<td class="eqTableEq">
+<div>$${\left\langle {{x^2}} \right\rangle _a} = \frac{{{F_o}}}{{2k\lambda }}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Allowing the sampling interval to become smaller, <span class="arithmatex">\({T_s} \to 0,\)</span> in the discrete-time expression <a href="Chap_7.html#eq:tpm13">Equation 7.49</a> and using a series expansion, the equivalent expression—see <a href="#problem-711">Problem 7.11</a>—is:</p>
+<div class="" id="eq:tpm15">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.51)</td>
+<td class="eqTableEq">
+<div>$${\left\langle {{x^2}} \right\rangle _d} = \frac{{{F_o}}}{{2k\lambda {T_s}}} = \frac{{{{\left\langle {{x^2}} \right\rangle }_a}}}{{{T_s}}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The results of <a href="Chap_7.html#eq:lveq12">Equation 7.19</a> and <a href="Chap_7.html#eq:lpeq16">Equation 7.36</a> are repeated for TPM. There is a simple relationship between the “analog” value and the “digital” value if the sampling interval <span class="arithmatex">\({T_s}\)</span> is sufficiently small, if the sampling <em>rate</em> is sufficiently high. Again, <span class="arithmatex">\(\sigma _{x,a}^2 = {T_s}\sigma _{x,d}^2.\)</span></p>
+<h3 id="one-step-further">One step further<a class="headerlink" href="#one-step-further" title="Permanent link">&para;</a></h3>
+<p>We can substitute the description for <span class="arithmatex">\({F_o}\)</span> <a href="Chap_7.html#eq:lveq13">Equation 7.20</a> that was given earlier. This gives:</p>
+<div class="" id="eq:tpm16">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.52)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+{\left\langle {{x^2}} \right\rangle _d} = \frac{{2\lambda {k_B}\Psi }}{{2k\lambda {T_s}}} = \frac{{{k_B}\Psi }}{{k{T_s}}}\,\,\,\,\, \Rightarrow \\
+\,\,\,\,\,\,\,k = \left( {\frac{{{k_B}\Psi }}{{{T_s}}}} \right)\frac{1}{{{{\left\langle {{x^2}} \right\rangle }_d}}}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The terms in <a href="Chap_7.html#eq:tpm16">Equation 7.52</a> are either constants or the parameters of an experiment: the Boltzmann constant (<span class="arithmatex">\({{k_B}}\)</span>), the equilibrium temperature <span class="arithmatex">\(\Psi\)</span> of the fluid, and the sampling interval <span class="arithmatex">\({T_s}.\)</span> By measuring the mean-square dispersion from a sequence of images as in <a href="#movie_7_2">Movie 7.2</a>, we can estimate the spring constant <span class="arithmatex">\(k\)</span> of the macromolecule DNA.</p>
+<p>The spring constant can be used to infer a property of the DNA molecule such as the persistence length <span class="arithmatex">\(P\)</span> (<a href="Chap_7.html#eq:tpm4">Equation 7.40</a>) or to follow a change in the macromolecule as it is exposed to proteins such as RecA. <a href="#fig:ftpm5">Figure 7.9</a> illustrates why a dynamic change in the spring constant might be expected after RecA is injected into a TPM test chamber containing <span class="arithmatex">\(R = 40\)</span> nm gold particles tethered through DNA molecules to a substrate.</p>
+<figure class="figaltcap fullsize" id="fig:ftpm5"><img src="images/Fig_7_9.gif" /><figcaption><strong>Figure 7.9:</strong> Model of varying stages in the interaction of RecA with DNA.</figcaption>
+</figure>
+<p>In <a href="#fig:ftpm6">Figure 7.10</a>, we see how the root-mean-square <em>radial</em> dispersion <span class="arithmatex">\(\sqrt {\left\langle {{r^2} = {x^2} + {y^2}} \right\rangle }\)</span> is affected. It should be obvious that while the
+analysis described at length above was for the lateral <span class="arithmatex">\(x\)</span> motion, the lateral <span class="arithmatex">\(y\)</span> motion can be measured and described in exactly the same way leading to a radial <span class="arithmatex">\(r\)</span> description.</p>
+<figure class="figaltcap fullsize" id="fig:ftpm6"><img src="images/Fig_7_10.gif" /><figcaption><strong>Figure 7.10:</strong> Dynamic behavior of DNA due to injection of RecA at <span class="arithmatex">\(t = 0.\)</span> All measurements and estimates were based upon discrete-time imagery (as in Movie 7.2) and with digital images. As indicated in the legend, two different concentrations of RecA were used and each measurement repeated twice for a total of four movies.</figcaption>
+</figure>
+<p>After injection of RecA at <span class="arithmatex">\(t = 0,\)</span> the binding of the protein to the DNA causes the rms radius to decrease from a first equilibrium state to a second, smaller equilibrium state. The higher the concentration of the protein, the faster the transition occurs. The time scale is on the order of minutes See Dietrich<sup id="fnref:dietrich2007"><a class="footnote-ref" href="#fn:dietrich2007">9</a></sup>.  </p>
+<h2 id="why-this-case-study">Why this case study<a class="headerlink" href="#why-this-case-study" title="Permanent link">&para;</a></h2>
+<p>A case study offers the opportunity to show how the ideas that have been developed can (and should) be used. There are many areas of application that lend themselves to a case study: speech processing, radar processing, and economic forecasting are but three examples. In the case study of <a href="#tethered-particle-motion">TPM</a> we have chosen for a more “exotic” application, the use of stochastic signal processing to measure physical phenomena at the molecular level and, in the case of tethered particle motion (TPM), analyzing one molecule at a time.</p>
+<p>We have seen that the description of such phenomena through the use of the descriptive statistics mean and variance (<span class="arithmatex">\(\mu\)</span> and <span class="arithmatex">\({\sigma ^2}\)</span>) and the functional descriptions autocorrelation and power spectral density (<span class="arithmatex">\(\varphi [k]\)</span> and <span class="arithmatex">\(S(\Omega )\)</span>) allows us to
+properly implement a discrete-time analysis of continuous-time processes and estimate relevant (bio)physical parameters.</p>
+<p>Although we are finished with our discussion of the Langevin equation and the extended variant represented in TPM, we are not finished developing tools that can be important in the implementation and application of stochastic signal processing. In the remaining chapters we shall develop these tools.</p>
+<h2 class="problems" id="problems">Problems<a class="headerlink" href="#problems" title="Permanent link">&para;</a></h2>
+<h3 id="problem-71">Problem 7.1<a class="headerlink" href="#problem-71" title="Permanent link">&para;</a></h3>
+<p>The physical situation represented in <a href="Chap_7.html#eq:langEqs1">Equation 7.1</a> describes a stable, causal situation.  <a href="Chap_7.html#eq:deq_langEqs2">Equation 7.5</a> describes the transformation to a description of that situation but in the discrete-time representation. Is this new description also stable and causal? Justify your answer.</p>
+<h3 id="problem-72">Problem 7.2<a class="headerlink" href="#problem-72" title="Permanent link">&para;</a></h3>
+<p>Consider a system described by a Laplace transform:</p>
+<div class="arithmatex">\[H(s) = \sum\limits_{k = 1}^K {\frac{{{A_k}}}{{s + {s_k}}}}\]</div>
+<p>where <span class="arithmatex">\(K\)</span> is a finite, positive integer.</p>
+<ol>
+<li>Show that there does not exist a finite sampling interval <span class="arithmatex">\({T_s}\)</span> for its impulse response <em>h</em>(<em>t</em>) that will satisfy the Nyquist sampling theorem.</li>
+<li>If this system is processing a stochastic (or deterministic) signal <em>x</em>(<em>t</em>) to produce an 
+output signal <em>y</em>(<em>t</em>), under what circumstances might a finite sampling interval <span class="arithmatex">\({T_s}\)</span> exist? 
+Carefully explain your reasoning.</li>
+</ol>
+<h3 id="problem-73">Problem 7.3<a class="headerlink" href="#problem-73" title="Permanent link">&para;</a></h3>
+<p>Consider a continuous-time, linear, time-invariant system with impulse response <span class="arithmatex">\(h(t)\)</span> and whose Fourier transform is <span class="arithmatex">\(H(\omega ).\)</span> The input to the system is an ergodic signal <span class="arithmatex">\(x(t)\)</span> with a finite mean and a finite variance. The output of the system is a stochastic signal <span class="arithmatex">\(y(t).\)</span></p>
+<ol>
+<li>Is the output signal stationary?</li>
+<li>Determine a relation between the mean of the input <span class="arithmatex">\({m_x}\)</span> and the mean of the output <span class="arithmatex">\({m_y}.\)</span></li>
+<li>Determine an expression for the output autocorrelation function <span class="arithmatex">\({\varphi _{yy}}(\tau )\)</span> in terms of the autocorrelation function of the stochastic input and the autocorrelation function of the deterministic system.</li>
+<li>Determine an expression for the output power spectral density <span class="arithmatex">\({S_{yy}}(\omega )\)</span> in terms of the power spectral density of the stochastic input and <span class="arithmatex">\(H(\omega ).\)</span></li>
+<li>Determine a relation between the variance of the input signal <span class="arithmatex">\(x(t)\)</span> and the variance of the output signal <span class="arithmatex">\(y(t).\)</span></li>
+</ol>
+<h3 id="problem-74">Problem 7.4<a class="headerlink" href="#problem-74" title="Permanent link">&para;</a></h3>
+<p>Starting from <a href="Chap_7.html#eq:lveq4">Equation 7.11</a> show that the autocorrelation function for the
+velocity, <span class="arithmatex">\({\varphi _{vv}}[k],\)</span> is given by <a href="Chap_7.html#eq:lveq5">Equation 7.12</a>.</p>
+<h3 id="problem-75">Problem 7.5<a class="headerlink" href="#problem-75" title="Permanent link">&para;</a></h3>
+<p>Starting from <a href="Chap_7.html#eq:lveq5">Equation 7.12</a> show that the power spectral density for the
+velocity, <span class="arithmatex">\({S_{vv}}(\Omega ),\)</span> is given by <a href="Chap_7.html#eq:lveq6">Equation 7.13</a>.</p>
+<h3 id="problem-76">Problem 7.6<a class="headerlink" href="#problem-76" title="Permanent link">&para;</a></h3>
+<p>Starting from <a href="Chap_6.html#eq:filt_crosspds4">Equation 6.21</a> and <a href="Chap_7.html#eq:lpeq9">Equation 7.29</a> show that the power spectral
+density for the position, <span class="arithmatex">\({S_{xx}}(\Omega ),\)</span> is given by <a href="Chap_7.html#eq:lpeq11">Equation 7.31</a>.</p>
+<h3 id="problem-77">Problem 7.7<a class="headerlink" href="#problem-77" title="Permanent link">&para;</a></h3>
+<p>Consider a TPM experiment that has proceeded long enough so that the first term in <a href="Chap_7.html#eq:lpeq16">Equation 7.36</a> describes the variance, that is,</p>
+<div class="arithmatex">\[\sigma _{x,d}^2 = \frac{{{F_o}}}{{{\lambda ^2}}}\left( {\mathop {\lim }\limits_{N \to \infty } N} \right) = \frac{{{F_o}}}{{{\lambda ^2}}}N\]</div>
+<p>The Stokes-Einstein diffusion equation says that:</p>
+<div class="" id="eq:tpm17">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(7.53)</td>
+<td class="eqTableEq">
+<div>$$D = \frac{{{k_B}\Psi }}{{6\pi \eta R}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>where <span class="arithmatex">\(D\)</span> is the diffusion coefficient and the other terms are defined
+in the text.</p>
+<p>Determine a simple relationship between the mean-square dispersion, <span class="arithmatex">\(D\)</span>
+and <span class="arithmatex">\(N.\)</span></p>
+<h3 id="problem-78">Problem 7.8<a class="headerlink" href="#problem-78" title="Permanent link">&para;</a></h3>
+<p>Physical units—dimensions—are important! They can be seen as the link between the abstraction of our mathematics and the application in our physical world. If the left-hand side of an equation is in units of meters [m] or kilograms [kg] or volts [V] or dollars [$], then the right-hand side must be in the same units for the equation to be
+valid. If there is a discrepancy, then a mistake has been made.</p>
+<p>In the discussions concerning <a href="Chap_7.html#eq:lveq12">Equation 7.19</a>, <a href="Chap_7.html#eq:lpeq16">Equation 7.36</a>, and <a href="Chap_7.html#eq:tpm15">Equation 7.51</a>, we have seen expressions of the form <span class="arithmatex">\(\sigma _{x,a}^2 = {T_s}\sigma _{x,d}^2\)</span> where “<span class="arithmatex">\(a\)</span>” denotes analog (continuous time) and “<span class="arithmatex">\(d\)</span>” denotes digital (discrete time).</p>
+<ol>
+<li>If the variance of the continuous-time variable has units of, say, temperature [K], what is the unit of the variance of the discrete-time variable?  </li>
+</ol>
+<p>And now the hard question:</p>
+<ol start="2">
+<li>Where does your answer to part (<em>a</em>) originate? Where in the entire discussion in this chapter does the unit of the discrete-time variable get changed from the original unit of the continuous-time variable?  </li>
+</ol>
+<h3 id="problem-79">Problem 7.9<a class="headerlink" href="#problem-79" title="Permanent link">&para;</a></h3>
+<p>One might expect that a spectrum with a very high frequency term—as in <a href="#fig:ftpm2">Figure 7.6</a>—would require a much higher sampling frequency that that of the Langevin velocity equation as shown in <a href="#fig:sampchoices1c">Figure 7.1</a>. At the end of the section <a href="#fig:sampchoices1c"><em>t</em> to <em>n</em> </a>, however, we found a sampling period of <span class="arithmatex">\({T_s} = 13.4\)</span> <span class="arithmatex">\(\mu\)</span>s while for TPM the value was <span class="arithmatex">\({T_s} = 324\)</span> <span class="arithmatex">\(\mu\)</span>s, a longer time interval or lower sampling frequency.</p>
+<ol>
+<li>How much of this change is due to the change in the radius of the gold particle? Be as quantitative as possible.</li>
+<li>How much of this change is due to the change in the transfer function of the physical model? Be as quantitative as possible.  </li>
+</ol>
+<h3 id="problem-710">Problem 7.10<a class="headerlink" href="#problem-710" title="Permanent link">&para;</a></h3>
+<p>Consider a TPM system as in <a href="Chap_7.html#eq:tpm1">Equation 7.37</a>. In <a href="Chap_7.html#eq:tpm5">Equation 7.41</a> we concluded that this was an <em>overdamped</em> system. We also concluded that the associated values, <span class="arithmatex">\({\rho _1}\)</span> and <span class="arithmatex">\({\rho _2},\)</span> were not “balanced”; one was much greater than the other.</p>
+<ol>
+<li>Show that this means that one pole is located at <span class="arithmatex">\(\approx \lambda /m\)</span> and the other at <span class="arithmatex">\(\approx k/\lambda.\)</span></li>
+<li>Which of the these two poles has the larger value? Explain your reasoning.  </li>
+</ol>
+<h3 id="problem-711">Problem 7.11<a class="headerlink" href="#problem-711" title="Permanent link">&para;</a></h3>
+<p>Starting from <a href="Chap_7.html#eq:tpm13">Equation 7.49</a> and the definitions of <span class="arithmatex">\({\rho _1}\)</span> and <span class="arithmatex">\({\rho _2}\)</span> given in
+<a href="Chap_7.html#eq:tpm8">Equation 7.44</a>, show that when <span class="arithmatex">\({T_s} \to 0\)</span> the mean-square dispersion <span class="arithmatex">\({\left\langle {{x^2}} \right\rangle _d}\)</span> becomes the expression given in <a href="Chap_7.html#eq:tpm15">Equation 7.51</a>.</p>
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:oppenheim1993">
+<p>Oppenheim, A. V., A. S. Willsky and I. T. Young (1983). Signals and Systems. Englewood Cliffs, New Jersey, Prentice-Hall&#160;<a class="footnote-backref" href="#fnref:oppenheim1993" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:reif1965">
+<p>Reif, F. (1965). Fundamentals of Statistical and Thermal Physics. New York, McGraw-Hill&#160;<a class="footnote-backref" href="#fnref:reif1965" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:feynman1963">
+<p>Feynman, R. P., R. B. Leighton and M. Sands (1963). The Feynman Lectures on Physics: Mainly Mechanics, Radiation, and Heat. Reading, Massachusetts, Addison-Wesley&#160;<a class="footnote-backref" href="#fnref:feynman1963" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:cox1965">
+<p>Cox, D. R. and H. D. Miller (1965). The Theory of Stochastic Processes. New York, John Wiley &amp; Sons Inc.&#160;<a class="footnote-backref" href="#fnref:cox1965" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:lidner2009">
+<p>Lindner, M., G. Nir, H. R. C. Dietrich, I. T. Young, E. Tauber, I. Bronshtein, L. Altman and Y. Garini (2009). “Studies of single molecules in their natural form.” Israel Journal of Chemistry 49(3-4): 283-291&#160;<a class="footnote-backref" href="#fnref:lidner2009" title="Jump back to footnote 5 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:lidner2009" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:dietrich2009">
+<p>Dietrich, H. R. C., B. Rieger, F. G. M. Wiertz, F. H. de Groote, H. A. Heering, I. T. Young and Y. Garini (2009). &ldquo;Tethered particle motion mediated by scattering from gold nanoparticles and darkfield microscopy.&rdquo; J. Nanophotonics 3(031795): 1-17&#160;<a class="footnote-backref" href="#fnref:dietrich2009" title="Jump back to footnote 6 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:dietrich2009" title="Jump back to footnote 6 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:dietrich2009" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:oppenheim1996">
+<p>Oppenheim, A. V., A. S. Willsky and S. H. Nawab (1996). Signals and Systems. Upper Saddle River, New Jersey, Prentice-Hall&#160;<a class="footnote-backref" href="#fnref:oppenheim1996" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+<li id="fn:rubinstein2003">
+<p>Rubinstein, M. and R. H. Colby (2003). Polymer Physics. Oxford, UK, Oxford University Press&#160;<a class="footnote-backref" href="#fnref:rubinstein2003" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+</li>
+<li id="fn:dietrich2007">
+<p>Dietrich, H. R. C., B. Vermolen, B. Rieger, I. T. Young and Y. Garini (2007). “A New Optical Method for Characterizing Single Molecule Interactions based on Dark Field Microscopy.” SPIE: Ultrasensitive and Single-Molecule Detection Technologies II 6444: 1-8&#160;<a class="footnote-backref" href="#fnref:dietrich2007" title="Jump back to footnote 9 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+
+<footer class="md-footer" id="jumpToBottom">
+
+  <!-- Link to previous and/or next page -->
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        <!-- Link to previous page -->
+        
+          <a
+            href="Chap_6.html"
+            title="6. Filtering of Stochastic Signals"
+            class="md-footer-nav__link md-footer-nav__link--prev"
+            rel="prev"
+          >
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                6. Filtering of Stochastic Signals
+              </div>
+            </div>
+          </a>
+        
+
+        <!-- Link to next page -->
+        
+          <a
+            href="Chap_8.html"
+            title="8. Characterizing Signal-to-Noise Ratios"
+            class="md-footer-nav__link md-footer-nav__link--next"
+            rel="next"
+          >
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                8. Characterizing Signal-to-Noise Ratios
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+</footer>
+      
+    </div>
+    
+      <script src="assets/javascripts/vendor.77e55a48.min.js"></script>
+      <script src="assets/javascripts/bundle.9554a270.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+
+	<script src="js/polyfill/index.js"></script>
+	<script src="search/search_index.js"></script>
+
+
+      <script>
+        app = initialize({
+          base: ".",
+          features: [],
+          search: Object.assign({
+            worker: "assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="js/extra.js"></script>
+      
+        <script src="js/SSPextra.js"></script>
+      
+        <script src="js/mathjax_3_generic_conf.js"></script>
+      
+        <script src="js/mathjax/tex-svg.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1143 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <meta name="author" content="I.T. Young & R. Ligteringen">
+      
+      <link rel="shortcut icon" href="images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.0.2">
+    
+    
+      
+        <title>9. The Matched Filter - Introduction to Stochastic Signal Processing</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.38780c08.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.3f72e892.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Georgia:300,400,400i,700%7CCourier&display=fallback">
+        <style>body,input{font-family:"Georgia",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Courier",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="css/extra.css">
+    
+      <link rel="stylesheet" href="css/imgtxt.css">
+    
+      <link rel="stylesheet" href="css/tables.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#the-matched-filter" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <!-- Application header -->
+<header class="md-header" data-md-component="header">
+
+  <!-- Top-level navigation -->
+  <nav class="md-header-nav md-grid" aria-label="Header">
+
+    <!-- Link to home -->
+    <a
+      href="."
+      title="Introduction to Stochastic Signal Processing"
+      class="md-header-nav__button md-logo"
+      aria-label="Introduction to Stochastic Signal Processing"
+    >
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+<!-- 
+  Insert an <img> here as an alternative for the standard logo if desired.
+  Then comment out the above two lines
+ <img src="images/favicon.png" style="margin-top:5px; border: 0px solid lime; border-radius:5px; width:120%; height: auto;" />
+ -->
+
+    </a>
+
+    <!-- Button to open drawer -->
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+
+    <!-- Header title -->
+    <div class="md-header-nav__title" data-md-component="header-title">
+          
+            
+              <a href="#jumpToBottom">
+                <span class="md-header-nav__topic">
+                  Introduction to Stochastic Signal Processing
+                </span>
+                <span class="md-header-nav__topic">
+                  9. The Matched Filter
+                </span>
+              </a>
+            
+          
+    </div>
+
+    <!-- Button to open search dialogue -->
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+
+      <!-- Search interface -->
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    <!-- Repository containing source -->
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Introduction to Stochastic Signal Processing" class="md-nav__button md-logo" aria-label="Introduction to Stochastic Signal Processing">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+<!-- 
+  Insert an <img> here as an alternative for the standard logo if desired.
+  Then comment out the above two lines
+ <img src="images/favicon.png" style="margin-top:5px; border: 0px solid lime; border-radius:5px; width:120%; height: auto;" />
+ -->
+
+    </a>
+    Introduction to Stochastic Signal Processing
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_1.html" class="md-nav__link">
+      1. How to use this iBook
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_2.html" class="md-nav__link">
+      2. Prologue
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_3.html" class="md-nav__link">
+      3. Introduction
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_4.html" class="md-nav__link">
+      4. Characterization of Random Signals
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_5.html" class="md-nav__link">
+      5. Correlations and Spectra
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_6.html" class="md-nav__link">
+      6. Filtering of Stochastic Signals
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_7.html" class="md-nav__link">
+      7. The Langevin Equation – A Case Study
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_8.html" class="md-nav__link">
+      8. Characterizing Signal-to-Noise Ratios
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        9. The Matched Filter
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="Chap_9.html" class="md-nav__link md-nav__link--active">
+      9. The Matched Filter
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-the-problem" class="md-nav__link">
+    Setting up the problem
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-cauchy-schwartz" class="md-nav__link">
+    Using Cauchy-Schwartz
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-classic-example" class="md-nav__link">
+    The classic example
+  </a>
+  
+    <nav class="md-nav" aria-label="The classic example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-matching-your-filter" class="md-nav__link">
+    Example: Matching your filter
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-matched-filter-as-an-autocorrelation" class="md-nav__link">
+    The matched filter as an autocorrelation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-in-the-presence-of-noise" class="md-nav__link">
+    Performance in the presence of noise
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problems" class="md-nav__link">
+    Problems
+  </a>
+  
+    <nav class="md-nav" aria-label="Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-91" class="md-nav__link">
+    Problem 9.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-92" class="md-nav__link">
+    Problem 9.2
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#laboratory-exercises" class="md-nav__link">
+    Laboratory Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Laboratory Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-91" class="md-nav__link">
+    Laboratory Exercise 9.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-92" class="md-nav__link">
+    Laboratory Exercise 9.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-93" class="md-nav__link">
+    Laboratory Exercise 9.3
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_10.html" class="md-nav__link">
+      10. The Wiener filter
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_11.html" class="md-nav__link">
+      11. Aspects of Estimation
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_12.html" class="md-nav__link">
+      12. Spectral Estimation
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_13.html" class="md-nav__link">
+      Appendices
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="info.html" class="md-nav__link">
+      Information
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-the-problem" class="md-nav__link">
+    Setting up the problem
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-cauchy-schwartz" class="md-nav__link">
+    Using Cauchy-Schwartz
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-classic-example" class="md-nav__link">
+    The classic example
+  </a>
+  
+    <nav class="md-nav" aria-label="The classic example">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-matching-your-filter" class="md-nav__link">
+    Example: Matching your filter
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-matched-filter-as-an-autocorrelation" class="md-nav__link">
+    The matched filter as an autocorrelation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-in-the-presence-of-noise" class="md-nav__link">
+    Performance in the presence of noise
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problems" class="md-nav__link">
+    Problems
+  </a>
+  
+    <nav class="md-nav" aria-label="Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-91" class="md-nav__link">
+    Problem 9.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-92" class="md-nav__link">
+    Problem 9.2
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#laboratory-exercises" class="md-nav__link">
+    Laboratory Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Laboratory Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-91" class="md-nav__link">
+    Laboratory Exercise 9.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-92" class="md-nav__link">
+    Laboratory Exercise 9.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-93" class="md-nav__link">
+    Laboratory Exercise 9.3
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="the-matched-filter">The Matched Filter<a class="headerlink" href="#the-matched-filter" title="Permanent link">&para;</a></h1>
+<p>How do you find a “needle in a haystack”? To start you have to know what a needle looks like. The “image” of a needle is a template and with one or more templates you then search through the haystack until a match is found. (Of course, other methods might be available like magnetic separation but here we focus on matching templates as opposed to haystack processing.)</p>
+<p>Let the input to an LTI system be given by <span class="arithmatex">\(x[n] + N[n]\)</span> where <span class="arithmatex">\(x[n]\)</span> is a known signal (the “needle”) and for simplicity <span class="arithmatex">\(x[n]\)</span> is <em>real</em>. The real, impulse response of the system is <span class="arithmatex">\(h[n]\)</span> and the output <span class="arithmatex">\(y[n]\)</span> (the “haystack”) is:</p>
+<div class="" id="eq:match1">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(9.1)</td>
+<td class="eqTableEq">
+<div>$$y[n] = \left( {x[n] + N[n]} \right) \otimes h[n] = {y_x}[n] + {y_N}[n]$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>where <span class="arithmatex">\({y_x}[n]\)</span> is the component of the output generated by the signal <span class="arithmatex">\(x[n]\)</span> and <span class="arithmatex">\({y_N}[n]\)</span> is the component of the output generated by the real noise <span class="arithmatex">\(N[n].\)</span> We wish to determine a filter <span class="arithmatex">\(h[n]\)</span> such that, at a specified time <span class="arithmatex">\(n = {n_0},\)</span> the output signal-to-noise ratio (<em>SNR</em>) will be maximized. Why the <em>SNR</em>?</p>
+<p>In communication theory<sup id="fnref:wozencraft1965"><a class="footnote-ref" href="#fn:wozencraft1965">1</a></sup>, one learns that attempting to detect a signal always involves the possibility that an error will be made. Under a broad range of models it can be shown that maximizing the <em>SNR</em> leads to a minimization of the probability of error.</p>
+<p>We cannot maximize the <em>SNR</em> by simply amplifying <span class="arithmatex">\(y[n]\)</span>; both the signal and noise will be amplified and the <em>SNR</em> will remain the same. To search through the haystack <span class="arithmatex">\(y[n]\)</span> to detect the needle <span class="arithmatex">\(x[n]\)</span> we need filtering. We need the matched filter.</p>
+<h2 id="setting-up-the-problem">Setting up the problem<a class="headerlink" href="#setting-up-the-problem" title="Permanent link">&para;</a></h2>
+<p>Assuming a zero-mean noise process and using a variation on <a href="Chap_8.html#eq:snreq2">Equation 8.2</a> to define the <em>SNR</em> at time <span class="arithmatex">\(n = {n_0},\)</span> we have:</p>
+<div class="" id="eq:match2">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(9.2)</td>
+<td class="eqTableEq">
+<div>$$S\tilde N{R_d} = \frac{S}{N} = \frac{{\left| {{y_x}[n = {n_0}]} \right|}}{{\sqrt {E\left\{ {{{\left| {{y_N}[n = {n_0}]} \right|}^2}} \right\}} }}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>But from <a href="Chap_6.html#eq:powerpos1">Equation 6.25</a>:</p>
+<div class="" id="eq:match3">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(9.3)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{E\left\{ {{{\left| {{y_n}[{n_0}]} \right|}^2}} \right\}}&amp;{ = \frac{1}{{2\pi }}\int\limits_{ - \pi }^{ + \pi } {{{\left| {H( - \Omega )} \right|}^2}{S_{nn}}(\Omega )} d\Omega }\\
+{\,\,\,}&amp;{ = \frac{1}{{2\pi }}\int\limits_{ - \pi }^{ + \pi } {{{\left| {H(\Omega )} \right|}^2}{S_{nn}}(\Omega )} d\Omega }
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p><span class="arithmatex">\(H(\Omega )\)</span> is the Fourier domain characterization of the filter to be found and we have used the fact that <span class="arithmatex">\(h[n]\)</span> is real to move from <span class="arithmatex">\(H( - \Omega )\)</span> to <span class="arithmatex">\(H(\Omega ).\)</span> Further, the <span class="arithmatex">\(H(\Omega )\)</span> that satisfies our requirement that the <em>SNR</em> be maximized will contain the parameter <span class="arithmatex">\({n_0}.\)</span></p>
+<p>Using <a href="Chap_9.html#eq:match1">Equation 9.1</a> and <a href="Chap_9.html#eq:match2">Equation 9.2</a> and remembering that in this specific discussion we are assuming that <span class="arithmatex">\(x[n]\)</span> as well as <span class="arithmatex">\(h[n]\)</span> is deterministic, we have:</p>
+<div class="" id="eq:match4">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(9.4)</td>
+<td class="eqTableEq">
+<div>$${y_x}[{n_0}] = \frac{1}{{2\pi }}\int\limits_{ - \pi }^{ + \pi } {X(\Omega )H(\Omega } ){e^{j\Omega {n_0}}}d\Omega$$</div>
+</td>
+</tr>
+</table>
+</div>
+<h2 id="using-cauchy-schwartz">Using Cauchy-Schwartz<a class="headerlink" href="#using-cauchy-schwartz" title="Permanent link">&para;</a></h2>
+<p>We now apply the Cauchy-Schwartz inequality<sup id="fnref:cauchyschwartz"><a class="footnote-ref" href="#fn:cauchyschwartz">2</a></sup>:</p>
+<div class="" id="eq:match5">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(9.5)</td>
+<td class="eqTableEq">
+<div>$${\left| {\int\limits_a^b {Z(\Omega )} W(\Omega )d\Omega } \right|^2} \le \left( {\int\limits_a^b {{{\left| {Z(\Omega )} \right|}^2}d\Omega } } \right)\left( {\int\limits_a^b {{{\left| {W(\Omega )} \right|}^2}d\Omega } } \right)$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>with equality if and only if <span class="arithmatex">\(Z(\Omega ) = C\,{W^*}(\Omega )\)</span> where <span class="arithmatex">\(C\)</span> is a real constant.</p>
+<p>We rewrite <a href="Chap_9.html#eq:match4">Equation 9.4</a> as:</p>
+<div class="" id="eq:match6">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(9.6)</td>
+<td class="eqTableEq">
+<div>$${y_x}[{n_0}] = \frac{1}{{2\pi }}\int\limits_{ - \pi }^{ + \pi } {\frac{{X(\Omega )}}{{\sqrt {{S_{nn}}(\Omega )} }}H(\Omega } )\sqrt {{S_{nn}}(\Omega )} {e^{j\Omega {n_0}}}d\Omega$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Using the inequality in <a href="Chap_9.html#eq:match5">Equation 9.5</a>, we then have:</p>
+<div class="" id="eq:match7">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(9.7)</td>
+<td class="eqTableEq">
+<div>$${\left| {{y_x}[{n_0}]} \right|^2} \le \frac{1}{{2\pi }}\left( {\int\limits_{ - \pi }^{ + \pi } {\frac{{{{\left| {X(\Omega )} \right|}^2}}}{{{S_{nn}}(\Omega )}}} d\Omega } \right)\left( {\int\limits_{ - \pi }^{ + \pi } {{{\left| {H(\Omega )} \right|}^2}} {S_{nn}}(\Omega )d\Omega } \right)$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Combining this result with our definition of <span class="arithmatex">\(S\tilde NR\)</span> from <a href="Chap_9.html#eq:match2">Equation 9.2</a> gives:</p>
+<div class="" id="eq:match8">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(9.8)</td>
+<td class="eqTableEq">
+<div>$${\left( {\frac{S}{N}} \right)^2} \le \int\limits_{ - \pi }^{ + \pi } {\frac{{{{\left| {X(\Omega )} \right|}^2}}}{{{S_{nn}}(\Omega )}}} d\Omega$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>This result is independent of our choice of <span class="arithmatex">\(H(\Omega )\)</span> and, further, fixes the largest signal-to-noise (<em>SNR</em>) ratio that can be attained. According to the Cauchy-Schwartz inequality, the maximum is reached if and only if:</p>
+<div class="" id="eq:match9">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(9.9)</td>
+<td class="eqTableEq">
+<div>$$\sqrt {{S_{nn}}(\Omega )} H(\Omega ) = C\frac{{{X^*}(\Omega )}}{{\sqrt {{S_{nn}}(\Omega )} }}{e^{ - j\Omega {n_0}}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>This can be rewritten to give the filter <span class="arithmatex">\(H(\Omega )\)</span> as:</p>
+<div class="" id="eq:match10">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(9.10)</td>
+<td class="eqTableEq">
+<div>$$H(\Omega ) = C\frac{{{X^*}(\Omega )}}{{{S_{nn}}(\Omega )}}{e^{ - j\Omega {n_0}}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>and an <span class="arithmatex">\({S\tilde N{R_d}}\)</span> of:</p>
+<div class="" id="eq:match11">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(9.11)</td>
+<td class="eqTableEq">
+<div>$${\left( {S\tilde N{R_d}} \right)^2} = {\left( {\frac{S}{N}} \right)^2} = \int\limits_{ - \pi }^{ + \pi } {\frac{{{{\left| {X(\Omega )} \right|}^2}}}{{{S_{nn}}(\Omega )}}} d\Omega $$</div>
+</td>
+</tr>
+</table>
+</div>
+<h2 id="the-classic-example">The classic example<a class="headerlink" href="#the-classic-example" title="Permanent link">&para;</a></h2>
+<p>As an example, let <span class="arithmatex">\({S_{nn}}(\Omega ) = {N_o}\)</span> that is, white noise of power density <span class="arithmatex">\({N_o}.\)</span> From our solution for the matched filter, <a href="Chap_9.html#eq:match10">Equation 9.10</a>, we have immediately:</p>
+<div class="" id="eq:match12">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(9.12)</td>
+<td class="eqTableEq">
+<div>$$H(\Omega ) = \frac{C}{{{N_0}}}{X^*}(\Omega ){e^{ - j\Omega {n_0}}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Taking the inverse Fourier transform of both sides yields the impulse
+response:</p>
+<div class="specialresult" id="eq:match13">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(9.13)</td>
+<td class="eqTableEq">
+<div>$$h[n] = \frac{C}{{{N_0}}}x[{n_0} - n]$$</div>
+</td>
+</tr>
+</table>
+</div>
+<h4 id="example-matching-your-filter">Example: Matching your filter<a class="headerlink" href="#example-matching-your-filter" title="Permanent link">&para;</a></h4>
+<p>If <span class="arithmatex">\(x[n]\)</span> is as shown in <a href="#fig:fig_match1">Figure 9.1</a> below, then <span class="arithmatex">\(h[n]\)</span> will have the form that is also shown.</p>
+<figure class="figaltcap fullsize" id="fig:fig_match1"><img src="images/Fig_9_1.png" /><figcaption><strong>Figure 9.1:</strong> (<em>top</em>) The signal $x\lbrack n\rbrack $ and (<em>bottom</em>) the matched filter <span class="arithmatex">\(h\lbrack n\rbrack = x\lbrack {n_0} - n\rbrack .\)</span></figcaption>
+</figure>
+<p>The <span class="arithmatex">\(S\tilde N{R_d}\)</span> at time <span class="arithmatex">\({n_0}\)</span> will be</p>
+<div class="" id="eq:match14">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(9.14)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{S\tilde N{R_d}}&amp;{ = \sqrt {\int\limits_{ - \pi }^{ + \pi } {\frac{{{{\left| {X(\Omega )} \right|}^2}}}{{{N_0}}}} d\Omega }  = \sqrt {\frac{1}{{{N_0}}}\int\limits_{ - \pi }^{ + \pi } {{{\left| {X(\Omega )} \right|}^2}} d\Omega } }\\
+{\,\,\,}&amp;{ = \sqrt {\frac{{2\pi E}}{{{N_0}}}} }
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>where <span class="arithmatex">\(E\)</span> is the energy in the signal <span class="arithmatex">\(x[n].\)</span></p>
+<p>To further interpret this result we note that <span class="arithmatex">\(h[n]\)</span> is just a “flipped” version of <span class="arithmatex">\(x[n]\)</span> and this is what we call a <em>matched</em> <em>filter</em>. To explore this just a bit further, we note that <span class="arithmatex">\({y_x}[n]\)</span> will be:</p>
+<div class="" id="eq:match15">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(9.15)</td>
+<td class="eqTableEq">
+<div>$${y_x}[n] = x[n] \otimes h[n] = x[n] \otimes \frac{C}{{{N_0}}}x[{n_0} - n]$$</div>
+</td>
+</tr>
+</table>
+</div>
+<h2 id="the-matched-filter-as-an-autocorrelation">The matched filter as an autocorrelation<a class="headerlink" href="#the-matched-filter-as-an-autocorrelation" title="Permanent link">&para;</a></h2>
+<p>Formally writing out the convolution gives:</p>
+<div class="" id="eq:match16">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(9.16)</td>
+<td class="eqTableEq">
+<div>$${y_x}[n] = \left( {\frac{C}{{{N_0}}}} \right)\sum\limits_{m =  - \infty }^{ + \infty } {x[m]} x[m + n - {n_0}]$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>which, for real signals, is just the autocorrelation function of <span class="arithmatex">\(x[n].\)</span> That is:</p>
+<div class="" id="eq:match17">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(9.17)</td>
+<td class="eqTableEq">
+<div>$${y_x}[n] = \left( {\frac{C}{{{N_0}}}} \right){\varphi _{xx}}[n - {n_0}]$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>We have shown earlier, <a href="Chap_6.html#eq:max_acorr4">Equation 6.32</a>, that the maximum of <span class="arithmatex">\({\varphi _{xx}}[k]\)</span> occurs at <span class="arithmatex">\(k = 0,\)</span> that is, <span class="arithmatex">\({\varphi _{xx}}[k] \leqslant {\varphi _{xx}}[0].\)</span> Translating this to the matched filter problem, we have that <span class="arithmatex">\({y_x}[n]\)</span> is maximized (given the choice <span class="arithmatex">\(h[n] \propto x[{n_0} - n]\)</span>) at <span class="arithmatex">\(n = {n_0}.\)</span></p>
+<p>This cross-correlation between the two signals in <a href="#fig:fig_match1">Figure 9.1</a> is illustrated in <a href="#movie91">Movie 9.1</a>.</p>
+<table class="imgtxt" style="margin:1em auto;" id="movie91">
+    <tr>
+        <td style="width:auto; vertical-align:middle; text-align:center;">
+            <video id="theVideo" src="media/Matched_Filter.m4v" 
+                poster="media/PosterMovie_9.1.png" width=100% controls 
+                onended="rewind()" style="border: 2px solid rgb(174,24,16)"></video>
+        </td>
+    </tr>
+</table>
+
+<figcaption style="margin: 0px 30px;">
+<b>Movie 9.1:</b> Cross-correlation of two signals. This involves first shifting one signal with respect to the other, then multiplying the signals point-by-point, and finally computing the “area” under their product.
+</figcaption>
+
+<p>It is important to remember that the cross-correlation depicted in <a href="#movie91">Movie 9.1</a> is actually a convolution as described in <a href="Chap_9.html#eq:match15">Equation 9.15</a>.</p>
+<h2 id="performance-in-the-presence-of-noise">Performance in the presence of noise<a class="headerlink" href="#performance-in-the-presence-of-noise" title="Permanent link">&para;</a></h2>
+<p>As we saw in <a href="Chap_6.html#fig:IraqKuwait_2">Figure 6.4</a>, cross-correlation allows us to identify a peak, corresponding to a delay, in noisy (real) data. It is instructive to see
+how well this concept works at varying signal-to-noise ratios. We use the top signal in <a href="#fig:fig_match1">Figure 9.1</a> as a matched filter and a noisy version of the bottom
+signal in <a href="#fig:fig_match1">Figure 9.1</a> as the noisy input signal to the matched filter. We vary the
+<em>SNR</em> from 40 dB down to 0 dB according to the definition in <a href="Chap_8.html#eq:snreq3">Equation 8.3</a>. The result is shown in <a href="#movie92">Movie 9.2</a>.</p>
+<table class="imgtxt" style="margin:1em auto;" id="movie92">
+    <tr>
+        <td style="width:auto; vertical-align:middle; text-align:center;">
+            <video id="theVideo" src="media/Matched_Noise_Filter.m4v" 
+                poster="media/PosterMovie_9.2.png" width=100% controls 
+                onended="rewind()" style="border: 2px solid rgb(174,24,16)"></video>
+        </td>
+    </tr>
+</table>
+
+<figcaption style="margin: 0px 30px;">
+<b>Movie 9.2:</b> Output of the matched filter as the SNR varies from 40 dB down to 0 dB. Note the stability of the location of the peak position.
+</figcaption>
+
+<p>We see from this animation that the matched filter gives a robust method to estimate the peak position even at low values of the <em>SNR</em>.</p>
+<h2 class="problems" id="problems">Problems<a class="headerlink" href="#problems" title="Permanent link">&para;</a></h2>
+<h3 id="problem-91">Problem 9.1<a class="headerlink" href="#problem-91" title="Permanent link">&para;</a></h3>
+<p>The matched filter gives a robust method to find a signal in noise. We have seen this in <a href="#movie92">Movie 9.2</a> and we will have the opportunity to experiment with this in the laboratory experiments in this chapter.</p>
+<p>This suggests that we can perhaps use a matched filter to select one specific signal over other specific signals. Consider the four signals shown in <a href="#fig:fig_match2">Figure 9.2</a>.</p>
+<figure class="figaltcap fullsize" id="fig:fig_match2"><img src="images/Fig_9_2.gif" /><figcaption><strong>Figure 9.2:</strong> Four signals <span class="arithmatex">\({s_i}[n\rbrack,\)</span> <span class="arithmatex">\(\left\{ {i = 1,2,3,4} \right\}\)</span> each of which is zero for <span class="arithmatex">\(n &lt; 0\)</span> and <span class="arithmatex">\(n &gt; 7.\)</span></figcaption>
+</figure>
+<ol>
+<li>Based upon <a href="Chap_9.html#eq:match15">Equation 9.15</a>, determine and sketch the matched filter <span class="arithmatex">\({h_i}[n]\)</span> for each of the four signals: <span class="arithmatex">\({s_i}[n],\)</span> <span class="arithmatex">\(\left\{ {i = 1,2,3,4} \right\}.\)</span> Assume that <span class="arithmatex">\(C = 1\)</span> and <span class="arithmatex">\({N_o} = 1\)</span> Watt/Hz.</li>
+<li>Determine the output <span class="arithmatex">\({y_{ij}}[n]\)</span> of each of the four matched filters <span class="arithmatex">\(\left\{ {i = 1,2,3,4} \right\}\)</span> for each of the four input signals <span class="arithmatex">\(\left\{ {j = 1,2,3,4} \right\}.\)</span> <em>Hint</em>: The use of various properties of convolution and correlation will save you a lot of work.</li>
+<li>If each of the signals in part (<em>b</em>) is corrupted by additive, stationary Gaussian noise whose mean is zero and whose standard deviation is <span class="arithmatex">\(\sigma,\)</span> determine the mean of the output of each of the matched filters. The matched filters are not corrupted by noise.<a class="indentlist" href=""></a>  </li>
+</ol>
+<h3 id="problem-92">Problem 9.2<a class="headerlink" href="#problem-92" title="Permanent link">&para;</a></h3>
+<p>The signals shown in <a href="#fig:fig_match2">Figure 9.2</a> are related to one another.</p>
+<ol>
+<li>Describe, in words, any relationships you observe among the signals <span class="arithmatex">\({s_i}[n],\)</span> <span class="arithmatex">\(\left\{ {i = 1,2,3,4} \right\}.\)</span><a class="indentlist" href=""></a>  </li>
+</ol>
+<p>We want the four signals to convey information so we assign a meaning to each of the signals.  </p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="arithmatex">\({s_1}[n]\,\,\, \Leftrightarrow \,\,\,{\rm{The\,Chicago\,Cubs\,will\,win\,the\,World\,Series}}\)</span></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="arithmatex">\({s_2}[n]\,\,\, \Leftrightarrow \,\,\,{\rm{The\,Chicago\,Cubs\,will\,win\,the\,NBA\, Championship}}\)</span></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="arithmatex">\({s_3}[n]\,\,\, \Leftrightarrow \,\,\,{\rm{The\,Chicago\,Cubs\,will\,win\,the\,Super\, Bowl}}\)</span></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="arithmatex">\({s_4}[n]\,\,\, \Leftrightarrow \,\,\,{\rm{The\,Chicago\,Cubs\,will\,not\,win\,the\,World\,Series}}\)</span><a class="indentlist" href=""></a>  </p>
+<p>We have tried to make the signals in <a href="#fig:fig_match2">Figure 9.2</a> as different from one another as possible in order to protect a message in the presence of additive noise. If the signals are different, then presumably it will still be possible to determine which message is being sent even when the signal is corrupted by noise. We measure the “difference” between two signals <span class="arithmatex">\(x[n]\)</span> and <span class="arithmatex">\(y[n]\)</span> as:</p>
+<div class="" id="eq:match18">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(9.18)</td>
+<td class="eqTableEq">
+<div>$${d_{xy}} = \sum\limits_{n =  - \infty }^{ + \infty } {{{\left| {x[n] - y[n]} \right|}^2}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<ol start="2">
+<li>Determine the difference <span class="arithmatex">\({d_{ij}}\)</span> between each possible pair of the four signals <span class="arithmatex">\({s_i}[n],\)</span> <span class="arithmatex">\(\left\{ {i = 1,2,3,4} \right\}.\)</span> <em>Hint</em>: Expanding the quadratic term before you start your computation can save you a lot of work.  </li>
+<li>According to our definition of difference, which signal pair is the most different?<a class="indentlist" href=""></a>  </li>
+</ol>
+<p>The design of signals to facilitate communication in the presence of noise is described in communication theory and information theory. An excellent textbook for these topics is Wozencraft and Jacobs<sup id="fnref2:wozencraft1965"><a class="footnote-ref" href="#fn:wozencraft1965">1</a></sup>, in particular Chapter 4.</p>
+<h2 class="labexp" id="laboratory-exercises">Laboratory Exercises<a class="headerlink" href="#laboratory-exercises" title="Permanent link">&para;</a></h2>
+<h3 id="laboratory-exercise-91">Laboratory Exercise 9.1<a class="headerlink" href="#laboratory-exercise-91" title="Permanent link">&para;</a></h3>
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_9.1.html'>
+                <img src='images/Matched_9.1.gif' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+            <a href="#movie92">Movie 9.2</a> illustrated the stability of peak location 
+            in the presence of noise. In this exercise you will experiment with this 
+            result. Click on the icon to the left to start.
+        </td>
+    </tr>
+</table>
+
+<!-- 
+### Laboratory Exercise 9.2
+
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_9.2.html'>
+                <img src='images/Matched_9.2.gif' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        We continue our experiments with the matched filter using your spoken input. 
+        Click on the icon to the left to start.
+        </td>
+    </tr>
+</table>
+ -->
+
+<h3 id="laboratory-exercise-92">Laboratory Exercise 9.2<a class="headerlink" href="#laboratory-exercise-92" title="Permanent link">&para;</a></h3>
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_9.3.html'>
+                <img src='images/Lorentz_80a.png' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        Finding a face in a crowd is similar to finding a needle in a haystack. You 
+        may have noticed this if you have ever tried to find Waldo (or Wally). 
+        Can matched filtering lend a hand or, better said, an eye? 
+        Click on the icon to the left to start.
+        </td>
+    </tr>
+</table>
+
+<!-- 
+### Laboratory Exercise 9.4
+
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_9.4.html'>
+                <img src='images/Matched_9.2.gif' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        Using matched filtering, let us look for a verbal “needle” in a spoken 
+        sentence. Click on the icon to the left to start.
+        </td>
+    </tr>
+</table>
+ -->
+
+<h3 id="laboratory-exercise-93">Laboratory Exercise 9.3<a class="headerlink" href="#laboratory-exercise-93" title="Permanent link">&para;</a></h3>
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_9.5.html'>
+                <img src='images/Matched_9.5.gif' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        Fourier analysis tells us that signals can be decomposed into weighted sums 
+        of sines and cosines. What happens if we use a sinusoid as a matched filter?
+        To find out, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+<!-- 
+### Laboratory Exercise 9.6
+
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_9.6.html'>
+                <img src='images/Matched_9.6.gif' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        Using a sinusoid as a matched filter, we examine various audio signals 
+        that you provide to determine how filter length, filter frequency, and 
+        <i>SNR</i> affect the results. Click on the icon to the left to start.
+        </td>
+    </tr>
+</table>
+ -->
+
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:wozencraft1965">
+<p>Wozencraft, J. M. and I. M. Jacobs (1965). Principles of Communication Engineering. New York, John Wiley &amp; Sons, Inc.&#160;<a class="footnote-backref" href="#fnref:wozencraft1965" title="Jump back to footnote 1 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:wozencraft1965" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:cauchyschwartz">
+<p>An interpretation of the Cauchy-Schwartz inequality that makes it easier to understand is given by considering the inner product of two complex vectors <span class="arithmatex">\({\bf{a}}\)</span> and <span class="arithmatex">\({\bf{b}}.\)</span> This is given by the complex, scalar quantity ${\bf{a}} \bullet {\bf{b}} = \sum\nolimits_i {{a_i}b_i^<em> = } \left| {\bf{a}} \right|\left| {\bf{b}} \right|\cos \theta $ where <span class="arithmatex">\(\cos \theta  = {\mathop{\rm Re}\nolimits} \{ {\bf{a}} \bullet {\bf{b}}\} /\left| {\bf{a}} \right|\left| {\bf{b}} \right|\)</span>. ${\mathop{\rm Re}\nolimits} { \,\,} $ is the real part operator, 
+<span class="arithmatex">\(\theta\)</span> is the angle between the two complex vectors, and “</em>” denotes complex conjugation. The spectra <span class="arithmatex">\(Z(\Omega )\)</span> and <span class="arithmatex">\(W(\Omega )\)</span> can be considered as infinite dimensional vectors. Because <span class="arithmatex">\(\cos \theta\)</span> is between <span class="arithmatex">\(- 1\)</span> and <span class="arithmatex">\(+ 1,\)</span> we have <span class="arithmatex">\({\left| {{\bf{a}} \bullet {\bf{b}}} \right|^2} \le {\left| {\bf{a}} \right|^2}{\left| {\bf{b}} \right|^2}\)</span> which is the Cauchy-Schwartz inequality. The maximum value of the inner product is achieved when the two vectors are parallel, when <span class="arithmatex">\(\theta  = 0\)</span> or <span class="arithmatex">\(\theta  =  \pm \pi,\)</span> in other words when <span class="arithmatex">\({\bf{a}} = C\,{\bf{b}}\)</span> where <span class="arithmatex">\(C\)</span> is real.&#160;<a class="footnote-backref" href="#fnref:cauchyschwartz" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+
+<footer class="md-footer" id="jumpToBottom">
+
+  <!-- Link to previous and/or next page -->
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        <!-- Link to previous page -->
+        
+          <a
+            href="Chap_8.html"
+            title="8. Characterizing Signal-to-Noise Ratios"
+            class="md-footer-nav__link md-footer-nav__link--prev"
+            rel="prev"
+          >
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                8. Characterizing Signal-to-Noise Ratios
+              </div>
+            </div>
+          </a>
+        
+
+        <!-- Link to next page -->
+        
+          <a
+            href="Chap_10.html"
+            title="10. The Wiener filter"
+            class="md-footer-nav__link md-footer-nav__link--next"
+            rel="next"
+          >
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                10. The Wiener filter
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+</footer>
+      
+    </div>
+    
+      <script src="assets/javascripts/vendor.77e55a48.min.js"></script>
+      <script src="assets/javascripts/bundle.9554a270.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+
+	<script src="js/polyfill/index.js"></script>
+	<script src="search/search_index.js"></script>
+
+
+      <script>
+        app = initialize({
+          base: ".",
+          features: [],
+          search: Object.assign({
+            worker: "assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="js/extra.js"></script>
+      
+        <script src="js/SSPextra.js"></script>
+      
+        <script src="js/mathjax_3_generic_conf.js"></script>
+      
+        <script src="js/mathjax/tex-svg.js"></script>
+      
+    
+  </body>
+</html>

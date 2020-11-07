@@ -1,0 +1,1133 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <meta name="author" content="I.T. Young & R. Ligteringen">
+      
+      <link rel="shortcut icon" href="images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.0.2">
+    
+    
+      
+        <title>8. Characterizing Signal-to-Noise Ratios - Introduction to Stochastic Signal Processing</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.38780c08.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.3f72e892.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Georgia:300,400,400i,700%7CCourier&display=fallback">
+        <style>body,input{font-family:"Georgia",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Courier",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="css/extra.css">
+    
+      <link rel="stylesheet" href="css/imgtxt.css">
+    
+      <link rel="stylesheet" href="css/tables.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#characterizing-signal-to-noise-ratios" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <!-- Application header -->
+<header class="md-header" data-md-component="header">
+
+  <!-- Top-level navigation -->
+  <nav class="md-header-nav md-grid" aria-label="Header">
+
+    <!-- Link to home -->
+    <a
+      href="."
+      title="Introduction to Stochastic Signal Processing"
+      class="md-header-nav__button md-logo"
+      aria-label="Introduction to Stochastic Signal Processing"
+    >
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+<!-- 
+  Insert an <img> here as an alternative for the standard logo if desired.
+  Then comment out the above two lines
+ <img src="images/favicon.png" style="margin-top:5px; border: 0px solid lime; border-radius:5px; width:120%; height: auto;" />
+ -->
+
+    </a>
+
+    <!-- Button to open drawer -->
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+
+    <!-- Header title -->
+    <div class="md-header-nav__title" data-md-component="header-title">
+          
+            
+              <a href="#jumpToBottom">
+                <span class="md-header-nav__topic">
+                  Introduction to Stochastic Signal Processing
+                </span>
+                <span class="md-header-nav__topic">
+                  8. Characterizing Signal-to-Noise Ratios
+                </span>
+              </a>
+            
+          
+    </div>
+
+    <!-- Button to open search dialogue -->
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+
+      <!-- Search interface -->
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    <!-- Repository containing source -->
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Introduction to Stochastic Signal Processing" class="md-nav__button md-logo" aria-label="Introduction to Stochastic Signal Processing">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+<!-- 
+  Insert an <img> here as an alternative for the standard logo if desired.
+  Then comment out the above two lines
+ <img src="images/favicon.png" style="margin-top:5px; border: 0px solid lime; border-radius:5px; width:120%; height: auto;" />
+ -->
+
+    </a>
+    Introduction to Stochastic Signal Processing
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_1.html" class="md-nav__link">
+      1. How to use this iBook
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_2.html" class="md-nav__link">
+      2. Prologue
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_3.html" class="md-nav__link">
+      3. Introduction
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_4.html" class="md-nav__link">
+      4. Characterization of Random Signals
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_5.html" class="md-nav__link">
+      5. Correlations and Spectra
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_6.html" class="md-nav__link">
+      6. Filtering of Stochastic Signals
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_7.html" class="md-nav__link">
+      7. The Langevin Equation – A Case Study
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        8. Characterizing Signal-to-Noise Ratios
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="Chap_8.html" class="md-nav__link md-nav__link--active">
+      8. Characterizing Signal-to-Noise Ratios
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#example-filtering-noise" class="md-nav__link">
+    Example: Filtering noise
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#snr-for-deterministic-signals-in-the-presence-of-noise" class="md-nav__link">
+    SNR for deterministic signals in the presence of noise
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#snr-for-random-signals-in-the-presence-of-noise" class="md-nav__link">
+    SNR for random signals in the presence of noise
+  </a>
+  
+    <nav class="md-nav" aria-label="SNR for random signals in the presence of noise">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-not-too-noisy" class="md-nav__link">
+    Example: Not too noisy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-cocktail-party-noise" class="md-nav__link">
+    Example: Cocktail party noise?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#snr-for-signals-and-systems-with-poisson-noise" class="md-nav__link">
+    SNR for signals and systems with Poisson noise
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problems" class="md-nav__link">
+    Problems
+  </a>
+  
+    <nav class="md-nav" aria-label="Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-81" class="md-nav__link">
+    Problem 8.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-82" class="md-nav__link">
+    Problem 8.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-83" class="md-nav__link">
+    Problem 8.3
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_9.html" class="md-nav__link">
+      9. The Matched Filter
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_10.html" class="md-nav__link">
+      10. The Wiener filter
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_11.html" class="md-nav__link">
+      11. Aspects of Estimation
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_12.html" class="md-nav__link">
+      12. Spectral Estimation
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_13.html" class="md-nav__link">
+      Appendices
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="info.html" class="md-nav__link">
+      Information
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#example-filtering-noise" class="md-nav__link">
+    Example: Filtering noise
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#snr-for-deterministic-signals-in-the-presence-of-noise" class="md-nav__link">
+    SNR for deterministic signals in the presence of noise
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#snr-for-random-signals-in-the-presence-of-noise" class="md-nav__link">
+    SNR for random signals in the presence of noise
+  </a>
+  
+    <nav class="md-nav" aria-label="SNR for random signals in the presence of noise">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-not-too-noisy" class="md-nav__link">
+    Example: Not too noisy
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-cocktail-party-noise" class="md-nav__link">
+    Example: Cocktail party noise?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#snr-for-signals-and-systems-with-poisson-noise" class="md-nav__link">
+    SNR for signals and systems with Poisson noise
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problems" class="md-nav__link">
+    Problems
+  </a>
+  
+    <nav class="md-nav" aria-label="Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-81" class="md-nav__link">
+    Problem 8.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-82" class="md-nav__link">
+    Problem 8.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-83" class="md-nav__link">
+    Problem 8.3
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="characterizing-signal-to-noise-ratios">Characterizing Signal-to-Noise Ratios<a class="headerlink" href="#characterizing-signal-to-noise-ratios" title="Permanent link">&para;</a></h1>
+<p>We now know how to characterize stochastic signals and how to determine
+how that characterization changes as a stochastic signal is passed
+through an LTI system, a linear filter. We start with an example.</p>
+<h4 id="example-filtering-noise">Example: Filtering noise<a class="headerlink" href="#example-filtering-noise" title="Permanent link">&para;</a></h4>
+<p>Let the input to an LTI system be given by an ergodic process <span class="arithmatex">\(x[n]\)</span> with power spectrum <span class="arithmatex">\({S_{xx}}(\Omega ).\)</span> Then <span class="arithmatex">\({S_{yy}}(\Omega ) = {\left| {H( - \Omega )} \right|^2}{S_{xx}}(\Omega ).\)</span> If <span class="arithmatex">\({\varphi _{xx}}[k] = {N_o}\delta [k]\)</span> (white noise input) and <span class="arithmatex">\(h[n] = {\alpha ^n}u[n]\)</span> with <span class="arithmatex">\(\alpha\)</span> <em>real</em> and <span class="arithmatex">\(\left| \alpha  \right| &lt; 1\)</span> then:</p>
+<div class="" id="eq:snreq1">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(8.1)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+H(\Omega ) = \frac{1}{{1 - \alpha {e^{ - j\Omega }}}}\,\,\,\,\,\,\,\,\,\,\,{S_{xx}}(\Omega ) = {N_0}\,\,\\
+{S_{yy}}(\Omega ) = {N_0}{\left| {\frac{1}{{1 - \alpha {e^{ - j\Omega }}}}} \right|^2} = \frac{{{N_0}}}{{1 + {\alpha ^2} - 2\alpha \cos \Omega }}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The output random process <span class="arithmatex">\(y[n]\)</span> is a non-white, random process.</p>
+<p>In the following sections we will look at several applications of these ideas as well as attempt to understand why the power density spectrum and the correlation functions play such an important role in stochastic signal processing. Further, we will focus our attention on those situations where the model is additive noise that is statistically
+independent of the signal.</p>
+<p>We begin by defining a well-known measure of system performance, the signal-to-noise ratio (<i>SNR</i>). We make a distinction between two cases 1) where the signal is deterministic or 2) where the signal is stochastic. In either case, of course, the noise is considered to be stochastic.</p>
+<h2 id="snr-for-deterministic-signals-in-the-presence-of-noise">SNR for deterministic signals in the presence of noise<a class="headerlink" href="#snr-for-deterministic-signals-in-the-presence-of-noise" title="Permanent link">&para;</a></h2>
+<p>For deterministic signals, signals where the signal amplitude is known for every time instant, we define the signal-to noise ratio as:</p>
+<div class="" id="eq:snreq2">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(8.2)</td>
+<td class="eqTableEq">
+<div>$$S\tilde N{R_d} = \frac{S}{N} = \frac{{\max \left| {y[n]} \right|}}{{{\sigma _{nn}}}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>or using the logarithmic (Bode) description:</p>
+<div class="" id="eq:snreq3">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(8.3)</td>
+<td class="eqTableEq">
+<div>$$SN{R_d} = 20\,{\log _{10}}\left( {\frac{{\max \left| {y[n]} \right|}}{{{\sigma _{nn}}}}} \right)$$</div>
+</td>
+</tr>
+</table>
+</div>
+<h2 id="snr-for-random-signals-in-the-presence-of-noise">SNR for random signals in the presence of noise<a class="headerlink" href="#snr-for-random-signals-in-the-presence-of-noise" title="Permanent link">&para;</a></h2>
+<p>For random signals (such as speech) which bear information but whose amplitudes cannot be predicted with certainty, we define the signal-to-noise ratio as:</p>
+<div class="" id="eq:snreq4">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(8.4)</td>
+<td class="eqTableEq">
+<div>$$S\tilde N{R_r} = \frac{S}{N} = \frac{{{\sigma _{ss}}}}{{{\sigma _{nn}}}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="" id="eq:snreq5">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(8.5)</td>
+<td class="eqTableEq">
+<div>$$SN{R_r} = 20\,{\log _{10}}\left( {\frac{{{\sigma _{ss}}}}{{{\sigma _{nn}}}}} \right)$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>In both cases <span class="arithmatex">\({\sigma _{nn}}\)</span> is the standard deviation of the noise. In the case of
+random, information-bearing signals, <span class="arithmatex">\({\sigma _{ss}}\)</span> is the standard deviation of the signal amplitudes.</p>
+<p>From our earlier result, <a href="Chap_5.html#eq:covariances">Equation 5.2</a>, we know that</p>
+<div class="" id="eq:snreq6">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(8.6)</td>
+<td class="eqTableEq">
+<div>$$\sigma _{nn}^2 = {\gamma _{nn}}[0] = {\varphi _{nn}}[0] - {\left| {{m_n}} \right|^2}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>We begin with the case where <span class="arithmatex">\({m_n} = 0\)</span> giving <span class="arithmatex">\({\sigma _{nn}} = \sqrt {{\varphi _{nn}}[0]}.\)</span> Noise with zero mean leads to a formulation for the standard deviation of the
+noise in terms of the autocorrelation function of the noise evaluated at <span class="arithmatex">\(k = 0.\)</span> To simplify matters with respect to the case of information-bearing random signals, we will assume that their mean is also zero yielding <span class="arithmatex">\({\sigma _{ss}} = \sqrt {{\varphi _{ss}}[0]}.\)</span></p>
+<p>The justification for this is simple. If the mean is not zero then we can express the random signal <span class="arithmatex">\(y[n]\)</span> as <span class="arithmatex">\(y[n] = {m_y} + {y_0}[n]\)</span> where <span class="arithmatex">\({m_y}\)</span> is the (deterministic) non-zero average and <span class="arithmatex">\({y_0}[n]\)</span> is a stochastic signal with the same statistics as <span class="arithmatex">\(y[n]\)</span> except that its average is zero. For our discussion of <i>SNR</i>, we, therefore, focus on the
+zero-mean stochastic term.</p>
+<p>We can now rewrite our definition using our zero-mean assumption as:</p>
+<div class="mainresult" id="eq:snreq7">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(8.7)</td>
+<td class="eqTableEq">
+<div>$$SN{R_d} = 10\,{\log _{10}}\left( {\frac{{\max {{\left| {y[n]} \right|}^2}}}{{{\varphi _{nn}}[0]}}} \right)$$</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="mainresult" id="eq:snreq8">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(8.8)</td>
+<td class="eqTableEq">
+<div>$$SN{R_r} = 10\,{\log _{10}}\left( {\frac{{{\varphi _{ss}}[0]}}{{{\varphi _{nn}}[0]}}} \right)$$</div>
+</td>
+</tr>
+</table>
+</div>
+<h4 id="example-not-too-noisy">Example: Not too noisy<a class="headerlink" href="#example-not-too-noisy" title="Permanent link">&para;</a></h4>
+<p>To illustrate the concept for a deterministic signal, say that a video signal generated by a known test pattern is confined to the interval 0 to 1 volt and that the noise, <span class="arithmatex">\(N[n],\)</span> contaminating the video signal is 10 mv RMS. <i>RMS</i> means “root-mean-square” or <span class="arithmatex">\(\sqrt {E\left\{ {{{\left| {N[n]} \right|}^2}} \right\}}.\)</span> From our zero mean assumption, 10 mv RMS is equivalent to <span class="arithmatex">\({\sigma _{nn}} = 10\)</span> mv. According to our definition:</p>
+<div class="" id="eq:snreq9">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(8.9)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{SN{R_d}}&amp;{ = 10\,{{\log }_{10}}\left( {\frac{{{{\left( {1\,{\rm{V}}} \right)}^2}}}{{{{\left( {{{10}^{ - 2}}\;{\rm{V}}} \right)}^2}}}} \right)}\\
+{\,\,\,}&amp;{ = 10\,{{\log }_{10}}\left( {{{10}^4}} \right) = 40\;{\rm{dB}}}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<h4 id="example-cocktail-party-noise">Example: Cocktail party noise?<a class="headerlink" href="#example-cocktail-party-noise" title="Permanent link">&para;</a></h4>
+<p>We can also illustrate the concept for a random signal as follows. Let the discrete-time output of a microphone be described by <span class="arithmatex">\(r[n] = s[n] + N[n]\)</span> where <span class="arithmatex">\(s[n]\)</span> is a sampled, real speech signal and <span class="arithmatex">\(N[n]\)</span> is sampled, real random noise from the electronics. This is
+shown in <a href="#fig:stand_model1">Figure 8.1</a>.</p>
+<figure class="figaltcap fullsize" id="fig:stand_model1"><img src="images/Fig_8_1.gif" /><figcaption><strong>Figure 8.1:</strong> Model for a random signal speech, <span class="arithmatex">\(s[n\rbrack,\)</span> contaminated by additive noise <span class="arithmatex">\(N[n\rbrack\)</span> and resulting in <span class="arithmatex">\(r[n\rbrack.\)</span></figcaption>
+</figure>
+<p>The random speech signal <span class="arithmatex">\(s[n]\)</span> has power density spectrum <span class="arithmatex">\({S_{ss}}(\Omega )\)</span> given by:</p>
+<div class="" id="eq:snreq10">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(8.10)</td>
+<td class="eqTableEq">
+<div>$${S_{ss}}(\Omega ) = \frac{{{S_0}}}{{1 + {\alpha ^2} - 2\alpha \cos \Omega }}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>and the independent, additive noise <span class="arithmatex">\(N[n]\)</span> is characterized by:</p>
+<div class="" id="eq:snreq11">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(8.11)</td>
+<td class="eqTableEq">
+<div>$${S_{nn}}(\Omega ) = \frac{{{N_0}}}{{1 + {\beta ^2} - 2\beta \cos \Omega }}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The <i>SÑR<sub>r</sub></i> will then follow from:</p>
+<div class="" id="eq:snreq12">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(8.12)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{\varphi _{ss}}[0]}&amp;{ = \frac{1}{{2\pi }}\int\limits_{ - \pi }^{ + \pi } {{S_{ss}}(\Omega )} d\Omega }\\
+{\,\,\,}&amp;{ = \frac{1}{{2\pi }}\int\limits_{ - \pi }^{ + \pi } {\frac{{{S_0}}}{{1 + {\alpha ^2} - 2\alpha \cos \Omega }}} d\Omega }\\
+{\,\,\,}&amp;{ = \frac{{{S_0}}}{{1 - {\alpha ^2}}}}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="" id="eq:snreq13">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(8.13)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{\varphi _{nn}}[0]}&amp;{ = \frac{1}{{2\pi }}\int\limits_{ - \pi }^{ + \pi } {\frac{{{N_0}}}{{1 + {\beta ^2} - 2\beta \cos \Omega }}} d\Omega }\\
+{\,\,\,}&amp;{ = \frac{{{N_0}}}{{1 - {\beta ^2}}}}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The proof of <a href="Chap_8.html#eq:snreq12">Equation 8.12</a> can be found in <a href="Chap_8.html#problem-81">Problem 8.1</a>. Using <a href="Chap_8.html#eq:snreq8">Equation 8.8</a>:</p>
+<div class="" id="eq:snreq14">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(8.14)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{SN{R_r}}&amp;{ = 10\,{{\log }_{10}}\left( {\frac{{{S_o}/\left( {1 - {\alpha ^2}} \right)}}{{{N_o}/\left( {1 - {\beta ^2}} \right)}}} \right)}\\
+{\,\,\,}&amp;{ = 10\,{{\log }_{10}}\left( {\frac{{{S_0}}}{{{N_0}}}\,\left( {\frac{{1 - {\beta ^2}}}{{1 - {\alpha ^2}}}} \right)} \right)}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The two power density spectra are illustrated in <a href="#fig:stand_model2">Figure 8.2</a>.</p>
+<figure class="figaltcap fullsize" id="fig:stand_model2"><img src="images/Fig_8_2.png" /><figcaption><strong>Figure 8.2:</strong> Power density spectra of <strong>signal</strong> <span class="arithmatex">\({S_{ss}}(\Omega )\)</span> (in <strong><font color="red">red</font></strong>) and <strong>noise</strong> <span class="arithmatex">\({S_{nn}}(\Omega )\)</span> (in <strong><font color="#00bb00">green</font></strong>) for the values <span class="arithmatex">\(\alpha  = 4/7\)</span> and <span class="arithmatex">\(\beta  =  - 2/3.\)</span></figcaption>
+</figure>
+<p>For <span class="arithmatex">\({S_0} = 1,\)</span> <span class="arithmatex">\({N_0} = 1,\)</span> <span class="arithmatex">\(\alpha  = 4/7,\)</span> and <span class="arithmatex">\(\beta  =  - 2/3,\)</span> the <i>SNR<sub>r</sub></i> =  –0.84 dB.</p>
+<h2 id="snr-for-signals-and-systems-with-poisson-noise">SNR for signals and systems with Poisson noise<a class="headerlink" href="#snr-for-signals-and-systems-with-poisson-noise" title="Permanent link">&para;</a></h2>
+<p>One very important class of noise is Poisson noise. In this case, the noise is not Gaussian, not additive, not independent of the signal, and has a mean value that is greater than zero. We would be tempted to ignore it as a mathematical oddity were it not a type of noise that is encountered in a variety of physical systems.</p>
+<p>A <a href="https://en.wikipedia.org/wiki/Poisson_process">Poisson process</a> is one that describes the probability of <span class="arithmatex">\(n\)</span> independent discrete events occurring in a fixed amount of time <span class="arithmatex">\(T\)</span> if the time between occurrences of successive events is described by an exponential-type probability density function with a rate-parameter <span class="arithmatex">\(\lambda.\)</span> The units of <span class="arithmatex">\(\lambda\)</span> are events/(unit time). The value of <span class="arithmatex">\(T\)</span>—the length of the observation window or the integration time—is frequently known. An exceptionally lucid derivation of the Poisson distribution can be found in Section 18.13 of Thomas<sup id="fnref:thomas1960"><a class="footnote-ref" href="#fn:thomas1960">1</a></sup>.</p>
+<p>The emission of fluorescence photons in a labeled biological specimen, the production of photoelectrons in a CCD camera due to thermal vibrations (dark noise or dark current), and the radioactive decay of a population of identical atoms are examples of random processes governed by a Poisson distribution.</p>
+<p>The probability of <span class="arithmatex">\(n\)</span> events in <span class="arithmatex">\(T\)</span> units of time is given by:</p>
+<div class="" id="eq:snreq15">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(8.15)</td>
+<td class="eqTableEq">
+<div>$$p(n|\lambda T) = \frac{{{{\left( {\lambda T} \right)}^n}{e^{ - \lambda T}}}}{{n!}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>For Poisson processes the signal is intrinsically noisy and needs no “help” from external sources. We define the signal-to-noise ratio as:</p>
+<div class="" id="eq:snreq16">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(8.16)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{S\tilde N{R_P} = \frac{S}{N} = \frac{\mu }{\sigma }}\\
+{SN{R_P} = 20\,{{\log }_{10}}\left( {\frac{\mu }{\sigma }} \right)}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>where <span class="arithmatex">\(\mu\)</span> is the expected value of the stochastic signal and <span class="arithmatex">\(\sigma\)</span> is its
+standard deviation. This process—whether one is talking about <span class="arithmatex">\(\lambda\)</span> or <span class="arithmatex">\(\lambda T\)</span>—is
+a one-parameter process. This means that both <span class="arithmatex">\(\mu\)</span> and <span class="arithmatex">\(\sigma\)</span> will be defined by
+<span class="arithmatex">\(\lambda\)</span> (or <span class="arithmatex">\(\lambda T\)</span>).</p>
+<p>From <a href="Chap_3.html#problem-34">Problem 3.4c</a> we know that <span class="arithmatex">\(\mu  = \lambda T\)</span> and
+<span class="arithmatex">\(\sigma  = \sqrt {\lambda T}.\)</span> This means that:</p>
+<div class="" id="eq:snreq17">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(8.17)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{S\tilde N{R_P} = \frac{{\lambda T}}{{\sqrt {\lambda T} }} = \sqrt {\lambda T} }\\
+{SN{R_P} = 20{{\log }_{10}}\left( {\sqrt {\lambda T} } \right) = 10\,{{\log }_{10}}\left( {\lambda T} \right)}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>If we wish to increase the signal-to-noise ratio, we either have to increase the rate parameter <span class="arithmatex">\(\lambda\)</span> and/or use a longer observation window <span class="arithmatex">\(T.\)</span> Either approach simply means that we need more data.</p>
+<p>The implications of these results warrant some discussion. As the strength of a Poisson signal increases—for example by using a source that emits a greater number of photons per second—so does the strength of the fluctuations. The former is measured by <span class="arithmatex">\(\mu\)</span> and the latter by <span class="arithmatex">\(\sigma.\)</span> This is illustrated in <a href="#fig:stand_model3">Figure 8.3</a>.</p>
+<figure class="figaltcap fullsize" id="fig:stand_model3"><img src="images/Fig_8_3.gif" /><figcaption><strong>Figure 8.3:</strong> (left) The top half of the image is a “clean” image where the intensity in each block increases by 32 brightness levels. The bottom half is Poisson noise where the mean value (<span class="arithmatex">\(\mu\)</span>) in each block is the same as the corresponding block above it. The <strong><font color="red">red</font></strong> line is one row of the clean image and the <strong><font color="blue">blue</font></strong> line is one row of the noisy image. (right) The intensities along the <strong><font color="red">red</font></strong> line and <strong><font color="blue">blue</font></strong> line versus the column numbers (with column <span class="arithmatex">\(0\)</span> being in the middle) are displayed in <strong><font color="red">red</font></strong> and <strong><font color="blue">blue</font></strong>, respectively.</figcaption>
+</figure>
+<p>In the left-hand panel you should observe that the noise increases even as the average intensity increases. The basis for this observation will be discussed in <a href="Chap_8.html#problem-82">Problem 8.2</a>. In the right-hand panel we see the fluctuations increase as the average increases.
+The calculation in <a href="Chap_8.html#eq:snreq17">Equation 8.17</a> shows, however, that as the source strength increases (from left to right) the <i>SNR</i> increases as well.</p>
+<p>There is much more that can be said about Poisson noise; we will address the issue of the estimation of <span class="arithmatex">\(\lambda\)</span> (or <span class="arithmatex">\(\lambda T\)</span>) in an example in <a href="Chap_11.html#example-estimating-the-poisson-rate">Chapter 11</a>. </p>
+<h2 class="problems" id="problems">Problems<a class="headerlink" href="#problems" title="Permanent link">&para;</a></h2>
+<h3 id="problem-81">Problem 8.1<a class="headerlink" href="#problem-81" title="Permanent link">&para;</a></h3>
+<p>The autocorrelation function of a random process is given by:</p>
+<div class="" id="eq:snreq18">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(8.18)</td>
+<td class="eqTableEq">
+<div>$${\varphi _{xx}}[k] = {a^{\left| k \right|}}\,\,\,\,\,\,\,\,\,\,\left| a \right| &lt; 1$$</div>
+</td>
+</tr>
+</table>
+</div>
+<ol>
+<li>Determine the power spectral density <span class="arithmatex">\({S_{xx}}(\Omega ).\)</span></li>
+<li>Using <span class="arithmatex">\({S_{xx}}(\Omega )\)</span> and Fourier properties prove <a href="Chap_8.html#eq:snreq12">Equation 8.12</a>.</li>
+<li>What is <span class="arithmatex">\({m_x}\)</span> for this process?<a class="indentlist" href=""></a>  </li>
+</ol>
+<h3 id="problem-82">Problem 8.2<a class="headerlink" href="#problem-82" title="Permanent link">&para;</a></h3>
+<p>It has been recognized for over 150 years that the perception <span class="arithmatex">\(p\)</span> of a physical stimulus <span class="arithmatex">\(S\)</span> is described in many cases by:</p>
+<div class="" id="eq:snreq19">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(8.19)</td>
+<td class="eqTableEq">
+<div>$$\Delta p = k\frac{{\Delta S}}{S}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>where <span class="arithmatex">\(\Delta p\)</span> is the change in perception, <span class="arithmatex">\(k\)</span> is a proportionality constant, and <span class="arithmatex">\(\Delta S\)</span> represents a change in the stimulus. This is know as the <a href="https://en.wikipedia.org/wiki/Weber%E2%80%93Fechner_law">Weber-Fechner Law</a>.</p>
+<ol>
+<li>As we proceed to smaller increments in the stimulus, that is as <span class="arithmatex">\(\Delta S \to 0,\)</span> what is the functional relation between <span class="arithmatex">\(p\)</span> and <span class="arithmatex">\(S,\)</span> that is, what is <span class="arithmatex">\(p(S)?\)</span></li>
+<li>For the stimulus shown in <a href="#fig:stand_model3">Figure 8.3</a>, how does our observation of the noise relate to <i>SNR<sub>p</sub></i>?<a class="indentlist" href=""></a>  </li>
+</ol>
+<p>More information about the application of the Weber-Fechner Law to visual perception can be found in Hecht<sup id="fnref:hecht1924"><a class="footnote-ref" href="#fn:hecht1924">2</a></sup>.</p>
+<h3 id="problem-83">Problem 8.3<a class="headerlink" href="#problem-83" title="Permanent link">&para;</a></h3>
+<p>The light, that passes through a test tube containing a suspension of particles in liquid, is measured by a photomultiplier and converted to a discrete-time (digital) signal. The output signal <span class="arithmatex">\(s[n]\)</span> from the photomultiplier shows a stochastic variation due to the sum of two statistically independent sources: 1) the Brownian motion <span class="arithmatex">\(B[n]\)</span> of the particles in the liquid, and, 2) the noise from the photomultiplier <span class="arithmatex">\(N[n].\)</span> Thus:</p>
+<div class="" id="eq:snreq20">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(8.20)</td>
+<td class="eqTableEq">
+<div>$$s[n] = B[n] + N[n]$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The autocorrelation function of the Brownian motion, that is the velocity, is modeled by:</p>
+<div class="" id="eq:snreq21">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(8.21)</td>
+<td class="eqTableEq">
+<div>$${\varphi _{BB}}[k] = {e^{ - \left| k \right|/D}} = {\left( {{e^{ - 1/D}}} \right)^{\left| k \right|}} = {\varepsilon ^{\left| k \right|}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>with <span class="arithmatex">\(0 &lt; \varepsilon  &lt; 1.\)</span> The autocorrelation function of the photomultiplier noise is modeled by:</p>
+<div class="" id="eq:snreq22">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(8.22)</td>
+<td class="eqTableEq">
+<div>$${\varphi _{NN}}[k] = \delta [k]$$</div>
+</td>
+</tr>
+</table>
+</div>
+<ol>
+<li>What is the autocorrelation function of the signal <span class="arithmatex">\(s[n]\)</span> from the photomultiplier, that is, <span class="arithmatex">\({\varphi _{ss}}[k]?\)</span></li>
+<li>What is the power spectral density <span class="arithmatex">\({S_{ss}}(\Omega )\)</span> of the measured signal? Sketch <span class="arithmatex">\({S_{ss}}(\Omega ).\)</span><a class="indentlist" href=""></a>  </li>
+</ol>
+<p>We wish to estimate <span class="arithmatex">\(D,\)</span> a parameter related to the diffusion of the particles in the liquid. Our estimate of <span class="arithmatex">\(D\)</span> will, of course, be sensitive to the signal-to-noise ratio <i>SÑR<sub>r</sub></i> as defined in <a href="Chap_8.html#eq:snreq4">Equation 8.4</a>.</p>
+<ol start="3">
+<li>Determine the value of <i>SÑR<sub>r</sub></i>.<a class="indentlist" href=""></a>  </li>
+</ol>
+<p>To improve the signal-to-noise ratio we first filter the signal <span class="arithmatex">\(s[n]\)</span> as shown below:</p>
+<figure class="figaltcap fullsize" id="fig:stand_model4"><img src="images/Fig_P8_3.gif" /><figcaption><strong>Figure 8.4:</strong> Standard model of an (LTI) filter applied <em>after</em> a signal has been contaminated by additive noise.</figcaption>
+</figure>
+<p>where <span class="arithmatex">\(h[n]\)</span> is an ideal low-pass filter whose Fourier transform is
+specified in the baseband <span class="arithmatex">\(- \pi  \lt  \Omega  \le  + \pi\)</span> as:</p>
+<div class="" id="eq:snreq23">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(8.23)</td>
+<td class="eqTableEq">
+<div>$$H(\Omega ) = {\mathscr{F}}\left\{ {h[n]} \right\} = \left\{ {\begin{array}{*{20}{c}}
+1&amp;{\left| \Omega  \right| \le \pi /2}\\
+0&amp;{\left| \Omega  \right| &gt; \pi /2}
+\end{array}} \right.$$</div>
+</td>
+</tr>
+</table>
+</div>
+<ol start="4">
+<li>Determine <i>SÑR<sub>q</sub></i> from the filtered version of the signal, <span class="arithmatex">\(q[n].\)</span> Under what conditions will the signal-to-noise ratio improve, that is, increase as we go from <span class="arithmatex">\(s[n]\)</span> to <span class="arithmatex">\(q[n]?\)</span><a class="indentlist" href=""></a>  </li>
+</ol>
+<!-- 
+## Laboratory Exercises {: .labexp }
+
+### Laboratory Exercise 8.1  
+
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_8.1.html'>
+                <img src='images/SNR_8.1.gif' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        The camera in your device is not perfect. But just how good (or bad) is it? 
+        In this laboratory exercise you will measure the noise characteristics of 
+        your camera system. To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+### Laboratory Exercise 8.2  
+
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_8.2.html'>
+                <img src='images/SNR_8.2.gif' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        We can use the tools that we have already seen to look at the amplitude distribution of a difference image, its power spectral density, and its autocorrelation. To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+### Laboratory Exercise 8.3  
+
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_8.3.html'>
+                <img src='images/SNR_8.3.gif' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        We examine the noise characteristics of the microphone system of your device 
+        with the help of the average volume level, the autocorrelation function, and 
+        the power spectral density when “no” acoustic signal is proffered. To start 
+        the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+### Laboratory Exercise 8.4  
+
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_8.4.html'>
+                <img src='images/SNR_8.4.gif' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        We examine the noise properties of audio signals acquired through the 
+        microphone of your device. To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+### Laboratory Exercise 8.5  
+
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_8.5.html'>
+                <img src='images/SNR_8.5.gif' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        Based upon noise input from an <i>external</i> audio source, we measure the 
+        signal-to-noise ratio <i>SNR</i> of your device. To start the exercise, click 
+        on the icon to the left.
+        </td>
+    </tr>
+</table>
+ -->
+
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:thomas1960">
+<p>Thomas, G. B. (1960). Calculus and Analytic Geometry. Reading, Massachusetts, Addison-Wesley&#160;<a class="footnote-backref" href="#fnref:thomas1960" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:hecht1924">
+<p>Hecht, S. (1924). “The visual discrimination of intensity and the Weber-Fechner law.” Journal of General Physiology 7(2)&#160;<a class="footnote-backref" href="#fnref:hecht1924" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+
+<footer class="md-footer" id="jumpToBottom">
+
+  <!-- Link to previous and/or next page -->
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        <!-- Link to previous page -->
+        
+          <a
+            href="Chap_7.html"
+            title="7. The Langevin Equation – A Case Study"
+            class="md-footer-nav__link md-footer-nav__link--prev"
+            rel="prev"
+          >
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                7. The Langevin Equation – A Case Study
+              </div>
+            </div>
+          </a>
+        
+
+        <!-- Link to next page -->
+        
+          <a
+            href="Chap_9.html"
+            title="9. The Matched Filter"
+            class="md-footer-nav__link md-footer-nav__link--next"
+            rel="next"
+          >
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                9. The Matched Filter
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+</footer>
+      
+    </div>
+    
+      <script src="assets/javascripts/vendor.77e55a48.min.js"></script>
+      <script src="assets/javascripts/bundle.9554a270.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+
+	<script src="js/polyfill/index.js"></script>
+	<script src="search/search_index.js"></script>
+
+
+      <script>
+        app = initialize({
+          base: ".",
+          features: [],
+          search: Object.assign({
+            worker: "assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="js/extra.js"></script>
+      
+        <script src="js/SSPextra.js"></script>
+      
+        <script src="js/mathjax_3_generic_conf.js"></script>
+      
+        <script src="js/mathjax/tex-svg.js"></script>
+      
+    
+  </body>
+</html>

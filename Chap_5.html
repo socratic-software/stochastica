@@ -1,0 +1,1739 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <meta name="author" content="I.T. Young & R. Ligteringen">
+      
+      <link rel="shortcut icon" href="images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.0.2">
+    
+    
+      
+        <title>5. Correlations and Spectra - Introduction to Stochastic Signal Processing</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.38780c08.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.3f72e892.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Georgia:300,400,400i,700%7CCourier&display=fallback">
+        <style>body,input{font-family:"Georgia",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Courier",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="css/extra.css">
+    
+      <link rel="stylesheet" href="css/imgtxt.css">
+    
+      <link rel="stylesheet" href="css/tables.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#correlations-and-spectra" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <!-- Application header -->
+<header class="md-header" data-md-component="header">
+
+  <!-- Top-level navigation -->
+  <nav class="md-header-nav md-grid" aria-label="Header">
+
+    <!-- Link to home -->
+    <a
+      href="."
+      title="Introduction to Stochastic Signal Processing"
+      class="md-header-nav__button md-logo"
+      aria-label="Introduction to Stochastic Signal Processing"
+    >
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+<!-- 
+  Insert an <img> here as an alternative for the standard logo if desired.
+  Then comment out the above two lines
+ <img src="images/favicon.png" style="margin-top:5px; border: 0px solid lime; border-radius:5px; width:120%; height: auto;" />
+ -->
+
+    </a>
+
+    <!-- Button to open drawer -->
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+
+    <!-- Header title -->
+    <div class="md-header-nav__title" data-md-component="header-title">
+          
+            
+              <a href="#jumpToBottom">
+                <span class="md-header-nav__topic">
+                  Introduction to Stochastic Signal Processing
+                </span>
+                <span class="md-header-nav__topic">
+                  5. Correlations and Spectra
+                </span>
+              </a>
+            
+          
+    </div>
+
+    <!-- Button to open search dialogue -->
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+
+      <!-- Search interface -->
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    <!-- Repository containing source -->
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Introduction to Stochastic Signal Processing" class="md-nav__button md-logo" aria-label="Introduction to Stochastic Signal Processing">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+<!-- 
+  Insert an <img> here as an alternative for the standard logo if desired.
+  Then comment out the above two lines
+ <img src="images/favicon.png" style="margin-top:5px; border: 0px solid lime; border-radius:5px; width:120%; height: auto;" />
+ -->
+
+    </a>
+    Introduction to Stochastic Signal Processing
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_1.html" class="md-nav__link">
+      1. How to use this iBook
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_2.html" class="md-nav__link">
+      2. Prologue
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_3.html" class="md-nav__link">
+      3. Introduction
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_4.html" class="md-nav__link">
+      4. Characterization of Random Signals
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        5. Correlations and Spectra
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="Chap_5.html" class="md-nav__link md-nav__link--active">
+      5. Correlations and Spectra
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#correlations-simple-and-complex" class="md-nav__link">
+    Correlations: simple and complex
+  </a>
+  
+    <nav class="md-nav" aria-label="Correlations: simple and complex">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-delayed-effect" class="md-nav__link">
+    Example: Delayed effect
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#correlations-and-memory" class="md-nav__link">
+    Correlations and memory
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-mechanics-of-correlations-redux" class="md-nav__link">
+    The mechanics of correlations - redux
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fourier-description-of-correlation-functions" class="md-nav__link">
+    Fourier description of correlation functions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-digression" class="md-nav__link">
+    A digression
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-power-density-spectrum-and-its-properties" class="md-nav__link">
+    The power density spectrum and its properties
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#examples-of-power-spectra" class="md-nav__link">
+    Examples of power spectra
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples of power spectra">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-white-noise" class="md-nav__link">
+    Example: White noise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-pink-noise" class="md-nav__link">
+    Example: Pink noise
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#predicting-the-natural-climate-a-case-study" class="md-nav__link">
+    Predicting the natural climate - a case study
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problems" class="md-nav__link">
+    Problems
+  </a>
+  
+    <nav class="md-nav" aria-label="Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-51" class="md-nav__link">
+    Problem 5.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-52" class="md-nav__link">
+    Problem 5.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-53" class="md-nav__link">
+    Problem 5.3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-54" class="md-nav__link">
+    Problem 5.4
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-55" class="md-nav__link">
+    Problem 5.5
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-56" class="md-nav__link">
+    Problem 5.6
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#laboratory-exercises" class="md-nav__link">
+    Laboratory Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Laboratory Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-51" class="md-nav__link">
+    Laboratory Exercise 5.1
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_6.html" class="md-nav__link">
+      6. Filtering of Stochastic Signals
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_7.html" class="md-nav__link">
+      7. The Langevin Equation – A Case Study
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_8.html" class="md-nav__link">
+      8. Characterizing Signal-to-Noise Ratios
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_9.html" class="md-nav__link">
+      9. The Matched Filter
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_10.html" class="md-nav__link">
+      10. The Wiener filter
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_11.html" class="md-nav__link">
+      11. Aspects of Estimation
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_12.html" class="md-nav__link">
+      12. Spectral Estimation
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_13.html" class="md-nav__link">
+      Appendices
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="info.html" class="md-nav__link">
+      Information
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#correlations-simple-and-complex" class="md-nav__link">
+    Correlations: simple and complex
+  </a>
+  
+    <nav class="md-nav" aria-label="Correlations: simple and complex">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-delayed-effect" class="md-nav__link">
+    Example: Delayed effect
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#correlations-and-memory" class="md-nav__link">
+    Correlations and memory
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-mechanics-of-correlations-redux" class="md-nav__link">
+    The mechanics of correlations - redux
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fourier-description-of-correlation-functions" class="md-nav__link">
+    Fourier description of correlation functions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-digression" class="md-nav__link">
+    A digression
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-power-density-spectrum-and-its-properties" class="md-nav__link">
+    The power density spectrum and its properties
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#examples-of-power-spectra" class="md-nav__link">
+    Examples of power spectra
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples of power spectra">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-white-noise" class="md-nav__link">
+    Example: White noise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-pink-noise" class="md-nav__link">
+    Example: Pink noise
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#predicting-the-natural-climate-a-case-study" class="md-nav__link">
+    Predicting the natural climate - a case study
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problems" class="md-nav__link">
+    Problems
+  </a>
+  
+    <nav class="md-nav" aria-label="Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-51" class="md-nav__link">
+    Problem 5.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-52" class="md-nav__link">
+    Problem 5.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-53" class="md-nav__link">
+    Problem 5.3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-54" class="md-nav__link">
+    Problem 5.4
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-55" class="md-nav__link">
+    Problem 5.5
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-56" class="md-nav__link">
+    Problem 5.6
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#laboratory-exercises" class="md-nav__link">
+    Laboratory Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Laboratory Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-51" class="md-nav__link">
+    Laboratory Exercise 5.1
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="correlations-and-spectra">Correlations and Spectra<a class="headerlink" href="#correlations-and-spectra" title="Permanent link">&para;</a></h1>
+<p>Let <span class="arithmatex">\(x[n]\)</span> and <span class="arithmatex">\(y[n]\)</span> be two ergodic random processes. As stated in <a href="Chap_4.html#the-ergodic-process">Chapter 4</a>, this means that both processes are stationary.</p>
+<h2 id="correlations-simple-and-complex">Correlations: simple and complex<a class="headerlink" href="#correlations-simple-and-complex" title="Permanent link">&para;</a></h2>
+<p>Based upon <a href="Chap_4.html#autocorrelation">Equation 4.19</a> and <a href="Chap_4.html#cross-correlation">Equation 4.21</a>, we have that the autocorrelation function of the random process <span class="arithmatex">\(x\)</span> and the cross-correlation function between processes <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> are:</p>
+<div class="mainresult" id="eq:correlations">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.1)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+{\varphi _{xx}}[k] = E\left\{ {x[n]{x^*}[n + k]} \right\}\\
+{\varphi _{xy}}[k] = E\left\{ {x[n]{y^*}[n + k]} \right\}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>While <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y\)</span> are random processes, the auto- and cross-correlation
+functions are just ordinary, deterministic (not random) functions of the
+variable <span class="arithmatex">\(k.\)</span> Why is that?</p>
+<p>Because, like the mean <span class="arithmatex">\(\left( \mu  \right)\)</span> and standard deviation <span class="arithmatex">\(\left( \sigma  \right)\)</span> of familiar probability distributions, the correlations and covariances describe
+parameters—characteristics—of the probability distributions that
+generate random variables but are, themselves, not random.</p>
+<p>The auto- and cross-covariance functions are given by:</p>
+<div class="" id="eq:covariances">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.2)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+{\gamma _{xx}}[k] = {\varphi _{xx}}[k] - {\left| {{m_x}} \right|^2}\\
+{\gamma _{xy}}[k] = {\varphi _{xy}}[k] - {m_x}m_y^* \end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>By setting <span class="arithmatex">\(k = 0,\)</span> we see that</p>
+<div class="" id="eq:meansqpos">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.3)</td>
+<td class="eqTableEq">
+<div>$${\varphi _{xx}}[0] = E\left\{ {{{\left| {x[n]} \right|}^2}} \right\} = mean{\text -}square\;of\;process\; \ge 0$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>and  </p>
+<div class="" id="eq:varpos">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.4)</td>
+<td class="eqTableEq">
+<div>$${\gamma _{xx}}[0] = \sigma _x^2 \ge 0$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Further, we have:</p>
+<div class="" id="eq:autoeven">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.5)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+{\varphi _{xx}}[k] = \varphi _{xx}^*[ - k]\\
+{\gamma _{xx}}[k] = \gamma _{xx}^*[ - k]
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="" id="eq:crossHermitian">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.6)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+{\varphi _{xy}}[k] = \varphi _{yx}^*[ - k]\\
+{\gamma _{xy}}[k] = \gamma _{yx}^*[ - k]
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>It is straightforward and, therefore, left to you to show in <a href="#problem-51">Problem 5.1</a> that <a href="Chap_5.html#eq:autoeven">Equation 5.5</a> and the second part of <a href="Chap_5.html#eq:crossHermitian">Equation 5.6</a> are correct. The proof
+of the first part of <a href="Chap_5.html#eq:crossHermitian">Equation 5.6</a> is given below.</p>
+<p>We start from the second part of <a href="Chap_5.html#eq:correlations">Equation 5.1</a> and replace <span class="arithmatex">\(n + k\)</span> with
+<span class="arithmatex">\(m\)</span>:</p>
+<div class="arithmatex">\[\begin{array}{*{20}{l}}
+{{\varphi _{xy}}[k]}&amp;{ = E\left\{ {x[n]\,{y^*}[n + k]} \right\}\mathop  \Rightarrow \limits^{m = n + k} }\\
+{}&amp;\begin{array}{l}
+ = E\left\{ {x[m - k]\,{y^*}[m]} \right\}\\
+ = {\left( {E\left\{ {y[m]\,{x^*}[m - k]} \right\}} \right)^*}
+\end{array}\\
+{}&amp;{ = \varphi _{yx}^*[ - k]}
+\end{array}\]</div>
+<p>which proves  the first part of  <a href="Chap_5.html#eq:crossHermitian">Equation 5.6</a> .</p>
+<h4 id="example-delayed-effect">Example: Delayed effect<a class="headerlink" href="#example-delayed-effect" title="Permanent link">&para;</a></h4>
+<p>As a simple example we consider the case where <span class="arithmatex">\(y[n] = x[n - {n_o}],\)</span> a
+delayed version of <span class="arithmatex">\(x[n].\)</span> Then:</p>
+<div class="" id="eq:eq_delayed_effect">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.7)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{\varphi _{yy}}[k]}&amp;{ = E\left\{ {y[n]\,{y^*}[n + k]} \right\}}\\
+{}&amp;{ = E\left\{ {x[n - {n_0}]\,{x^*}[n - {n_0} + k]} \right\}}\\
+{}&amp;{ = {\varphi _{xx}}[k]}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p><em>What does this mean</em>? The conclusion associated with this example is
+that the autocorrelation of a time signal is independent of any time
+shift.</p>
+<h2 id="correlations-and-memory">Correlations and memory<a class="headerlink" href="#correlations-and-memory" title="Permanent link">&para;</a></h2>
+<p>We would now like to consider what may happen to the correlation between
+<span class="arithmatex">\(x[n]\)</span> and <span class="arithmatex">\(x[n + k]\)</span> as <span class="arithmatex">\(k\)</span> becomes larger. For many processes, as <span class="arithmatex">\(k \to \infty ,\)</span> the value of the random signal at time <span class="arithmatex">\(n\)</span> becomes less dependent upon the value at time <span class="arithmatex">\(n + k.\)</span> A simple example might be that the weather today is similar to the weather
+yesterday but less similar to the weather of four weeks ago. As <span class="arithmatex">\(k \to \infty ,\)</span> we have  </p>
+<div class="" id="eq:autointhelimit">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.8)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+\mathop {\lim }\limits_{k \to \infty } \left\{ {{\varphi _{xx}}[k] = E\left\{ {x[n]{x^*}[n + k]} \right\}} \right\}\\
+\,\,\,\,\,\,\,\,\,\, = E\left\{ {x[n]} \right\}E\left\{ {{x^*}[n + k]} \right\} = {\left| {{m_x}} \right|^2}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>This result frequently holds as well for the cross-correlation giving:</p>
+<div class="" id="eq:crossinthelimit">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.9)</td>
+<td class="eqTableEq">
+<div>$$\mathop {\lim }\limits_{k \to \infty } {\varphi _{xy}}[k] = {m_x}m_y^*$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Finally these two results may be used to show that for many important cases:</p>
+<div class="" id="eq:covarinthelimit">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.10)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+\mathop {\lim }\limits_{k \to \infty } {\gamma _{xx}}[k] = 0\\
+\mathop {\lim }\limits_{k \to \infty } {\gamma _{xy}}[k] = 0
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>As <span class="arithmatex">\(k \to \infty ,\)</span> correlations and covariances can exhibit a form of memory
+loss, of forgetting their relation to earlier values.</p>
+<p>These results provide us with tools that can help us estimate the long
+term correlation and variation of one or more random processes. We have
+specifically stated “many processes” but not “all processes”. See <a href="#problem-52">Problem 5.2</a> to explore this.</p>
+<h2 id="the-mechanics-of-correlations-redux">The mechanics of correlations - redux<a class="headerlink" href="#the-mechanics-of-correlations-redux" title="Permanent link">&para;</a></h2>
+<p>An issue that we have avoided until now is: how do we actually calculate the autocorrelation or cross-correlation of a random signal? According to <a href="Chap_4.html#eq:stat_corr-def2">Equation 4.24</a>, we need to know the joint probability distributions at two points <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(n + m.\)</span> Under the assumption of stationarity this reduces from <span class="arithmatex">\(\varphi [n,n + m]\)</span> to <span class="arithmatex">\(\varphi [m].\)</span> But given an actual random process such as air pressure, internet traffic, or radioactive emissions, we almost never know the joint probability distribution including the values of all of its parameters. Under the assumption of ergodicity, as described in Chapter 4 <a href="Chap_4.html#properties-of-averaging">here</a> and <a href="Chap_4.html#the-ergodic-process">here</a>, an alternative method is available to us.</p>
+<p>When considering the autocorrelation function, for example, instead of
+using <a href="Chap_4.html#eq:stat_corr-def2">Equation 4.24</a> we can use <a href="Chap_4.html#eq:time_acorr">Equation 4.30</a>. Both of these equations are repeated below in <a href="Chap_5.html#eq:acorrtimeavg">Equation 5.11</a> and they illustrate that for ergodic processes ensemble averages can be exchanged for time averages.</p>
+<div class="" id="eq:acorrtimeavg">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.11)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{\varphi _{xx}}[k]}&amp;{ = E\left\{ {x[n]\,{x^*}[n + k]} \right\}}\\
+{}&amp;{ = \; &lt; x[n]\,{x^*}[n + k] &gt; }\\
+{}&amp;{ = \mathop {\lim }\limits_{N \to \infty } \frac{1}{{2N + 1}}\sum\limits_{n =  - N}^{ + N} {x[n]\,{x^*}[n + k]} }
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Even with this reformulation there remains a problem. We never have an
+infinite amount of recorded data; <span class="arithmatex">\(N\)</span> never goes to infinity. This
+brings us instead to <a href="Chap_4.html#eq:finite_acorr">Equation 4.34</a> where a
+finite amount of data is used to estimate a correlation function. This
+means that we can use the following formulation.</p>
+<div class="" id="eq:acorrtimeavg_finite">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.12)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+{\varphi _{xx}}[k] = \;\frac{1}{{2N + 1}}\sum\limits_{n =  - N}^{ + N} {x[n]\,{x^*}[n + k]} \\
+{\varphi _{xy}}[k] = \;\frac{1}{{2N + 1}}\sum\limits_{n =  - N}^{ + N} {x[n]\,{y^*}[n + k]} 
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>As the term <span class="arithmatex">\(1/\left( {2N + 1} \right)\)</span> is only a scale factor—albeit an important one when comparing estimates of correlation functions based upon data sets of different lengths—we further simplify this to:</p>
+<div class="" id="eq:acorrtimeavg_scaled">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.13)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+{\varphi _{xx}}[k] = \;\sum\limits_{n =  - N}^{ + N} {x[n]\,{x^*}[n + k]} \\
+{\varphi _{xy}}[k] = \;\sum\limits_{n =  - N}^{ + N} {x[n]\,{y^*}[n + k]} 
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The formulas for calculating the autocorrelation and crosscorrelation of
+stochastic signals are now similar to the ones for deterministic signals Oppenheim<sup id="fnref:oppenheim1996"><a class="footnote-ref" href="#fn:oppenheim1996">1</a></sup>.</p>
+<p>To summarize, if the processes we are studying are ergodic, we use finite
+data sets to calculate correlation functions (and means and covariance
+functions). Papoulis<sup id="fnref:papoulis1965"><a class="footnote-ref" href="#fn:papoulis1965">2</a></sup> stated this in a most
+succinct way:</p>
+<p><a class="quote" href="">“x(t) is ergodic in the most general form if (with probability 1) all its statistics can be determined from a single function x(t,ζ) of the process.”</a></p>
+<p>This, of course, holds for discrete-time ergodic processes as well.</p>
+<h2 id="fourier-description-of-correlation-functions">Fourier description of correlation functions<a class="headerlink" href="#fourier-description-of-correlation-functions" title="Permanent link">&para;</a></h2>
+<p>We now look at the Fourier transform of the autocorrelation function for
+the complex ergodic random process <span class="arithmatex">\(x[n].\)</span> We should remember that
+<span class="arithmatex">\({\varphi _{xx}}[k]\)</span> is not a random process. The Fourier
+transform of the autocorrelation function—if it exists—is called the
+<em>power spectrum</em> (or power density spectrum) of the random process.
+This name will be explained later.</p>
+<p>Existence of the Fourier transform is not a trivial matter. A random
+process <span class="arithmatex">\(x[n]\)</span> might be ergodic but it need not be absolutely
+integrable, a condition for the existence of its Fourier spectrum; see
+Section 5.1.3 of Oppenheim<sup id="fnref2:oppenheim1996"><a class="footnote-ref" href="#fn:oppenheim1996">1</a></sup>. The same holds for the autocorrelation function associated with <span class="arithmatex">\(x[n].\)</span></p>
+<h2 id="a-digression">A digression<a class="headerlink" href="#a-digression" title="Permanent link">&para;</a></h2>
+<p>Ignoring the issue of convergence can lead to surprising results.
+Consider, for example, the <em>deterministic</em> signal given by:</p>
+<div class="" id="eq:asymp_signal">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.14)</td>
+<td class="eqTableEq">
+<div>$$x[n] = \left( {1 - {{\left( {\frac{1}{2}} \right)}^n}} \right)u[n]$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>This signal is depicted in <a href="#fig:asymp_signal_fig">Figure 5.1</a>.</p>
+<figure class="figaltcap fullsize" id="fig:asymp_signal_fig"><img src="images/Fig_5_1.png" /><figcaption><strong>Figure 5.1:</strong> A deterministic signal <span class="arithmatex">\(x\lbrack n\rbrack\)</span> that starts at 0 and reaches an asymptotic value of 1.</figcaption>
+</figure>
+<p>As mentioned before, the autocorrelation of a deterministic signal is
+defined by Oppenheim<sup id="fnref3:oppenheim1996"><a class="footnote-ref" href="#fn:oppenheim1996">1</a></sup>:  </p>
+<div class="" id="eq:acorr_determ_2">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.15)</td>
+<td class="eqTableEq">
+<div>$${\varphi _{xx}}[k] = \sum\limits_{n =  - \infty }^{ + \infty } {x[n]{x^*}[n + k]}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Substituting the specific signal <a href="Chap_5.html#eq:asymp_signal">Equation 5.14</a> into <a href="Chap_5.html#eq:acorr_determ_2">Equation 5.15</a> gives:</p>
+<div class="" id="eq:acorr_nasty_1">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.16)</td>
+<td class="eqTableEq">
+<div>$${\varphi _{xx}}[k] = \sum\limits_{n =  - \infty }^{ + \infty } {\left( {1 - {{\left( {\frac{1}{2}} \right)}^n}} \right)\left( {1 - {{\left( {\frac{1}{2}} \right)}^{n + k}}} \right)u[n]u[n + k]}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The two step functions <span class="arithmatex">\(u[n]\)</span> and <span class="arithmatex">\(u[n + k]\)</span> both “start”—go from 0 to
+1—at some finite time and then remain at 1 as <span class="arithmatex">\(n\)</span> increases. Their
+<em>product</em> starts at <span class="arithmatex">\(\max \left( {0, - k} \right).\)</span> If <span class="arithmatex">\(k \ge 0,\)</span> then the start time of
+the product is <span class="arithmatex">\(n = 0.\)</span> If <span class="arithmatex">\(k &lt; 0,\)</span> then the start time of the
+product is <span class="arithmatex">\(n =  - k.\)</span> From <a href="Chap_5.html#eq:autoeven">Equation 5.5</a> we know that the autocorrelation
+of a signal, whether it is deterministic or stochastic, is an even
+function. This means we only have to evaluate <a href="Chap_5.html#eq:acorr_nasty_1">Equation 5.16</a> for <span class="arithmatex">\(k \ge 0.\)</span> The
+rest will follow from the even symmetry.</p>
+<p>Multiplying the various terms in  <a href="Chap_5.html#eq:acorr_nasty_1">Equation 5.16</a>, the first of which yields
+<span class="arithmatex">\(\sum\nolimits_n 1,\)</span> it should be obvious that this sum diverges.</p>
+<p>To study the behavior of <a href="Chap_5.html#eq:acorr_nasty_1">Equation 5.16</a> we introduce a window function,
+<span class="arithmatex">\(w[n]\)</span>:</p>
+<div class="" id="eq:window_1">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.17)</td>
+<td class="eqTableEq">
+<div>$$w[n] = \left\{ {\begin{array}{*{20}{c}}
+1&amp;{\left| n \right| \le N}\\
+0&amp;{\left| n \right| &gt; N}
+\end{array}} \right.$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>such that <span class="arithmatex">\(x[n]\)</span> is replaced by <span class="arithmatex">\(x[n]\,w[n].\)</span> Eventually we will let
+<span class="arithmatex">\(N \to \infty.\)</span> The autocorrelation is then rewritten for <span class="arithmatex">\(k \ge 0\)</span> as:</p>
+<div class="" id="eq:acorr_window_1">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.18)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+{\varphi _{xx}}[k] = \sum\limits_{n =  - \infty }^\infty  {\left( {1 - {{\left( {\frac{1}{2}} \right)}^n}} \right)w[n]\left( {1 - {{\left( {\frac{1}{2}} \right)}^{n + k}}} \right)} w[n + k]\\
+\,\,\,\,\,\, = \sum\limits_{n = 0}^{N - k} {\left( {1 - {{\left( {\frac{1}{2}} \right)}^n}} \right)\left( {1 - {{\left( {\frac{1}{2}} \right)}^{n + k}}} \right)} 
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Notice how the limits on the sum have changed. Four terms are involved
+in this sum, the last three of which are “well-behaved”; they converge
+as <span class="arithmatex">\(N \to \infty.\)</span> The result including the even symmetry is:</p>
+<div class="" id="eq:acorr_window_2">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.19)</td>
+<td class="eqTableEq">
+<div>$${\varphi _{xx}}[k] = \left( {\mathop {\lim }\limits_{N \to \infty } N} \right) - \left| k \right| - \left( {\frac{2}{3}} \right){\left( {\frac{1}{2}} \right)^{\left| k \right|}} - 1$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The result is shown in <a href="#fig:acorr_nasty_fig">Figure 5.2</a>.  </p>
+<figure class="figaltcap fullsize" id="fig:acorr_nasty_fig"><img src="images/Fig_5_2.png" /><figcaption><strong>Figure 5.2:</strong> Autocorrelation function of <span class="arithmatex">\(x[n\rbrack\)</span> in <a href="Chap_5.html#eq:asymp_signal">Equation 5.14</a> plotted for <span class="arithmatex">\(\left| k \right| \le 10.\)</span> The value of <span class="arithmatex">\({\varphi _{xx}}[k = 0\rbrack = N - 5/3\)</span> where <span class="arithmatex">\(N\)</span> describes the width of window <span class="arithmatex">\(w[n\rbrack\)</span>. In this calculation <span class="arithmatex">\(N = 20,000.\)</span></figcaption>
+</figure>
+<p>The seemingly simple deterministic signal <span class="arithmatex">\(x[n]\)</span>—a signal which is not a
+pathological oddity but, in fact, describes a variety of common,
+physical processes—does not have a simple autocorrelation function. Why
+is this?</p>
+<p>In the time domain it is obvious from <a href="#fig:asymp_signal_fig">Figure 5.1</a> that <span class="arithmatex">\(x[n]\)</span> is summable
+in neither the absolute sense (<em>L<sup>1</sup></em>–norm) nor the quadratic sense
+(<em>L<sup>2</sup></em>–norm). Thus the sum in <a href="Chap_5.html#eq:acorr_nasty_1">Equation 5.16</a> is, formally, not possible.</p>
+<p>The Fourier transform of <span class="arithmatex">\(x[n]\)</span> also provides insight into the problem.
+The spectrum <span class="arithmatex">\(X\left( \Omega  \right)\)</span> is given by:</p>
+<div class="" id="eq:Fourier_nasty_1">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.20)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{X(\Omega )}&amp;{ = \sum\limits_{n =  - \infty }^{ + \infty } {x[n]{e^{ - j\Omega n}}}  = \sum\limits_{n =  - \infty }^{ + \infty } {\left( {1 - {{\left( {\frac{1}{2}} \right)}^n}} \right)u[n]{e^{ - j\Omega n}}} }\\
+{}&amp;{ = \sum\limits_{n =  - \infty }^{ + \infty } {u[n]{e^{ - j\Omega n}}}  - \sum\limits_{n =  - \infty }^{ + \infty } {{{\left( {\frac{1}{2}} \right)}^n}u[n]{e^{ - j\Omega n}}} }\\
+{}&amp;{ = {\rm{ }}{\mathscr{F}}\left\{ {u[n]} \right\} - \sum\limits_{n = 0}^{ + \infty } {{{\left( {\frac{1}{2}} \right)}^n}{e^{ - j\Omega n}}} }\\
+{}&amp;{ = {\rm{ }}{\mathscr{F}}\left\{ {u[n]} \right\} - \left( {\frac{1}{{1 - \frac{1}{2}{e^{ - j\Omega }}}}} \right)}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The difficulty originates in the first term, the Fourier transform of a
+unit step function. This transform is known Oppenheim<sup id="fnref4:oppenheim1996"><a class="footnote-ref" href="#fn:oppenheim1996">1</a></sup> and Oppenheim<sup id="fnref:oppenheim1999_2.9"><a class="footnote-ref" href="#fn:oppenheim1999_2.9">3</a></sup> and is given in the baseband <span class="arithmatex">\(- \pi  \lt  \Omega  \le  + \pi\)</span> by:</p>
+<div class="" id="eq:Fourier_step">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.21)</td>
+<td class="eqTableEq">
+<div>$${\mathscr{F}}\left\{ {u[n]} \right\} = \left( {\frac{1}{{1 - {e^{ - j\Omega }}}}} \right) + \pi \,\delta (\Omega )$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>This spectrum of a discrete-time signal is, of course, periodic and is
+specified in <a href="Chap_5.html#eq:Fourier_step">Equation 5.21</a> in the baseband frequency range,  <span class="arithmatex">\(- \pi  \lt \Omega  \le  + \pi.\)</span> Both terms in <a href="Chap_5.html#eq:Fourier_step">Equation 5.21</a> diverge for <span class="arithmatex">\(\Omega  = 0\)</span> and the behavior of
+<span class="arithmatex">\({\left| {X(\Omega )} \right|^2}\)</span>—whose relevance will be discussed
+later—becomes intractable.</p>
+<p>This may all seem like “much ado about nothing” but that is not the
+case. We will make extensive use of the Fourier representation of
+stochastic signals as in the example in <a href="Chap_5.html#predicting-the-natural-climate-a-case-study">Chapter 5</a> and, as we shall see in <a href="Chap_7.html">Chapter 7</a>, the divergence “problem” shown above may provide insights into the behavior of physical processes.  </p>
+<h2 id="the-power-density-spectrum-and-its-properties">The power density spectrum and its properties<a class="headerlink" href="#the-power-density-spectrum-and-its-properties" title="Permanent link">&para;</a></h2>
+<p>When the autocorrelation function exists, the power density spectrum is
+given by:  </p>
+<div class="mainresult" id="eq:pds_def">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.22)</td>
+<td class="eqTableEq">
+<div>$${S_{xx}}(\Omega ) = {\mathscr{F}}\left\{ {{\varphi _{xx}}[k]} \right\} = \sum\limits_{k =  - \infty }^{ + \infty } {{\varphi _{xx}}[k]{e^{ - j\Omega k}}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Standard Fourier theory gives the inverse transform as:  </p>
+<div class="mainresult" id="eq:invpds_def">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.23)</td>
+<td class="eqTableEq">
+<div>$${\varphi _{xx}}[k] = {\mathscr{F}^{ - 1}}\left\{ {{S_{xx}}(\Omega )} \right\} = \frac{1}{{2\pi }}\int\limits_{ - \pi }^{ + \pi } {{S_{xx}}(\Omega )} {e^{ + j\Omega k}}d\Omega$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Note that <span class="arithmatex">\({S_{xx}}(\Omega )\)</span> does not require the convergence condition to perform
+the inverse transform in <a href="Chap_5.html#eq:invpds_def">Equation 5.23</a> as it is periodic in the frequency
+domain and the integral involves the interval from <span class="arithmatex">\(- \pi\)</span> to <span class="arithmatex">\(+ \pi.\)</span> When the
+convergence conditions in the time-domain are satisfied then we can
+describe and use the Fourier transform pair
+<span class="arithmatex">\(\left\{ {{\varphi _{xx}}[k],{S_{xx}}(\Omega )} \right\}\)</span> as
+shown in the <a href="https://en.wikipedia.org/wiki/Wiener%E2%80%93Khinchin_theorem">Wiener-Khinchin</a>
+theorem.</p>
+<p>If we now substitute <a href="Chap_5.html#eq:acorrtimeavg_scaled">Equation 5.13</a> into <a href="Chap_5.html#eq:pds_def">Equation 5.22</a>, the power density spectrum of the ergodic signal <span class="arithmatex">\(x[n]\)</span> can be written as:</p>
+<div class="" id="eq:pds_calc_gen">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.24)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{S_{xx}}(\Omega )}&amp;{ = \sum\limits_{k =  - \infty }^{ + \infty } {{\varphi _{xx}}[k]{e^{ - j\Omega k}}} }\\
+{}&amp;{ = \;\sum\limits_k {\left( {\sum\limits_n {x[n]{x^*}[n + k]} } \right)} {e^{ - j\Omega k}}}\\
+{}&amp;{ = \;\sum\limits_n {x[n]\sum\limits_k {{x^*}[n + k]{e^{ - j\Omega k}}} } }\\
+{}&amp;{ = \sum\limits_n {x[n]{e^{j\Omega n}}\sum\limits_m {{x^*}[m]{e^{ - j\Omega m}}} } }\\
+{}&amp;{ = X( - \Omega ){X^*}( - \Omega ) = {{\left| {X( - \Omega )} \right|}^2}}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Several remarks are appropriate. First, note the crucial interchange of
+the order of summation of <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(k\)</span> in the third line. The implicit
+assumption is that this is permitted because both sums converge.</p>
+<p>Second, notice that the power density spectrum is related to the Fourier
+transform of the <em>finite length</em> data record <span class="arithmatex">\(x[n].\)</span> Third, we have
+assumed that <span class="arithmatex">\(x[n]\)</span> is complex and we use the Fourier properties that if
+<span class="arithmatex">\(X(\Omega ) = {\mathscr{F}}\left\{ {x[n]} \right\}\)</span> then:</p>
+<ol>
+<li><span class="arithmatex">\(X( - \Omega )\)</span> is the Fourier transform of <span class="arithmatex">\(x[ - n]\)</span>;</li>
+<li><span class="arithmatex">\({X^*}( - \Omega )\)</span> is the Fourier transform of <span class="arithmatex">\({x^*}[n],\)</span> and;</li>
+<li class="listalpha"><span class="arithmatex">\(X(\Omega ){e^{j\Omega k}}\)</span> is the Fourier transform of <span class="arithmatex">\(x[n + k].\)</span></li>
+</ol>
+<p>Finally, using property (a) above, we see that
+<span class="arithmatex">\({\mathscr{F}}\left\{ {{\varphi _{xx}}[ - k]} \right\} = {\left| {X(\Omega )} \right|^2}.\)</span> Note that because <span class="arithmatex">\(x[n]\)</span> is complex,
+<span class="arithmatex">\({\mathscr{F}}\left\{ {{\varphi _{xx}}[ - k]} \right\} \ne {\mathscr{F}}\left\{ {{\varphi _{xx}}[k]} \right\}.\)</span> The auto-correlation function is not even but conjugate symmetric:
+<span class="arithmatex">\({\varphi _{xx}}[k] = \varphi _{xx}^*[ - k].\)</span> See <a href="Chap_5.html#eq:autoeven">Equation 5.5</a>.  </p>
+<p>Using several of the properties derived above plus properties of the
+Fourier transform we can show:</p>
+<p>1. Because <span class="arithmatex">\({\varphi _{xx}}[0] = E\left\{ {{{\left| {x[n]} \right|}^2}} \right\} \ge 0,\)</span> we have as a consequence of setting <span class="arithmatex">\(k = 0\)</span> in <a href="Chap_5.html#eq:invpds_def">Equation 5.23</a>:</p>
+<div class="" id="eq:acorr_k_0">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.25)</td>
+<td class="eqTableEq">
+<div>$${\varphi _{xx}}[0] = \frac{1}{{2\pi }}\int\limits_{ - \pi }^{ + \pi } {{S_{xx}}(\Omega )} d\Omega \,\,\, \ge \,\,\,0$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>2. From the conjugate-symmetry property of autocorrelation functions for
+complex signals presented in equation <a href="Chap_5.html#eq:autoeven">Equation 5.5</a> and the properties of the Fourier transform given above, we know that
+the power density spectrum <span class="arithmatex">\({S_{xx}}(\Omega )\)</span> must be real. Starting from
+<span class="arithmatex">\({S_{xx}}(\Omega ) = {\mathscr{F}}\left\{ {{\varphi _{xx}}[k]} \right\},\)</span> the proof is:  </p>
+<div class="" id="eq:proveSreal">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.26)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{S_{xx}^*( - \Omega )}&amp;{ = {\mathscr{F}}\{ \varphi _{xx}^*[k]\} }&amp;{\left( {property\,b} \right)}\\
+{S_{xx}^*(\Omega )}&amp;{ = {\mathscr{F}}\{ \varphi _{xx}^*[ - k]\} }&amp;{\left( {property\,a} \right)}\\
+{{\varphi _{xx}}[k]}&amp;{ = \varphi _{xx}^*[ - k]}&amp;{\left( {Eq.\,\,5.5} \right)}\\
+ \downarrow &amp;{\,\,\,\,\, \downarrow }&amp;{}\\
+{{S_{xx}}(\Omega )}&amp;{ = S_{xx}^*(\Omega )}&amp;{}\\
+{ \Rightarrow {S_{xx}}(\Omega )\,\,is\,\,real}&amp;{}&amp;{}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>3. If the random process <span class="arithmatex">\(x[n]\)</span> is also real, then <span class="arithmatex">\({\varphi _{xx}}[k]\)</span> will be real and even meaning that <span class="arithmatex">\({S_{xx}}(\Omega )\)</span> will also be real and even. The proof of this last statement is considered in <a href="#problem-54">Problem 5.4</a>.</p>
+<p>We can also define a <em>cross-power spectrum</em> for two complex ergodic
+signals, <span class="arithmatex">\(x[n]\)</span> and <span class="arithmatex">\(y[n]\)</span> as:</p>
+<div class="mainresult" id="eq:cross_pds_def">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.27)</td>
+<td class="eqTableEq">
+<div>$${S_{xy}}(\Omega ) = {\mathscr{F}}\left\{ {{\varphi _{xy}}[k]} \right\} = \sum\limits_{k =  - \infty }^{ + \infty } {{\varphi _{xy}}[k]{e^{ - j\Omega k}}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>and</p>
+<div class="mainresult" id="eq:inv_crosspds_def">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.28)</td>
+<td class="eqTableEq">
+<div>$${\varphi _{xy}}[k] = {\mathscr{F}^{ - 1}}\left\{ {{S_{xy}}(\Omega )} \right\} = \frac{1}{{2\pi }}\int\limits_{ - \pi }^{ + \pi } {{S_{xy}}(\Omega )} {e^{ + j\Omega k}}d\Omega$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Using the same steps as in <a href="Chap_5.html#eq:pds_calc_gen">Equation 5.24</a> we can show that the cross power
+spectral density is given by:</p>
+<div class="" id="eq:crosspds_calc_gen">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.29)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{S_{xy}}(\Omega )}&amp;{ = \sum\limits_{k =  - \infty }^{ + \infty } {{\varphi _{xy}}[k]{e^{ - j\Omega k}}} }\\
+{}&amp;{ = \;\sum\limits_k {\left( {\sum\limits_n {x[n]{y^*}[n + k]} } \right)} {e^{ - j\Omega k}}}\\
+{}&amp;{ = \sum\limits_n {x[n]{e^{j\Omega n}}\sum\limits_m {{y^*}[m]{e^{ - j\Omega m}}} } }\\
+{}&amp;{ = X( - \Omega ){Y^*}( - \Omega )}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>We will make use of all of these definitions later when we discuss
+several applications. First, however, it is useful to look at several
+examples. In <a href="Chap_6.html#filtering-of-stochastic-signals">Chapter 6</a> we will then develop a description of how random signals are processed by linear, time-invariant (LTI) systems.</p>
+<p>Summarizing we have for complex signals:</p>
+<div class="mainresult" id="eq:summ_pds_gen">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.30)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{S_{xx}}(\Omega )}&amp;{ = {{\left| {X( - \Omega )} \right|}^2}}\\
+{{S_{xy}}(\Omega )}&amp;{ = X( - \Omega ){Y^*}( - \Omega )}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>and for real signals:</p>
+<div class="specialresult" id="eq:summ_pds_real">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.31)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{S_{xx}}(\Omega )}&amp;{ = {{\left| {X(\Omega )} \right|}^2}}\\
+{{S_{xy}}(\Omega )}&amp;{ = X(\Omega ){Y^*}(\Omega )}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<h2 id="examples-of-power-spectra">Examples of power spectra<a class="headerlink" href="#examples-of-power-spectra" title="Permanent link">&para;</a></h2>
+<h4 id="example-white-noise">Example: White noise<a class="headerlink" href="#example-white-noise" title="Permanent link">&para;</a></h4>
+<p>Consider an autocorrelation function of the form</p>
+<div class="" id="eq:acorr_wnoise">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.32)</td>
+<td class="eqTableEq">
+<div>$${\varphi _{xx}}[k] = I\,\delta [k]$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The power spectrum is given by</p>
+<div class="" id="eq:pds_wnoise">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.33)</td>
+<td class="eqTableEq">
+<div>$${S_{xx}}(\Omega ) = {\mathscr{F}}\left\{ {I\,\delta [k]} \right\} = I\sum\limits_{k =  - \infty }^{ + \infty } {\delta [k]{e^{ - j\Omega k}}}  = I$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>We see that the spectrum has the same amplitude for all frequencies; if
+we graph <span class="arithmatex">\({S_{xx}}(\Omega ) = I\)</span> versus <span class="arithmatex">\(\Omega,\)</span> it is “flat”. Because no
+particular frequency dominates the spectrum we say that the spectrum is
+“white”. This is the origin of the term <em>white noise</em><sup id="fnref:whitenoise"><a class="footnote-ref" href="#fn:whitenoise">4</a></sup>. See Porat<sup id="fnref:porat1994"><a class="footnote-ref" href="#fn:porat1994">5</a></sup> and Oppenheim<sup id="fnref:oppenheim1999_2.10"><a class="footnote-ref" href="#fn:oppenheim1999_2.10">6</a></sup>.</p>
+<h4 id="example-pink-noise">Example: Pink noise<a class="headerlink" href="#example-pink-noise" title="Permanent link">&para;</a></h4>
+<p>Let the autocorrelation function of a random process be given by:</p>
+<div class="" id="eq:acorr_pnoise">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.34)</td>
+<td class="eqTableEq">
+<div>$${\varphi _{xx}}[k] = {\left( {\frac{1}{2}} \right)^{\left| k \right|}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The power spectrum is given by:</p>
+<div class="" id="eq:pds_pnoise">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.35)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{S_{xx}}(\Omega )}&amp;{ = \sum\limits_{k =  - \infty }^{ + \infty } {{{\left( {\frac{1}{2}} \right)}^{\left| k \right|}}{e^{ - j\Omega k}}} }\\
+{\,\,\,}&amp;{ = \sum\limits_{k =  - \infty }^0 {{{\left( {\frac{1}{2}} \right)}^{ - k}}{e^{ - j\Omega k}}}  + \sum\limits_{k = 0}^{ + \infty } {{{\left( {\frac{1}{2}} \right)}^k}{e^{ - j\Omega k}}}  - 1}\\
+{\,\,\,}&amp;{ = \frac{3}{{5 - 4\cos \Omega }}}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>This random process is not white as the spectrum is certainly not flat.
+We can use other properties we have developed to determine the average value <span class="arithmatex">\({m_x}\)</span> and the mean-square <span class="arithmatex">\(E\left\{ {{{\left| {x[n]} \right|}^2}} \right\}.\)</span> As <span class="arithmatex">\(k \to \infty\)</span> we have from <a href="Chap_5.html#eq:autointhelimit">Equation 5.8</a> that <span class="arithmatex">\({\varphi _{xx}}[k] \to {\left| {{m_x}} \right|^2}.\)</span> For this example <span class="arithmatex">\({m_x} = 0\)</span> and the mean-square <span class="arithmatex">\(E\left\{ {{{\left| {x[n]} \right|}^2}} \right\}\)</span> is given by <span class="arithmatex">\({\varphi _{xx}}[0] = 1.\)</span></p>
+<p>The spectra from these two examples are illustrated in <a href="#fig:pds_noise_figs_a">Figure 5.3</a>.</p>
+<figcaption style="color:#2c5272;">
+(<i>a</i>) <i>White noise spectrum</i>
+</figcaption>
+
+<figure class="figaltcap" id="fig:pds_noise_figs_a"><img src="images/Fig_5_3_T.png" /><figcaption></figcaption>
+</figure>
+<figcaption style="color:#2c5272;">
+(<i>b</i>) <i>Pink noise spectrum</i>
+</figcaption>
+
+<figure class="figaltcap" id="fig:pds_noise_figs_b"><img src="images/Fig_5_3_B.png" /><figcaption><strong>Figure 5.3:</strong> Spectra of two noise processes.</figcaption>
+</figure>
+<p>Note that we plot the spectra between <span class="arithmatex">\(- \pi  \lt \Omega  \le  + \Omega\)</span> for the simple reason that the Fourier spectrum for any discrete time signal is periodic, that
+is, <span class="arithmatex">\(X(\Omega ) = X(\Omega  + 2\pi ).\)</span> Thus it is sufficient to show or describe only one
+period.</p>
+<h2 id="predicting-the-natural-climate-a-case-study">Predicting the natural climate - a case study<a class="headerlink" href="#predicting-the-natural-climate-a-case-study" title="Permanent link">&para;</a></h2>
+<p>We have developed a collection of powerful tools, in particular, the power density spectrum
+and the correlation function. Let us see how they can be used to gain insight 
+into a well-known stochastic physical phenomenon, the weather.</p>
+<p>On the cover of this iBook we show three basic concepts that have been 
+discussed until now: a stochastic signal, its correlation function, and
+its power spectral density. Let us now look at some real data to see
+what insights these tools can give us. We again use data from the Royal
+Netherlands Meteorological Institute
+(<a href="https://www.knmi.nl/klimatologie/daggegevens/download.html">KNMI</a>). We
+use their data concerning the average daily temperature and the average
+daily air pressure.</p>
+<p>We begin with the original data. For temperature, the data start at 1
+January 1901 and we use the measurements until 31 December 2009. This
+consists of <span class="arithmatex">\({N_T} = 39,812\)</span> days. For the air pressure, we use the data at
+the first available date which is 1 January 1902 and then (again) until
+31 December 2009. This represents <span class="arithmatex">\({N_P} = 39,447\)</span> days. The data are
+displayed in <a href="#fig:KNMI_data_figs">Figure 5.4</a>.</p>
+<figure class="figaltcap fullsize" id="fig:KNMI_data_figs"><img src="images/Fig_5_4.png" /><figcaption><strong>Figure 5.4:</strong> (<em>top</em>) Average daily air temperature and (<em>bottom</em>) average daily air pressure measured at De Bilt, The Netherlands over a period exceeding 100 years.</figcaption>
+</figure>
+<p>The power spectral densities, <span class="arithmatex">\({S_{TT}}\left( \Omega  \right)\)</span> and <span class="arithmatex">\({S_{PP}}\left( \Omega  \right),\)</span> for each of these stochastic signals, <span class="arithmatex">\(T[n]\)</span> and <span class="arithmatex">\(P[n],\)</span> can be computed using the techniques described above <a href="Chap_5.html#eq:pds_calc_gen">Equation 5.24</a> and in <a href="Chap_12.html">Chapter 12</a>. They are shown in <a href="#fig:KNMI_spectra">Figure 5.5</a>. The resulting spectra reveal an interesting difference. The temperature spectrum,  <span class="arithmatex">\({S_{TT}}\left( \Omega  \right),\)</span> shows a clear spectral peak—a significant amount of power—at frequency
+<span class="arithmatex">\({\Omega _k} = k\left( {2\pi /{N_T}} \right)\)</span> with <span class="arithmatex">\(k = 109.\)</span> This translates to a period of <span class="arithmatex">\({N_T}/k = 39812/109 = 365.248\)</span> days, a familiar value. The pressure
+spectrum, <span class="arithmatex">\({S_{PP}}\left( \Omega  \right),\)</span> shows no such peak.</p>
+<figure class="figaltcap fullsize" id="fig:KNMI_spectra"><img src="images/Fig_5_5.png" /><figcaption><strong>Figure 5.5:</strong> The <span class="arithmatex">\({\log _{10}}\left(  \bullet  \right)\)</span> of the power spectral densities for (<em>top</em>) air temperature <span class="arithmatex">\({S_{TT}}\left( \Omega  \right)\)</span> and (bottom) air pressure <span class="arithmatex">\({S_{PP}}\left( \Omega  \right).\)</span> The spectra are displayed for <span class="arithmatex">\(0  \lt  \Omega  \le  \pi /40.\)</span> Note the strong peak in <span class="arithmatex">\({S_{TT}}\left( \Omega  \right).\)</span> The unit of <span class="arithmatex">\(\Omega\)</span> is <span class="arithmatex">\(2\pi /days.\)</span></figcaption>
+</figure>
+<p>The autocorrelation functions, <span class="arithmatex">\({\varphi _{TT}}[k]\)</span> and <span class="arithmatex">\({\varphi _{PP}}[k],\)</span> can also be
+computed. See <a href="#fig:KNMI_correlations_a">Figure 5.6</a>. Due to the size of the
+data sets, we really do compute first the power spectral densities and
+then the autocorrelation functions as the computational efficiency of
+the FFT can then be exploited. (Can you estimate how much more efficient it is to use the &ldquo;FFT route&rdquo; to compute the autocorrelation function as opposed to a direct application of <a href="Chap_5.html#eq:acorrtimeavg_scaled">Equation 5.13</a>?) The spectral peak identified in the power
+density spectrum is clearly reflected in the sinusoidal behavior of the
+autocorrelation function <span class="arithmatex">\({\varphi _{TT}}[k]\)</span> and the one year period is obvious. A
+weather period of one year in daily temperatures is hardly surprising.
+But being able to use yearly, stochastic variations in temperature to
+estimate the length of the solar year with high accuracy might be
+surprising. The value given above, 365.248 days is only 0.002% above the
+<a href="https://en.wikipedia.org/wiki/Tropical_year">currently accepted value</a>
+for the solar year of 365.242 days.</p>
+<p>What may also be surprising is the impulse-like autocorrelation function
+associated with air pressure, <span class="arithmatex">\({\varphi _{PP}}[k].\)</span> At the scale shown in <a href="#fig:KNMI_correlations_a">Figure 5.6</a>, we have essentially <span class="arithmatex">\({\varphi _{PP}}[k] = A\,\delta [k].\)</span> There is virtually no month-to-month or year-to-year correlation in air pressure. If one is to be sought it should be at much shorter time scales than a one-month period.</p>
+<figcaption style="color:#2c5272;">
+(<i>a</i>) <i>Autocorrelation of <b>temperature</b>, ${\varphi _{TT}}\lbrack k\rbrack,$ <b>five year</b> interval</i>
+</figcaption>
+
+<figure class="figaltcap" id="fig:KNMI_correlations_a"><img src="images/Fig_5_6_a.png" /><figcaption></figcaption>
+</figure>
+<figcaption style="color:#2c5272;">
+(<i>b</i>) <i>Autocorrelation of <b>temperature</b>, ${\varphi _{TT}}\lbrack k\rbrack,$ <b> first ten weeks</b> interval</i>
+</figcaption>
+
+<figure class="figaltcap" id="fig:KNMI_correlations_b"><img src="images/Fig_5_6_b.png" /><figcaption></figcaption>
+</figure>
+<figcaption style="color:#2c5272;">
+(<i>c</i>) <i>Autocorrelation of <b>pressure</b>, ${\varphi _{PP}}\lbrack k\rbrack,$ <b>five year</b> interval</i>
+</figcaption>
+
+<figure class="figaltcap" id="fig:KNMI_correlations_c"><img src="images/Fig_5_6_c.png" /><figcaption></figcaption>
+</figure>
+<figcaption style="color:#2c5272;">
+(<i>d</i>) <i>Autocorrelation of <b>pressure</b>, ${\varphi _{PP}}\lbrack k\rbrack,$ <b>first three weeks</b> interval</i>
+</figcaption>
+
+<figure class="figaltcap fullsize" id="fig:KNMI_correlations_d"><img src="images/Fig_5_6_d.png" /><figcaption><strong>Figure 5.6:</strong> Autocorrelation functions for temperature <span class="arithmatex">\({\varphi _{TT}}\lbrack k\rbrack\)</span> and pressure <span class="arithmatex">\({\varphi _{PP}}\lbrack k\rbrack\)</span> for the two stochastic signals <span class="arithmatex">\(T[n\rbrack\)</span> and <span class="arithmatex">\(P[n\rbrack.\)</span></figcaption>
+</figure>
+<p>On a shorter time scale we do see short-term correlations. The average
+daily air temperature correlation falls to 50% of its maximum value, see
+<a href="Chap_5.html#\varphi _{TT">Figure 5.6b</a>, after 49.4 days. Given four
+seasons each of about 91 days, this is about half a season. The average
+daily air pressure correlation, however, falls to 50% of its maximum
+value after only 3.4 days, half a week. Put another way, the average
+daily air pressure is correlated over a significantly shorter time scale
+than the average daily air temperature.</p>
+<p>We emphasize through these examples that correlation functions and
+spectral densities are tools and that they can be useful in
+understanding the structure of complex data.</p>
+<h2 class="problems" id="problems">Problems<a class="headerlink" href="#problems" title="Permanent link">&para;</a></h2>
+<h3 id="problem-51">Problem 5.1<a class="headerlink" href="#problem-51" title="Permanent link">&para;</a></h3>
+<p>Prove <a href="Chap_5.html#eq:autoeven">Equation 5.5</a> and the second part of  <a href="Chap_5.html#eq:crossHermitian">Equation 5.6</a>.</p>
+<h3 id="problem-52">Problem 5.2<a class="headerlink" href="#problem-52" title="Permanent link">&para;</a></h3>
+<p>In the text we state:</p>
+<p><a class="quote" href="">For many processes, as <span class="arithmatex">\(k \to \infty,\)</span> the value of the random signal at time <span class="arithmatex">\(n\)</span> becomes less dependent upon the value at time <span class="arithmatex">\(n + k.\)</span></a></p>
+<ol>
+<li>Describe a common, random process that would <em>not</em> have this property.</li>
+<li>Based upon this example, for what class of random processes would you
+expect that <span class="arithmatex">\(\mathop {\lim }\limits_{x \to \infty } \,{\gamma _{xx}}[k] \ne 0?\)</span></li>
+</ol>
+<h3 id="problem-53">Problem 5.3<a class="headerlink" href="#problem-53" title="Permanent link">&para;</a></h3>
+<p>Consider the following statement:</p>
+<p>For the ergodic random process with a mean <span class="arithmatex">\({m_x}\)</span> and a variance <span class="arithmatex">\(\sigma _x^2,\)</span> we have:</p>
+<div class="" id="eq:var_prop">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(5.36)</td>
+<td class="eqTableEq">
+<div>$$\sigma _x^2 = {\varphi _{xx}}[k = 0] - {\varphi _{xx}}[k = \infty ]$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Discuss the applicability of this statement. When is it valid and when
+can its use lead to problems?</p>
+<h3 id="problem-54">Problem 5.4<a class="headerlink" href="#problem-54" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Show that if <span class="arithmatex">\(x[n]\)</span> is a real, ergodic process then its autocorrelation function <span class="arithmatex">\({\varphi _{xx}}[k]\)</span> will be real and even.</li>
+<li>Show that if <span class="arithmatex">\({\varphi _{xx}}[k]\)</span> is real and even then <span class="arithmatex">\({S_{xx}}(\Omega )\)</span> will also be real and even.</li>
+</ol>
+<h3 id="problem-55">Problem 5.5<a class="headerlink" href="#problem-55" title="Permanent link">&para;</a></h3>
+<p>The cross-correlation, <span class="arithmatex">\({\varphi _{xy}}[k],\)</span> between two real, <em>deterministic</em>
+signals, <span class="arithmatex">\(x[n]\)</span> and <span class="arithmatex">\(y[n],\)</span> is given by:</p>
+<div class="arithmatex">\[{\varphi _{xy}}[k] = \sum\limits_{n =  - \infty }^{ + \infty } {x[n]\,{y^*}[n + k] = } \sum\limits_{n =  - \infty }^{ + \infty } {x[n]\,y[n + k]}\]</div>
+<ol>
+<li>Is the cross-correlation function <span class="arithmatex">\({\varphi _{xy}}[k]\)</span> even? That is, does <span class="arithmatex">\({\varphi _{xy}}[k] = {\varphi _{xy}}[ - k]?\)</span> Explain your answer.</li>
+<li>Determine a general expression for <span class="arithmatex">\({S_{xy}}(\Omega ) = {\mathscr{F}}\left\{ {{\varphi _{xy}}[k]} \right\}\)</span> in terms of <span class="arithmatex">\(X(\Omega )\)</span> and <span class="arithmatex">\(Y(\Omega ).\)</span></li>
+<li>Determine and sketch <span class="arithmatex">\({\varphi _{xy}}[k]\)</span> if <span class="arithmatex">\(x[n] = {a^n}u[n]\)</span> where <span class="arithmatex">\(\left| a \right| &lt; 1\)</span> and <span class="arithmatex">\(y[n] = u[n - 2].\)</span></li>
+</ol>
+<h3 id="problem-56">Problem 5.6<a class="headerlink" href="#problem-56" title="Permanent link">&para;</a></h3>
+<p>The following statement was found in an old textbook:</p>
+<p><a class="quote" href="">Let <span class="arithmatex">\({\varphi _{xx}}[k]\)</span> be the autocorrelation function of an ergodic process and <span class="arithmatex">\({S_{xx}}(f)\)</span> its power density spectrum where <span class="arithmatex">\(\Omega  = 2\pi f.\)</span> Then the following relations hold:</a></p>
+<div class="arithmatex">\[\begin{array}{l}
+{S_{xx}}(f) = {\varphi _{xx}}[0] + 2\sum\limits_{k = 1}^{ + \infty } {{\varphi _{xx}}[k]\cos \left( {2\pi fk} \right)} \\
+{\varphi _{xx}}[k] = 2\int\limits_0^{ + \pi } {{S_{xx}}(f)} \cos \left( {2\pi fk} \right)df
+\end{array}\]</div>
+<p>Under what circumstances are these two relations correct? Explain your
+reasoning.</p>
+<h2 class="labexp" id="laboratory-exercises">Laboratory Exercises<a class="headerlink" href="#laboratory-exercises" title="Permanent link">&para;</a></h2>
+<h3 id="laboratory-exercise-51">Laboratory Exercise 5.1<a class="headerlink" href="#laboratory-exercise-51" title="Permanent link">&para;</a></h3>
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_5.1.html'>
+                <img src='images/CorrelationIconNoSlider_80.png' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        We review your understanding of the difference between convolution and correlation.
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+<!-- 
+### Laboratory Exercise 5.2
+
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_5.2.html'>
+                <img src='images/CorrelationAnimateMic.gif' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        In this exercise we will demonstrate how a cross-correlation ${\varphi _{xy}}[k]$ 
+        “unfolds” as the value of $k$ increases.
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+### Laboratory Exercise 5.3  
+
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_5.3.html'>
+                <img src='images/CorrelationAnimateMic.gif' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        Using an audio signal that you will record, let us look at the calculation of a 
+        correlation function in a little more detail.
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+### Laboratory Exercise 5.4  
+
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_5.4.html'>
+                <img src='images/CorrelationAnimateMic.gif' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        Again, using audio signals that you will record, we examine the autocorrelation and 
+        cross-correlation of two (presumably) different signals.
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+### Laboratory Exercise 5.5  
+
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_5.5.html'>
+                <img src='images/CorrelationAnimateMic.gif' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        Finally, we look at the correlation between a synthetic signal generated
+        within this device and the version heard by the microphone of this device.
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+### Laboratory Exercise 5.6  
+
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_5.6.html'>
+                <img src='images/CorrelationMic.gif' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        We will now look at the power spectral densities together with the autocorrelation 
+        functions for the various audio signals that we have used in the previous 
+        Laboratory Exercises.
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+
+### Laboratory Exercise 5.7  
+
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_5.7.html'>
+                <img src='images/CorrelationMic.gif' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        In this exercise we will look at a number of examples of cross-correlation and 
+        the cross-power density spectrum. You might consider practicing clapping your hands 
+        before you begin. 
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+ -->
+
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:oppenheim1996">
+<p>Oppenheim, A. V., A. S. Willsky and S. H. Nawab (1996). Signals and Systems. Upper Saddle River, New Jersey, Prentice-Hall&#160;<a class="footnote-backref" href="#fnref:oppenheim1996" title="Jump back to footnote 1 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:oppenheim1996" title="Jump back to footnote 1 in the text">&#8617;</a><a class="footnote-backref" href="#fnref3:oppenheim1996" title="Jump back to footnote 1 in the text">&#8617;</a><a class="footnote-backref" href="#fnref4:oppenheim1996" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:papoulis1965">
+<p>Papoulis, A. (1965). Probability, Random Variables, and Stochastic Processes. New York, McGraw-Hill, p. 327&#160;<a class="footnote-backref" href="#fnref:papoulis1965" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:oppenheim1999_2.9">
+<p>Oppenheim, A. V., R. W. Schafer and J. R. Buck (1999). Discrete-Time Signal Processing. Upper Saddle River, New Jersey, Prentice-Hall, Section 2.9&#160;<a class="footnote-backref" href="#fnref:oppenheim1999_2.9" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:whitenoise">
+<p>Actually there are some semantic issues here because white usually refers to color. If an object has a flat spectrum over the wavelength range 400 nm ≤ <span class="arithmatex">\(\lambda\)</span> ≤ 750 nm, we refer to its color as white as perceived by the average observer. Frequency and wavelength are related, however, by <span class="arithmatex">\(f = c/\lambda.\)</span> If the spectrum described in wavelength is flat then the frequency spectrum is not flat. The use of the term “white noise” is thus one of convention (or convenience) as opposed to color&#160;<a class="footnote-backref" href="#fnref:whitenoise" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:porat1994">
+<p>Porat, B. (1994). Digital Processing of Random Signals: Theory &amp; Methods. Englewood Cliffs, New Jersey, Prentice-Hall, Section 2.5&#160;<a class="footnote-backref" href="#fnref:porat1994" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:oppenheim1999_2.10">
+<p>Oppenheim, A. V., R. W. Schafer and J. R. Buck (1999). Discrete-Time Signal Processing. Upper Saddle River, New Jersey, Prentice-Hall, Section 2.10&#160;<a class="footnote-backref" href="#fnref:oppenheim1999_2.10" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+
+<footer class="md-footer" id="jumpToBottom">
+
+  <!-- Link to previous and/or next page -->
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        <!-- Link to previous page -->
+        
+          <a
+            href="Chap_4.html"
+            title="4. Characterization of Random Signals"
+            class="md-footer-nav__link md-footer-nav__link--prev"
+            rel="prev"
+          >
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                4. Characterization of Random Signals
+              </div>
+            </div>
+          </a>
+        
+
+        <!-- Link to next page -->
+        
+          <a
+            href="Chap_6.html"
+            title="6. Filtering of Stochastic Signals"
+            class="md-footer-nav__link md-footer-nav__link--next"
+            rel="next"
+          >
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                6. Filtering of Stochastic Signals
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+</footer>
+      
+    </div>
+    
+      <script src="assets/javascripts/vendor.77e55a48.min.js"></script>
+      <script src="assets/javascripts/bundle.9554a270.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+
+	<script src="js/polyfill/index.js"></script>
+	<script src="search/search_index.js"></script>
+
+
+      <script>
+        app = initialize({
+          base: ".",
+          features: [],
+          search: Object.assign({
+            worker: "assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="js/extra.js"></script>
+      
+        <script src="js/SSPextra.js"></script>
+      
+        <script src="js/mathjax_3_generic_conf.js"></script>
+      
+        <script src="js/mathjax/tex-svg.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1120 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <meta name="author" content="I.T. Young & R. Ligteringen">
+      
+      <link rel="shortcut icon" href="images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.0.2">
+    
+    
+      
+        <title>3. Introduction - Introduction to Stochastic Signal Processing</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.38780c08.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.3f72e892.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Georgia:300,400,400i,700%7CCourier&display=fallback">
+        <style>body,input{font-family:"Georgia",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Courier",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="css/extra.css">
+    
+      <link rel="stylesheet" href="css/imgtxt.css">
+    
+      <link rel="stylesheet" href="css/tables.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#introduction" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <!-- Application header -->
+<header class="md-header" data-md-component="header">
+
+  <!-- Top-level navigation -->
+  <nav class="md-header-nav md-grid" aria-label="Header">
+
+    <!-- Link to home -->
+    <a
+      href="."
+      title="Introduction to Stochastic Signal Processing"
+      class="md-header-nav__button md-logo"
+      aria-label="Introduction to Stochastic Signal Processing"
+    >
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+<!-- 
+  Insert an <img> here as an alternative for the standard logo if desired.
+  Then comment out the above two lines
+ <img src="images/favicon.png" style="margin-top:5px; border: 0px solid lime; border-radius:5px; width:120%; height: auto;" />
+ -->
+
+    </a>
+
+    <!-- Button to open drawer -->
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+
+    <!-- Header title -->
+    <div class="md-header-nav__title" data-md-component="header-title">
+          
+            
+              <a href="#jumpToBottom">
+                <span class="md-header-nav__topic">
+                  Introduction to Stochastic Signal Processing
+                </span>
+                <span class="md-header-nav__topic">
+                  3. Introduction
+                </span>
+              </a>
+            
+          
+    </div>
+
+    <!-- Button to open search dialogue -->
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+
+      <!-- Search interface -->
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    <!-- Repository containing source -->
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Introduction to Stochastic Signal Processing" class="md-nav__button md-logo" aria-label="Introduction to Stochastic Signal Processing">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+<!-- 
+  Insert an <img> here as an alternative for the standard logo if desired.
+  Then comment out the above two lines
+ <img src="images/favicon.png" style="margin-top:5px; border: 0px solid lime; border-radius:5px; width:120%; height: auto;" />
+ -->
+
+    </a>
+    Introduction to Stochastic Signal Processing
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_1.html" class="md-nav__link">
+      1. How to use this iBook
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_2.html" class="md-nav__link">
+      2. Prologue
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        3. Introduction
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="Chap_3.html" class="md-nav__link md-nav__link--active">
+      3. Introduction
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-basics" class="md-nav__link">
+    The basics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-a-random-signal" class="md-nav__link">
+    What is a random signal?
+  </a>
+  
+    <nav class="md-nav" aria-label="What is a random signal?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-dont-bet-on-it" class="md-nav__link">
+    Example: Don’t bet on it
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problems" class="md-nav__link">
+    Problems
+  </a>
+  
+    <nav class="md-nav" aria-label="Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-31" class="md-nav__link">
+    Problem 3.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-32" class="md-nav__link">
+    Problem 3.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-33" class="md-nav__link">
+    Problem 3.3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-34" class="md-nav__link">
+    Problem 3.4
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-35" class="md-nav__link">
+    Problem 3.5
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-36" class="md-nav__link">
+    Problem 3.6
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-37" class="md-nav__link">
+    Problem 3.7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-38" class="md-nav__link">
+    Problem 3.8
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-39" class="md-nav__link">
+    Problem 3.9
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-310" class="md-nav__link">
+    Problem 3.10
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_4.html" class="md-nav__link">
+      4. Characterization of Random Signals
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_5.html" class="md-nav__link">
+      5. Correlations and Spectra
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_6.html" class="md-nav__link">
+      6. Filtering of Stochastic Signals
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_7.html" class="md-nav__link">
+      7. The Langevin Equation – A Case Study
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_8.html" class="md-nav__link">
+      8. Characterizing Signal-to-Noise Ratios
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_9.html" class="md-nav__link">
+      9. The Matched Filter
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_10.html" class="md-nav__link">
+      10. The Wiener filter
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_11.html" class="md-nav__link">
+      11. Aspects of Estimation
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_12.html" class="md-nav__link">
+      12. Spectral Estimation
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_13.html" class="md-nav__link">
+      Appendices
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="info.html" class="md-nav__link">
+      Information
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-basics" class="md-nav__link">
+    The basics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-a-random-signal" class="md-nav__link">
+    What is a random signal?
+  </a>
+  
+    <nav class="md-nav" aria-label="What is a random signal?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-dont-bet-on-it" class="md-nav__link">
+    Example: Don’t bet on it
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problems" class="md-nav__link">
+    Problems
+  </a>
+  
+    <nav class="md-nav" aria-label="Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-31" class="md-nav__link">
+    Problem 3.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-32" class="md-nav__link">
+    Problem 3.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-33" class="md-nav__link">
+    Problem 3.3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-34" class="md-nav__link">
+    Problem 3.4
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-35" class="md-nav__link">
+    Problem 3.5
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-36" class="md-nav__link">
+    Problem 3.6
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-37" class="md-nav__link">
+    Problem 3.7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-38" class="md-nav__link">
+    Problem 3.8
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-39" class="md-nav__link">
+    Problem 3.9
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-310" class="md-nav__link">
+    Problem 3.10
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h1>
+<p>In introductory studies of signals and systems we look at the class of input signals known as &ldquo;deterministic&rdquo; signals, signals where the value of the time function is known, by definition, for every time point <a class="stoch_signal" href=""><span class="arithmatex">\(x[n]\)</span></a>. With the results derived in such studies we can calculate the outputs for linear, time-invariant (LTI) systems with impulse response <span class="arithmatex">\(h[n]\)</span> either through time domain convolution <a href="Chap_3.html#eq:timedomconv">Equation 3.1</a>:</p>
+<div class="" id="eq:timedomconv">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(3.1)</td>
+<td class="eqTableEq">
+<div>$$
+y[n] = x[n] \otimes h[n] \triangleq \sum\limits_{k =  - \infty }^{ + \infty } x [k]h[n - k]
+$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>or through frequency domain multiplication:</p>
+<div class="" id="eq:freqdommul">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(3.2)</td>
+<td class="eqTableEq">
+<div>$$
+Y(\Omega)=X(\Omega)H(\Omega)
+$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>We assume an introductory level knowledge of signal processing and linear system theory. Such an introduction can be found in &ldquo;Signals and Systems&rdquo;<sup id="fnref:oppenheim1996"><a class="footnote-ref" href="#fn:oppenheim1996">1</a></sup>.</p>
+<h2 id="the-basics">The basics<a class="headerlink" href="#the-basics" title="Permanent link">&para;</a></h2>
+<p>The time domain <span class="arithmatex">\(n\)</span> and the frequency domain <span class="arithmatex">\(\Omega\)</span> representations of signals are related through the Fourier transform pair:</p>
+<div class="mainresult" id="eq:fourtranspair">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(3.3)</td>
+<td class="eqTableEq">
+<div>$$
+\begin{aligned}
+X(\Omega)&amp;=\sum_{n={-\infty}}^{+\infty}x[n]e^{{-j}\Omega n}\\
+x[n]&amp;=\frac{1}{2\pi}\int\limits_{-\pi}^{+\pi}X(\Omega)e^{+j\Omega n}d\Omega
+\end{aligned}
+$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>In shorthand notation, <span class="arithmatex">\(X(\Omega)=\mathscr{F}\left\{x[n]\right\}\)</span> and <span class="arithmatex">\(x[n]=\mathscr{F}^{-1}\left\{X(\Omega)\right\}\)</span> where <span class="arithmatex">\(\mathscr{F}\left\{•\right\}\)</span> is the Fourier transform operator. It is important that you are familiar with the computation and properties of Fourier transforms and inverse Fourier transforms and with convolution. The exercises in <a href="#problem-31">Problem 3.1</a> and <a href="#problem-33">Problem 3.3</a> review this material.</p>
+<p>The first eight problems, in fact, are review problems in linear system theory and probability theory. If you find them difficult then you should review the textbooks in these disciplines. Several textbooks are listed below<sup id="fnref2:oppenheim1996"><a class="footnote-ref" href="#fn:oppenheim1996">1</a></sup><sup>,</sup><sup id="fnref:papoulis2002"><a class="footnote-ref" href="#fn:papoulis2002">2</a></sup><sup>,</sup><sup id="fnref:cramer1946"><a class="footnote-ref" href="#fn:cramer1946">3</a></sup>.</p>
+<h2 id="what-is-a-random-signal">What is a random signal?<a class="headerlink" href="#what-is-a-random-signal" title="Permanent link">&para;</a></h2>
+<p>For an important class of input signals, however, the value of the signal at each time point is not known. Only very general properties of the input signal, referred to as <em>averages</em>, are available and it is with these averages that we must try to describe what happens at the output end of an LTI system. These signals are called <em>stochastic</em> or <em>random</em> signals and we can distinguish between two classes:</p>
+<ol>
+<li>Random signals carrying information&mdash;e.g. speech, music, radio astronomy;</li>
+<li>Random signals without information&mdash;noise.</li>
+</ol>
+<p>We will describe both types of random signals in this iBook but, to do so, we must first develop some basic concepts concerning random signals and various averages of random signals. After that we will show how these concepts of stochastic signals can be used. We assume that you are familiar with basic probability theory but to review this material there is &ldquo;Probability, Random Variables, and Stochastic Processes&rdquo;<sup id="fnref2:papoulis2002"><a class="footnote-ref" href="#fn:papoulis2002">2</a></sup> and the classical &ldquo;Mathematical Methods of Statistics&rdquo;<sup id="fnref2:cramer1946"><a class="footnote-ref" href="#fn:cramer1946">3</a></sup>. The exercises in <a href="#problem-34">Problem 3.4</a> review this material.</p>
+<p>We will develop several important themes including:</p>
+<ol>
+<li>Signal-to-noise ratio (SNR) characterizations of systems;</li>
+<li>Choosing linear filters for noise reduction;</li>
+<li>Problems in estimation of Fourier spectra.</li>
+</ol>
+<p>We begin with a simple model for generating a random signal in <a href="#example-dont-bet-on-it">Example &ldquo;Don&rsquo;t bet on it&rdquo;</a>.</p>
+<h4 id="example-dont-bet-on-it">Example: Don’t bet on it<a class="headerlink" href="#example-dont-bet-on-it" title="Permanent link">&para;</a></h4>
+<p>We throw a die once per second (discrete time) and the amplitude of the signal is the number of dots showing on the top die face. If at time <span class="arithmatex">\(n=n_0\)</span> the result is 
+<img src="images/die.png" style="vertical-align:middle;"> then:</p>
+<div class="" id="eq:label4">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(3.4)</td>
+<td class="eqTableEq">
+<div>$$x[n_0]=6\delta[n-n_0]$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>If the die is &ldquo;fair&rdquo; then the probability of die face #<span class="arithmatex">\(i\)</span> appearing on top, <span class="arithmatex">\(p(i)\)</span>, will be the same for all faces and thus <span class="arithmatex">\(p(1)=p(2)=\dots=p(6)=\frac{1}{6}\)</span>. This is just an example of the general requirements for a set of probabilities that could be associated with the six faces of a die.</p>
+<div class="" id="eq:label5">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(3.5)</td>
+<td class="eqTableEq">
+<div>$$\sum_{i=0}^{6}p(i)=1\text{ with }p(i)\geq 0 $$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Over a period of time, that is a number of seconds, we can generate a random signal as shown in <a href="#fig3_1">Figure 3.1</a>.</p>
+<figure class="figaltcap" id="fig3_1"><img src="images/Fig_3_1.png" /><figcaption><strong>Figure 3.1:</strong> First realization of 31 random throws of a fair die.</figcaption>
+</figure>
+<p>This is just one <em>realization</em> of a random signal where the amplitudes are governed by a specific probability function. Performing the experiment again might lead to another realization as shown in <a href="#fig3_2">Figure 3.2</a>.  </p>
+<figure class="figaltcap" id="fig3_2"><img src="images/Fig_3_2.png" /><figcaption><strong>Figure 3.2:</strong> Second realization of 31 random throws of a fair die.</figcaption>
+</figure>
+<p>This concept will be illustrated, later, in <a href="Chap_4.html#laboratory-exercise-41">Laboratory Exercise 4.1</a>.</p>
+<p>We can continue this procedure to generate an infinite number of realizations each governed by the same generating rule, throwing a fair die once per second and using the top face as a signal amplitude at that second. The possible collection of waveforms (<span class="arithmatex">\(x_1[n]\)</span>, <span class="arithmatex">\(x_2[n]\)</span>, <span class="arithmatex">\(x_3[n]\)</span>, <span class="arithmatex">\(x_4[n]\)</span>,&hellip;) together with the probability function for the amplitudes at time <span class="arithmatex">\(n\)</span> form a <em>random process</em>.</p>
+<p>Instead of having the amplitudes governed by the throw of a die, we might find that the amplitudes are taken from the values on the continuous real line between <span class="arithmatex">\({-a}\)</span> and <span class="arithmatex">\(+a\)</span> with probability density function:</p>
+<div class="" id="eq:label8">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(3.6)</td>
+<td class="eqTableEq">
+<div>$$p(\alpha)= \begin{cases} \frac{1}{2a} &amp; \lvert\alpha\rvert\leq a\\ 0 &amp; \lvert\alpha\rvert &gt; a\\ \end{cases} $$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>A graph of this probability function is given in <a href="#fig3_3">Figure 3.3</a>.</p>
+<figure class="figaltcap" id="fig3_3"><img src="images/Fig_3_3.png" /><figcaption><strong>Figure 3.3:</strong> A uniform probability density function, <span class="arithmatex">\(p(\alpha)\)</span>. All realizations between <span class="arithmatex">\(-a\)</span> and <span class="arithmatex">\(+a\)</span> are equally likely. The total probability (area under the curve) is 1.</figcaption>
+</figure>
+<p>It should be clear that at no time point will <span class="arithmatex">\(\lvert x[n]\rvert &gt; a.\)</span> (Can you see why?) Thus <span class="arithmatex">\(\vert x[n]\rvert \leq a.\)</span> But the probability of the amplitude taking on the exact values <span class="arithmatex">\(x[n]=+a\)</span> or <span class="arithmatex">\(x[n]={-a}\)</span> is zero. (The proof of this is left to you; see <a href="#problem-35">Problem 3.5</a>.)</p>
+<p>We might also consider that the amplitudes could be governed by the probability density function (<em>pdf</em>):</p>
+<div class="" id="eq:pdf">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(3.7)</td>
+<td class="eqTableEq">
+<div>$$p(\alpha ) = \frac{1}{{\sigma \sqrt {2\pi } }}{e^{ - {\alpha ^2}/2{\sigma ^2}}}\quad {\kern 1pt}  - \infty  \leqslant \alpha  \leqslant  + \infty $$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>This is perhaps the most well-known and well-studied continuous probability density function, the Gaussian (or normal) function. A graph of this probability function is given in <a href="#fig3_4">Figure 3.4</a>.</p>
+<figure class="figaltcap" id="fig3_4"><img src="images/Fig_3_4.png" /><figcaption><strong>Figure 3.4:</strong> A Gaussian (normal) probability density function, <span class="arithmatex">\(p(\alpha).\)</span> Again, the total area under the curve is 1.</figcaption>
+</figure>
+<p>Examples of realizations from two random processes, one governed by a uniform probability density function and one by a Gaussian probability density function, are shown in <a href="#figudf">Figure 3.5</a> and <a href="#figgdf">Figure 3.6</a>. See <a href="#problem-36">Problem 3.6</a>.</p>
+<figure class="figaltcap" id="figudf"><img src="images/Fig_3_5.png" /><figcaption><strong>Figure 3.5:</strong> Example of samples from a Uniform density function (<span class="arithmatex">\(\mu=1.0, \sigma=1/\sqrt{12}\)</span>)</figcaption>
+</figure>
+<figure class="figaltcap" id="figgdf"><img src="images/Fig_3_6.png" /><figcaption><strong>Figure 3.6:</strong> Example of samples from a Gaussian density function (<span class="arithmatex">\(\mu=1.0, \sigma=1/\sqrt{12}\)</span>)</figcaption>
+</figure>
+<p>Further, we could envision the situation where the random signal is generated by the composite rule from two distributions:</p>
+<div class="arithmatex">\[
+\begin{aligned}
+n\text{ even }(n=\dots, -4, -2, 0, 2, \dots)\rightarrow p(x[n])&amp;=\text{ throw die}\\
+n\text{ odd }(n=\dots, -3, -1, 1, 3, \dots)\rightarrow p(x[n])&amp;=\text{ choose from Gaussian}
+\end{aligned}
+\]</div>
+<p>Of course, we can also talk about continuous-time random signals <span class="arithmatex">\(x(t)\)</span> where, for every instant <span class="arithmatex">\(t,\)</span> a rule is used to generate the value <span class="arithmatex">\(x(t)\)</span> leading to a random signal, a collection (<em>ensemble</em>) of realizations, and thus, together with the probability rule, a random process.</p>
+<p>In our formulation of the random process based upon die throwing, we assumed that all throws were independent of each other, that is, <em>independent events</em>. Thus the outcome of throw <em>n</em> had no influence on the outcome of throw <em>m</em> and vice-vers1. According to basic probability theory this means:</p>
+<div class="" id="eq:label14">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(3.8)</td>
+<td class="eqTableEq">
+<div>$$p(x[n]=i,x[m]=j)=p(x[n]=i)p(x[m]=j)\quad n\neq m;\quad i,j=1,\dots,6 $$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Two variables, <span class="arithmatex">\(x\)</span> and <span class="arithmatex">\(y,\)</span> are said to be <em>statistically independent</em> if <span class="arithmatex">\(p_{x,y}(\alpha, \beta)=p_{x}(\alpha)p_{y}(\beta).\)</span> Thus the die throwing described above forms a random process composed of statistically independent (SI) events. See <a href="#problem-37">Problem 3.7</a>.</p>
+<p>In summary and in preparing to do the following problems you should remember that this is neither an introductory textbook in signal processing nor an introductory textbook in probability theory. Should you have difficulties with these concepts, you should review one of the many textbooks available on these two subjects.</p>
+<h2 class="problems" id="problems">Problems<a class="headerlink" href="#problems" title="Permanent link">&para;</a></h2>
+<h3 id="problem-31">Problem 3.1<a class="headerlink" href="#problem-31" title="Permanent link">&para;</a></h3>
+<p>Compute the Fourier transform <span class="arithmatex">\(X(\Omega)\)</span> of the following signals:</p>
+<ol>
+<li><span class="arithmatex">\(x[n]=\delta[n]=\begin{cases}1&amp;n=0\\0&amp;n\neq 0\end{cases}\)</span></li>
+<li><span class="arithmatex">\(x[n]=\delta[n-10]\)</span></li>
+<li><span class="arithmatex">\(x[n]=e^{{-j}\Omega_{0}n}\)</span></li>
+<li><span class="arithmatex">\(x[n]=\sin(\Omega_{0}n)\)</span></li>
+<li><span class="arithmatex">\(x[n]=e^{{-j}\Omega_{0}n}\sin(\Omega_{0}n)\)</span></li>
+<li><span class="arithmatex">\(x[n]=\left(\frac{1}{2}\right)^{-n}u[n]+2^{n}u[{-n}]-\delta[n]\)</span></li>
+<li><span class="arithmatex">\(x[n]=\begin{cases}1&amp;\lvert n\rvert\leq N\\0&amp;\lvert n\rvert &gt;N\end{cases}\)</span></li>
+<li><span class="arithmatex">\(x[n]=\frac{\sin(n)}{\pi n}\otimes\frac{\sin(2n)}{\pi n}\text{ where}\otimes\text{ is convolution.}\)</span></li>
+</ol>
+<h3 id="problem-32">Problem 3.2<a class="headerlink" href="#problem-32" title="Permanent link">&para;</a></h3>
+<p>Compute the signal <span class="arithmatex">\(x[n]\)</span> described by the following Fourier transforms. Note that as all discrete-time Fourier transforms are periodic, <span class="arithmatex">\(X(\Omega)=X(\Omega+2\pi),\)</span> we describe the transform in the exercises below in the interval <span class="arithmatex">\(- \pi  \lt  \Omega  \le  + \pi,\)</span> the <em>baseband</em>.</p>
+<ol>
+<li><span class="arithmatex">\(X(\Omega ) = \delta (\Omega )\)</span></li>
+<li><span class="arithmatex">\(X(\Omega)=\frac{1}{\left(1-\frac{1}{2}e^{{-j}\Omega}\right)\left(1-\frac{1}{3}e ^{{-j}\Omega}\right)}\)</span></li>
+<li><span class="arithmatex">\(X(\Omega)=\left(\frac{\sin(5\Omega/2)}{\sin(\Omega/2)}\right)^2\)</span></li>
+<li><span class="arithmatex">\(X(\Omega)=\frac{1}{2}(1+\cos^2(\Omega))\)</span></li>
+</ol>
+<h3 id="problem-33">Problem 3.3<a class="headerlink" href="#problem-33" title="Permanent link">&para;</a></h3>
+<p>For each of the examples given below <span class="arithmatex">\(x[n]\)</span> represents an input signal with Fourier transform <span class="arithmatex">\(X(\Omega),\)</span> <span class="arithmatex">\(h[n]\)</span> represents an impulse response of an LTI system with Fourier transform <span class="arithmatex">\(H(\Omega),\)</span> and <span class="arithmatex">\(y[n]\)</span> represents the output signal of the LTI system with Fourier transform <span class="arithmatex">\(Y(\Omega).\)</span></p>
+<p>Given the description of the input and the LTI system below, determine the output <span class="arithmatex">\(y[n].\)</span></p>
+<ol>
+<li><span class="arithmatex">\(x[n]=\delta[n]\qquad h[n]=\frac{\sin(\Omega_0n)}{(\pi n)}\)</span></li>
+<li><span class="arithmatex">\(x[n]=\delta[n-2]\qquad h[n]=\delta[n+3]\)</span></li>
+<li><span class="arithmatex">\(\begin{aligned}x[n]&amp;=\alpha^n u[n]\qquad\lvert\alpha\rvert&lt;1\\h[n]&amp;=\beta^n u[n]\qquad\lvert\beta\rvert&lt;1\end{aligned}\qquad \alpha \neq \beta\)</span></li>
+<li><span class="arithmatex">\(x[n]=e^{{-j}3n}\qquad h[n]=\frac{\sin(2n)}{(\pi n)}\)</span></li>
+<li><span class="arithmatex">\(\begin{aligned}x[n]&amp;=\alpha^n u[n]\qquad\lvert\alpha\rvert&lt;1\\h[n]&amp;=\beta^n u[{-n}]\qquad\lvert\beta\rvert&gt;1\end{aligned}\qquad \alpha \neq \beta\)</span></li>
+<li><span class="arithmatex">\(x[n]=\left(\frac{1}{7}\right)^n u[n]\qquad h[n]=\delta[n]-\frac{1}{7}\delta[n-1]\)</span></li>
+<li><span class="arithmatex">\(X(\Omega)=\left(\frac{\sin(5\Omega/2)}{\sin(\Omega/2)}\right)\qquad H(\Omega)=\left(\frac{\sin(3\Omega/2)}{\sin(\Omega/2)}\right)\)</span></li>
+<li><span class="arithmatex">\(\begin{aligned}x[n]&amp;=\alpha^n u[{-n}]\qquad \lvert\alpha\rvert&gt;1\\h[n]&amp;=\beta^n u[{-n}]\qquad \lvert\beta\rvert&gt;1\end{aligned}\qquad \alpha \neq \beta\)</span></li>
+</ol>
+<h3 id="problem-34">Problem 3.4<a class="headerlink" href="#problem-34" title="Permanent link">&para;</a></h3>
+<p>Each of the functions given below is intended to be a probability density function <span class="arithmatex">\(p(x)\)</span> in the continuous variable <span class="arithmatex">\(x\)</span> or a probability mass function <span class="arithmatex">\(p(n)\)</span> in the discrete variable <span class="arithmatex">\(n.\)</span> For each function determine the value of the constant <span class="arithmatex">\(A,\)</span> the value of the mean <span class="arithmatex">\(\mu,\)</span> and the value of the standard deviation <span class="arithmatex">\(\sigma.\)</span></p>
+<ol>
+<li><span class="arithmatex">\(p(n)=A\delta(n-q)=\begin{cases}A&amp;n=q\\0&amp;n\neq q\end{cases}\quad n,q\in\mathbb{R}\)</span></li>
+<li><span class="arithmatex">\(p(x)=\begin{cases}Ae^{{-Bx}}&amp;x\geq0\\0&amp;x&lt;0\end{cases}\quad B\in\mathbb{R}\text{ and }B&gt;0\)</span></li>
+<li><span class="arithmatex">\(p(n)=A\frac{\lambda^{n}e^{{-\lambda}}}{n!}\qquad n\geq0\text{ and }n\in\mathbb{Z}\)</span></li>
+<li><span class="arithmatex">\(p(x)=\frac{A}{4+x^2}\qquad{-\infty}\leq x\leq{+\infty}\)</span></li>
+<li><span class="arithmatex">\(p(x)=\begin{cases}Axe^{-x^2/2}&amp;x\geq 0\\0&amp;x&lt;0\end{cases}\)</span></li>
+</ol>
+<h3 id="problem-35">Problem 3.5<a class="headerlink" href="#problem-35" title="Permanent link">&para;</a></h3>
+<p>A uniform probability density function is defined in <a href="Chap_3.html#eq:pdf">Equation 3.7</a>.</p>
+<ol>
+<li>What is the probability that the random variable <span class="arithmatex">\(\alpha\)</span> will lie in an interval of width <span class="arithmatex">\(\Delta a\)</span> where the interval is wholly contained in the region where <span class="arithmatex">\(\left| \alpha  \right| &lt; a?\)</span></li>
+<li>What is the probability that <span class="arithmatex">\(\alpha\)</span> will lie in an interval of width <span class="arithmatex">\(\Delta a\)</span> where the interval is wholly contained in the region where <span class="arithmatex">\(\left| \alpha  \right| &gt; a?\)</span></li>
+<li>Determine the mean <span class="arithmatex">\(m_\alpha\)</span> and the standard deviation <span class="arithmatex">\(\sigma_\alpha\)</span> of the random variable <span class="arithmatex">\(\alpha\)</span> for this uniform density function.</li>
+</ol>
+<h3 id="problem-36">Problem 3.6<a class="headerlink" href="#problem-36" title="Permanent link">&para;</a></h3>
+<p>Determine mathematical formulas for the two probability density functions shown in <a href="#figudf">Figure 3.5</a> and <a href="#figgdf">Figure 3.6</a>. Your formulas should not involve any undefined parameters; all parameters should have a numerical value.</p>
+<h3 id="problem-37">Problem 3.7<a class="headerlink" href="#problem-37" title="Permanent link">&para;</a></h3>
+<p>We throw two independent, fair dice as described in <a href="#example-dont-bet-on-it">Example: Don&rsquo;t bet on it</a> producing the numbers <span class="arithmatex">\(i\)</span> and <span class="arithmatex">\(j.\)</span>  </p>
+<ol>
+<li>Determine the probability that <span class="arithmatex">\(i+j=11.\)</span></li>
+<li>Determine the probability mass function <span class="arithmatex">\(p(r)\)</span> where <span class="arithmatex">\(r=\sqrt{i^2+j^2}\)</span>. That is, what are the values of <span class="arithmatex">\(\left\{ p(\sqrt{2}),p(\sqrt{5}),p(\sqrt{8}),\dots,p(6\sqrt{2}) \right\}\)</span>?</li>
+<li>Determine the mean value of <span class="arithmatex">\(r,\)</span> <span class="arithmatex">\(m_r,\)</span> and the standard deviation of <span class="arithmatex">\(r,\)</span> <span class="arithmatex">\(\sigma_r.\)</span></li>
+</ol>
+<h3 id="problem-38">Problem 3.8<a class="headerlink" href="#problem-38" title="Permanent link">&para;</a></h3>
+<p>An even signal is defined by <span class="arithmatex">\(x_e[n]=x_e[{-n}]\)</span> and an odd signal is defined by <span class="arithmatex">\(x_o[n]=-x_o[{-n}].\)</span> <em>Even</em> and <em>odd</em> are symmetry properties. Answer each of the following:</p>
+<ol>
+<li>Let <span class="arithmatex">\(x[n]\)</span> be an arbitrary signal. Determine the formulas that give the even part of <span class="arithmatex">\(x[n]\)</span> and the odd part of <span class="arithmatex">\(x[n].\)</span></li>
+<li>Show that <span class="arithmatex">\(x[n]\)</span> can be represented by the sum of the even signal and the odd signal.</li>
+<li>What is <span class="arithmatex">\(x_o[n=0]?\)</span></li>
+<li>What is <span class="arithmatex">\(\sum\limits_{n={-\infty}}^{+\infty}x_o[n]?\)</span></li>
+<li>What is <span class="arithmatex">\(\sum\limits_{n={-\infty}}^{+\infty}x_e[n]x_o[n]?\)</span></li>
+<li>Express <span class="arithmatex">\(\sum\limits_{n={-\infty}}^{+\infty}\lvert x[n]\rvert^2\)</span> in terms of <span class="arithmatex">\(x_e[n]\)</span> and <span class="arithmatex">\(x_o[n].\)</span> Simplify your answer as much as possible.</li>
+<li>Is <span class="arithmatex">\(x_e[n]\cos(\Omega n)\)</span> an even function of <span class="arithmatex">\(n?\)</span> What symmetry property is associated with the frequency variable <span class="arithmatex">\(\Omega?\)</span></li>
+<li>Repeat the previous part for <span class="arithmatex">\(x_e[n]\sin(\Omega n),\)</span> <span class="arithmatex">\(x_o[n]\cos(\Omega n)\)</span> and <span class="arithmatex">\(x_o[n]\sin(\Omega n).\)</span></li>
+<li>What symmetry properties can be associated with the Fourier transform <span class="arithmatex">\(X(\Omega)\)</span> of an arbitrary signal <span class="arithmatex">\(x[n]?\)</span> What properties can be expected if <span class="arithmatex">\(x[n]\)</span> is a real signal (as opposed to complex)?</li>
+</ol>
+<h3 id="problem-39">Problem 3.9<a class="headerlink" href="#problem-39" title="Permanent link">&para;</a></h3>
+<p>The unit step function <span class="arithmatex">\(u[n]\)</span> has a Fourier transform given by:</p>
+<div class="arithmatex">\[U(\Omega)=\mathscr{F}\left\{u[n]\right\}=\left(\frac{1}{1-e^{{-j}\Omega}}\right)
++\pi\delta(\Omega)\]</div>
+<p>where, once again, the periodic spectrum is specified in the baseband <span class="arithmatex">\(- \pi  \lt  \Omega  \le  + \pi.\)</span> This will be discussed in a section in <a href="Chap_5.html#a-digression">Chapter 5</a>.</p>
+<ol>
+<li>Determine the spectrum of the <em>even</em> part of <span class="arithmatex">\(u[n]\)</span> and the <em>odd</em> part of <span class="arithmatex">\(u[n],\)</span> that is, <span class="arithmatex">\(U_e(\Omega)=\mathscr{F}\left\{u_e[n]\right\}\)</span> and <span class="arithmatex">\(U_o(\Omega)=\mathscr{F}\left\{u_o[n]\right\}.\)</span></li>
+<li>Does <span class="arithmatex">\(U_o(\Omega)\)</span> have the properties one should expect from the odd part of a real signal? Explain your answer.</li>
+</ol>
+<h3 id="problem-310">Problem 3.10<a class="headerlink" href="#problem-310" title="Permanent link">&para;</a></h3>
+<p>This problem is in continuous time instead of discrete time but is, nevertheless, important because it has a link to probability theory. <em>Full disclosure</em>: We wrote this problem for the 2014 Dutch Physics Olympiad. <em>Caveat emptor!</em></p>
+<p>A linear, time-invariant system has impulse response <span class="arithmatex">\(h(t),\)</span> that is, when the input is <span class="arithmatex">\(x(t)=\delta(t),\)</span> the output is <span class="arithmatex">\(y(t)=h(t).\)</span> The output of this system can then be used as the input for one or more <em>identical</em> systems as shown below.</p>
+<figure class="figaltcap" id="figLTIsys"><img src="images/Problem_3_10.png" /><figcaption><strong>Figure 3.7:</strong> Concatenation of LTI systems.</figcaption>
+</figure>
+<p>The impulse response is given by:</p>
+<div class="arithmatex">\[ h(t)=\begin{cases}\frac{1}{2\sqrt{3}}&amp;\lvert t\rvert\leq\sqrt{3}\\0&amp;\lvert t\rvert&gt;\sqrt{3}\end{cases} \]</div>
+<ol>
+<li>Determine and sketch <span class="arithmatex">\(H(\omega),\)</span> the Fourier transform of <span class="arithmatex">\(h(t).\)</span> Your sketch should include labels and numerical values where possible.</li>
+<li>Determine and sketch <span class="arithmatex">\(y_1(t)\)</span> and <span class="arithmatex">\(y_2(t)\)</span> when <span class="arithmatex">\(x(t)=\delta(t).\)</span> Again, your sketch should include labels and numerical values.</li>
+<li>Sketch <span class="arithmatex">\(y_3(t)\)</span> and <span class="arithmatex">\(y_{100}(t).\)</span> You do not have to work out the analytical forms (unless you want to). And, yes, that is <span class="arithmatex">\(N=100.\)</span></li>
+<li>Describe in words your result for <span class="arithmatex">\(N=100.\)</span> Be as precise as possible in your reasoning.</li>
+</ol>
+<p>If we consider the class of signals that are everywhere non-negative, the center of a signal <span class="arithmatex">\(y_c\)</span> can be defined in the same way as the &ldquo;center-of-gravity&rdquo;. That is:</p>
+<div class="arithmatex">\[
+y_c=\frac{\int\limits_{-\infty}^{+\infty}ty(t)dt}{\int\limits_{-\infty}^{+\infty}y(t)dt}
+\]</div>
+<p>The root-mean-square width of a signal <span class="arithmatex">\(y_{rms}\)</span> can be similarly defined as:</p>
+<div class="arithmatex">\[
+y_{rms}=\sqrt{\frac{\int\limits_{-\infty}^{+\infty}(t-y_c)^2y(t)dt}{\int\limits_{-\infty}^{+\infty}y(t)dt}}
+\]</div>
+<ol start="5">
+<li>Determine <span class="arithmatex">\(y_c\)</span> and <span class="arithmatex">\(y_{rms}\)</span> for <span class="arithmatex">\(y_1(t),\)</span> <span class="arithmatex">\(y_2(t)\)</span> and the general case <span class="arithmatex">\(y_N(t).\)</span> Reduce your answers to the simplest possible form.</li>
+</ol>
+<p>The impulse response is now replaced by a <em>new</em> impulse response:</p>
+<div class="arithmatex">\[
+h(t)=
+\begin{cases}
+\cos(5\pi t)&amp;\lvert t\rvert\leq\sqrt{3}\\
+0&amp;\lvert t\rvert&gt;\sqrt{3}
+\end{cases}
+\]</div>
+<ol start="6">
+<li>Determine and sketch the new <span class="arithmatex">\(H(\omega),\)</span> the Fourier transform of the new <span class="arithmatex">\(h(t).\)</span> Your sketch should include labels and numerical values where possible.</li>
+<li>Sketch <span class="arithmatex">\(y_1(t)\)</span> and <span class="arithmatex">\(y_2(t)\)</span> when <span class="arithmatex">\(x(t)=\delta(t).\)</span> Again, your sketch should include labels and numerical values. You do not have to give the analytical form for either signal.</li>
+<li>Sketch <span class="arithmatex">\(y_{100}(t).\)</span> Again, you do not have to work out the analytical form (unless you want to). And, once again, that is <span class="arithmatex">\(N=100.\)</span></li>
+</ol>
+<!-- 
+## Laboratory Exercises {: .labexp }
+
+### Laboratory Exercise 3.1
+
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_3.1.html'>
+                <img src='images/mic_80.png' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        A stochastic audio signal that you will record has a Fourier transform. (How do we 
+        know this?) Let us examine the relationship between the signal <i>x</i>[<i>n</i>] and 
+        its spectrum <i>X</i>(&Omega;).
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+### Laboratory Exercise 3.2
+
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_3.2.html'>
+                <img src='images/TruiAndCamera.png' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        A two-dimensional stochastic signal, an image that you will record, has a 
+        two-dimensional Fourier transform. (How do we know this?) Let us examine the 
+        relationship between the signal <i>x</i>[<i>m, n</i>] and its spectrum 
+        <i>X</i>(&Omega;<i><sub>m</sub></i>, &Omega;<i><sub>n</sub></i>).
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+### Laboratory Exercise 3.3
+
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_3.3.html'>
+                <img src='images/mic_80.png' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        We frequently describe the complex Fourier spectrum <i>X</i> of a signal <i>x</i> by 
+        looking separately at the magnitude of the spectrum |<i>X</i>| and the phase of 
+        the spectrum $\sphericalangle$<i>X</i>. 
+        But which is &ldquo;more important&rdquo;, the magnitude or the phase?
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+### Laboratory Exercise 3.4
+
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_3.4.html'>
+                <img src='images/TruiAndCamera.png' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        If you are not yet convinced from Laboratory Exercise 3.3 
+        that the phase component of the complex Fourier spectrum is important in signals, 
+        let us now look at which component, magnitude or phase, dominates in the 
+        reproduction of a signal.
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+### Laboratory Exercise 3.5
+
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_3.5.html'>
+                <img src='images/mic_80.png' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        We repeat Laboratory Exercise 3.4 but now for audio signals. After completing this 
+        exercise do you think that you will ask the same questions of a salesperson when you 
+        buy your next audio amplifier?
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+ -->
+
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:oppenheim1996">
+<p>Oppenheim, A. V., A. S. Willsky and S. H. Nawab (1996). Signals and Systems. Upper Saddle River, New Jersey, Prentice-Hall&#160;<a class="footnote-backref" href="#fnref:oppenheim1996" title="Jump back to footnote 1 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:oppenheim1996" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:papoulis2002">
+<p>Papoulis, A. and S. U. Pillai (2002). Probability, Random Variables, and Stochastic Processes. New York, McGraw-Hill&#160;<a class="footnote-backref" href="#fnref:papoulis2002" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:papoulis2002" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:cramer1946">
+<p>Cramér, H. (1946). Mathematical Methods of Statistics. Princeton, New Jersey, Princeton University Press&#160;<a class="footnote-backref" href="#fnref:cramer1946" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:cramer1946" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+
+<footer class="md-footer" id="jumpToBottom">
+
+  <!-- Link to previous and/or next page -->
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        <!-- Link to previous page -->
+        
+          <a
+            href="Chap_2.html"
+            title="2. Prologue"
+            class="md-footer-nav__link md-footer-nav__link--prev"
+            rel="prev"
+          >
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                2. Prologue
+              </div>
+            </div>
+          </a>
+        
+
+        <!-- Link to next page -->
+        
+          <a
+            href="Chap_4.html"
+            title="4. Characterization of Random Signals"
+            class="md-footer-nav__link md-footer-nav__link--next"
+            rel="next"
+          >
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                4. Characterization of Random Signals
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+</footer>
+      
+    </div>
+    
+      <script src="assets/javascripts/vendor.77e55a48.min.js"></script>
+      <script src="assets/javascripts/bundle.9554a270.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+
+	<script src="js/polyfill/index.js"></script>
+	<script src="search/search_index.js"></script>
+
+
+      <script>
+        app = initialize({
+          base: ".",
+          features: [],
+          search: Object.assign({
+            worker: "assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="js/extra.js"></script>
+      
+        <script src="js/SSPextra.js"></script>
+      
+        <script src="js/mathjax_3_generic_conf.js"></script>
+      
+        <script src="js/mathjax/tex-svg.js"></script>
+      
+    
+  </body>
+</html>

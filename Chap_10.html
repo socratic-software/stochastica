@@ -1,0 +1,1686 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <meta name="author" content="I.T. Young & R. Ligteringen">
+      
+      <link rel="shortcut icon" href="images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.0.2">
+    
+    
+      
+        <title>10. The Wiener filter - Introduction to Stochastic Signal Processing</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.38780c08.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.3f72e892.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Georgia:300,400,400i,700%7CCourier&display=fallback">
+        <style>body,input{font-family:"Georgia",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Courier",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="css/extra.css">
+    
+      <link rel="stylesheet" href="css/imgtxt.css">
+    
+      <link rel="stylesheet" href="css/tables.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#the-wiener-filter" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <!-- Application header -->
+<header class="md-header" data-md-component="header">
+
+  <!-- Top-level navigation -->
+  <nav class="md-header-nav md-grid" aria-label="Header">
+
+    <!-- Link to home -->
+    <a
+      href="."
+      title="Introduction to Stochastic Signal Processing"
+      class="md-header-nav__button md-logo"
+      aria-label="Introduction to Stochastic Signal Processing"
+    >
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+<!-- 
+  Insert an <img> here as an alternative for the standard logo if desired.
+  Then comment out the above two lines
+ <img src="images/favicon.png" style="margin-top:5px; border: 0px solid lime; border-radius:5px; width:120%; height: auto;" />
+ -->
+
+    </a>
+
+    <!-- Button to open drawer -->
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+
+    <!-- Header title -->
+    <div class="md-header-nav__title" data-md-component="header-title">
+          
+            
+              <a href="#jumpToBottom">
+                <span class="md-header-nav__topic">
+                  Introduction to Stochastic Signal Processing
+                </span>
+                <span class="md-header-nav__topic">
+                  10. The Wiener filter
+                </span>
+              </a>
+            
+          
+    </div>
+
+    <!-- Button to open search dialogue -->
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+
+      <!-- Search interface -->
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    <!-- Repository containing source -->
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Introduction to Stochastic Signal Processing" class="md-nav__button md-logo" aria-label="Introduction to Stochastic Signal Processing">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+<!-- 
+  Insert an <img> here as an alternative for the standard logo if desired.
+  Then comment out the above two lines
+ <img src="images/favicon.png" style="margin-top:5px; border: 0px solid lime; border-radius:5px; width:120%; height: auto;" />
+ -->
+
+    </a>
+    Introduction to Stochastic Signal Processing
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_1.html" class="md-nav__link">
+      1. How to use this iBook
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_2.html" class="md-nav__link">
+      2. Prologue
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_3.html" class="md-nav__link">
+      3. Introduction
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_4.html" class="md-nav__link">
+      4. Characterization of Random Signals
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_5.html" class="md-nav__link">
+      5. Correlations and Spectra
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_6.html" class="md-nav__link">
+      6. Filtering of Stochastic Signals
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_7.html" class="md-nav__link">
+      7. The Langevin Equation – A Case Study
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_8.html" class="md-nav__link">
+      8. Characterizing Signal-to-Noise Ratios
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_9.html" class="md-nav__link">
+      9. The Matched Filter
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        10. The Wiener filter
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="Chap_10.html" class="md-nav__link md-nav__link--active">
+      10. The Wiener filter
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-restoration-case-noise" class="md-nav__link">
+    The restoration case: noise
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-the-least-mean-square-error-criterion" class="md-nav__link">
+    Using the least mean-square error criterion
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expressing-the-mean-square-error" class="md-nav__link">
+    Expressing the mean-square error
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#correlation-returns" class="md-nav__link">
+    Correlation returns
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-wiener-hopf-equation" class="md-nav__link">
+    The Wiener-Hopf equation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#as-seen-from-the-fourier-domain" class="md-nav__link">
+    As seen from the Fourier domain
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-that-least-mean-square-error" class="md-nav__link">
+    What is that least mean-square error?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classic-example-classic-result" class="md-nav__link">
+    Classic example, classic result
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-more-general-restoration-case-noise-distortion" class="md-nav__link">
+    The more general restoration case: noise &amp; distortion
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-we-avoid-the-inverse-filter" class="md-nav__link">
+    Why we avoid the inverse filter
+  </a>
+  
+    <nav class="md-nav" aria-label="Why we avoid the inverse filter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-sound-of-distorted-music" class="md-nav__link">
+    Example: Sound of (distorted) music
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-cleaning-up-our-act" class="md-nav__link">
+    Example: Cleaning up our act
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#determining-the-wiener-filter" class="md-nav__link">
+    Determining the Wiener filter
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problems" class="md-nav__link">
+    Problems
+  </a>
+  
+    <nav class="md-nav" aria-label="Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-101" class="md-nav__link">
+    Problem 10.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-102" class="md-nav__link">
+    Problem 10.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-103" class="md-nav__link">
+    Problem 10.3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-104" class="md-nav__link">
+    Problem 10.4
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#laboratory-exercises" class="md-nav__link">
+    Laboratory Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Laboratory Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-101" class="md-nav__link">
+    Laboratory Exercise 10.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-102" class="md-nav__link">
+    Laboratory Exercise 10.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-103" class="md-nav__link">
+    Laboratory Exercise 10.3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-104" class="md-nav__link">
+    Laboratory Exercise 10.4
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-105" class="md-nav__link">
+    Laboratory Exercise 10.5
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_11.html" class="md-nav__link">
+      11. Aspects of Estimation
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_12.html" class="md-nav__link">
+      12. Spectral Estimation
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_13.html" class="md-nav__link">
+      Appendices
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="info.html" class="md-nav__link">
+      Information
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-restoration-case-noise" class="md-nav__link">
+    The restoration case: noise
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#using-the-least-mean-square-error-criterion" class="md-nav__link">
+    Using the least mean-square error criterion
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expressing-the-mean-square-error" class="md-nav__link">
+    Expressing the mean-square error
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#correlation-returns" class="md-nav__link">
+    Correlation returns
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-wiener-hopf-equation" class="md-nav__link">
+    The Wiener-Hopf equation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#as-seen-from-the-fourier-domain" class="md-nav__link">
+    As seen from the Fourier domain
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-that-least-mean-square-error" class="md-nav__link">
+    What is that least mean-square error?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classic-example-classic-result" class="md-nav__link">
+    Classic example, classic result
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-more-general-restoration-case-noise-distortion" class="md-nav__link">
+    The more general restoration case: noise &amp; distortion
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-we-avoid-the-inverse-filter" class="md-nav__link">
+    Why we avoid the inverse filter
+  </a>
+  
+    <nav class="md-nav" aria-label="Why we avoid the inverse filter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-sound-of-distorted-music" class="md-nav__link">
+    Example: Sound of (distorted) music
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-cleaning-up-our-act" class="md-nav__link">
+    Example: Cleaning up our act
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#determining-the-wiener-filter" class="md-nav__link">
+    Determining the Wiener filter
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problems" class="md-nav__link">
+    Problems
+  </a>
+  
+    <nav class="md-nav" aria-label="Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-101" class="md-nav__link">
+    Problem 10.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-102" class="md-nav__link">
+    Problem 10.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-103" class="md-nav__link">
+    Problem 10.3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-104" class="md-nav__link">
+    Problem 10.4
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#laboratory-exercises" class="md-nav__link">
+    Laboratory Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Laboratory Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-101" class="md-nav__link">
+    Laboratory Exercise 10.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-102" class="md-nav__link">
+    Laboratory Exercise 10.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-103" class="md-nav__link">
+    Laboratory Exercise 10.3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-104" class="md-nav__link">
+    Laboratory Exercise 10.4
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-105" class="md-nav__link">
+    Laboratory Exercise 10.5
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="the-wiener-filter">The Wiener filter<a class="headerlink" href="#the-wiener-filter" title="Permanent link">&para;</a></h1>
+<p>In the previous chapter we showed that a desired effect, a maximized SNR, could be achieved by the suitable choice of a linear filter, a matched filter. We will now address a more difficult problem: the use of linear filters to estimate a <em>stochastic</em> signal in the presence of noise. We let <span class="arithmatex">\(x[n]\)</span> be a stochastic, ergodic signal from a process with known
+statistics.</p>
+<h2 id="the-restoration-case-noise">The restoration case: noise<a class="headerlink" href="#the-restoration-case-noise" title="Permanent link">&para;</a></h2>
+<p>In the presence of noise and using a linear filter, we wish to produce an <em>estimate</em> of <span class="arithmatex">\(x[n]\)</span> which we call <span class="arithmatex">\({x_e}[n].\)</span> This is frequently termed signal <em>restoration</em> because we are attempting to restore a signal <span class="arithmatex">\(x[n]\)</span> that has become damaged, corrupted, and/or noisy. We want the <em>best</em> estimate where the definition of “best” will be explained. We assume that <span class="arithmatex">\(x[n]\)</span> is real as is the noise process <span class="arithmatex">\(N[n].\)</span> The total signal <span class="arithmatex">\(r[n]\)</span> composed of <span class="arithmatex">\(x[n]\)</span> and <span class="arithmatex">\(N[n]\)</span> is to be processed to produce the estimate <span class="arithmatex">\({x_e}[n]\)</span> of the original <span class="arithmatex">\(x[n].\)</span> The model is shown in <a href="#fig:fig_Wiener1">Figure 10.1</a>.</p>
+<figure class="figaltcap fullsize" id="fig:fig_Wiener1"><img src="images/Fig_10_1.gif" /><figcaption><strong>Figure 10.1:</strong> LTI filter <span class="arithmatex">\(h[n\rbrack\)</span> to estimate a stochastic signal <span class="arithmatex">\(x[n\rbrack\)</span> in the presence of additive noise.</figcaption>
+</figure>
+<p>We start with:</p>
+<div class="" id="eq:Weq1">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.1)</td>
+<td class="eqTableEq">
+<div>$${x_e}[n] = \sum\limits_{m =  - \infty }^{ + \infty } {r[n - m]} h[m]$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>and we define &ldquo;best&rdquo; in terms of a measure of the difference (error) between the &ldquo;true&rdquo; stochastic signal <span class="arithmatex">\(x[n]\)</span> and the estimate <span class="arithmatex">\({x_e}[n].\)</span></p>
+<h2 id="using-the-least-mean-square-error-criterion">Using the least mean-square error criterion<a class="headerlink" href="#using-the-least-mean-square-error-criterion" title="Permanent link">&para;</a></h2>
+<p>Specifically we look at the mean (expected) square error:</p>
+<div class="" id="eq:Weq2">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.2)</td>
+<td class="eqTableEq">
+<div>$$e = mean\text{-}squared\;error = E\left\{ {{{\left| {{x_e}[n] - x[n]} \right|}^2}} \right\}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>and we propose to choose <span class="arithmatex">\(h[n]\)</span> in order to minimize this error. We will need a basic result from least mean-square estimation theory and this can be found in <a href="Chap_13.html#appendix-i-mean-square-error-minimization">Appendix I</a>.  </p>
+<p>To determine a minimum, we look at:</p>
+<div class="" id="eq:Weq3">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.3)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{\frac{{\partial e}}{{\partial h}}}&amp;{ = \frac{\partial }{{\partial h}}E\left\{ {{{\left| {{x_e}[n] - x[n]} \right|}^2}} \right\}}\\
+{\,\,\,}&amp;{ = \frac{\partial }{{\partial h}}E\left\{ {{{\left( {\sum\limits_{m =  - \infty }^{ + \infty } {r[n - m]} h[m] - x[n]} \right)}^2}} \right\} = 0}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>That is, we vary the filter to choose the one that gives the minimum mean-square error. Note that the restriction to real signals and systems ensures that we can replace the non-differentiable absolute value operation <span class="arithmatex">\({\left|  \bullet  \right|^2}\)</span> with the differentiable operation <span class="arithmatex">\({\left(  \bullet  \right)^2}\)</span> in <a href="Chap_10.html#eq:Weq3">Equation 10.3</a>.  </p>
+<p>The equation above, of course, yields an extremum but it can be shown that this is a minimum; see <a href="#problem-101">Problem 10.1</a>. The development of this approach follows those in the references Castleman<sup id="fnref:castleman1996"><a class="footnote-ref" href="#fn:castleman1996">1</a></sup>, Lee<sup id="fnref:lee1960"><a class="footnote-ref" href="#fn:lee1960">2</a></sup>, and Papoulis<sup id="fnref:papoulis1977"><a class="footnote-ref" href="#fn:papoulis1977">3</a></sup>.</p>
+<h2 id="expressing-the-mean-square-error">Expressing the mean-square error<a class="headerlink" href="#expressing-the-mean-square-error" title="Permanent link">&para;</a></h2>
+<p>Based upon <a href="Chap_13.html#appendix-i-mean-square-error-minimization">Appendix I</a>, and starting from <a href="Chap_10.html#eq:Weq1">Equation 10.1</a> and the result in
+<a href="Chap_12.html#eq:SEeq9">Equation 12.9</a>, we have:</p>
+<div class="" id="eq:Weq4">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.4)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+e&amp;{ = E\left\{ {{{\left( {{x_e} - x} \right)}^2}} \right\} = E\left\{ {{{\left( {{x_e}[n] - x[n]} \right)}^2}} \right\}}\\
+{\,\,\,}&amp;{ = E\left\{ {{{\left( {r[n] \otimes h[n] - x[n]} \right)}^2}} \right\}}\\
+{\,\,\,}&amp;{ = E\left\{ {{{\left( {\sum\limits_{k =  - \infty }^{ + \infty } {r[n - k]h[k]}  - x[n]} \right)}^2}} \right\}}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>We might have expected that the left-hand side of <a href="Chap_10.html#eq:Weq4">Equation 10.4</a> would be <span class="arithmatex">\(e[n]\)</span> instead of <span class="arithmatex">\(e.\)</span> The expectation operation, <span class="arithmatex">\(E\left\{  \bullet  \right\},\)</span> combined with the assumption of ergodicity assures that the result <span class="arithmatex">\(e\)</span> is independent of <span class="arithmatex">\(n.\)</span></p>
+<p>We now apply the key result—orthogonality—from <a href="Chap_12.html#eq:SEeq9">Equation 12.9</a> and rewrite this as:</p>
+<div class="" id="eq:Weq5">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.5)</td>
+<td class="eqTableEq">
+<div>$$0 = \frac{{de}}{{d{h_i}}} = \,2E\left\{ {\left( {\sum\limits_{k =  - \infty }^{ + \infty } {r[n - k]h[k]}  - x[n]} \right)r[n - i]} \right\}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<h2 id="correlation-returns">Correlation returns<a class="headerlink" href="#correlation-returns" title="Permanent link">&para;</a></h2>
+<p>Rearranging this expression gives:</p>
+<div class="" id="eq:Weq6">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.6)</td>
+<td class="eqTableEq">
+<div>$$E\left\{ {x[n]r[n - i]} \right\} = E\left\{ {r[n - i]\sum\limits_{k =  - \infty }^{ + \infty } {r[n - k]} h[k]} \right\}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The term on the left side of the equation is the cross-correlation function between <span class="arithmatex">\(x[n]\)</span> and <span class="arithmatex">\(r[n].\)</span> Because both signals are real, we have from <a href="Chap_5.html#eq:autoeven">Equation 5.5</a> and <a href="Chap_5.html#eq:crossHermitian">Equation 5.6</a>:</p>
+<div class="" id="eq:Weq7">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.7)</td>
+<td class="eqTableEq">
+<div>$$E\left\{ {x[n]r[n - i]} \right\} = {\varphi _{xr}}[ - i] = \varphi _{rx}^*[i] = {\varphi _{rx}}[i]$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Because the signal <span class="arithmatex">\(r[n - i]\)</span> is not a function of <span class="arithmatex">\(k\)</span> and the order of the operations of summation and expectation can—with all the usual caveats—be reversed, the term on the right side of the equation can be rewritten as:</p>
+<div class="" id="eq:Weq8">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.8)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+E\left\{ {\sum\limits_{k =  - \infty }^{ + \infty } {r[n - k]r[n - i]} h[k]} \right\} = \\
+\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,\sum\limits_{k =  - \infty }^{ + \infty } {E\left\{ {r[n - k]r[n - i]} \right\}} h[k]
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Again we have made use of <a href="Chap_4.html#eq:additive">Equation 4.13</a> which says that expectation as an operator distributes over sums.</p>
+<h2 id="the-wiener-hopf-equation">The Wiener-Hopf equation<a class="headerlink" href="#the-wiener-hopf-equation" title="Permanent link">&para;</a></h2>
+<p>The result is an implicit expression for the optimum filter <span class="arithmatex">\(h[n]\)</span>:</p>
+<div class="" id="eq:Weq9">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.9)</td>
+<td class="eqTableEq">
+<div>$${\varphi _{rx}}[k] = \sum\limits_{m =  - \infty }^{ + \infty } {{\varphi _{rr}}[k - m]} h[m] = {\varphi _{rr}}[k] \otimes h[k]$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Note the way the variable names “<span class="arithmatex">\(m\)</span>” and “<span class="arithmatex">\(k\)</span>” are used in order to be
+consistent with earlier notation, for example, <a href="Chap_5.html#eq:autoeven">Equation 5.5</a> and <a href="Chap_5.html#eq:crossHermitian">Equation 5.6</a>.</p>
+<p>We distinguish between two cases of this famous equation, the <a href="https://en.wikipedia.org/wiki/Wiener%E2%80%93Hopf_method">Wiener-Hopf
+equation</a>. The variable <span class="arithmatex">\(k\)</span> represents the interval over which the process is observed. In the first case, <span class="arithmatex">\(k &gt; 0\)</span> and this represents the case of <em>causal</em> observations. That is, in principle, it is only possible to estimate <span class="arithmatex">\(x[n]\)</span> from data that have already been gathered. The estimate <span class="arithmatex">\({x_e}[n]\)</span> can only have a causal dependence on <span class="arithmatex">\(r[n]\)</span> and the (causal) filter choice <span class="arithmatex">\(h[n].\)</span> With this condition the solution of the Wiener-Hopf equation is extremely
+difficult, far beyond what we introduce here.</p>
+<p>We will concentrate, instead, on the case <span class="arithmatex">\(- \infty  \le k \le  + \infty\)</span> which admits a direct solution through application of Fourier techniques. While this case is somewhat less realistic for temporal signals (but not for spatial signals), it will enable us to develop some insights into the character of filters developed as solutions to the Wiener-Hopf equation. Such filters, independent of the conditions on <span class="arithmatex">\(k,\)</span> are known
+as <em>Wiener filters</em> after a mathematical giant of the 20<sup>th</sup> century <a href="https://en.wikipedia.org/wiki/Norbert_Wiener">Prof. Norbert Wiener</a> (1894-1964).</p>
+<h2 id="as-seen-from-the-fourier-domain">As seen from the Fourier domain<a class="headerlink" href="#as-seen-from-the-fourier-domain" title="Permanent link">&para;</a></h2>
+<p>We start by taking the Fourier transform of both sides of <a href="Chap_10.html#eq:Weq9">Equation 10.9</a> to produce:</p>
+<div class="" id="eq:Weq10">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.10)</td>
+<td class="eqTableEq">
+<div>$${S_{rx}}(\Omega ) = {S_{rr}}(\Omega )H(\Omega )$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The desired filter is, of course, <span class="arithmatex">\(H(\Omega )\)</span> and this is given by:</p>
+<div class="" id="eq:Weq11">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.11)</td>
+<td class="eqTableEq">
+<div>$$H(\Omega ) = \frac{{{S_{rx}}(\Omega )}}{{{S_{rr}}(\Omega )}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<h2 id="what-is-that-least-mean-square-error">What is that least mean-square error?<a class="headerlink" href="#what-is-that-least-mean-square-error" title="Permanent link">&para;</a></h2>
+<p>Through a series of manipulations (following section 10.3 in Papoulis<sup id="fnref2:papoulis1977"><a class="footnote-ref" href="#fn:papoulis1977">3</a></sup>),
+we show that the total minimum error <span class="arithmatex">\(e\)</span> is:</p>
+<div class="mainresult" id="eq:Weq12">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.12)</td>
+<td class="eqTableEq">
+<div>$$e = \frac{1}{{2\pi }}\int\limits_{ - \pi }^{ + \pi } {\left( {{S_{xx}}(\Omega ) - {S_{rx}}(\Omega )H(\Omega )} \right)} d\Omega$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>We start with <a href="Chap_10.html#eq:Weq4">Equation 10.4</a> and using some algebra and the definition of the autocorrelation function we find:</p>
+<div class="" id="eq:Weq13">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.13)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+e&amp;{ = E\left\{ {{{\left( {{x_e}[n] - x[n]} \right)}^2}} \right\} }\\
+{\,\,\,}&amp;{ = E\left\{ {{x^2}[n]} \right\} + E\left\{ {x_e^2[n]} \right\} - 2E\left\{ {{x_e}[n]x[n]} \right\}}\\
+{\,\,\,}&amp;{ = {\varphi _{xx}}[0] + E\left\{ {x_e^2[n]} \right\} - 2E\left\{ {{x_e}[n]x[n]} \right\}}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Continuing with the use of <a href="Chap_10.html#eq:Weq1">Equation 10.1</a> this becomes a lengthy—somewhat inelegant— expression:</p>
+<div class="" id="eq:Weq14">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.14)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+e&amp;{ = {\varphi _{xx}}[0] + E\left\{ {x_e^2[n]} \right\} - 2E\left\{ {{x_e}[n]x[n]} \right\}}\\
+{}&amp;{ = {\varphi _{xx}}[0]\,\, + }\\
+{}&amp;{\,\,\,\,E\left\{ {\left( {\sum\limits_{m =  - \infty }^{ + \infty } {r[n - m]} h[m]} \right)\left( {\sum\limits_{i =  - \infty }^{ + \infty } {r[n - i]} h[i]} \right)} \right\}\,\, - }\\
+{}&amp;{\,\,\,\,\,2E\left\{ {\left( {\sum\limits_{m =  - \infty }^{ + \infty } {r[n - m]} h[m]} \right)x[n]} \right\}}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Exchanging orders of expectation and summation, again, yields:</p>
+<div class="" id="eq:Weq15">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.15)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+e&amp;{ = {\varphi _{xx}}[0]\,\, + }\\
+{\,\,\,}&amp;{\,\,\,\,\,\,\sum\limits_{m =  - \infty }^{ + \infty } {\left( {h[m]\sum\limits_{i =  - \infty }^{ + \infty } {{\varphi _{rr}}[m - i]h[i]} } \right)} \,\, - }\\
+{\,\,\,}&amp;{\,\,\,\,\,\,2\left( {\sum\limits_{m =  - \infty }^{ + \infty } {{\varphi _{rx}}[m]h[m]} } \right)}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>In  <a href="Chap_10.html#eq:Weq9">Equation 10.9</a> we determined an expression for the optimum filter, the filter that produces the minimum mean-square error. Substituting <a href="Chap_10.html#eq:Weq9">Equation 10.9</a> in <a href="Chap_10.html#eq:Weq15">Equation 10.15</a> yields:</p>
+<div class="" id="eq:Weq16">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.16)</td>
+<td class="eqTableEq">
+<div>$$e = {\varphi _{xx}}[0] - \sum\limits_{k =  - \infty }^{ + \infty } {h[k]{\varphi _{rx}}[k]}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>where, once again, we have replaced the dummy variable “<span class="arithmatex">\(m\)</span>” with “<span class="arithmatex">\(k\)</span>”. Using <a href="Chap_5.html#eq:invpds_def">Equation 5.23</a> and Parseval’s Theorem, it is easy to see that <a href="Chap_10.html#eq:Weq16">Equation 10.16</a> is equivalent to <a href="Chap_10.html#eq:Weq12">Equation 10.12</a>. See <a href="#problem-102">Problem 10.2</a>.</p>
+<h2 id="classic-example-classic-result">Classic example, classic result<a class="headerlink" href="#classic-example-classic-result" title="Permanent link">&para;</a></h2>
+<p>To proceed further we use one of the most common situations as an example. Let <span class="arithmatex">\(x[n]\)</span> and <span class="arithmatex">\(N[n]\)</span> be statistically independent and let <span class="arithmatex">\(N[n]\)</span> have zero mean. Then:</p>
+<div class="" id="eq:Weq17">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.17)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{\varphi _{nx}}[k]}&amp;{ = E\left\{ {N[n]x[n + k]} \right\}}\\
+{\,\,\,}&amp;{ = E\left\{ {N[n]} \right\}E\left\{ {x[n + k]} \right\} = 0}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>From the Wiener-Hopf equation, <a href="Chap_10.html#eq:Weq9">Equation 10.9</a>, the desired quantities are <span class="arithmatex">\({\varphi _{rx}}[k]\)</span> and <span class="arithmatex">\({\varphi _{rr}}[k]\)</span>:</p>
+<div class="" id="eq:Weq18">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.18)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{\varphi _{rx}}[k]}&amp;{ = E\left\{ {r[n]x[n + k]} \right\}}&amp;{}&amp;{}\\
+{\,\,\,}&amp;{ = E\left\{ {\left( {x[n] + N[n]} \right)x[n + k]} \right\}}&amp;{}&amp;{}\\
+{\,\,\,}&amp;{ = E\left\{ {x[n]x[n + k]} \right\} + E\left\{ {N[n]x[n + k]} \right\}}&amp;{}&amp;{}\\
+{\,\,\,}&amp;{ = {\varphi _{xx}}[k] + {\varphi _{nx}}[k]}&amp;{}&amp;{}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>From <a href="Chap_10.html#eq:Weq17">Equation 10.17</a> we see that the second term is zero. Thus,</p>
+<div class="" id="eq:Weq19">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.19)</td>
+<td class="eqTableEq">
+<div>$${\varphi _{rx}}[k] = {\varphi _{xx}}[k]$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>or taking the Fourier transform of both sides,</p>
+<div class="" id="eq:Weq20">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.20)</td>
+<td class="eqTableEq">
+<div>$${S_{rx}}(\Omega ) = {S_{xx}}(\Omega )$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Further, because <span class="arithmatex">\(r[n] = x[n] + N[n]\)</span> and the noise is zero mean, we can show—see <a href="#problem-103">Problem 10.3</a>—that:</p>
+<div class="" id="eq:Weq21">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.21)</td>
+<td class="eqTableEq">
+<div>$${S_{rr}}(\Omega ) = {S_{xx}}(\Omega ) + {S_{nn}}(\Omega )$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Combining <a href="Chap_10.html#eq:Weq11">Equation 10.11</a>, <a href="Chap_10.html#eq:Weq20">Equation 10.20</a>, and <a href="Chap_10.html#eq:Weq21">Equation 10.21</a> results in:</p>
+<div class="" id="eq:Weq22">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.22)</td>
+<td class="eqTableEq">
+<div>$$H(\Omega ) = \frac{{{S_{xx}}(\Omega )}}{{{S_{xx}}(\Omega ) + {S_{nn}}(\Omega )}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>To better understand this result we look at two cases.</p>
+<p>In the first case we consider those frequency regions where the signal strength (power) dominates the noise strength, that is, where</p>
+<div class="" id="eq:Weq23">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.23)</td>
+<td class="eqTableEq">
+<div>$${S_{xx}}(\Omega )\; &gt;  &gt; \;{S_{nn}}(\Omega )$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>From our solution <a href="Chap_10.html#eq:Weq22">Equation 10.22</a> we see that this implies that <span class="arithmatex">\(H(\Omega ) = 1.\)</span> In those frequency bands where the signal-to-noise ratio is high, the Wiener filter simply passes the input spectrum <span class="arithmatex">\(R(\Omega ) = {\mathscr{F}}\left\{ {r[n]} \right\}\)</span> unchanged.</p>
+<p>In the second case, we consider those frequency regions where the noise strength dominates the signal strength. We have:</p>
+<div class="" id="eq:Weq24">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.24)</td>
+<td class="eqTableEq">
+<div>$${S_{xx}}(\Omega )\; &lt;  &lt; \;{S_{nn}}(\Omega )\,\,\,\,\,\, \Rightarrow \,\,\,\,\,\,H(\Omega ) = \frac{{{S_{xx}}(\Omega )}}{{{S_{nn}}(\Omega )}} \approx 0$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The input spectrum <span class="arithmatex">\(R(\Omega )\)</span> is almost completely attenuated by the Wiener filter.  </p>
+<p><a href="#fig:fig_Wiener2">Figure 10.2</a> shows the linear filter spectrum generated by the signal and noise spectra given in an example in <a href="Chap_8.html#example-cocktail-party-noise">Chapter 8</a> and <a href="Chap_8.html#fig:stand_model2">Figure 8.2</a>. </p>
+<figcaption style="color:#2c5272;">
+(<i>a</i>) <i>
+${S_{xx}}(\Omega )$ and ${S_{nn}}(\Omega )$:
+</i></figcaption>
+
+<figure class="figaltcap fullsize"><img src="images/Fig_10_2_T.png" /><figcaption></figcaption>
+</figure>
+<figcaption style="color:#2c5272;">
+(<i>b</i>) <i>
+Wiener filter $H(\Omega )$:
+</i></figcaption>
+
+<figure class="figaltcap fullsize" id="fig:fig_Wiener2"><img src="images/Fig_10_2_B.png" /><figcaption><strong>Figure 10.2:</strong> (<em>a</em>) Two power-density spectra <span class="arithmatex">\({S_{xx}}(\Omega )\)</span> (in <strong><font color="darkred">dark red</font></strong>) and <span class="arithmatex">\({S_{nn}}(\Omega )\)</span> (in <strong><font color="#00bb00">green</font></strong>) (<em>b</em>) The Wiener filter <span class="arithmatex">\(H(\Omega ) = {S_{xx}}(\Omega )/({S_{xx}}(\Omega ) + {S_{nn}}(\Omega ))\)</span> (in <strong><font color="blue">blue</font></strong>). The spectra <span class="arithmatex">\({S_{xx}}(\Omega )\)</span> and <span class="arithmatex">\({S_{nn}}(\Omega )\)</span> intersect at the frequencies at which the signal and noise power density spectra are equal.</figcaption>
+</figure>
+<h2 id="the-more-general-restoration-case-noise-distortion">The more general restoration case: noise &amp; distortion<a class="headerlink" href="#the-more-general-restoration-case-noise-distortion" title="Permanent link">&para;</a></h2>
+<p>A more general formulation of the Wiener filter problem assumes not only a contamination of the input signal by random noise but also distortion of the input signal by a known linear filter <span class="arithmatex">\({h_o}[n].\)</span> An example of this might be the blurred recording of an image due to camera motion where the noise source is the camera electronics. This situation is modeled in <a href="#fig:fig_Wiener3">Figure 10.3</a>.</p>
+<figure class="figaltcap fullsize" id="fig:fig_Wiener3"><img src="images/Fig_10_3.gif" /><figcaption><strong>Figure 10.3:</strong> LTI filter <span class="arithmatex">\(h[n\rbrack\)</span> to estimate a stochastic signal which has first been degraded by a deterministic filter <span class="arithmatex">\({h_o}[n\rbrack\)</span> before the additive noise.</figcaption>
+</figure>
+<p>Once again, we desire an <span class="arithmatex">\(h[n]\)</span> that will minimize the expected square error between <span class="arithmatex">\(x[n]\)</span> and <span class="arithmatex">\({x_e}[n].\)</span></p>
+<p>We continue to assume real signals and systems, statistical independence of ergodic signal and ergodic noise, zero-mean signals, and zero-mean noise leading to <span class="arithmatex">\(E\left\{ {x[n]h[n + k]} \right\} = E\left\{ {x[n + k]h[n]} \right\} = 0.\)</span></p>
+<h2 id="why-we-avoid-the-inverse-filter">Why we avoid the inverse filter<a class="headerlink" href="#why-we-avoid-the-inverse-filter" title="Permanent link">&para;</a></h2>
+<p>Our first temptation might be to use an inverse filter, <span class="arithmatex">\(H(\Omega ) = 1/{H_o}(\Omega )\)</span> where <span class="arithmatex">\({H_o}(\Omega ) = {\mathscr{F}}\left\{ {{h_o}[n]} \right\}.\)</span> The problem, however, lies in the behavior that the inverse filter will exhibit at those frequencies where <span class="arithmatex">\({H_o}(\Omega ) = 0.\)</span></p>
+<p>At zeroes of the transfer function <span class="arithmatex">\({H_o}(\Omega ),\)</span> the filter <span class="arithmatex">\(H(\Omega ) = 1/{H_o}(\Omega )\)</span> will diverge. This will cause the noise to overwhelm the signal in precisely those frequency bands where the signal is weakest. The Wiener filter approach avoids this problem. An example of the problem caused by the inverse approach is shown in <a href="#fig:fig_Wiener4">Figure 10.4</a>.</p>
+<figure class="figaltcap fullsize"><img src="images/Fig_10_4T.png" /><figcaption></figcaption>
+</figure>
+<figure class="figaltcap fullsize"><img src="images/Fig_10_4M.png" /><figcaption></figcaption>
+</figure>
+<figure class="figaltcap fullsize"><img src="images/Fig_10_4B.png" /><figcaption></figcaption>
+</figure>
+<figure class="figaltcap fullsize" id="fig:fig_Wiener4"><img src="images/Fig_10_4BB.png" /><figcaption><strong>Figure 10.4:</strong> (<em>top row</em>) Stochastic signal <span class="arithmatex">\(x[n\rbrack\)</span> and its input power density spectrum <span class="arithmatex">\({S_{xx}}(\Omega )\)</span>; (<em>second row</em>) The impulse response <span class="arithmatex">\({h_o}[n\rbrack\)</span> and the filter spectrum <span class="arithmatex">\({H_o}(\Omega )\)</span> of a bandpass filter; (<em>third row</em>) The noise-free distorted signal <span class="arithmatex">\(r[n\rbrack = y[n\rbrack = x[n\rbrack \otimes {h_o}[n\rbrack\)</span> and its output power density spectrum <span class="arithmatex">\({S_{rr}}(\Omega )\)</span>; (<em>bottom row</em>) The inverse filter which has infinities at a number of frequencies and thus cannot be used to remove the distortion. All spectral graphs are plotted over the interval <span class="arithmatex">\(- \pi /2 \le \Omega  \le  + \pi /2\)</span> and all graphs are normalized in range, in the time domain &lcub;–1, +1&rcub; and in the frequency domain &lcub;0, +1&rcub;.</figcaption>
+</figure>
+<h4 id="example-sound-of-distorted-music">Example: Sound of (distorted) music<a class="headerlink" href="#example-sound-of-distorted-music" title="Permanent link">&para;</a></h4>
+<p>In the one-dimensional case illustrated<sup id="fnref:discretetimesignals"><a class="footnote-ref" href="#fn:discretetimesignals">4</a></sup> in <a href="#fig:fig_Wiener4">Figure 10.4</a>, the signal is based upon a short section of Paganini&rsquo;s violin concerto. The signal <span class="arithmatex">\(x[n]\)</span> and its power spectrum <span class="arithmatex">\({S_{xx}}(\Omega )\)</span> are shown.  </p>
+<p>It is interesting to consider if music can be treated as a stochastic signal. Certainly when Paganini wrote his Violin Concerto No. 1, every note is explicitly given as well as the manner that it should be played. Nevertheless, every performance of that music is different in unpredictable ways – the violinist, the violin, the temperature in the hall, the hall acoustics and so forth. Even with a digitally-recorded version, every listening experience differs due to room acoustics, position of the listener, electronic noise in the analog music reproduction, and environmental acoustical noise. We, therefore, use music as an example of a stochastic signal.  </p>
+<table class="imgtxt" style="margin:1em auto; padding-top:10px;">
+    <tr>
+        <td style="width:auto; vertical-align:middle; text-align:center;">
+            <audio controls><source src="media/Paganini_Original.wav" type="audio/mpeg"></audio>
+        </td>
+    </tr>
+</table>
+
+<figcaption style="margin: 0px 30px;">
+<b>Audio 10.1:</b> Original music: Click the play triangle ( <img src="images/play_triangle1.png" style="vertical-align:middle;">) to hear the original Paganini selection.
+</figcaption>
+
+<p>The signal is passed through a band-pass filter <span class="arithmatex">\({h_o}[n]\)</span> with spectrum <span class="arithmatex">\({H_o}(\Omega )\)</span> as shown in <a href="#fig:fig_Wiener4">Figure 10.4</a>.</p>
+<table class="imgtxt" style="margin:1em auto; padding-top:10px;">
+    <tr>
+        <td style="width:auto; vertical-align:middle; text-align:center;">
+            <audio controls><source src="media/Paganini_Distorted.wav" type="audio/mpeg"></audio>
+        </td>
+    </tr>
+</table>
+
+<figcaption style="margin: 0px 30px;">
+<b>Audio 10.2:</b> Distorted music: Click the play triangle ( <img src="images/play_triangle1.png" style="vertical-align:middle;">) to hear a distorted version of the Paganini selection.
+</figcaption>
+
+<p>The output power spectrum of the filter is <span class="arithmatex">\({S_{yy}}(\Omega )\)</span> and in the time domain the signal is <span class="arithmatex">\(y[n]\)</span> as illustrated in <a href="#fig:fig_Wiener3">Figure 10.3</a> and <a href="#fig:fig_Wiener4">Figure 10.4</a>. For the model shown in <a href="#fig:fig_Wiener3">Figure 10.3</a>, we assume (for now) that the noise is identically zero meaning <span class="arithmatex">\(r[n] = y[n].\)</span> If the restoration filter is the inverse filter, <span class="arithmatex">\(H(\Omega ) = 1/{H_o}(\Omega )\)</span> the zeroes in <span class="arithmatex">\({H_o}(\Omega )\)</span> lead to infinities in the inverse and the output is indeterminate.</p>
+<p>To make matters worse (and more realistic), we now look at what happens when the noise is not zero.</p>
+<h4 id="example-cleaning-up-our-act">Example: Cleaning up our act<a class="headerlink" href="#example-cleaning-up-our-act" title="Permanent link">&para;</a></h4>
+<p>As shown in <a href="#fig:fig_Wiener3">Figure 10.3</a>, the filtered signal <span class="arithmatex">\(y[n]\)</span> is now corrupted by noise which we will assume to be additive, white Gaussian noise. The effects in the time domain, the spectrum <span class="arithmatex">\(R(\Omega ),\)</span> and the power spectral density <span class="arithmatex">\({S_{rr}}(\Omega )\)</span> are shown in <a href="#fig:fig_Wiener5">Figure 10.5</a>.</p>
+<p>Again, an inverse filter would lead to significant signal corruption as the zeroes of the <span class="arithmatex">\({H_o}(\Omega )\)</span> which produce infinities in the inverse filter would now be multiplied by the non-zero spectral density values of the white noise. Adding noise exacerbates the problem of inverse filtering.</p>
+<figure class="figaltcap fullsize"><img src="images/Fig_10_5T.png" /><figcaption></figcaption>
+</figure>
+<figure class="figaltcap fullsize" id="fig:fig_Wiener5"><img src="images/Fig_10_5B.png" /><figcaption><strong>Figure 10.5:</strong> (<em>top</em>) On the left, a white, Gaussian noise sample <span class="arithmatex">\(N[n\rbrack,\)</span> is added to the distorted stochastic signal <span class="arithmatex">\(y[n\rbrack\)</span> in Figure 10.4 to produce the output signal, <span class="arithmatex">\(r[n\rbrack\)</span> on the right. (<em>bottom</em>) On the left, the power density spectrum of the noise <span class="arithmatex">\({S_{nn}}(\Omega )\)</span>. The power density spectrum <span class="arithmatex">\({S_{rr}}(\Omega ),\)</span> where <i>r = x</i> &otimes; <i>h<sub>o</sub> + N</i> is shown on the right. All spectral graphs are plotted over the interval <span class="arithmatex">\(- \pi /2 \le \Omega  \le  + \pi /2\)</span> and all graphs are normalized in range, in the time domain &lcub;–1, +1&rcub; and in the frequency domain &lcub;0, +1&rcub;.</figcaption>
+</figure>
+<p>As “simple” inverse filtering is in many cases inadvisable, we, therefore, seek a filter technique that is “immune” to zeroes in <span class="arithmatex">\({H_o}(\Omega ).\)</span></p>
+<h2 id="determining-the-wiener-filter">Determining the Wiener filter<a class="headerlink" href="#determining-the-wiener-filter" title="Permanent link">&para;</a></h2>
+<p>Once again we require <span class="arithmatex">\({\varphi _{rx}}[k]\)</span> but</p>
+<div class="" id="eq:Weq25">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.25)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{\varphi _{rx}}[k]}&amp;{ = E\left\{ {r[n]x[n + k]} \right\}}&amp;{}&amp;{}\\
+{\,\,\,}&amp;{ = E\left\{ {\left( {y[n] + N[n]} \right)x[n + k]} \right\}}&amp;{}&amp;{}\\
+{\,\,\,}&amp;{ = E\left\{ {y[n]x[n + k]} \right\}}&amp;{}&amp;{}\\
+{\,\,\,}&amp;{ = {\varphi _{yx}}[k]}&amp;{}&amp;{}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>This leads to (see <a href="Chap_6.html#eq:filt_crosspds5">Equation 6.22</a>),</p>
+<div class="" id="eq:Weq26">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.26)</td>
+<td class="eqTableEq">
+<div>$${S_{rx}}(\Omega ) = {S_{yx}}(\Omega ) = H_0^*(\Omega ){S_{xx}}(\Omega )$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Further,</p>
+<div class="" id="eq:Weq27">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.27)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{\varphi _{rr}}[k]}&amp;{ = E\left\{ {\left( {y[n] + N[n]} \right)\left( {y[n + k] + N[n + k]} \right)} \right\}}&amp;{}&amp;{}\\
+{\,\,\,}&amp;{ = {\varphi _{yy}}[k] + {\varphi _{nn}}[k]}&amp;{}&amp;{}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Taking the Fourier transform of both sides and using <a href="Chap_6.html#eq:filt_crosspds4">Equation 6.21</a> gives:</p>
+<div class="" id="eq:Weq28">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.28)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{S_{rr}}(\Omega )}&amp;{ = {S_{yy}}(\Omega ) + {S_{nn}}(\Omega )}\\
+{\,\,\,}&amp;{ = {{\left| {{H_0}(\Omega )} \right|}^2}{S_{xx}}(\Omega ) + {S_{nn}}(\Omega )}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The Wiener filter is once again defined through <a href="Chap_10.html#eq:Weq11">Equation 10.11</a> and, therefore,  </p>
+<div class="mainresult" id="eq:Weq29">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.29)</td>
+<td class="eqTableEq">
+<div>$$H(\Omega ) = \frac{{H_0^*(\Omega ){S_{xx}}(\Omega )}}{{{{\left| {{H_0}(\Omega )} \right|}^2}{S_{xx}}(\Omega ) + {S_{nn}}(\Omega )}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>This is simply a general form of <a href="Chap_10.html#eq:Weq22">Equation 10.22</a> where a possible LTI distortion filter, <span class="arithmatex">\({{H_0}(\Omega )},\)</span> has been taken into consideration. If there is no distortion filter, if <span class="arithmatex">\({H_o}(\Omega ) = 1,\)</span> then <a href="Chap_10.html#eq:Weq29">Equation 10.29</a> reverts to <a href="Chap_10.html#eq:Weq22">Equation 10.22</a>.  </p>
+<p>There are several useful ways to rewrite <a href="Chap_10.html#eq:Weq29">Equation 10.29</a>. One of these is explored in 
+<a href="Chap_10.html#laboratory-exercise-105">Laboratory Exercise 10.5</a> and the 
+reformulation is:</p>
+<div class="mainresult" id="eq:Weq30">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.30)</td>
+<td class="eqTableEq">
+<div>$$H(\Omega ) = \frac{{H_0^*(\Omega )}}{{{{\left| {{H_0}(\Omega )} \right|}^2} + \left( {\frac{{{S_{nn}}(\Omega )}}{{{S_{xx}}(\Omega )}}} \right)}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>For those frequencies where <span class="arithmatex">\({S_{xx}}(\Omega ) &gt;  &gt; {S_{nn}}(\Omega ),\)</span> the high-<span class="arithmatex">\(SNR\)</span>
+frequency bands, the filter reduces to an <em>inverse</em> filter:</p>
+<div class="" id="eq:Weq31">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.31)</td>
+<td class="eqTableEq">
+<div>$$H(\Omega ) \approx \frac{{H_0^*(\Omega )}}{{{{\left| {{H_0}(\Omega )} \right|}^2}}} = \frac{1}{{{H_0}(\Omega )}} = H_0^{ - 1}(\Omega )$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>For those frequencies where <span class="arithmatex">\({S_{xx}}(\Omega ) &lt;  &lt; {S_{nn}}(\Omega ),\)</span> the low-<span class="arithmatex">\(SNR\)</span> frequency bands, let</p>
+<div class="" id="eq:Weq32">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.32)</td>
+<td class="eqTableEq">
+<div>$$\frac{{{S_{nn}}(\Omega )}}{{{S_{xx}}(\Omega )}} \approx {N_0}\; &gt;  &gt; \;1$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Then the filter reduces to the <em>matched filter</em> solution as in <a href="Chap_9.html#eq:match12">Equation 9.12</a>:</p>
+<div class="" id="eq:Weq33">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.33)</td>
+<td class="eqTableEq">
+<div>$$H(\Omega ) \approx \frac{1}{{{N_0}}}H_0^*(\Omega )$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Finally, for those frequencies where <span class="arithmatex">\({H_o}(\Omega ) = 0,\)</span> we see that <span class="arithmatex">\(H(\Omega ) = 0\)</span> meaning no noise amplification. In <a href="#fig:fig_Wiener6">Figure 10.6</a> we see an example of a Wiener filter designed to restore data after the effects of the bandpass filter used in <a href="#fig:fig_Wiener4">Figure 10.4</a> and <a href="#fig:fig_Wiener5">Figure 10.5</a>.</p>
+<figure class="figaltcap fullsize"><img src="images/Fig_10_6T.png" /><figcaption></figcaption>
+</figure>
+<figure class="figaltcap fullsize" id="fig:fig_Wiener6"><img src="images/Fig_10_6B.png" /><figcaption><strong>Figure 10.6:</strong> (<em>top</em>) A section of the original stochastic (music) signal on the left and the power density spectrum <span class="arithmatex">\({S_{rr}}(\Omega )\)</span> of the noisy, distorted signal <span class="arithmatex">\(r[n\rbrack\)</span> on the right. (<em>bottom</em>) On the right, the spectrum of the Wiener filter as developed from the definition <a href="Chap_10.html#eq:Weq29">Equation 10.29</a>. On the left, the restored signal, <span class="arithmatex">\({x_e}[n\rbrack,\)</span> after application of the Wiener filter. All spectral graphs are plotted over the interval <span class="arithmatex">\(- \pi /2 \le \Omega  \le  + \pi /2\)</span> and all graphs are normalized in range, in the time domain &lcub;–1, +1&rcub; and in the frequency domain &lcub;0, +1&rcub;.</figcaption>
+</figure>
+<table class="imgtxt" style="margin:1em auto; padding-top:10px;">
+    <tr>
+        <td style="width:auto; vertical-align:middle; text-align:center;">
+            <audio controls><source src="media/Paganini_Noisy_Distorted.wav" type="audio/mpeg"></audio>
+        </td>
+    </tr>
+</table>
+
+<figcaption style="margin: 0px 30px;">
+<b>Audio 10.3:</b> Distortion + Noise: Click the play triangle ( <img src="images/play_triangle1.png" style="vertical-align:middle;">) to hear a noisy, distorted version of the Paganini selection.
+</figcaption>
+
+<p>It is important to notice that the spectra <span class="arithmatex">\(\left\{ {{H_o}(\Omega ),{S_{xx}}(\Omega ),{S_{nn}}(\Omega )} \right\},\)</span> that are required to implement the Wiener filter in <a href="Chap_10.html#eq:Weq29">Equation 10.29</a>, are deterministic functions and not (stochastic) estimates. Such prior knowledge is rarely available so we are usually forced to estimate the spectra. Such estimation is the topic of the next chapter.  </p>
+<table class="imgtxt" style="margin:1em auto; padding-top:10px;">
+    <tr>
+        <td style="width:auto; vertical-align:middle; text-align:center;">
+            <audio controls><source src="media/Paganini_Wiener_Restored.wav" type="audio/mpeg"></audio>
+        </td>
+    </tr>
+</table>
+
+<figcaption style="margin: 0px 30px;">
+<b>Audio 10.4:</b> Wiener-filter restoration: Click the play triangle ( <img src="images/play_triangle1.png" style="vertical-align:middle;">) to hear a Wiener-filter-restored version of the Paganini selection.
+</figcaption>
+
+<p>This example illustrates the power of Wiener filtering. The distortion and noise in  <span class="arithmatex">\(r[n]\)</span> are considerably—but not completely—reduced through the use of the Wiener filter.  </p>
+<h2 class="problems" id="problems">Problems<a class="headerlink" href="#problems" title="Permanent link">&para;</a></h2>
+<h3 id="problem-101">Problem 10.1<a class="headerlink" href="#problem-101" title="Permanent link">&para;</a></h3>
+<p>Starting from <a href="Chap_13.html#eq:Ap1eq3">Equation 13.3</a> show that the extremum is a minimum as opposed
+to a maximum or saddle point.</p>
+<h3 id="problem-102">Problem 10.2<a class="headerlink" href="#problem-102" title="Permanent link">&para;</a></h3>
+<p>Consider two complex signals <span class="arithmatex">\(p[n]\)</span> and <span class="arithmatex">\(q[n]\)</span> with Fourier transforms <span class="arithmatex">\(P(\Omega )\)</span> and <span class="arithmatex">\(Q(\Omega ).\)</span>  </p>
+<ol>
+<li>Show that:<a class="indentlist" href=""></a>  </li>
+</ol>
+<div class="" id="eq:Weq34">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(10.34)</td>
+<td class="eqTableEq">
+<div>$$\sum\limits_{k =  - \infty }^{ + \infty } {q[k]{p^*}[k] = \frac{1}{{2\pi }}} \int\limits_{ - \pi }^{ + \pi } {Q(\Omega )} {P^*}(\Omega )d\Omega$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Please note that this is the generalized form of Parseval&rsquo;s Theorem. If <span class="arithmatex">\(q[n] = p[n],\)</span> this then becomes the usual statement of the theorem.  </p>
+<ol start="2">
+<li>How does the result in part (<em>a</em>) change if both <span class="arithmatex">\(p[n]\)</span> and <span class="arithmatex">\(q[n]\)</span> are real signals?</li>
+<li>Using the result from part (<em>b</em>) show that <a href="Chap_10.html#eq:Weq16">Equation 10.16</a> can be rewritten as <a href="Chap_10.html#eq:Weq12">Equation 10.12</a>.<a class="indentlist" href=""></a>  </li>
+</ol>
+<h3 id="problem-103">Problem 10.3<a class="headerlink" href="#problem-103" title="Permanent link">&para;</a></h3>
+<p>Consider an ergodic, stochastic signal <span class="arithmatex">\(x[n]\)</span> such as speech that has been corrupted by independent, additive ergodic noise <span class="arithmatex">\(N[n]\)</span> so that the result is <span class="arithmatex">\(r[n] = x[n] + N[n].\)</span></p>
+<ol>
+<li>Determine an expression for <span class="arithmatex">\({\varphi _{rr}}[k]\)</span> in terms of <span class="arithmatex">\({\varphi _{xx}}[k]\)</span> (the autocorrelation function of the signal), <span class="arithmatex">\({\varphi _{NN}}[k]\)</span> (the autocorrelation function of the noise), <span class="arithmatex">\({m_x}\)</span> (the mean of <span class="arithmatex">\(x[n]\)</span>), and <span class="arithmatex">\({m_N}\)</span> (the mean of <span class="arithmatex">\(N[n]\)</span>).</li>
+<li>What does <span class="arithmatex">\({\varphi _{rr}}[k]\)</span> reduce to if the noise has zero-mean, that is, <span class="arithmatex">\({m_N} = 0?\)</span></li>
+<li>Determine the power spectral density of <span class="arithmatex">\(r[n]\)</span> in terms of the power spectral densities of <span class="arithmatex">\(x[n]\)</span> and <span class="arithmatex">\(N[n]\)</span> assuming <span class="arithmatex">\({m_N} = 0.\)</span><a class="indentlist" href=""></a>  </li>
+</ol>
+<h3 id="problem-104">Problem 10.4<a class="headerlink" href="#problem-104" title="Permanent link">&para;</a></h3>
+<p>The continuous-time music from Paganini used in the following sections <a href="Chap_10.html#the-more-general-restoration-case-noise-distortion">Chapter 10</a>, <a href="Chap_10.html#why-we-avoid-the-inverse-filter">Chapter 10</a>, and <a href="Chap_10.html#determining-the-wiener-filter">Chapter 10</a> was sampled at 44.1 kHz. In <a href="#fig:fig_Wiener4">Figure 10.4</a>, <a href="#fig:fig_Wiener5">Figure 10.5</a>, and <a href="#fig:fig_Wiener6">Figure 10.6</a> the spectra are displayed from <span class="arithmatex">\(- \pi /2 \le \Omega  \le  + \pi /2\)</span>  </p>
+<ol>
+<li>What is the analog frequency range (in kHz) that is displayed in these figures?</li>
+<li>How can we justify displaying only these frequencies as opposed to the full spectra?<a class="indentlist" href=""></a>  </li>
+</ol>
+<p><em>Note</em>: In the following laboratory exercises involving audio signals, we will be freely switching between use of the discrete time frequency variable <span class="arithmatex">\(\Omega\)</span> and the continuous frequency variable <span class="arithmatex">\(\omega  = 2\pi f.\)</span> The sampling rate remains 44.1 kHz.</p>
+<h2 class="labexp" id="laboratory-exercises">Laboratory Exercises<a class="headerlink" href="#laboratory-exercises" title="Permanent link">&para;</a></h2>
+<h3 id="laboratory-exercise-101">Laboratory Exercise 10.1<a class="headerlink" href="#laboratory-exercise-101" title="Permanent link">&para;</a></h3>
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_10.1.html'>
+                <img src='images/Wiener_10.1.gif' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; 
+                    border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        A simple impulse has been corrupted by noise. Can the Wiener filter restore 
+        the signal and at what noise levels? Look and listen.
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+<!-- 
+### Laboratory Exercise 10.2
+
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_10.2.html'>
+                <img src='images/Wiener_10.2.gif' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; 
+                    border-radius:11px;"></a>           </div>
+        </td>
+        <td>
+        Instead of a synthetic signal, we now use audio input from your device. Can 
+        the Wiener filter restore the signal and at what noise levels? Look and 
+        listen. Click on the icon to the left to start the exercise.
+        </td>
+    </tr>
+</table>
+ -->
+
+<h3 id="laboratory-exercise-102">Laboratory Exercise 10.2<a class="headerlink" href="#laboratory-exercise-102" title="Permanent link">&para;</a></h3>
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_10.3.html'>
+                <img src='images/Solvay_80.png' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; 
+                    border-radius:11px;"></a>           </div>
+        </td>
+        <td>
+        We explore the quality of the restoration of color images that can be achieved 
+        in the presence of significant amounts of noise.
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+<!-- 
+### Laboratory Exercise 10.4
+
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_10.4.html'>
+                <img src='images/Wiener_10.2.gif' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; 
+                    border-radius:11px;"></a>           </div>
+        </td>
+        <td>
+        When signals have been distorted by recording equipment and contaminated by 
+        noise, how well can they be restored when using a Wiener filter? Look and listen.
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+ -->
+
+<h3 id="laboratory-exercise-103">Laboratory Exercise 10.3<a class="headerlink" href="#laboratory-exercise-103" title="Permanent link">&para;</a></h3>
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_10.5.html'>
+                <img src='images/ColorTruiSq_80.gif' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; 
+                    border-radius:11px;"></a>           </div>
+        </td>
+        <td>
+        We apply Wiener filtering to a two-dimensional signal, an image, that 
+        has first been distorted and then contaminated with noise. How faithful 
+        is the restored image? The mean-square error may have been minimized 
+        but is the image “pretty”?
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+<h3 id="laboratory-exercise-104">Laboratory Exercise 10.4<a class="headerlink" href="#laboratory-exercise-104" title="Permanent link">&para;</a></h3>
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_10.6.html'>
+                <img src='images/ColorTruiSq_80.gif' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; 
+                    border-radius:11px;"></a>           </div>
+        </td>
+        <td>
+        Images are acquired through cameras and all cameras have apertures. Can 
+        we restore an image that is distorted by an aperture effect and is 
+        “dirty” (noisy) as well?
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+<h3 id="laboratory-exercise-105">Laboratory Exercise 10.5<a class="headerlink" href="#laboratory-exercise-105" title="Permanent link">&para;</a></h3>
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_10.7.html'>
+                <img src='images/ColorTruiSq_80.gif' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; 
+                    border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        Using the Wiener-filter concept means having prior knowledge. What, for 
+        example, is the noise spectrum? If we make some assumptions <i>and are 
+        prepared to justify these assumptions</i>, perhaps we can simplify the 
+        problem with a “poor man’s Wiener filter”.
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+<!-- 
+### Laboratory Exercise 10.8
+
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_10.8.html'>
+                <img src='images/Wiener_10.2.gif' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; 
+                    border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        Can we estimate the impulse respons <b><i>h<sub>o</sub></i></b> of your 
+        recording device? If so, can this help us improve the quality of the 
+        recording using the appropriate Wiener filter?
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+### Laboratory Exercise 10.9  
+
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_10.9.html'>
+                <img src='images/TruiAndCamera.png' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; 
+                    border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        Using the camera(s) in your device, explore the results of Wiener filtering
+        to restore images that have been degraded by “distortion” filters and 
+        corrupted by additive noise.
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+ -->
+
+<!-- 
+### Laboratory Exercise 10.10
+
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_10.10.html'>
+                <img src='images/TruiAndCamera.png' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; 
+                    border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        Using the <i>back</i> camera in your device estimate the point-spread-function 
+        (<i>psf</i>) and explore the results of Wiener filtering to improve recorded 
+        images that have been degraded by this <i>psf</i> and corrupted by additional 
+        additive noise. To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+ -->
+
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:castleman1996">
+<p>Castleman, K. R. (1996). Digital Image Processing. Englewood Cliffs, New Jersey, Prentice-Hall&#160;<a class="footnote-backref" href="#fnref:castleman1996" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:lee1960">
+<p>Lee, Y. W. (1960). Statistical Theory of Communication. New York, John Wiley &amp; Sons&#160;<a class="footnote-backref" href="#fnref:lee1960" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:papoulis1977">
+<p>Papoulis, A. (1977). Signal Analysis. New York, McGraw-Hill&#160;<a class="footnote-backref" href="#fnref:papoulis1977" title="Jump back to footnote 3 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:papoulis1977" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:discretetimesignals">
+<p>The discrete-time signals <em>x</em>[<em>n</em>] and <em>r</em>[<em>n</em>] in this discussion are displayed as “continuous” curves because they contain thousands of samples and the standard display does not reproduce well. The spectra of the stochastic signals are displayed as line spectra because they are calculated from the Discrete Fourier Transform (DFT) using the FFT algorithm. Nevertheless, we continue to discuss discrete-time signals of the form <span class="arithmatex">\(f[n]\)</span> and spectra as <span class="arithmatex">\(F(\Omega )\)</span> as presented in the beginning of Chapter 3.&#160;<a class="footnote-backref" href="#fnref:discretetimesignals" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+
+<footer class="md-footer" id="jumpToBottom">
+
+  <!-- Link to previous and/or next page -->
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        <!-- Link to previous page -->
+        
+          <a
+            href="Chap_9.html"
+            title="9. The Matched Filter"
+            class="md-footer-nav__link md-footer-nav__link--prev"
+            rel="prev"
+          >
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                9. The Matched Filter
+              </div>
+            </div>
+          </a>
+        
+
+        <!-- Link to next page -->
+        
+          <a
+            href="Chap_11.html"
+            title="11. Aspects of Estimation"
+            class="md-footer-nav__link md-footer-nav__link--next"
+            rel="next"
+          >
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                11. Aspects of Estimation
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+</footer>
+      
+    </div>
+    
+      <script src="assets/javascripts/vendor.77e55a48.min.js"></script>
+      <script src="assets/javascripts/bundle.9554a270.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+
+	<script src="js/polyfill/index.js"></script>
+	<script src="search/search_index.js"></script>
+
+
+      <script>
+        app = initialize({
+          base: ".",
+          features: [],
+          search: Object.assign({
+            worker: "assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="js/extra.js"></script>
+      
+        <script src="js/SSPextra.js"></script>
+      
+        <script src="js/mathjax_3_generic_conf.js"></script>
+      
+        <script src="js/mathjax/tex-svg.js"></script>
+      
+    
+  </body>
+</html>

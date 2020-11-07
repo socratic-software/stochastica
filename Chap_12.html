@@ -1,0 +1,1474 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <meta name="author" content="I.T. Young & R. Ligteringen">
+      
+      <link rel="shortcut icon" href="images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.0.2">
+    
+    
+      
+        <title>12. Spectral Estimation - Introduction to Stochastic Signal Processing</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.38780c08.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.3f72e892.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Georgia:300,400,400i,700%7CCourier&display=fallback">
+        <style>body,input{font-family:"Georgia",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Courier",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="css/extra.css">
+    
+      <link rel="stylesheet" href="css/imgtxt.css">
+    
+      <link rel="stylesheet" href="css/tables.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#spectral-estimation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <!-- Application header -->
+<header class="md-header" data-md-component="header">
+
+  <!-- Top-level navigation -->
+  <nav class="md-header-nav md-grid" aria-label="Header">
+
+    <!-- Link to home -->
+    <a
+      href="."
+      title="Introduction to Stochastic Signal Processing"
+      class="md-header-nav__button md-logo"
+      aria-label="Introduction to Stochastic Signal Processing"
+    >
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+<!-- 
+  Insert an <img> here as an alternative for the standard logo if desired.
+  Then comment out the above two lines
+ <img src="images/favicon.png" style="margin-top:5px; border: 0px solid lime; border-radius:5px; width:120%; height: auto;" />
+ -->
+
+    </a>
+
+    <!-- Button to open drawer -->
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+
+    <!-- Header title -->
+    <div class="md-header-nav__title" data-md-component="header-title">
+          
+            
+              <a href="#jumpToBottom">
+                <span class="md-header-nav__topic">
+                  Introduction to Stochastic Signal Processing
+                </span>
+                <span class="md-header-nav__topic">
+                  12. Spectral Estimation
+                </span>
+              </a>
+            
+          
+    </div>
+
+    <!-- Button to open search dialogue -->
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+
+      <!-- Search interface -->
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    <!-- Repository containing source -->
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Introduction to Stochastic Signal Processing" class="md-nav__button md-logo" aria-label="Introduction to Stochastic Signal Processing">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+<!-- 
+  Insert an <img> here as an alternative for the standard logo if desired.
+  Then comment out the above two lines
+ <img src="images/favicon.png" style="margin-top:5px; border: 0px solid lime; border-radius:5px; width:120%; height: auto;" />
+ -->
+
+    </a>
+    Introduction to Stochastic Signal Processing
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_1.html" class="md-nav__link">
+      1. How to use this iBook
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_2.html" class="md-nav__link">
+      2. Prologue
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_3.html" class="md-nav__link">
+      3. Introduction
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_4.html" class="md-nav__link">
+      4. Characterization of Random Signals
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_5.html" class="md-nav__link">
+      5. Correlations and Spectra
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_6.html" class="md-nav__link">
+      6. Filtering of Stochastic Signals
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_7.html" class="md-nav__link">
+      7. The Langevin Equation – A Case Study
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_8.html" class="md-nav__link">
+      8. Characterizing Signal-to-Noise Ratios
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_9.html" class="md-nav__link">
+      9. The Matched Filter
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_10.html" class="md-nav__link">
+      10. The Wiener filter
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_11.html" class="md-nav__link">
+      11. Aspects of Estimation
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        12. Spectral Estimation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="Chap_12.html" class="md-nav__link md-nav__link--active">
+      12. Spectral Estimation
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-periodogram-unbiased" class="md-nav__link">
+    The periodogram – unbiased?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#windowed-observations" class="md-nav__link">
+    Windowed observations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-periodogram-what-about-convergence" class="md-nav__link">
+    The periodogram – what about convergence?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-windows" class="md-nav__link">
+    Other windows
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-family-of-windows" class="md-nav__link">
+    A family of windows
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problems" class="md-nav__link">
+    Problems
+  </a>
+  
+    <nav class="md-nav" aria-label="Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-121" class="md-nav__link">
+    Problem 12.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-122" class="md-nav__link">
+    Problem 12.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-123" class="md-nav__link">
+    Problem 12.3
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#laboratory-exercises" class="md-nav__link">
+    Laboratory Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Laboratory Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-121" class="md-nav__link">
+    Laboratory Exercise 12.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-122" class="md-nav__link">
+    Laboratory Exercise 12.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-123" class="md-nav__link">
+    Laboratory Exercise 12.3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-124" class="md-nav__link">
+    Laboratory Exercise 12.4
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_13.html" class="md-nav__link">
+      Appendices
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="info.html" class="md-nav__link">
+      Information
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-periodogram-unbiased" class="md-nav__link">
+    The periodogram – unbiased?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#windowed-observations" class="md-nav__link">
+    Windowed observations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-periodogram-what-about-convergence" class="md-nav__link">
+    The periodogram – what about convergence?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-windows" class="md-nav__link">
+    Other windows
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-family-of-windows" class="md-nav__link">
+    A family of windows
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problems" class="md-nav__link">
+    Problems
+  </a>
+  
+    <nav class="md-nav" aria-label="Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-121" class="md-nav__link">
+    Problem 12.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-122" class="md-nav__link">
+    Problem 12.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-123" class="md-nav__link">
+    Problem 12.3
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#laboratory-exercises" class="md-nav__link">
+    Laboratory Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Laboratory Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-121" class="md-nav__link">
+    Laboratory Exercise 12.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-122" class="md-nav__link">
+    Laboratory Exercise 12.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-123" class="md-nav__link">
+    Laboratory Exercise 12.3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-124" class="md-nav__link">
+    Laboratory Exercise 12.4
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="spectral-estimation">Spectral Estimation<a class="headerlink" href="#spectral-estimation" title="Permanent link">&para;</a></h1>
+<p>We may not have an analytical model of a signal, its autocorrelation function, or its power spectral density. An example of this problem was presented in <a href="Chap_5.html#predicting-the-natural-climate-a-case-study">Chapter 5</a>. It should be clear that the phenomenon of weather is far too complex to admit an analytical solution for the autocorrelation function of the temperature <span class="arithmatex">\({\varphi _{TT}}[k]\)</span> or its power spectral density <span class="arithmatex">\({S_{TT}}(\Omega ).\)</span> We must work with estimates of these quantities.  </p>
+<p>In the previous chapter we examined the central questions of estimation: bias and convergence applied to means, variances, and correlations. In this chapter we will look at the problem of estimating the power spectral density.  </p>
+<p>Our estimate of the power spectrum of a random process is <span class="arithmatex">\({I_N}(\Omega ).\)</span> That is <span class="arithmatex">\({I_N}(\Omega )\)</span> is the estimate of <span class="arithmatex">\({S_{xx}}(\Omega ) = {\mathscr{F}}\left\{ {{\varphi _{xx}}[k]} \right\}.\)</span> We begin with a stochastic signal whose power spectral density is shown in <a href="Chap_8.html#fig:stand_model2">Figure 8.2</a> and given, for <span class="arithmatex">\({S_o} = 1\)</span> and <span class="arithmatex">\(\alpha  = 4/7,\)</span> by <a href="Chap_8.html#eq:snreq10">Equation 8.10</a>:</p>
+<div class="" id="eq:SEeq1">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(12.1)</td>
+<td class="eqTableEq">
+<div>$${S_{xx}}(\Omega ) = \frac{{{S_o}}}{{1 + {\alpha ^2} - 2\alpha \cos \Omega }} = \frac{{49}}{{65 - 56\cos \Omega }}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>We use the spectral estimator:</p>
+<div class="" id="eq:SEeq2">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(12.2)</td>
+<td class="eqTableEq">
+<div>$${I_N}(\Omega ) = {\mathscr{F}}\left\{ {{{\hat c}_{xx}}[k]} \right\} = \sum\limits_{k = 0}^{N - 1} {{{\hat c}_{xx}}[k]} \,{e^{ - j\Omega k}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>But <span class="arithmatex">\({{{\hat c}_{xx}}[k]}\)</span> is, itself, formed with the aid of <a href="Chap_11.html#eq:Eeq39">Equation 11.39</a> from <span class="arithmatex">\(x[n]\)</span> and using basic Fourier theory:</p>
+<div class="" id="eq:SEeq3">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(12.3)</td>
+<td class="eqTableEq">
+<div>$${I_N}(\Omega ) = \frac{1}{N}{\left| {X(\Omega )} \right|^2}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<h2 id="the-periodogram-unbiased">The periodogram – unbiased?<a class="headerlink" href="#the-periodogram-unbiased" title="Permanent link">&para;</a></h2>
+<p>This basic estimate is referred to in the literature as a <em>periodogram</em>. The issue we will now examine is whether the periodogram <span class="arithmatex">\({I_N}(\Omega )\)</span> is a good estimate of <span class="arithmatex">\({S_{xx}}(\Omega ).\)</span> By now we understand that “good” relates to the issues of bias and convergence.</p>
+<p>This bias is defined as:</p>
+<div class="" id="eq:SEeq4">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(12.4)</td>
+<td class="eqTableEq">
+<div>$$B = E\left\{ {{I_N}(\Omega )} \right\} - {S_{xx}}(\Omega ) = B(\Omega )$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The term that must be investigated is:</p>
+<div class="" id="eq:SEeq5">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(12.5)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{E\left\{ {{I_N}(\Omega )} \right\}}&amp;{ = E\left\{ {\sum\limits_{k = 0}^{N - 1} {{{\hat c}_{xx}}[k]} \,{e^{ - j\Omega k}}} \right\}}\\
+{\,\,\,}&amp;{ = \sum\limits_{k = 0}^{N - 1} {E\left\{ {{{\hat c}_{xx}}[k]} \right\}\,} {e^{ - j\Omega k}}}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>As the only term inside the first set of braces that is stochastic is <span class="arithmatex">\({{{\hat c}_{xx}}[k]},\)</span> we can exchange the order of expectation and summation. From <a href="Chap_11.html#eq:Eeq40">Equation 11.40</a> we can replace the expectation as follows:</p>
+<div class="" id="eq:SEeq6">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(12.6)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{E\left\{ {{I_N}(\Omega )} \right\}}&amp;{ = \sum\limits_{k = 0}^{N - 1} {\left( {\frac{{N - \left| k \right|}}{N}} \right)} {\varphi _{xx}}[k]{e^{ - j\Omega k}}}\\
+{\,\,\,}&amp;{ = \sum\limits_{k = 0}^{N - 1} {\left( {1 - \frac{{\left| k \right|}}{N}} \right)} {\varphi _{xx}}[k]{e^{ - j\Omega k}}}\\
+{\,\,\,}&amp;{ = \sum\limits_{k = 0}^{N - 1} {{\varphi _{xx}}[k]{e^{ - j\Omega k}}}  - \sum\limits_{k = 0}^{N - 1} {\frac{{\left| k \right|}}{N}{\varphi _{xx}}[k]{e^{ - j\Omega k}}} }
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The first sum does not have the limits that we should expect from the formal definition of <span class="arithmatex">\({S_{xx}}(\Omega )\)</span>; the variable <span class="arithmatex">\(k\)</span> does not go from <span class="arithmatex">\(- \infty\)</span> to <span class="arithmatex">\(+ \infty.\)</span> See <a href="Chap_12.html#eq:SEeq9">Equation 12.9</a> below. The second sum in <a href="Chap_12.html#eq:SEeq6">Equation 12.6</a> shows clearly that the estimate is biased. Specifically, the term <span class="arithmatex">\(\left| k \right|/N\)</span> would seem to indicate that <span class="arithmatex">\(E\left\{ {{I_N}(\Omega )} \right\}\)</span> is an underestimate. Thus the periodogram based upon <span class="arithmatex">\({{{\hat c}_{xx}}[k]}\)</span> is a biased estimate of <span class="arithmatex">\({S_{xx}}(\Omega ).\)</span></p>
+<p>We might choose instead to consider the spectral estimate given by:</p>
+<div class="" id="eq:SEeq7">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(12.7)</td>
+<td class="eqTableEq">
+<div>$${P_N}(\Omega ) = {\mathscr{F}}\left\{ {{c_{xx}}[k]} \right\} = \sum\limits_{k = 0}^{N - 1} {{c_{xx}}[k]} {e^{ - j\Omega k}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Once again our computation of the bias requires:</p>
+<div class="" id="eq:SEeq8">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(12.8)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{E\left\{ {{P_N}(\Omega )} \right\}}&amp;{ = E\left\{ {\sum\limits_{k = 0}^{N - 1} {{c_{xx}}[k]} {e^{ - j\Omega k}}} \right\}}\\
+{\,\,\,}&amp;{ = \sum\limits_{k = 0}^{N - 1} {E\left\{ {{c_{xx}}[k]} \right\}} {e^{ - j\Omega k}} = \sum\limits_{k = 0}^{N - 1} {{\varphi _{xx}}[k]{e^{ - j\Omega k}}} }
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>This last line follows from <span class="arithmatex">\({{c_{xx}}[k]}\)</span> being an unbiased estimate of <span class="arithmatex">\({{\varphi _{xx}}[k]}.\)</span> It might seem at this point that we have found an unbiased estimate of <span class="arithmatex">\({S_{xx}}(\Omega ).\)</span> Our result <a href="Chap_12.html#eq:SEeq8">Equation 12.8</a>, however, is <em>not</em> the same as:</p>
+<div class="" id="eq:SEeq9">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(12.9)</td>
+<td class="eqTableEq">
+<div>$${S_{xx}}(\Omega ) = {\mathscr{F}}\left\{ {{\varphi _{xx}}[k]} \right\} = \sum\limits_{k =  - \infty }^{ + \infty } {{\varphi _{xx}}[k]} {e^{ - j\Omega k}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Once again the difference lies in the limits of the summation. In <a href="Chap_12.html#eq:SEeq8">Equation 12.8</a> the limits on <span class="arithmatex">\(k\)</span> are <span class="arithmatex">\(0 \le k \le N - 1\)</span> while in <a href="Chap_12.html#eq:SEeq9">Equation 12.9</a> the limits on <span class="arithmatex">\(k\)</span> are <span class="arithmatex">\(- \infty  \le k \le  + \infty.\)</span> The limits in <a href="Chap_12.html#eq:SEeq8">Equation 12.8</a> represent the fact that we have only a finite amount of data to estimate <span class="arithmatex">\({S_{xx}}(\Omega ).\)</span></p>
+<p>The conclusion is clear: Both estimates, <span class="arithmatex">\({I_N}(\Omega )\)</span> and <span class="arithmatex">\({P_N}(\Omega ),\)</span> are biased
+estimates of the power spectral density <span class="arithmatex">\({S_{xx}}(\Omega ).\)</span></p>
+<h2 id="windowed-observations">Windowed observations<a class="headerlink" href="#windowed-observations" title="Permanent link">&para;</a></h2>
+<p>Our stochastic process is being observed through a “window” of width <span class="arithmatex">\(N.\)</span> This finite-length data record introduces a bias into our estimate of the power density spectrum. This window bias can be observed in both <span class="arithmatex">\({I_N}(\Omega )\)</span> (<a href="Chap_12.html#eq:SEeq6">Equation 12.6</a>) and <span class="arithmatex">\({P_N}(\Omega )\)</span> (<a href="Chap_12.html#eq:SEeq8">Equation 12.8</a>).</p>
+<p>It is possible to rewrite our expression for <span class="arithmatex">\(E\left\{ {{I_N}(\Omega )} \right\}\)</span> and <span class="arithmatex">\(E\left\{ {{P_N}(\Omega )} \right\}\)</span> using the concept of a deterministic <em>window function</em>, <span class="arithmatex">\(w[n].\)</span></p>
+<div class="" id="eq:SEeq10">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(12.10)</td>
+<td class="eqTableEq">
+<div>$$E\left\{ {{I_N}(\Omega )} \right\} = \sum\limits_{k =  - \infty }^{ + \infty } {{w_I}[k]{\varphi _{xx}}[k]{e^{ - j\Omega k}}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="" id="eq:SEeq11">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(12.11)</td>
+<td class="eqTableEq">
+<div>$$E\left\{ {{P_N}(\Omega )} \right\} = \sum\limits_{k =  - \infty }^{ + \infty } {{w_P}[k]{\varphi _{xx}}[k]{e^{ - j\Omega k}}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The two summations extend over an infinite data record and the influence of a finite data record, as well as the difference between the two estimates, has been transferred to the window function.  </p>
+<p><a class="smaller" href=""><em>Triangular (Bartlett) window:</em></a></p>
+<div class="" id="eq:SEeq12">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(12.12)</td>
+<td class="eqTableEq">
+<div>$${w_I}[k] = \left\{ {\begin{array}{*{20}{c}}
+{\frac{{N - \left| k \right|}}{N}}&amp;{\left| k \right| &lt; N}\\
+0&amp;{\left| k \right| \ge N}
+\end{array}} \right.$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p><a class="smaller" href=""><em>Rectangular (Block) window:</em></a></p>
+<div class="" id="eq:SEeq13">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(12.13)</td>
+<td class="eqTableEq">
+<div>$${w_P}[k] = \left\{ {\begin{array}{*{20}{c}}
+1&amp;{\left| k \right| &lt; N}\\
+0&amp;{\left| k \right| \ge N}
+\end{array}} \right.$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>From Fourier theory we know that the influence of the window on the spectrum <span class="arithmatex">\({S_{xx}}(\Omega )\)</span> will be given by:</p>
+<div class="" id="eq:SEeq14">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(12.14)</td>
+<td class="eqTableEq">
+<div>$$E\left\{ {{I_N}(\Omega )} \right\} = \frac{1}{{2\pi }}{W_I}(\Omega ) \otimes {S_{xx}}(\Omega )$$</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="" id="eq:SEeq15">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(12.15)</td>
+<td class="eqTableEq">
+<div>$$E\left\{ {{P_N}(\Omega )} \right\} = \frac{1}{{2\pi }}{W_P}(\Omega ) \otimes {S_{xx}}(\Omega )$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>That is, multiplication in the time domain <span class="arithmatex">\(n\)</span> yields convolution in the frequency domain <span class="arithmatex">\(\Omega\)</span> where:</p>
+<div class="" id="eq:SEeq16">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(12.16)</td>
+<td class="eqTableEq">
+<div>$${W_I}(\Omega ) = {\mathscr{F}}\left\{ {{w_I}[k]} \right\}\,\,\,\,\,\,\,\,\,{W_P}(\Omega ) = {\mathscr{F}}\left\{ {{w_P}[k]} \right\}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Plots of the two windows <span class="arithmatex">\({w_I}[k]\)</span> and <span class="arithmatex">\({w_P}[k]\)</span> as well as their spectra <span class="arithmatex">\({W_I}(\Omega )\)</span> and <span class="arithmatex">\({W_P}(\Omega )\)</span> are given in <a href="#fig:fig_SEst1">Figure 12.1</a>. A comparison of various properties is useful.</p>
+<p>The ideal window would have the form in the frequency domain of <span class="arithmatex">\(W(\Omega ) = 2\pi \,\delta \left( \Omega  \right).\)</span> This is because the convolutions in <a href="Chap_12.html#eq:SEeq14">Equation 12.14</a> and <a href="Chap_12.html#eq:SEeq15">Equation 12.15</a> would then yield the desired spectrum, <span class="arithmatex">\({S_{xx}}(\Omega ).\)</span> Instead we have spectra <span class="arithmatex">\({W_I}(\Omega )\)</span> and <span class="arithmatex">\({W_P}(\Omega )\)</span> that have wider <em>center</em> lobes than the impulse <span class="arithmatex">\(\delta \left( \Omega  \right)\)</span> and that have <em>side</em> lobes that further contaminate the spectral estimate. Comparing the two spectra, we see that <span class="arithmatex">\({W_I}(\Omega )\)</span> has a wide center lobe but small side lobes while <span class="arithmatex">\({W_P}(\Omega )\)</span> has a narrower center lobe but larger side lobes, another example of a trade-off.</p>
+<p>Once we have accepted the idea that windowing of the data is inevitable<sup id="fnref:windowed"><a class="footnote-ref" href="#fn:windowed">1</a></sup>, we can consider searching for other window shapes that might have certain desirable properties for spectral estimation.</p>
+<figure class="figaltcap fullsize" id="fig:fig_SEst1"><img src="images/Fig_12_1.png" /><figcaption><strong>Figure 12.1:</strong> (<em>top</em>) Spectrum <span class="arithmatex">\({W_I}\left( \Omega  \right)\)</span> associated with a triangular (Bartlett) window <span class="arithmatex">\({w_I}[n\rbrack\)</span>; (<em>bottom</em>) Spectrum <span class="arithmatex">\({W_P}\left( \Omega  \right)\)</span> associated with a rectangular (Block) window <span class="arithmatex">\({w_P}[n\rbrack.\)</span> Note the trade-off between the width of the main lobe and the height of the side lobes.</figcaption>
+</figure>
+<p>The spectrum associated with windowing is not only affected by a window’s shape but by the window’s length as well. In <a href="#movie121">Movie 12.1</a> we show how the spectrum <span class="arithmatex">\({W_P}(\Omega )\)</span> is affected by the length (width) of the window <span class="arithmatex">\({w_P}[k].\)</span>  </p>
+<table class="imgtxt" style="margin:1em auto;" id="movie121">
+    <tr>
+        <td style="width:auto; vertical-align:middle; text-align:center;">
+            <video id="theVideo" src="media/Time-Bandwidth.m4v" 
+                poster="media/PosterMovie_12.1.png" width=100% controls 
+                onended="rewind()" style="border: 2px solid rgb(174,24,16)"></video> 
+        </td>
+    </tr>
+</table>
+
+<figcaption style="margin: 0px 30px;">
+<b>Movie 12.1:</b> Tradeoff between (<i>top</i>) window width and (<i>bottom</i>) spectral bandwidth. The window extends from $- N$ to $+ N.$ Notice, in particular, the width of the main, central spectral lobe as $N$ increases.
+</figcaption>
+
+<p>The width of this window is <span class="arithmatex">\(2N + 1\)</span> and, as <span class="arithmatex">\(N \to \infty,\)</span> the window approaches the ideal, impulse-like behavior, <span class="arithmatex">\(\delta \left( \Omega  \right).\)</span> The exact form of <span class="arithmatex">\({W_P}(\Omega )\)</span> is given in <a href="Chap_12.html#eq:SEeq17">Equation 12.17</a>.  </p>
+<div class="" id="eq:SEeq17">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(12.17)</td>
+<td class="eqTableEq">
+<div>$${W_P}(\Omega ) = \frac{{\sin \left( {\Omega \left( {2N + 1} \right)/2} \right)}}{{\sin \left( {\Omega /2} \right)}}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<h2 id="the-periodogram-what-about-convergence">The periodogram – what about convergence?<a class="headerlink" href="#the-periodogram-what-about-convergence" title="Permanent link">&para;</a></h2>
+<p>In the previous section we looked at the issue of bias in spectral estimation. The issue of convergence, as we have seen earlier, is also pivotal. In general, however, the issue is too complicated to analyze here. The results for certain simplifying assumptions show that, as estimates, <span class="arithmatex">\({I_N}(\Omega )\)</span> and <span class="arithmatex">\({P_N}(\Omega )\)</span> are seriously deficient.</p>
+<p>In other words, neither one provides an estimate whose variance goes to zero as <span class="arithmatex">\(N \to \infty.\)</span> This effect is illustrated in <a href="#fig:fig_SEst2">Figure 12.2</a> where the lack of convergence in the spectral estimate as <span class="arithmatex">\(N\)</span> increases is shown. As <span class="arithmatex">\(N\)</span> grows, the estimate of the spectrum at any given frequency <span class="arithmatex">\(\Omega\)</span> does not converge but, instead, continues to fluctuate and behave as an underestimate.</p>
+<p>The theory to explain this has been worked out for Gaussian white noise with zero-mean and standard deviation <span class="arithmatex">\(\sigma.\)</span> It can be shown (Jenkins<sup id="fnref:jenkins1998"><a class="footnote-ref" href="#fn:jenkins1998">2</a></sup>) that:</p>
+<div class="" id="eq:SEeq18">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(12.18)</td>
+<td class="eqTableEq">
+<div>$$Var\left\{ {{I_N}(\Omega )} \right\} = {\sigma ^4}\left( {1 + {{\left( {\frac{{\sin (N\Omega )}}{{N\sin \Omega }}} \right)}^2}} \right)$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Thus as <span class="arithmatex">\(N \to \infty\)</span> we have <span class="arithmatex">\(Var\left\{ {{I_N}\left( \Omega  \right)} \right\} = {\sigma ^4}\)</span> and we conclude that the variance of the estimate does not go to zero. Neither the periodogram <span class="arithmatex">\({I_N}(\Omega )\)</span> nor <span class="arithmatex">\({P_N}(\Omega )\)</span> is a consistent estimate of <span class="arithmatex">\({S_{xx}}(\Omega ).\)</span> Further, as explained in Section 11.3.2 of Jenkins<sup id="fnref2:jenkins1998"><a class="footnote-ref" href="#fn:jenkins1998">2</a></sup> and illustrated in <a href="#fig:fig_SEst2">Figure 12.2</a>, the rapidity of the fluctuations in the spectral estimate increases as <span class="arithmatex">\(N\)</span> increases.   </p>
+<figure class="figaltcap fullsize" id="fig:fig_SEst2"><img src="images/Fig_12_2.png" /><figcaption><strong>Figure 12.2:</strong> The “true” power spectral density of a stochastic signal <span class="arithmatex">\({S_{xx}}(\Omega )\)</span> (in <strong><font color="darkred">dark red</font></strong>) and an <span class="arithmatex">\({I_N}(\Omega )\)</span> estimate based upon (<em>top</em>) <span class="arithmatex">\(N = 16\)</span> and <span class="arithmatex">\(N = 64\)</span> samples; (<em>middle</em>) <span class="arithmatex">\({I_N}(\Omega )\)</span> estimate based upon <span class="arithmatex">\(N = 256\)</span> and <span class="arithmatex">\(N = 1024\)</span> samples; (<em>bottom</em>) <span class="arithmatex">\({I_N}(\Omega )\)</span> estimate based upon <span class="arithmatex">\(N = 4096\)</span> and <span class="arithmatex">\(N = 16384\)</span> samples.</figcaption>
+</figure>
+<p>The most well-known technique for dealing with this problem is Bartlett’s procedure. We begin with <span class="arithmatex">\(M\)</span> samples of data, that is, <span class="arithmatex">\(\left\{ {x[0],x[1],x[2],...,x[M - 1]} \right\}.\)</span> We now split the <span class="arithmatex">\(M\)</span> samples up into <span class="arithmatex">\(K\)</span> non-overlapping, contiguous records, each of length <span class="arithmatex">\(N.\)</span> That is <span class="arithmatex">\(M = K \bullet N.\)</span> As an example we might have <span class="arithmatex">\(M = 2048\)</span> samples and choose <span class="arithmatex">\(K = 16\)</span> records with <span class="arithmatex">\(N = 128\)</span> samples/record.</p>
+<p>For each record <span class="arithmatex">\(k = 1,2,...,16\)</span> we compute the periodogram <span class="arithmatex">\(I_N^{(k)}\left( \Omega  \right),\)</span> that is, we compute <span class="arithmatex">\(K\)</span> different periodograms, one per record. We now form the Bartlett estimate of the spectrum:</p>
+<div class="mainresult" id="eq:SEeq19">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(12.19)</td>
+<td class="eqTableEq">
+<div>$${B_I}(\Omega ) = \frac{1}{K}\sum\limits_{k = 1}^K {I_N^{(k)}(\Omega )}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The Bartlett estimate is the arithmetic mean (average) of the <span class="arithmatex">\(K\)</span> periodograms. Of course, it is also possible to form the Bartlett estimate using <span class="arithmatex">\(P_N^{(k)}\left( \Omega  \right)\)</span> giving:</p>
+<div class="mainresult" id="eq:SEeq20">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(12.20)</td>
+<td class="eqTableEq">
+<div>$${B_P}(\Omega ) = \frac{1}{K}\sum\limits_{k = 1}^K {P_N^{(k)}(\Omega )}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Because each of the <span class="arithmatex">\(K\)</span> records is independent of the other <span class="arithmatex">\(K - 1\)</span>
+records—do you understand why?—we have:</p>
+<div class="" id="eq:SEeq21">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(12.21)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+E\left\{ {{B_I}(\Omega )} \right\} = \frac{1}{K}\sum\limits_{k = 1}^K {E\left\{ {I_N^{(k)}(\Omega )} \right\}}  = E\left\{ {I_N^{(k)}(\Omega )} \right\}\\
+Var\left\{ {{B_I}(\Omega )} \right\} = \frac{1}{K}Var\left\{ {I_N^{(k)}(\Omega )} \right\}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="" id="eq:SEeq22">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(12.22)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+E\left\{ {{B_P}(\Omega )} \right\} = \frac{1}{K}\sum\limits_{k = 1}^K {E\left\{ {P_N^{(k)}(\Omega )} \right\}}  = E\left\{ {P_N^{(k)}(\Omega )} \right\}\\
+Var\left\{ {{B_P}(\Omega )} \right\} = \frac{1}{K}Var\left\{ {P_N^{(k)}(\Omega )} \right\}
+\end{array}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Whether we choose <span class="arithmatex">\({{B_I}(\Omega )}\)</span> or <span class="arithmatex">\({{B_P}(\Omega )}\)</span> we can achieve a convergent
+estimate of the spectrum by choosing a large value for <span class="arithmatex">\(K.\)</span> Thus the splitting of the <span class="arithmatex">\(M\)</span> data samples into <span class="arithmatex">\(K\)</span> records generates <span class="arithmatex">\(1/K\)</span> convergence as <span class="arithmatex">\(K \to M.\)</span> This convergence does not, however, come for free. For fixed <span class="arithmatex">\(M,\)</span> as we choose larger and larger values of <span class="arithmatex">\(K,\)</span> the value of <span class="arithmatex">\(N\)</span> (the number of samples per record) must decrease. Since the <em>bias</em> is only dependent on <span class="arithmatex">\(N\)</span> (and not <span class="arithmatex">\(K\)</span>), <a href="Chap_12.html#eq:SEeq21">Equation 12.21</a> and <a href="Chap_12.html#eq:SEeq22">Equation 12.22</a>, the bias will get worse as <span class="arithmatex">\(K\)</span> increases. Spectral estimation, like life, is filled with compromises.</p>
+<p>Summarizing we see that for fixed <span class="arithmatex">\(M\)</span>:</p>
+<p><span class="arithmatex">\(\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,N\)</span> large <span class="arithmatex">\(\Rightarrow\)</span> <span class="arithmatex">\(K\)</span> small <span class="arithmatex">\(\Rightarrow\)</span> good bias, poor convergence</p>
+<p><span class="arithmatex">\(\,\,\,\,\,\,\,\,\,\,\,\,\,\,\,N\)</span> small <span class="arithmatex">\(\Rightarrow\)</span> <span class="arithmatex">\(K\)</span> large <span class="arithmatex">\(\Rightarrow\)</span> poor bias, good convergence</p>
+<p>An example of the application of this Bartlett technique to the data shown in <a href="#fig:fig_SEst2">Figure 12.2</a> is shown in <a href="#fig:fig_SEst3">Figure 12.3</a>.</p>
+<figure class="figaltcap fullsize" id="fig:fig_SEst3"><img src="images/Fig_12_3.gif" /><figcaption><strong>Figure 12.3:</strong> Bartlett estimates of the spectrum for various values of <span class="arithmatex">\(M,\)</span> <span class="arithmatex">\(K,\)</span> and <span class="arithmatex">\(N\)</span> where <span class="arithmatex">\(M = K \bullet N.\)</span> The “true” spectrum is shown in <strong><font color="darkred">dark red</font></strong>.</figcaption>
+</figure>
+<p>The evolution of this Bartlett estimation of a “true” spectrum is shown in <a href="#movie122">Movie 12.2</a>.  </p>
+<table class="imgtxt" style="margin:1em auto;" id="movie122">
+    <tr>
+        <td style="width:auto; vertical-align:middle; text-align:center;">
+            <video id="theVideo" src="media/Bartlett_Estimate.m4v" 
+                poster="media/PosterMovie_12.2.png" width=100% controls 
+                onended="rewind()" style="border: 2px solid rgb(174,24,16)"></video> 
+        </td>
+    </tr>
+</table>
+
+<figcaption style="margin: 0px 30px;">
+<b>Movie 12.2:</b> Bartlett estimation with $M$ samples, $K$ records, and $N$ samples/record.
+</figcaption>
+
+<p>Once again we are confronted with a trade-off. The proper choice of <span class="arithmatex">\(M,\)</span> <span class="arithmatex">\(N,\)</span> and <span class="arithmatex">\(K\)</span> then becomes dependent on the specifics of the problem and what the goals and constraints of the estimation problem are.</p>
+<h2 id="other-windows">Other windows<a class="headerlink" href="#other-windows" title="Permanent link">&para;</a></h2>
+<p>In the previous section we have looked at two windows: the Block (rectangular) window and the triangular window. The latter is also known as the Bartlett window. Once we have accepted the idea that windowing is inevitable, we might search for “optimum” windows, windows that give a “best” estimate of an underlying spectrum. In addition to the two
+previously mentioned windows, we will describe the Gauss, Tukey, Hamming, Hann, Parzen, and Verbeek windows. The first five of these are well-described in the
+<a href="https://en.wikipedia.org/wiki/Window_function#/">literature</a>; the last
+one is described in <a href="#problem-122">Problem 12.2</a>.</p>
+<p>These weighted windows have been proposed and analyzed and their various properties are summarized in <a href="#tbl:t01">Table 12.1</a> and <a href="#tbl:t02">Table 12.2</a>. It is important, however, to decide what criteria will be used to assess effectiveness of any specific window.</p>
+<p>We would like to use as little data as possible to estimate a spectrum so this implies that the duration of the window should be as small as possible. In the frequency domain, however, the window spectrum is convolved with the true spectrum. This means that an ideal window has a spectral bandwidth that is as narrow, as impulse-like, as possible. Putting these two requirements together means using a window that has a small <em>time-bandwidth product</em>. A continuous-time Gaussian of infinite extent is known to fulfill this condition but we will be dealing with discrete-time windows of finite extent.</p>
+<h2 id="a-family-of-windows">A family of windows<a class="headerlink" href="#a-family-of-windows" title="Permanent link">&para;</a></h2>
+<p>For purposes of comparison, we assume that all windows are real, even, and normalized such that <span class="arithmatex">\(w[n = 0] = 1.\)</span> As the windows are of finite extent and even, this means that they are identically zero for <span class="arithmatex">\(\left| n \right| &gt; N\)</span> with an extent (duration) of <span class="arithmatex">\(2N + 1.\)</span> The windows are defined in <a href="#tbl:t01">Table 12.1</a> and their properties are compared in <a href="#tbl:t02">Table 12.2</a>.</p>
+<div id="tbl:t01"></div>
+
+<table class="T12_1">
+
+<!--Header row -->
+<thead>
+<tr>
+<th><i><b> Window</b></i></th>
+<th><i><b>Definition w[n]</b></i></th>
+<th><i><b>Graph w[n]</b></i></th>
+</tr>
+</thead>
+
+<!--Footer row -->
+<tfoot>
+<tr>
+<th><i><b> Window</b></i></th>
+<th><i><b>Definition w[n]</b></i></th>
+<th><i><b>Graph w[n]</b></i></th>
+</tr>
+</tfoot>
+
+<!-- Row 1 -->
+<tr>
+<td colspan="3" style="color: #264662"><i><b> Polynomial-based windows</b></i></td>
+</tr>
+
+<!-- Row 2 -->
+<tr>
+<td> Block</td>
+<td>$1$</td>
+<td><img src="images/Table_12_1_Block.png" class="scaledImage12_1"/></td> 
+</tr>
+
+<!-- Row 3 -->
+<tr>
+<td> Bartlett</td>
+<td>$1 - \left| {\frac{n}{N}} \right|$</td>
+<td><img src="images/Table_12_1_Bartlett.png" class="scaledImage12_1"/></td> 
+</tr>
+
+<!-- Row 4 -->
+<tr>
+<td> Parzen</td>
+<td>$1 - {\left( {\frac{n}{N}} \right)^2}$</td>
+<td><img src="images/Table_12_1_Parzen.png" class="scaledImage12_1"/></td> 
+</tr>
+
+<!-- Row 5 -->
+<tr>
+<td colspan="3" style="color: #264662"><i><b> Gaussian-based windows</b></i></td>
+</tr>
+
+<!-- Row 6 -->
+<tr>
+<td> Gauss</td>
+<td>${e^{ - q}}\,\,\,\,\,\,\,\,q = \frac{1}{2}{\left( {\frac{n}{{\sigma N}}} \right)^2}$</td>
+<td><img src="images/Table_12_1_Gauss.png" class="scaledImage12_1"/></td> 
+</tr>
+
+<!-- Row 7 -->
+<tr>
+<td> Verbeek</td>
+<td>$\left( {1 + q + \frac{{{q^2}}}{2}} \right){e^{ - q}}\,\,\,\,\,\,\,\,q = \frac{1}{2}{\left( {\frac{n}{{\sigma N}}} \right)^2}$</td>
+<td><img src="images/Table_12_1_Verbeek.png" class="scaledImage12_1"/></td> 
+</tr>
+
+<!-- Row 8 -->
+<tr>
+<td colspan="3" style="color: #264662"><i><b> Cosine-based windows</b></i></td>
+</tr>
+
+<!-- Row 9 -->
+<tr>
+<td> Tukey</td>
+<td>$0.5 + 0.5\cos \left( {\frac{{\pi n}}{N}} \right)$</td>
+<td><img src="images/Table_12_1_Tukey.png" class="scaledImage12_1"/></td> 
+</tr>
+
+<!-- Row 10 -->
+<tr>
+<td> Hamming</td>
+<td>$0.54 + 0.46\cos \left( {\frac{{\pi n}}{N}} \right)$</td>
+<td><img src="images/Table_12_1_Hamming.png" class="scaledImage12_1"/></td> 
+</tr>
+
+<!-- Row 11 -->
+<tr>
+<td> Hann</td>
+<td>$\cos \left( {\frac{{\pi n}}{2N}} \right)$</td>
+<td><img src="images/Table_12_1_Hann.png" class="scaledImage12_1"/></td> 
+</tr>
+</table>
+
+<figcaption style="margin: 0px 30px;">
+<br><b>Table 12.1:</b> Definition of window functions. All windows, $w[n],$ are defined over the interval $- N \le n \le  + N$ and are identically zero outside this interval. For the examples shown below on the right, $N = 9$ and $\sigma  = 1/3.$
+</figcaption>
+
+<p>Comparison of these windows reveals some of the consequences associated with each choice. We denote the time duration as <span class="arithmatex">\(\Delta {n_{rms}}\)</span> and the bandwidth as <span class="arithmatex">\(\Delta {\Omega _{rms}}.\)</span> They are defined by:</p>
+<div class="" id="eq:SEeq23">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(12.23)</td>
+<td class="eqTableEq">
+<div>$$\Delta {n_{rms}} = \sqrt {\left( {\sum\limits_{n =  - N}^{ + N} {{n^2}{w^2}[n]} } \right)/\left( {\sum\limits_{n =  - N}^{ + N} {{w^2}[n]} } \right)}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="" id="eq:SEeq24">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(12.24)</td>
+<td class="eqTableEq">
+<div>$$\Delta {\Omega _{rms}} = \sqrt {\left( {\int\limits_{ - \pi }^{ + \pi } {{\Omega ^2}{{\left| {W(\Omega )} \right|}^2}d\Omega } } \right)/\left( {\int\limits_{ - \pi }^{ + \pi } {{{\left| {W(\Omega )} \right|}^2}d\Omega } } \right)}$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>These two measures are intentionally chosen to resemble the “standard deviation” of an associated (even) “probability” function. In the case of <a href="Chap_12.html#eq:SEeq23">Equation 12.23</a>, it is the normalized function <span class="arithmatex">\({\left| {w[n]} \right|^2}.\)</span> In the case of <a href="Chap_12.html#eq:SEeq24">Equation 12.24</a>, it is the normalized function <span class="arithmatex">\({\left| {W\left( \Omega  \right)} \right|^2}\)</span> . We do this because it is possible to show that, for all continuous-time signals, the time-bandwidth product <span class="arithmatex">\(\Delta {t_{rms}}\Delta {\omega _{rms}} \ge 1/2.\)</span> This is, of course, the well-known Uncertainty Principle. Further, it can be shown that for continuous-time signals, the Gaussian signal (filter) achieves the minimum. This result holds for discrete-time signals but a proof has, to our knowledge, not been published. The proof of this result, the Uncertainty Principle for discrete-time signals <span class="arithmatex">\(\Delta {n_{rms}}\Delta {\Omega _{rms}} \ge 1/2,\)</span> is, therefore, presented in <a href="Chap_13.html#appendix-ii-the-discrete-time-uncertainty-principle">Appendix II</a>.  </p>
+<p><a href="#tbl:t02">Table 12.2</a> shows the values for the time duration, frequency bandwidth, and time-bandwidth product for each of the eight windows defined in <a href="#tbl:t01">Table 12.1</a> and using <span class="arithmatex">\(N = 9\)</span> and <span class="arithmatex">\(\sigma  = 1/3.\)</span>  </p>
+<div id="tbl:t02"></div>
+
+<table class="T12_2">
+<!--Header row -->
+<thead>
+<tr>
+<th><i><b>Window</b></i></th>
+<th><i><b>W</i>(</b><b>&Omega;)</b></th>
+<th><i><b>&Delta;n<sub>rms</sub></b></i></th>
+<th><b><i>&Delta;</i>&Omega;<i><sub>rms</sub></i></b></th>
+<th><i><b>&Delta;n<sub>rms </sub></b></i><b><i>&Delta;</i>&Omega;<i><sub>rms</sub></i></b></th>
+</tr>
+</thead>
+
+<!--Footer row -->
+<tfoot>
+<tr>
+<th><i><b>Window</b></i></th>
+<th><i><b>W</i>(&Omega;)</b></th>
+<th><i><b>&Delta;n<sub>rms</sub></b></i></th>
+<th><b><i>&Delta;</i>&Omega;<i><sub>rms</sub></i></b></th>
+<th><b><i>&Delta;n<sub>rms </sub>&Delta;</i>&Omega;<i><sub>rms</sub></i></b></th>
+</tr>
+</tfoot>
+
+<!-- Row 1 -->
+<tr>
+<td>Verbeek</td>
+<td><img src="images/Table_12_2_Verbeek.png" class="scaledImage12_2"/></td> 
+<td>3.739</td>
+<td>0.166</td>
+<td>0.619</td>
+</tr>
+
+<!-- Row 2 -->
+<tr>
+<td>Hann</td>
+<td><img src="images/Table_12_2_Hann.png" class="scaledImage12_2"/></td> 
+<td>3.253</td>
+<td>0.177</td>
+<td>0.577</td>
+</tr>
+
+<!-- Row 3 -->
+<tr>
+<td>Parzen</td>
+<td><img src="images/Table_12_2_Parzen.png" class="scaledImage12_2"/></td> 
+<td>3.401</td>
+<td>0.179</td>
+<td>0.611</td>
+</tr>
+
+<!-- Row 4 -->
+<tr>
+<td>Hamming</td>
+<td><img src="images/Table_12_2_Hamming.png" class="scaledImage12_2"/></td> 
+<td>2.764</td>
+<td>0.186</td>
+<td>0.515</td>
+</tr>
+
+<!-- Row 5 -->
+<tr>
+<td>Bartlett</td>
+<td><img src="images/Table_12_2_Bartlett.png" class="scaledImage12_2"/></td> 
+<td>2.837</td>
+<td>0.197</td>
+<td>0.558</td>
+</tr>
+
+<!-- Row 6 -->
+<tr>
+<td>Tukey</td>
+<td><img src="images/Table_12_2_Tukey.png" class="scaledImage12_2"/></td> 
+<td>2.550</td>
+<td>0.200</td>
+<td>0.510</td>
+</tr>
+
+<!-- Row 7 -->
+<tr>
+<td>Gauss</td>
+<td><img src="images/Table_12_2_Gauss.png" class="scaledImage12_2"/></td> 
+<td>2.121</td>
+<td>0.236</td>
+<td>0.5</td>
+</tr>
+
+<!-- Row 8 -->
+<tr>
+<td>Block</td>
+<td><img src="images/Table_12_2_Block.png" class="scaledImage12_2"/></td> 
+<td>5.477</td>
+<td>0.382</td>
+<td>2.093</td>
+</tr>
+</table>
+
+<figcaption style="margin: 0px 30px;">
+<br><b>Table 12.2:</b> Comparison of window functions. $\Delta {n_{rms}}$ = $rms$ width of the window in the discrete-time domain, $\Delta {\Omega _{rms}}$ = $rms$ width of the window spectrum in the frequency domain, and $\Delta {n_{rms}}\Delta {\Omega _{rms}}$ = the time-bandwidth product. Windows are defined over the interval $- N \le n \le  + N$ and are identically zero outside this interval. The numerical values are, again, calculated for $N = 9$ and $\sigma  = 1/3.$ Because all the windows involve the same $2N + 1$ samples, they are sorted according to increasing values of the spectral width, $\Delta {\Omega _{rms}}. $
+</figcaption>
+
+<p>At first glance we might seem to desire a filter that yields a good spectral estimate while using a minimum amount of data. This translates to a small duration <em>and</em> a small bandwidth. But in <a href="#tbl:t01">Table 12.1</a> and <a href="#tbl:t02">Table 12.2</a>, the filters and their spectra that are displayed, all involve the same amount of data, <span class="arithmatex">\(2N + 1\)</span> samples.</p>
+<p>A small spectral bandwidth comes from the desire to have <span class="arithmatex">\(W\left( \Omega  \right)\)</span> as much like <span class="arithmatex">\(2\pi \,\delta \left( \Omega  \right)\)</span> as possible. See <a href="Chap_12.html#eq:SEeq14">Equation 12.14</a> and <a href="Chap_12.html#eq:SEeq15">Equation 12.15</a>. On this basis we would choose the Verbeek window from among those presented here as it has the smallest bandwidth. We note, in passing, that the discrete-time version of the Gauss window does achieve the minimum time-bandwidth product predicted by the Uncertainty Principle but that its bandwidth is 42% wider than the Verbeek window.</p>
+<h2 class="problems" id="problems">Problems<a class="headerlink" href="#problems" title="Permanent link">&para;</a></h2>
+<h3 id="problem-121">Problem 12.1<a class="headerlink" href="#problem-121" title="Permanent link">&para;</a></h3>
+<p>In <a href="Chap_12.html#eq:SEeq17">Equation 12.17</a> we presented the spectrum <span class="arithmatex">\({W_P}\left( \Omega  \right)\)</span> associated with the Block window <span class="arithmatex">\({w_P}[n].\)</span></p>
+<ol>
+<li>Determine <span class="arithmatex">\({W_I}\left( \Omega  \right),\)</span> the spectrum associated with the Bartlett window <span class="arithmatex">\({w_I}[n].\)</span><a class="indentlist" href=""></a>  </li>
+</ol>
+<p>We define the width of the main lobe of a window spectrum <span class="arithmatex">\(W\left( \Omega  \right)\)</span> as the
+distance between the first two positions on the frequency axis around <span class="arithmatex">\(\Omega  = 0\)</span> where <span class="arithmatex">\(W\left( \Omega  \right) = 0.\)</span> This is illustrated in <a href="#fig:fig_SEst4">Figure 12.4</a>.</p>
+<figure class="figaltcap fullsize" id="fig:fig_SEst4"><img src="images/Fig_12_4.png" /><figcaption><strong>Figure 12.4:</strong> Spectrum <span class="arithmatex">\(W\left( \Omega  \right)\)</span> of a window <span class="arithmatex">\(w[n\rbrack\)</span> that can be found in Table 12.1 and Table 12.2. The width of the main lobe, as defined in the text, is the distance between the two, dashed <strong><font color="blue">blue</font></strong> lines.</figcaption>
+</figure>
+<p>For a window consisting of <span class="arithmatex">\(2N + 1\)</span> samples, determine the width of the main lobe for each of the following windows:</p>
+<ol start="2">
+<li>Block (rectangular) window</li>
+<li>Bartlett (triangular) window</li>
+<li>Parzen (parabolic) window</li>
+<li>Tukey window</li>
+<li>Hann window<a class="indentlist" href=""></a>  </li>
+</ol>
+<h3 id="problem-122">Problem 12.2<a class="headerlink" href="#problem-122" title="Permanent link">&para;</a></h3>
+<p>Eight different windows have been examined in this chapter. How and why does one develop a new window? To address this question let us look at the characteristics a window “should” have.</p>
+<p>It should i) be narrow in the time domain to use as few samples as possible, ii) be narrow in the frequency domain so that it resembles an impulse; see <a href="Chap_12.html#eq:SEeq14">Equation 12.14</a>, iii) have a narrow main lobe so that the distortion caused by the convolution in <a href="Chap_12.html#eq:SEeq14">Equation 12.14</a> should be minimized, and iv) have small sidelobes for the same reason. In this problem we will look at the implications of the first two requirements, (i) and (ii). Further, we will cast the discussion in the continuous-time domain <span class="arithmatex">\(t\)</span> and the associated frequency domain <span class="arithmatex">\(\omega\)</span> for simplicity’s sake.</p>
+<p>The limits of what can be achieved given requirements (i) and (ii) are described in the Uncertainty Principle (<a href="Chap_12.html#a-family-of-windows">Chapter 12</a> and <a href="Chap_13.html#appendix-ii-the-discrete-time-uncertainty-principle">Chapter 13</a>). The duration-bandwidth product has a lower bound and we know that the Gaussian window achieves this bound. But as we shall see in <a href="Chap_12.html#laboratory-exercise-124">Laboratory Exercise 12.4</a>, the actual performance of the Gaussian window when compared, for example, to a Block (rectangular) window can leave much to be desired.</p>
+<p>An explanation for this is that multiplying the recorded data by a Gaussian window suppresses the amplitude information of a significant number of samples, information that could be used to obtain a better estimate of the power spectral density. This suppression is illustrated in <a href="#fig:fig_SEst5">Figure 12.5</a>.</p>
+<figure class="figaltcap fullsize" id="fig:fig_SEst5"><img src="images/Fig_12_5.gif" /><figcaption><strong>Figure 12.5:</strong> 1.024 s of a signal sampled at 44.1 kHz. The original (synthetic) signal is in <strong><font color="blue">blue</font></strong>. The same signal multiplied by a Gaussian window is in <strong><font color="#ff8000">orange</font></strong>.</figcaption>
+</figure>
+<ol>
+<li>The value of <span class="arithmatex">\(\sigma\)</span> used in <a href="#fig:fig_SEst5">Figure 12.5</a> is <span class="arithmatex">\(\sigma  = 1/4\)</span> when defined on the zero-centered interval (–1, +1). How many samples correspond to <span class="arithmatex">\(\sigma?\)</span> How many seconds?<a class="indentlist" href=""></a>  </li>
+</ol>
+<p>Through this choice of <span class="arithmatex">\(\sigma\)</span> the Gaussian tapers smoothly to zero at the edges of the window. In 2003, Verbeek<sup id="fnref:verbeek2003"><a class="footnote-ref" href="#fn:verbeek2003">3</a></sup> considered how the Gaussian window could be modified such that less data would be suppressed in amplitude while the smooth tapering would be maintained. He reasoned as follows.</p>
+<p>If the Gaussian window <span class="arithmatex">\({w_G}(q) = {e^{ - {q^2}/2}}\)</span> is multiplied by <span class="arithmatex">\({e^{ + {q^2}/2}}\)</span> then the result is <span class="arithmatex">\(1\)</span> and the window is flat like the Block filter. If instead, a Taylor series expansion <span class="arithmatex">\(P(q)\)</span> of <span class="arithmatex">\({e^{ + {q^2}/2}}\)</span> around <span class="arithmatex">\(q = 0\)</span> is used to multiply <span class="arithmatex">\({e^{ - {q^2}/2}},\)</span> then the modified Gaussian window will be flat in the vicinity of <span class="arithmatex">\(q = 0.\)</span></p>
+<ol start="2">
+<li>What is the Taylor series expansion of <span class="arithmatex">\({e^{ + {q^2}/2}}\)</span> around <span class="arithmatex">\(q = 0\)</span> to second order, that is, a second-order polynomial <span class="arithmatex">\({P_2}(q)?\)</span></li>
+<li>Is the modified window <span class="arithmatex">\({w_V}(q) = {P_2}(q)\,{e^{ - {q^2}/2}}\)</span> flat around <span class="arithmatex">\(q = 0?\)</span> To assess this, look at derivatives <span class="arithmatex">\({d^m}{w_V}(q)/d{q^m}\)</span> of the modified window around <span class="arithmatex">\(q = 0\)</span> for various values of <span class="arithmatex">\(m.\)</span> What is the first value of <span class="arithmatex">\(m\)</span> such that the value of that derivative at <span class="arithmatex">\(q = 0\)</span> is <em>not</em> flat?</li>
+<li>Plot <span class="arithmatex">\({w_G}(q)\)</span> and <span class="arithmatex">\({w_V}(q)\)</span> over the interval <span class="arithmatex">\(- 5 \leq q \leq  + 5.\)</span></li>
+<li>Determine the spectra <span class="arithmatex">\({W_G}(\omega ) =\)</span> <span class="arithmatex">\({\mathscr{F}}\left\{ {{w_G}(q)} \right\}\)</span> and <span class="arithmatex">\({W_V}(\omega ) =\)</span> <span class="arithmatex">\({\mathscr{F}}\left\{ {{w_V}(q)} \right\}.\)</span> <em>Hint</em>: What is the mathematical relationship between <span class="arithmatex">\({W_G}(\omega )\)</span> and <span class="arithmatex">\({W_V}(\omega )?\)</span></li>
+<li>Plot the spectra over the interval <span class="arithmatex">\(- 4 \leq \omega  \leq  + 4.\)</span><a class="indentlist" href=""></a>  </li>
+</ol>
+<p>Use of the Verbeek window and other windows will be explored in <a href="Chap_12.html#laboratory-exercise-123">Laboratory Exercise 12.3</a> and <a href="Chap_12.html#laboratory-exercise-124">Laboratory Exercise 12.4</a>.</p>
+<h3 id="problem-123">Problem 12.3<a class="headerlink" href="#problem-123" title="Permanent link">&para;</a></h3>
+<p>This problem concerns the recognition of separate musical tones. <em>Full disclosure</em>: We wrote this problem for the 2002 Dutch Physics Olympiad. Caveat emptor!  </p>
+<p>The musical notes middle <span class="arithmatex">\(A\)</span> and middle <span class="arithmatex">\({A^\# }\)</span> are known to have the frequencies:</p>
+<div class="arithmatex">\[\begin{array}{*{20}{l}}
+{A:}&amp;{440\,{\rm{Hz}} = {f_0}}\\
+{{A^\# }:}&amp;{440 \bullet {2^{1/12}}\,\,{\rm{Hz}} = 440 \bullet 1.0595\,{\rm{Hz}} = 466.2\,{\rm{Hz}} = {f_1}}
+\end{array}\]</div>
+<p>The positions of these notes on a piano keyboard are shown in <a href="#fig:fig_SEst6">Figure 12.6</a>. A single sound, not from the piano, has been recorded which consists of either <span class="arithmatex">\(A,\)</span> <span class="arithmatex">\({A^\# },\)</span> or the normalized sum of <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\({A^\# }.\)</span> The recorded signal is also shown in <a href="#fig:fig_SEst6">Figure 12.6</a>. The <span class="arithmatex">\(SNR &gt; 60\)</span> dB.</p>
+<figure class="figaltcap fullsize" id="fig:fig_SEst6"><img src="images/Fig_12_6.png" /><figcaption><strong>Figure 12.6:</strong> (<em>left</em>) Piano keyboard illustrating the notes <span class="arithmatex">\(A\)</span> and <span class="arithmatex">\({A^\# }.\)</span> (<em>right</em>) A portion of the recorded signal.</figcaption>
+</figure>
+<ol>
+<li>What is the minimum length of time <span class="arithmatex">\(T\)</span> in seconds that is required to distinguish between the three alternatives: <span class="arithmatex">\(A,\)</span> <span class="arithmatex">\({A^\# },\)</span> or <span class="arithmatex">\(\left( {A + {A^\# }} \right)/2?\)</span></li>
+<li>Explain your choice of measurement technique and what the consequences are for the accuracy of your determination.<a class="indentlist" href=""></a>  </li>
+</ol>
+<h2 class="labexp" id="laboratory-exercises">Laboratory Exercises<a class="headerlink" href="#laboratory-exercises" title="Permanent link">&para;</a></h2>
+<h3 id="laboratory-exercise-121">Laboratory Exercise 12.1<a class="headerlink" href="#laboratory-exercise-121" title="Permanent link">&para;</a></h3>
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_12.1.html'>
+                <img src='images/SignalSpectrum_omega_80.png' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        We examine the practical aspects of estimating the spectrum of a “trivial” signal.
+        Click on the icon to the left to start.        </td>
+        </td>
+    </tr>
+</table>
+
+<!-- 
+### Laboratory Exercise 12.2
+
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_12.2.html'>
+                <img src='images/mic_80.png' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        The successful estimation of the power density spectrum of a 
+        stochastic signal can be difficult. In this exercise we explore 
+        the reality of the spectral estimation process.
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+ -->
+
+<h3 id="laboratory-exercise-122">Laboratory Exercise 12.2<a class="headerlink" href="#laboratory-exercise-122" title="Permanent link">&para;</a></h3>
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_12.3.html'>
+                <img src='images/SignalSpectrum_omega_80.png' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        Modern society has taught us to be impatient. We want everything to 
+        be available <i>now</i>. In spectral estimation that means using as 
+        few samples as possible. What are the consequences?
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+<h3 id="laboratory-exercise-123">Laboratory Exercise 12.3<a class="headerlink" href="#laboratory-exercise-123" title="Permanent link">&para;</a></h3>
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_12.4.html'>
+                <img src='images/SignalSpectrum_omega_80.png' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        Using a finite amount of data to estimate a spectrum—any spectrum—is 
+        like observing the data source through a window. What is the effect of 
+        the window and what if we “shape” the window?
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+<h3 id="laboratory-exercise-124">Laboratory Exercise 12.4<a class="headerlink" href="#laboratory-exercise-124" title="Permanent link">&para;</a></h3>
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_12.5.html'>
+                <img src='images/SignalSpectrum_omega_80.png' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        We continue to explore the effects of window size and window shape. 
+        But now let us throw a little noise into the spectral estimation 
+        problem.
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+<!-- 
+### Laboratory Exercise 12.6
+
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_12.6.html'>
+                <img src='images/mic_80.png' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        Who is the better spectrum synthesizer and analyzer, your device or you?
+        Click on the icon to the left to start.
+        </td>
+    </tr>
+</table>
+ -->
+
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:windowed">
+<p>All data are “windowed”. There are no data available from before the Big Bang.&#160;<a class="footnote-backref" href="#fnref:windowed" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:jenkins1998">
+<p>Jenkins, G. M. and D. G. Watts (1998). Spectral Analysis and Its Applications, Emerson Adams Press&#160;<a class="footnote-backref" href="#fnref:jenkins1998" title="Jump back to footnote 2 in the text">&#8617;</a><a class="footnote-backref" href="#fnref2:jenkins1998" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:verbeek2003">
+<p>Verbeek, P. W. (2003). A modified Gaussian window for spectral estimation. Department of Imaging Science &amp; Technology, Delft University of Technology&#160;<a class="footnote-backref" href="#fnref:verbeek2003" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+
+<footer class="md-footer" id="jumpToBottom">
+
+  <!-- Link to previous and/or next page -->
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        <!-- Link to previous page -->
+        
+          <a
+            href="Chap_11.html"
+            title="11. Aspects of Estimation"
+            class="md-footer-nav__link md-footer-nav__link--prev"
+            rel="prev"
+          >
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                11. Aspects of Estimation
+              </div>
+            </div>
+          </a>
+        
+
+        <!-- Link to next page -->
+        
+          <a
+            href="Chap_13.html"
+            title="Appendices"
+            class="md-footer-nav__link md-footer-nav__link--next"
+            rel="next"
+          >
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                Appendices
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+</footer>
+      
+    </div>
+    
+      <script src="assets/javascripts/vendor.77e55a48.min.js"></script>
+      <script src="assets/javascripts/bundle.9554a270.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+
+	<script src="js/polyfill/index.js"></script>
+	<script src="search/search_index.js"></script>
+
+
+      <script>
+        app = initialize({
+          base: ".",
+          features: [],
+          search: Object.assign({
+            worker: "assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="js/extra.js"></script>
+      
+        <script src="js/SSPextra.js"></script>
+      
+        <script src="js/mathjax_3_generic_conf.js"></script>
+      
+        <script src="js/mathjax/tex-svg.js"></script>
+      
+    
+  </body>
+</html>

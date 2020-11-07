@@ -1,0 +1,1815 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <meta name="author" content="I.T. Young & R. Ligteringen">
+      
+      <link rel="shortcut icon" href="images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.0.2">
+    
+    
+      
+        <title>4. Characterization of Random Signals - Introduction to Stochastic Signal Processing</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.38780c08.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.3f72e892.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Georgia:300,400,400i,700%7CCourier&display=fallback">
+        <style>body,input{font-family:"Georgia",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Courier",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="css/extra.css">
+    
+      <link rel="stylesheet" href="css/imgtxt.css">
+    
+      <link rel="stylesheet" href="css/tables.css">
+    
+    
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#characterization-of-random-signals" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <!-- Application header -->
+<header class="md-header" data-md-component="header">
+
+  <!-- Top-level navigation -->
+  <nav class="md-header-nav md-grid" aria-label="Header">
+
+    <!-- Link to home -->
+    <a
+      href="."
+      title="Introduction to Stochastic Signal Processing"
+      class="md-header-nav__button md-logo"
+      aria-label="Introduction to Stochastic Signal Processing"
+    >
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+<!-- 
+  Insert an <img> here as an alternative for the standard logo if desired.
+  Then comment out the above two lines
+ <img src="images/favicon.png" style="margin-top:5px; border: 0px solid lime; border-radius:5px; width:120%; height: auto;" />
+ -->
+
+    </a>
+
+    <!-- Button to open drawer -->
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+
+    <!-- Header title -->
+    <div class="md-header-nav__title" data-md-component="header-title">
+          
+            
+              <a href="#jumpToBottom">
+                <span class="md-header-nav__topic">
+                  Introduction to Stochastic Signal Processing
+                </span>
+                <span class="md-header-nav__topic">
+                  4. Characterization of Random Signals
+                </span>
+              </a>
+            
+          
+    </div>
+
+    <!-- Button to open search dialogue -->
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+
+      <!-- Search interface -->
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active">
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    <!-- Repository containing source -->
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Introduction to Stochastic Signal Processing" class="md-nav__button md-logo" aria-label="Introduction to Stochastic Signal Processing">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+<!-- 
+  Insert an <img> here as an alternative for the standard logo if desired.
+  Then comment out the above two lines
+ <img src="images/favicon.png" style="margin-top:5px; border: 0px solid lime; border-radius:5px; width:120%; height: auto;" />
+ -->
+
+    </a>
+    Introduction to Stochastic Signal Processing
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_1.html" class="md-nav__link">
+      1. How to use this iBook
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_2.html" class="md-nav__link">
+      2. Prologue
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_3.html" class="md-nav__link">
+      3. Introduction
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        4. Characterization of Random Signals
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="Chap_4.html" class="md-nav__link md-nav__link--active">
+      4. Characterization of Random Signals
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#example-fair-chance" class="md-nav__link">
+    Example: Fair chance
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#describing-the-ensemble-average" class="md-nav__link">
+    Describing the ensemble average
+  </a>
+  
+    <nav class="md-nav" aria-label="Describing the ensemble average">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-average-experience" class="md-nav__link">
+    Example: Average experience
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-averages" class="md-nav__link">
+    Other averages
+  </a>
+  
+    <nav class="md-nav" aria-label="Other averages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-dice-money" class="md-nav__link">
+    Example: Dice &amp; money
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#properties-of-averaging" class="md-nav__link">
+    Properties of averaging
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#correlation-the-workhorse" class="md-nav__link">
+    Correlation – the workhorse
+  </a>
+  
+    <nav class="md-nav" aria-label="Correlation – the workhorse">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#autocorrelation" class="md-nav__link">
+    Autocorrelation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-mechanics-of-correlations" class="md-nav__link">
+    The mechanics of correlations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#auto-covariance" class="md-nav__link">
+    Auto-covariance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-correlation" class="md-nav__link">
+    Cross-correlation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-covariance" class="md-nav__link">
+    Cross-covariance
+  </a>
+  
+    <nav class="md-nav" aria-label="Cross-covariance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-is-that-coin-fair" class="md-nav__link">
+    Example: Is that coin fair?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#describing-the-time-average" class="md-nav__link">
+    Describing the time average
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-ergodic-process" class="md-nav__link">
+    The ergodic process
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problems" class="md-nav__link">
+    Problems
+  </a>
+  
+    <nav class="md-nav" aria-label="Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-41" class="md-nav__link">
+    Problem 4.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-42" class="md-nav__link">
+    Problem 4.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-43" class="md-nav__link">
+    Problem 4.3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-44" class="md-nav__link">
+    Problem 4.4
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-45" class="md-nav__link">
+    Problem 4.5
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-46" class="md-nav__link">
+    Problem 4.6
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-47" class="md-nav__link">
+    Problem 4.7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-48" class="md-nav__link">
+    Problem 4.8
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-49" class="md-nav__link">
+    Problem 4.9
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#laboratory-exercises" class="md-nav__link">
+    Laboratory Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Laboratory Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-41" class="md-nav__link">
+    Laboratory Exercise 4.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-42" class="md-nav__link">
+    Laboratory Exercise 4.2
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_5.html" class="md-nav__link">
+      5. Correlations and Spectra
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_6.html" class="md-nav__link">
+      6. Filtering of Stochastic Signals
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_7.html" class="md-nav__link">
+      7. The Langevin Equation – A Case Study
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_8.html" class="md-nav__link">
+      8. Characterizing Signal-to-Noise Ratios
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_9.html" class="md-nav__link">
+      9. The Matched Filter
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_10.html" class="md-nav__link">
+      10. The Wiener filter
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_11.html" class="md-nav__link">
+      11. Aspects of Estimation
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_12.html" class="md-nav__link">
+      12. Spectral Estimation
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="Chap_13.html" class="md-nav__link">
+      Appendices
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="info.html" class="md-nav__link">
+      Information
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#example-fair-chance" class="md-nav__link">
+    Example: Fair chance
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#describing-the-ensemble-average" class="md-nav__link">
+    Describing the ensemble average
+  </a>
+  
+    <nav class="md-nav" aria-label="Describing the ensemble average">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-average-experience" class="md-nav__link">
+    Example: Average experience
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#other-averages" class="md-nav__link">
+    Other averages
+  </a>
+  
+    <nav class="md-nav" aria-label="Other averages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-dice-money" class="md-nav__link">
+    Example: Dice &amp; money
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#properties-of-averaging" class="md-nav__link">
+    Properties of averaging
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#correlation-the-workhorse" class="md-nav__link">
+    Correlation – the workhorse
+  </a>
+  
+    <nav class="md-nav" aria-label="Correlation – the workhorse">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#autocorrelation" class="md-nav__link">
+    Autocorrelation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-mechanics-of-correlations" class="md-nav__link">
+    The mechanics of correlations
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#auto-covariance" class="md-nav__link">
+    Auto-covariance
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-correlation" class="md-nav__link">
+    Cross-correlation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cross-covariance" class="md-nav__link">
+    Cross-covariance
+  </a>
+  
+    <nav class="md-nav" aria-label="Cross-covariance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#example-is-that-coin-fair" class="md-nav__link">
+    Example: Is that coin fair?
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#describing-the-time-average" class="md-nav__link">
+    Describing the time average
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#the-ergodic-process" class="md-nav__link">
+    The ergodic process
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#problems" class="md-nav__link">
+    Problems
+  </a>
+  
+    <nav class="md-nav" aria-label="Problems">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#problem-41" class="md-nav__link">
+    Problem 4.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-42" class="md-nav__link">
+    Problem 4.2
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-43" class="md-nav__link">
+    Problem 4.3
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-44" class="md-nav__link">
+    Problem 4.4
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-45" class="md-nav__link">
+    Problem 4.5
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-46" class="md-nav__link">
+    Problem 4.6
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-47" class="md-nav__link">
+    Problem 4.7
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-48" class="md-nav__link">
+    Problem 4.8
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#problem-49" class="md-nav__link">
+    Problem 4.9
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#laboratory-exercises" class="md-nav__link">
+    Laboratory Exercises
+  </a>
+  
+    <nav class="md-nav" aria-label="Laboratory Exercises">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-41" class="md-nav__link">
+    Laboratory Exercise 4.1
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#laboratory-exercise-42" class="md-nav__link">
+    Laboratory Exercise 4.2
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="characterization-of-random-signals">Characterization of Random Signals<a class="headerlink" href="#characterization-of-random-signals" title="Permanent link">&para;</a></h1>
+<p>Because it is impossible for us to specify what a random signal will be at any one instant, let alone for all <span class="arithmatex">\(t\)</span> or <span class="arithmatex">\(n\)</span>, we have to settle for a description based upon <em>average</em> properties of the signal. There are a variety of definitions associated with the use of the word &ldquo;average&rdquo; (including &ldquo;not very good&rdquo;). In the context of this book we will focus on the concept as related to a number or property that is considered as representative of a collection of numbers such as those encountered in a signal.</p>
+<p>Consider, for example, the flipping of a coin.</p>
+<h4 id="example-fair-chance">Example: Fair chance<a class="headerlink" href="#example-fair-chance" title="Permanent link">&para;</a></h4>
+<p>We map Heads into +1 and Tails into –1 giving:  </p>
+<figure class="figaltcap" id="figcoin_flipping"><img src="images/Fig_4_1.png" /><figcaption><strong>Figure 4.1:</strong> One realization of a coin-flipping experiment with Heads mapped to +1 and Tails mapped to –1</figcaption>
+</figure>
+<p>We might imagine computing the (arithmetic) average<sup id="fnref:average"><a class="footnote-ref" href="#fn:average">1</a></sup> over <span class="arithmatex">\(2N + 1\)</span> samples as:</p>
+<div class="" id="eq:arith_avg">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.1)</td>
+<td class="eqTableEq">
+<div>$$
+&lt; x[n]{ &gt; _{2N + 1}} = \frac{1}{{2N + 1}}\left( {\sum\limits_{n =  - N}^{ + N} {x[n]} } \right)
+$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>In the above example:</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For <span class="arithmatex">\(N = 1 \to  &lt; x[n]{ &gt; _3} = 1\)</span></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For <span class="arithmatex">\(N = 2 \to  &lt; x[n]{ &gt; _5} = 1/5\)</span></p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For <span class="arithmatex">\(N = 3 \to  &lt; x[n]{ &gt; _7} = 3/7\)</span></p>
+<p>We &ldquo;expect&rdquo; for a &ldquo;fair coin&rdquo; that if <span class="arithmatex">\(N\)</span> is large then <span class="arithmatex">\(&lt; x[n]{ &gt; _{2N + 1}} \approx 0\)</span> because there will be just as many +1&rsquo;s in the sum as –1&rsquo;s.</p>
+<p>Another way to compute the average is based upon knowledge of the distribution of <span class="arithmatex">\(p(x[n])\)</span> and is termed <em>ensemble averaging</em>. Instead of flipping one coin <span class="arithmatex">\(N\)</span> times we could flip <span class="arithmatex">\(N\)</span> coins once.</p>
+<p>We then count the number of Heads <span class="arithmatex">\(\left( {{n_H}} \right)\)</span> and the number of Tails <span class="arithmatex">\(\left( {{n_T} = N - {n_H}} \right)\)</span>. Our estimate of the probability of Heads would then be <span class="arithmatex">\(p(H) = {n_H}/N\)</span> and the probability of Tails as <span class="arithmatex">\(p(T) = {n_T}/N = 1 - {n_H}/N\)</span>. Again for large values of <span class="arithmatex">\(N\)</span> and a &ldquo;fair coin&rdquo; we expect just as many Heads as Tails and this means <span class="arithmatex">\(p(H) = p(T) = 1/2\)</span>. This method and stochastic signals associated with this method are explored in <a href="#laboratory-exercise-41">Laboratory Exercise 4.1</a>.</p>
+<p>By examining the probability of all the possible outcomes—in this case with a coin just two but in the case of a die six—we can develop a model for a probability distribution that describes the possible values of our random variable. And by associating numerical values to the variable, such as Heads <span class="arithmatex">\(\rightarrow\)</span> +1 and Tails <span class="arithmatex">\(\rightarrow\)</span> –1, we can compute averages.</p>
+<h2 id="describing-the-ensemble-average">Describing the ensemble average<a class="headerlink" href="#describing-the-ensemble-average" title="Permanent link">&para;</a></h2>
+<p>How do we do this? Returning to a statement above, we seek a number that is representative of a collection of random numbers. Let us assume that we have either a formal mathematical model of the random process that has generated the random numbers or we have collected sufficient data to have an excellent estimate of that probability distribution (or density) function. Either way we can depict—with confidence—the probability that the random variable <span class="arithmatex">\(x\)</span> can take on a specific value <span class="arithmatex">\(m\)</span> at time <span class="arithmatex">\(n\)</span>. Such a probability distribution is shown in <a href="#figdressed_Poisson">Figure 4.2</a>.</p>
+<figure class="figaltcap" id="figdressed_Poisson"><img src="images/Fig_4_2.png" /><figcaption><strong>Figure 4.2:</strong> Determining a representative number from a probability distribution. The distribution shown is a Poisson distribution.</figcaption>
+</figure>
+<p>If a single number is to characterize this distribution, a reasonable requirement is that the number provides a &ldquo;balanced&rdquo; description. From the domain of physics this has a specific meaning, the center-of-mass of a body with mass distribution, <span class="arithmatex">\(m(\vec p).\)</span> The classical distribution of mass, as we know, is a non-negative function of the position vector <span class="arithmatex">\(\vec p.\)</span> In that sense it is similar to a probability distribution. Finding the center-of-mass is equivalent to finding the position where the mass can be balanced. This is illustrated in <a href="#figbalancing">Figure 4.3</a>.</p>
+<figure class="figaltcap" id="figbalancing"><img src="images/Fig_4_3.gif" /><figcaption><strong>Figure 4.3:</strong> Determining a representative number from a mass (or probability) distribution. When the mass is distributed around the center-of-mass the object is balanced. When another position is chosen, unexpected and possibly unpleasant things can happen.</figcaption>
+</figure>
+<p>The mathematics associated with the calculation of the center-of-mass involve either <span class="arithmatex">\(\int {\vec p} \,m(\vec p)d\vec p\)</span> for a continuous (in space) distribution of mass or <span class="arithmatex">\(\sum {{{\vec p}_i}} \,m({\vec p_i})\)</span> for a discrete (in space) distribution of mass. See Sections I-18 and I-19 of Feynman<sup id="fnref:feynman1963"><a class="footnote-ref" href="#fn:feynman1963">2</a></sup>.</p>
+<p>It is but a short step to replace mass distribution (continuous or discrete) with a probability distribution (continuous or discrete) to define a number, the average, which is representative of a collection of random numbers. Indeed, this is the approach presented in Section 15.2 of Cramér<sup id="fnref:cramer1946"><a class="footnote-ref" href="#fn:cramer1946">3</a></sup>. This leads to a formal definition of averaging as:</p>
+<div class="" id="eq:avg_def">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.2)</td>
+<td class="eqTableEq">
+<div>$$
+E \left\{ {x[n]} \right\} = \int\limits_{ - \infty }^{ + \infty } {x\,{p_{x[n]}}(x,n)dx = {m_{x[n]}}}
+$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>When the determination of an average is based upon the use of the probability distribution, it is referred to as an <em>ensemble average</em><sup id="fnref:ensembleaverage"><a class="footnote-ref" href="#fn:ensembleaverage">4</a></sup>.</p>
+<p>Here we take into consideration that the average or <em>mean</em> may depend on <span class="arithmatex">\(n.\)</span> (See, for instance, the even<em>/</em>odd mixed example above. In that example the probability distribution that is to be used in computing the average depends upon whether <span class="arithmatex">\(n\)</span> is even or odd.)</p>
+<p>It may seem strange to see an integral in <a href="Chap_4.html#eq:avg_def">Equation 4.2</a> when we are talking about discrete-time signals. We should remember, however, that although time is discrete the values of the random variable need not be. They can, in principle, be complex numbers <span class="arithmatex">\({\Bbb C}\)</span>, real numbers <span class="arithmatex">\({\Bbb R}\)</span>, or integers <span class="arithmatex">\({\Bbb Z}\)</span>. The average value is computed over all possible values of the random variable of the amplitude <span class="arithmatex">\(x\)</span>.</p>
+<p>It is possible that a sum can be used instead of an integral. In <a href="#example-average-experience">Example: Average Experience</a>, we see that the possible values of the random variable are indexed <span class="arithmatex">\(i = 1, \ldots ,6\)</span> in which case a sum is used. Another example is given in <a href="#problem-41">Problem 4.1</a> where <span class="arithmatex">\(i =  - \infty , \ldots ,0, \ldots , + \infty\)</span> and a sum is again required. But in the most general formulation of averaging an integral is used<sup id="fnref:sumformulation"><a class="footnote-ref" href="#fn:sumformulation">5</a></sup>.</p>
+<p>For many problems that occur—<em>including those that we plan to focus on here</em>—the random processes are <em>stationary</em>. This means that averages are in an equilibrium condition that is invariant to a shift in time. In a stationary die experiment we should obtain the same results (averages) whether the experiment is performed yesterday, today, or next year. For the mean value given above this would imply a value independent of the time origin:</p>
+<div class="" id="eq:stat_avg">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.3)</td>
+<td class="eqTableEq">
+<div>$$
+{m_{x[n]}} = {m_{x[n + k]}} = {m_{x[\ell ]}} = {m_x}
+$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The mean value of the random process <span class="arithmatex">\(x[n]\)</span> at time <span class="arithmatex">\(n\)</span> is the same as at time <span class="arithmatex">\(n + k.\)</span> But this second time has its own “name” <span class="arithmatex">\(\ell.\)</span> This implies that the mean value is independent of time and is simply <span class="arithmatex">\({m_x},\)</span> that is, stationary.</p>
+<h4 id="example-average-experience">Example: Average experience<a class="headerlink" href="#example-average-experience" title="Permanent link">&para;</a></h4>
+<p>For our die experiment, where the number of possible outcomes can be indexed, we can use a version of the average based upon a sum:</p>
+<div class="" id="eq:die_avg">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.4)</td>
+<td class="eqTableEq">
+<div>$$
+E\left\{ x \right\} = \sum\limits_{i = 1}^6 {{x_i}p({x_i})}  = 1\left( {\frac{1}{6}} \right) + 2\left( {\frac{1}{6}} \right) +  \ldots  + 6\left( {\frac{1}{6}} \right) = \frac{7}{2} = {m_x}
+$$</div>
+</td>
+</tr>
+</table>
+</div>
+<h2 id="other-averages">Other averages<a class="headerlink" href="#other-averages" title="Permanent link">&para;</a></h2>
+<p>Other averages might, in general, be written as:</p>
+<div class="" id="eq:meansq_def">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.5)</td>
+<td class="eqTableEq">
+<div>$$
+Mean\;square = E\left\{ {{x^2}[n]} \right\} = \int\limits_{ - \infty }^{ + \infty } {{x^2}p(x[n])dx}
+$$</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="" id="eq:arbitrary_mean_def">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.6)</td>
+<td class="eqTableEq">
+<div>$$
+E\left\{ {g\left( {x[n]} \right)} \right\} = \int\limits_{ - \infty }^{ + \infty } {g(x)p(x[n])dx}
+$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>To repeat, while <span class="arithmatex">\(n\)</span> is discrete, the random variable <span class="arithmatex">\(x\)</span> can have any value. For stationary processes these averages would reduce to:</p>
+<div class="" id="eq:stationary_versions">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.7)</td>
+<td class="eqTableEq">
+<div>$$
+\begin{array}{l}
+E\left\{ {{x^2}} \right\} = \int\limits_{ - \infty }^{ + \infty } {{x^2}p(x)dx} \\
+E\left\{ {g(x)} \right\} = \int\limits_{ - \infty }^{ + \infty } {g(x)p(x)dx}
+\end{array}
+$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>We apply these concepts to the example of throwing a die.</p>
+<h4 id="example-dice-money">Example: Dice &amp; money<a class="headerlink" href="#example-dice-money" title="Permanent link">&para;</a></h4>
+<div class="" id="eq:meansq_die">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.8)</td>
+<td class="eqTableEq">
+<div>$$
+E\left\{ {{x^2}} \right\} = {1^2}\left( {\frac{1}{6}} \right) + {2^2}\left( {\frac{1}{6}} \right) + {3^2}\left( {\frac{1}{6}} \right) +  \ldots  + {6^2}\left( {\frac{1}{6}} \right) = 15\frac{1}{6}
+$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>If we use a function <span class="arithmatex">\(g( \bullet )\)</span> defined on the random variable <span class="arithmatex">\(x\)</span>:</p>
+<div class="" id="eq:gx_die">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.9)</td>
+<td class="eqTableEq">
+<div>$$
+g(x) = \left\{ {\begin{array}{*{20}{l}}
+{ + 1}&amp;{x\;{\rm{even}}\;2,\;4,\;6}\\
+{ - 1}&amp;{x\;{\rm{odd}}\;1,\;3,\;5}
+\end{array}} \right.
+$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Then the average value of this function of a random variable is:</p>
+<div class="" id="eq:gx_result_die">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.10)</td>
+<td class="eqTableEq">
+<div>$$
+E\left\{ {g(x)} \right\} = 0
+$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>We see through this choice of <span class="arithmatex">\(g(x)\)</span> that it is possible to use the die experiment to model the coin-flipping experiment. It is also important to realize that although we have chosen integer values for the random variable <span class="arithmatex">\(x\)</span> in <a href="#example-fair-chance">Example: Fair chance</a>, <a href="#example-average-experience">Example: Average experience</a> and <a href="#example-dice-money">Example: Dice money</a>, in general the variable can take on any complex value. The time index <span class="arithmatex">\(n,\)</span> of course, will remain discrete, that is, an integer.</p>
+<p>We may also use two random variables <span class="arithmatex">\(x[n]\)</span> and <span class="arithmatex">\(y[k]\)</span> with an associated joint probability given by <span class="arithmatex">\(p(x[n],y[k])\)</span> and take the average:</p>
+<div class="" id="eq:joint_avg">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.11)</td>
+<td class="eqTableEq">
+<div>$$
+E\left\{ {x[n]y[k]} \right\} = \int\limits_{}^{} {\int\limits_{}^{} {x\,y\,p(x[n],y[k])dxdy} }
+$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The more general function of the two random variables leads to an average:</p>
+<div class="" id="eq:arbitrary_joint_avg">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.12)</td>
+<td class="eqTableEq">
+<div>$$
+E\left\{ {g\left( {x[n],y[k]} \right)} \right\} = \int\limits_{}^{} {\int\limits_{}^{} {g(x,y)p(x[n],y[k])dxdy} }
+$$</div>
+</td>
+</tr>
+</table>
+</div>
+<p>We should remember that it is possible that <span class="arithmatex">\(p(x[n],y[k])\)</span> has a complicated behavior. The signal <span class="arithmatex">\(x[n]\)</span> may be based upon flipping a coin and the signal <span class="arithmatex">\(y[n]\)</span> may be based upon throwing a die. If these two types of events are independent, fair and stationary (<em>caveat emptor!</em>), then:</p>
+<div class="arithmatex">\[
+p(x[n] =  - 1,y[k] = 5) = p(x[n] =  - 1)\,p(y[k] = 5) = \left( {\frac{1}{2}} \right)\left( {\frac{1}{6}} \right) = \frac{1}{{12}}\,.
+\]</div>
+<p>While we have explicitly chosen two distinct time instances <span class="arithmatex">\(n \ne k,\)</span> this does not matter for calculation of the probability because we have also assumed that both signals are stationary. See <a href="#problem-42">Problem 4.2</a>.</p>
+<p>As we can infer from <a href="#figx_is_y">Figure 4.4</a>, it is also possible that <span class="arithmatex">\(y[k]\)</span> is just the signal <span class="arithmatex">\(x[n]\)</span> at time <span class="arithmatex">\(k.\)</span> That is, if there is anything to be gained, there is nothing to prevent us from considering the case where <span class="arithmatex">\(y[n] = x[n].\)</span></p>
+<figure class="figaltcap" id="figx_is_y"><img src="images/Fig_4_4.png" /><figcaption><strong>Figure 4.4:</strong> Two samples <span class="arithmatex">\((x[n\rbrack,x[k\rbrack)\)</span> can come from one realization of a random process. One sample is at time <span class="arithmatex">\(n\)</span> and the other at time <span class="arithmatex">\(k.\)</span></figcaption>
+</figure>
+<h2 id="properties-of-averaging">Properties of averaging<a class="headerlink" href="#properties-of-averaging" title="Permanent link">&para;</a></h2>
+<p>At this point, several well-known properties based upon linearity of averaging are useful to have available:</p>
+<div class="" id="eq:additive">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.13)</td>
+<td class="eqTableEq">
+<div>$$
+E\left\{ {x[n] + y[n]} \right\} = E\left\{ {x[n]} \right\} + E\left\{ {y[n]} \right\}
+$$</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="" id="eq:homogeneous">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.14)</td>
+<td class="eqTableEq">
+<div>$$
+E\left\{ {ax[n]} \right\} = aE\left\{ {x[n]} \right\}
+$$</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="" id="eq:invariant">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.15)</td>
+<td class="eqTableEq">
+<div>$$E\left\{ {x[n] + c} \right\} = E\left\{ {x[n]} \right\} + c$$
+</div>
+</td>
+</tr>
+</table>
+</div>
+<p>We will prove <a href="Chap_4.html#eq:homogeneous">Equation 4.14</a> and leave the proofs of <a href="Chap_4.html#eq:additive">Equation 4.13</a> and <a href="Chap_4.html#eq:invariant">Equation 4.15</a> for you at the end of this chapter. See <a href="#problem-43">Problem 4.3</a>.</p>
+<p>We start from <a href="Chap_4.html#eq:avg_def">Equation 4.2</a> and substitute <span class="arithmatex">\(a\,x[n]\)</span> where the constant <span class="arithmatex">\(a\)</span> is a deterministic—not random (!)—number:</p>
+<div class="" id="eq:proofEq2">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.16)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{E\left\{ {a\,x[n]} \right\}}&amp;{ = \int\limits_{ - \infty }^{ + \infty } {a\,x\,p(x[n])dx}  = a\int\limits_{ - \infty }^{ + \infty } {x\,p(x[n])dx}  = a\,{m_{x[n]}}}\\
+{}&amp;{ = a\,E\left\{ {x[n]} \right\}}
+\end{array}$$
+</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The first two properties, <a href="Chap_4.html#eq:additive">Equation 4.13</a> and <a href="Chap_4.html#eq:homogeneous">Equation 4.14</a>, indicate that the averaging operation is a linear operation. The average of a weighted sum of random variables, <span class="arithmatex">\(x_1\)</span> and <span class="arithmatex">\(x_2,\)</span> is the weighted sum of their averages, <span class="arithmatex">\(E\left\{ {a\,{x_1} + b\,{x_2}} \right\} = a\,E\left\{ {{x_1}} \right\} + b\,E\left\{ {{x_2}} \right\}.\)</span> As simple as each of these properties may seem, it is important that you understand how to prove each one and <em>what each one means</em>.</p>
+<p>We have already looked at the averages <em>mean</em> and <em>mean-square</em>. Another
+important and therefore common average is the <em>variance</em>:</p>
+<div class="" id="eq:var_def">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.17)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{Variance\left\{ {x[n]} \right\}}&amp;{ = \sigma _{x[n]}^2}\\
+{}&amp;{ = E\left\{ {{{\left( {x[n] - {m_{x[n]}}} \right)}^2}} \right\}}\\
+{}&amp;{ = E\left\{ {{x^2}[n]} \right\} - {{\left( {{m_{x[n]}}} \right)}^2}}
+\end{array}$$
+</div>
+</td>
+</tr>
+</table>
+</div>
+<p>which in the stationary form is given by:</p>
+<div class="" id="eq:var_stat">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.18)</td>
+<td class="eqTableEq">
+<div>$$Var\left( x \right) = \sigma _x^2 = E\left\{ {{{\left( {x[n] - {m_x}} \right)}^2}} \right\} = E\left\{ {{x^2}[n]} \right\} - m_x^2$$
+</div>
+</td>
+</tr>
+</table>
+</div>
+<p>We introduce here the notation <span class="arithmatex">\(Var(x)\)</span> to indicate the variance of the random variable <span class="arithmatex">\(x.\)</span> The term <span class="arithmatex">\(\sigma,\)</span> the positive square root of the variance, is called the <em>standard deviation</em>. Note that when the physical process generating <span class="arithmatex">\(x[n]\)</span> has a certain unit such as meters, then the standard deviation  <span class="arithmatex">\(\sigma\)</span> has the same unit. The issue of units will be important later in this iBook when we discuss topics such as signal-to-noise ratio.</p>
+<h2 id="correlation-the-workhorse">Correlation – the workhorse<a class="headerlink" href="#correlation-the-workhorse" title="Permanent link">&para;</a></h2>
+<p>These averages only describe what happens at a single time point of a
+random process even if the process is stationary. A more general and
+very useful average is the <em>autocorrelation</em> that describes the joint
+behavior of a random process at two points in time.</p>
+<p>The motivation for examining this issue is that we would like to know if
+knowledge at one time point can help us predict or understand behavior
+at another time point. If a stochastic signal is increasing now, is it
+possible to predict that it might be decreasing 180 days from now?</p>
+<h3 id="autocorrelation">Autocorrelation<a class="headerlink" href="#autocorrelation" title="Permanent link">&para;</a></h3>
+<p>In discrete time the definition of autocorrelation is:</p>
+<div class="" id="eq:acorr-def">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.19)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{\varphi _{xx}}[n,k]}&amp;{ = E\left\{ {x[n]\,{x^*}[k]} \right\} = E\left\{ {x[n]\,{x^*}[n + m]} \right\}}\\
+{}&amp;{ = {\varphi _{xx}}[n,n + m]}
+\end{array}$$
+</div>
+</td>
+</tr>
+</table>
+</div>
+<p>The procedure should be clear. We take the random variable at time <span class="arithmatex">\(n\)</span>
+and the random variable at time <span class="arithmatex">\(k\)</span> with their associated joint
+probability. We then ask: what is the expected value of their product?</p>
+<h3 id="the-mechanics-of-correlations">The mechanics of correlations<a href="" id="example:mech_corr"></a><a class="headerlink" href="#the-mechanics-of-correlations" title="Permanent link">&para;</a></h3>
+<p>As an example we compute the expected value of the maximum temperature
+in Rotterdam, The Netherlands on 18 May 2013 multiplied by the maximum
+temperature in Rotterdam on 16 August 2013. We use data from the Royal
+Netherlands Meteorological Institute
+(<a href="https://www.knmi.nl/klimatologie/daggegevens/download.html">KNMI</a>).
+Their recordings for more than a century provide extensive information
+concerning what we frequently describe as “unpredictable weather”.</p>
+<p>The maximum temperatures in Rotterdam for these two dates were 12.4 ºC
+and 26.4 ºC, respectively. But this is not enough. The result is not
+simply 327.36 ºC<span class="arithmatex">\(^2,\)</span> the product of the two numbers. We need to know the
+joint probability distribution of the two temperatures on those two
+specific days that are 90 days apart so that we can correctly compute
+the expected value. Estimating the joint probability distribution may
+not be easy.</p>
+<p>As data collection in Rotterdam started in 1956, at the time of this writing only 60 years of data are available. Each year yields exactly one data pair <span class="arithmatex">\(\left( {{T_{18 - May}},{T_{16 - Apr}}} \right).\)</span> With a 0.1 ºC resolution and a potential temperature range of 20 ºC this means that approximately <span class="arithmatex">\(200^2\)</span> = 40,000 “cells” in a two-dimensional histogram are available. Any estimate based upon just 60 data points within 40,000 cells will be flawed. There is no underlying physical model (e.g. bivariate Gaussian)
+that we might wish to use. What should we do?</p>
+<p>Our experience might suggest that within a one-week interval the temperature range is essentially the same with only statistical fluctuations. See <a href="Chap_5.html#predicting-the-natural-climate-a-case-study">&ldquo;Predicting the natural climate – a case study&rdquo;</a> in Chapter 5.</p>
+<p>But this would yield only 7 × 60 = 420 values for our 40,000 cells.
+Estimating the joint probability distribution <span class="arithmatex">\(p\left( {{T_{18 - May}},{T_{16 - Apr}}} \right)\)</span> is difficult.  </p>
+<p>Further, the maximum temperature values that we should expect will
+obviously be different if we choose instead 11 November 2013 and 9
+February 2014 which are also 90 days apart. The maximum temperatures in
+Rotterdam for these last two days were 9.8 ºC and 7.6 ºC. The random
+process is not stationary.  </p>
+<p>It should also be clear that we could look at the temperature in
+Rotterdam on 18 May 2013 and the temperature at Amsterdam Airport
+(Schiphol) on that same day. These temperatures were 12.4 ºC and 12.5
+ºC, respectively. The issue here is that the indices <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(k\)</span> need
+not be time; they could be spatial position. Once again we would need
+the joint probability distribution for these two temperature
+measurements at different spatial locations.  </p>
+<p>We emphasize that we have not invoked the assumption of stationarity,
+neither in time nor in space. The consequence of this is that we have
+two independent instances <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(k.\)</span> But we can always write <span class="arithmatex">\(k\)</span> as
+<span class="arithmatex">\(n + m.\)</span> (If <span class="arithmatex">\(k = 10\)</span> and <span class="arithmatex">\(n = 7,\)</span> then the difference between them is
+<span class="arithmatex">\(m =  + 3.\)</span>) The description of the probabilities and the averages derived
+with these probabilities will remain dependent on <span class="arithmatex">\((n,k)\)</span> or
+<span class="arithmatex">\((n,n + m)\)</span> and not simply the difference <span class="arithmatex">\(m.\)</span></p>
+<p>Further, the use of the complex-conjugate notation <span class="arithmatex">\(\left( {^ * } \right)\)</span> as in <a href="Chap_4.html#eq:acorr-def">Equation 4.19</a> implies that, unless otherwise indicated, we will be considering complex
+stochastic signals as well as real stochastic signals.</p>
+<h3 id="auto-covariance">Auto-covariance<a class="headerlink" href="#auto-covariance" title="Permanent link">&para;</a></h3>
+<p>The <em>auto-covariance</em> is defined as:</p>
+<div class="" id="eq:acov-def">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.20)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{\gamma _{xx}}[n,k]}&amp;{ = E\left\{ {\left( {x[n] - {m_{x[n]}}} \right){{\left( {x[k] - {m_{x[k]}}} \right)}^*}} \right\}}\\
+{}&amp;{ = {\varphi _{xx}}[n,k] - {m_{x[n]}}m_{x[k]}^*}\\
+{}&amp;{ = {\varphi _{xx}}[n,n + m] - {m_{x[n]}}m_{x[n + m]}^*}
+\end{array}$$
+</div>
+</td>
+</tr>
+</table>
+</div>
+<p>We leave it to you to derive the second line from the first line. See <a href="#problem-46">Problem 4.6</a>.  </p>
+<h3 id="cross-correlation">Cross-correlation<a class="headerlink" href="#cross-correlation" title="Permanent link">&para;</a></h3>
+<p>Following on the idea introduced in <a href="Chap_4.html#eq:joint_avg">Equation 4.11</a>, that we can consider two
+signals <span class="arithmatex">\(x[n]\)</span> and <span class="arithmatex">\(y[k],\)</span> we also introduce the <em>cross-correlation</em>:</p>
+<div class="" id="eq:ccorr-def">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.21)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{\varphi _{xy}}[n,k]}&amp;{ = E\left\{ {x[n]{y^*}[k]} \right\} = E\left\{ {x[n]{y^*}[n + m]} \right\}}\\
+{}&amp;{ = {\varphi _{xy}}[n,n + m]}
+\end{array}$$
+</div>
+</td>
+</tr>
+</table>
+</div>
+<h3 id="cross-covariance">Cross-covariance<a class="headerlink" href="#cross-covariance" title="Permanent link">&para;</a></h3>
+<p>Similarly, there is the <em>cross-covariance</em> for complex stochastic
+signals:</p>
+<div class="" id="eq:ccov-def">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.22)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{\gamma _{xy}}[n,k]}&amp;{ = E\left\{ {\left( {x[n] - {m_{x[n]}}} \right){{\left( {y[k] - {m_{y[k]}}} \right)}^*}} \right\}}\\
+{}&amp;{ = {\varphi _{xy}}[n,k] - {m_{x[n]}}m_{y[k]}^*}\\
+{}&amp;{ = {\varphi _{xy}}[n,n + m] - {m_{x[n]}}m_{y[n + m]}^*}
+\end{array}$$
+</div>
+</td>
+</tr>
+</table>
+</div>
+<p>We can immediately make the following observations: 1) In general
+<span class="arithmatex">\({\varphi _{xx}}[n,k],\)</span> <span class="arithmatex">\({\varphi _{xy}}[n,k],\)</span> <span class="arithmatex">\({\gamma _{xx}}[n,k]\)</span> and <span class="arithmatex">\({\gamma _{xy}}[n,k]\)</span> are all functions of two variables,
+and, 2) If <span class="arithmatex">\(n = k,\)</span> then</p>
+<div class="" id="eq:stat_corr-def1">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.23)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+{\varphi _{xx}}[n,k] = E\left\{ {{{\left| {x[n]} \right|}^2}} \right\}\\
+{\gamma _{xx}}[n,k] = E\left\{ {{{\left| {x[n] - {m_{{x_n}}}} \right|}^2}} \right\} = \sigma _{{x_n}}^2\\
+{\varphi _{xy}}[n,k] = E\left\{ {x[n]{y^*}[n]} \right\}
+\end{array}$$
+</div>
+</td>
+</tr>
+</table>
+</div>
+<p>If the process is stationary then the precise values of <span class="arithmatex">\(n\)</span> and <span class="arithmatex">\(k\)</span> are
+not important. Instead only <span class="arithmatex">\(m = k - n,\)</span> the time difference between
+them, is significant. Thus we have:</p>
+<div class="" id="eq:stat_corr-def2">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.24)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{l}
+{\varphi _{xx}}[n,k] = {\varphi _{xx}}[n,n + m] = E\left\{ {x[n]{x^*}[n + m]} \right\} = {\varphi _{xx}}[m]\\
+{\varphi _{xy}}[n,k] = {\varphi _{xy}}[n,n + m] = E\left\{ {x[n]{y^*}[n + m]} \right\} = {\varphi _{xy}}[m]
+\end{array}$$
+</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Notice that by definition we subtract the first index <span class="arithmatex">\(n\)</span> from the second <span class="arithmatex">\(n + m\)</span> to give
+<span class="arithmatex">\(\left( {n + m} \right) - n = m.\)</span></p>
+<h4 id="example-is-that-coin-fair">Example: Is that coin fair?<a class="headerlink" href="#example-is-that-coin-fair" title="Permanent link">&para;</a></h4>
+<p>We return once again to the coin-flipping experiment for an example. We
+assume that the probability of Heads, <span class="arithmatex">\(p(H),\)</span> will be <span class="arithmatex">\(p\)</span> and the
+probability of Tails,  <span class="arithmatex">\(p(T),\)</span> will be <span class="arithmatex">\(1 – p.\)</span> We associate with the
+occurrence of Heads a signal of +1 and with Tails a signal of –1. We
+note in passing that as <span class="arithmatex">\(p(H)\)</span> is not a function of time, this
+immediately implies that the random process is stationary. See also
+<a href="#problem-47">Problem 4.7</a>.</p>
+<p>We can now generate various realizations of this random process. Various
+averages, defined previously, can be determined as follows using the
+assumption that tosses of the coin occurring at differing instances of
+time will be statistically independent.</p>
+<div class="" id="eq:coin-mean">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.25)</td>
+<td class="eqTableEq">
+<div>$${m_x} = ( + 1)(p)\; + \;( - 1)(1 - p) = 2p-1$$
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="" id="eq:coin-msq">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.26)</td>
+<td class="eqTableEq">
+<div>$$E\left\{ {{x^2}} \right\} = {( + 1)^2}(p)\; + \;{( - 1)^2}(1 - p) = 1$$
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="" id="eq:coin-var">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.27)</td>
+<td class="eqTableEq">
+<div>$$\sigma _x^2 = 1 - {(2p - 1)^2} = 4p(1 - p)$$
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="" id="eq:coin-acorr">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.28)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{\varphi _{xx}}[k]}&amp;{ = E\left\{ {x[n]{x^*}[n + k]} \right\}}\\
+{}&amp;{ = \left\{ {\begin{array}{*{20}{l}}
+{k = 0\;\; \Rightarrow }&amp;{E\left\{ {{x^2}[n]} \right\} = 1}\\
+{k \ne 0\;\; \Rightarrow }&amp;{E\left\{ {x[n]} \right\} \bullet E\left\{ {x[n + k]} \right\} = m_x^2}
+\end{array}} \right.}
+\end{array}$$
+</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Notice how the assumption of statistical independence of the coin flips
+allows us to write in the bottom line of <a href="Chap_4.html#eq:coin-acorr">Equation 4.28</a> that the average of
+the product equals the product of the averages.</p>
+<p>For <span class="arithmatex">\(p = 1/2\)</span> (a fair coin where Heads is just as likely as Tails), we
+have <span class="arithmatex">\({m_x} = 0,\)</span> <span class="arithmatex">\(\sigma _x^2 = 1,\)</span> and <span class="arithmatex">\({\varphi _{xx}}[k] = A\,\delta [k],\)</span> the unit, discrete-time impulse. This last random signal <span class="arithmatex">\(\left( {p = 1/2} \right)\)</span> with independent and identically
+distributed signal values is pure noise and is termed <em>white noise</em>
+because the zero-mean, autocorrelation function is of the form <span class="arithmatex">\({\varphi _{xx}}[k] = A\,\delta [k]\)</span> or, in the continuous-time case, <span class="arithmatex">\({\varphi _{xx}}(\tau ) = A\,\delta (\tau )\)</span> where <span class="arithmatex">\(A\)</span> is a positive, real number. There are various definitions of white noise; we follow the description given in Section 2.5 of Porat<sup id="fnref:porat1994"><a class="footnote-ref" href="#fn:porat1994">6</a></sup> and in Oppenheim<sup id="fnref:oppenheim1999"><a class="footnote-ref" href="#fn:oppenheim1999">7</a></sup>. Later in this iBook we will explain <em>why</em> this particular form of
+stochastic signal is termed “white” noise.</p>
+<h2 id="describing-the-time-average">Describing the time average<a class="headerlink" href="#describing-the-time-average" title="Permanent link">&para;</a></h2>
+<p>As mentioned earlier it is also possible to compute the average of a
+signal as a time average:</p>
+<div class="" id="eq:time_average">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.29)</td>
+<td class="eqTableEq">
+<div>$$&lt; x[n] &gt; \; = \mathop {\lim }\limits_{N \to \infty } \frac{1}{{2N + 1}}\sum\limits_{n =  - N}^{ + N} {x[n]}$$
+</div>
+</td>
+</tr>
+</table>
+</div>
+<p>and the autocorrelation as:</p>
+<div class="" id="eq:time_acorr">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.30)</td>
+<td class="eqTableEq">
+<div>$$&lt; x[n]{x^*}[n + k] &gt; \; = \mathop {\lim }\limits_{N \to \infty } \frac{1}{{2N + 1}}\sum\limits_{n =  - N}^{ + N} {x[n]{x^*}[n + k]}$$
+</div>
+</td>
+</tr>
+</table>
+</div>
+<p>These two formulas both use a symmetric interval, <span class="arithmatex">\(- N \leq n \leq  + N,\)</span>
+because we wish to capture the complete discrete-time series in our
+computation of an average: the past, the present and the future. For
+certain random processes, the following relations hold between the time
+average of a random process and the probabilistic average (ensemble
+average) of that same random process.</p>
+<div class="" id="eq:ergodic_average">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.31)</td>
+<td class="eqTableEq">
+<div>$${m_x} = E\left\{ {x[n]} \right\} = \; &lt; x[n] &gt;$$
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="" id="eq:ergodic_acorr">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.32)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{\varphi _{xx}}[k]}&amp;{ = E\left\{ {x[n]{x^*}[n + k]} \right\}}\\
+{}&amp;{ = \; &lt; x[n]{x^*}[n + k] &gt; }
+\end{array}$$
+</div>
+</td>
+</tr>
+</table>
+</div>
+<p>Such a random process, where the time average equals the ensemble
+average, is known as an <em>ergodic process</em><sup id="fnref:ergodic"><a class="footnote-ref" href="#fn:ergodic">8</a></sup>.</p>
+<h2 id="the-ergodic-process">The ergodic process<a class="headerlink" href="#the-ergodic-process" title="Permanent link">&para;</a></h2>
+<p>One consequence of <em>ergodicity</em> is that it does not
+matter when computing an average—any average—whether one flips one coin
+<span class="arithmatex">\(N\)</span> times or <span class="arithmatex">\(N\)</span> coins once. From the definitions of time averages given
+above, it is clear that one condition that a random process must fulfill
+in order to be ergodic is that the process be stationary. <em>All ergodic
+processes are stationary processes.</em></p>
+<p>For an ergodic process the above result implies that, given a data
+record of <em>finite</em> length <span class="arithmatex">\({ x[n] },\)</span> we can use finite-interval time
+averages to <em>estimate</em> the signal average and autocorrelation function
+even when the probability function is not explicitly known. The first
+step is to replace the limits in <a href="Chap_4.html#eq:ergodic_average">Equation 4.31</a> and <a href="Chap_4.html#eq:ergodic_acorr">Equation 4.32</a> with finite sums:</p>
+<div class="" id="eq:finite_avg">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.33)</td>
+<td class="eqTableEq">
+<div>$${m_x} = \;{\kern 1pt}  &lt; x[n]{ &gt; _{2N + 1}}\;{\kern 1pt}  = \frac{1}{{2N + 1}}\sum\limits_{n =  - N}^{ + N} {x[n]} $$
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="" id="eq:finite_acorr">
+<table class="eqTable">
+<tr>
+<td class="eqTableTag">(4.34)</td>
+<td class="eqTableEq">
+<div>$$\begin{array}{*{20}{l}}
+{{\varphi _{xx}}[k]}&amp;{ = \; &lt; x[n]{x^*}[n + k]{ &gt; _{2N + 1}}\;}\\
+{}&amp;{ = \frac{1}{{2N + 1}}\sum\limits_{n =  - N}^{ + N} {x[n]{x^*}[n + k]} }
+\end{array}$$
+</div>
+</td>
+</tr>
+</table>
+</div>
+<p>In the following chapters we will make extensive use of the results from
+this chapter. In particular, in <a href="Chap_5.html#the-mechanics-of-correlations-redux">Chapter 5</a> we will further refine these
+equations.</p>
+<p>It is important to note that while <a href="Chap_4.html#eq:finite_avg">Equation 4.33</a> and <a href="Chap_4.html#eq:finite_acorr">Equation 4.34</a> are estimates
+of statistical properties of an ergodic process, this does not mean that
+they are <em>good</em> estimates. This issue will be discussed in greater
+detail in <a href="Chap_11.html">Chapter 11</a>.  </p>
+<h2 class="problems" id="problems">Problems<a class="headerlink" href="#problems" title="Permanent link">&para;</a></h2>
+<h3 id="problem-41">Problem 4.1<a class="headerlink" href="#problem-41" title="Permanent link">&para;</a></h3>
+<p>Consider the probability distribution described as follows:</p>
+<div class="arithmatex">\[p(i) = \left\{ {\begin{array}{*{20}{l}}
+{A{{\left( {\frac{1}{2}} \right)}^i}}&amp;{i &gt; 0}\\
+0&amp;{i \le 0}
+\end{array}} \right.\]</div>
+<p>where <span class="arithmatex">\(i\)</span> is an integer.</p>
+<ol>
+<li>Determine the value of <em>A</em>.</li>
+</ol>
+<p>Let the random variable <span class="arithmatex">\(x\)</span> associated with index <em>i</em> be given by <span class="arithmatex">\({2^{ - i}}.\)</span>  </p>
+<ol start="2">
+<li>Determine the expected value <span class="arithmatex">\(E\{ x\}.\)</span></li>
+</ol>
+<h3 id="problem-42">Problem 4.2<a class="headerlink" href="#problem-42" title="Permanent link">&para;</a></h3>
+<p><a href="https://en.wikipedia.org/wiki/Schr%C3%B6dinger%27s_cat">Schrödinger’s cat</a>
+is back in the box. This time he is accompanied by two atoms each of a
+different isotope. The first isotope, <sup>11</sup>Be, has a half-life of
+<span class="arithmatex">\({t_{1/2}} = 13.81\)</span>s and its radioactive decay—a stochastic
+process—involves an electron <span class="arithmatex">\(\left( {{\beta ^ - }} \right)\)</span> emission. The second isotope, <sup>10</sup>C, has a half-life of <span class="arithmatex">\({t_{1/2}} = 19.29\)</span>s and its radioactive decay involves
+a positron <span class="arithmatex">\(\left( {{\beta ^ + }} \right)\)</span> emission. Detectors inside the box can distinguish between these emitted particles.  </p>
+<p>If the <sup>11</sup>Be atom emits an electron, then poison gas will be released
+and the cat will immediately die. If the <sup>10</sup>C isotope emits a positron,
+then the cat will be immediately released from the box and live.</p>
+<p>What is the probability that after 20 seconds the cat will be released
+and survive? <em>Hint</em>: The probability, <span class="arithmatex">\(p(t),\)</span> that an atom will decay either through
+electron or positron emission in the interval <span class="arithmatex">\(0 \leqslant t \leqslant T\)</span> seconds is
+given by:</p>
+<div class="arithmatex">\[P(0 \leqslant t \leqslant T) = 1 - {e^{ - T/\tau }}\]</div>
+<p>where <span class="arithmatex">\(\tau  = {t_{1/2}}/\ln 2.\)</span></p>
+<h3 id="problem-43">Problem 4.3<a class="headerlink" href="#problem-43" title="Permanent link">&para;</a></h3>
+<p>Prove <a href="Chap_4.html#eq:additive">Equation 4.13</a> and  <a href="Chap_4.html#eq:invariant">Equation 4.15</a> .</p>
+<h3 id="problem-44">Problem 4.4<a class="headerlink" href="#problem-44" title="Permanent link">&para;</a></h3>
+<p>In <a href="Chap_4.html#eq:additive">Equation 4.13</a>, <a href="Chap_4.html#eq:homogeneous">Equation 4.14</a>, and <a href="Chap_4.html#eq:invariant">Equation 4.15</a> we presented three important
+properties of averaging. The consequences when applied to the
+calculation of means should be obvious. There are, however, other
+averages and in this problem we look at the variance of a random
+variable.  </p>
+<p>Let <span class="arithmatex">\(x\)</span> be a random variable that has both a mean <span class="arithmatex">\({\mu _x}\)</span> and a variance <span class="arithmatex">\(\sigma _x^2.\)</span> By this we mean that both <span class="arithmatex">\({\mu _x}\)</span> and <span class="arithmatex">\(\sigma _x^2\)</span> exist and are finite. The random variable <span class="arithmatex">\(y\)</span> is related to <span class="arithmatex">\(x\)</span> by <span class="arithmatex">\(y = a\,x + b\)</span> where <span class="arithmatex">\(a\)</span> and <span class="arithmatex">\(b\)</span> are deterministic—not random—variables (or constants). </p>
+<ol>
+<li>Determine the mean <span class="arithmatex">\({\mu _y}\)</span> and variance <span class="arithmatex">\(\sigma _y^2.\)</span></li>
+<li><em>What does this mean?</em> Explain in words the meaning of the result for variance in relation to <span class="arithmatex">\(b.\)</span> How would this, for example, be reflected in a graph of the probability density function of <span class="arithmatex">\(y\)</span> relative to <span class="arithmatex">\(x?\)</span></li>
+<li>If the coefficient-of-variation <span class="arithmatex">\(C{V_x}\)</span> of the random variable <span class="arithmatex">\(x\)</span> is given by <span class="arithmatex">\(C{V_x} = {\sigma _x}/{\mu _x},\)</span> where <span class="arithmatex">\({\mu _x} \ne 0,\)</span> determine <span class="arithmatex">\(C{V_y}\)</span> in terms of the parameters given.</li>
+</ol>
+<h3 id="problem-45">Problem 4.5<a class="headerlink" href="#problem-45" title="Permanent link">&para;</a></h3>
+<p>Let <span class="arithmatex">\(x[n]\)</span> be a sample from a random process <span class="arithmatex">\(x\)</span> with an underlying
+probability distribution that is stationary. The mean of the process is
+<span class="arithmatex">\({\mu _x}\)</span> and the variance is <span class="arithmatex">\(\sigma _x^2.\)</span></p>
+<p>The process <span class="arithmatex">\(y\)</span> is formed by <span class="arithmatex">\(y[n] = x[n]\cos \left( {\Omega n} \right).\)</span></p>
+<ol>
+<li>What is the mean of process <span class="arithmatex">\(y?\)</span></li>
+<li>What is the variance of process <span class="arithmatex">\(y?\)</span></li>
+<li>Is process <span class="arithmatex">\(y\)</span> stationary?</li>
+</ol>
+<h3 id="problem-46">Problem 4.6<a class="headerlink" href="#problem-46" title="Permanent link">&para;</a></h3>
+<p>Prove <a href="Chap_4.html#eq:acov-def">Equation 4.20</a>.</p>
+<h3 id="problem-47">Problem 4.7<a class="headerlink" href="#problem-47" title="Permanent link">&para;</a></h3>
+<p>We assume that when someone “flips” a coin that the <span class="arithmatex">\(p(H) = p(T) = 1/2,\)</span>
+what we call a “fair” coin. But with practice one could in principle
+learn to alter these probabilities. Fast Eddie has been practicing and
+he is learning. After <span class="arithmatex">\(m\)</span> practice sessions, his <span class="arithmatex">\(p(H)\)</span> is given by:</p>
+<div class="arithmatex">\[p(H) = \frac{1}{2}\left( {2 - {{\left( {\frac{1}{2}} \right)}^m}} \right)\]</div>
+<p>Every time Heads (<span class="arithmatex">\(H\)</span>) comes up, Eddie pays out $1; every time Tails (<span class="arithmatex">\(T\)</span>)
+comes up, Eddie receives $1.</p>
+<ol>
+<li>What is Eddie’s expected result with no training, that is, <span class="arithmatex">\(m = 0?\)</span></li>
+<li>What is Eddie’s expected result after <span class="arithmatex">\(m = 10\)</span> training sessions?</li>
+<li>Is Eddie working with a stationary random process?</li>
+<li>Is Eddie &ldquo;playing with a full deck&rdquo;, that is, is he a rational player?</li>
+</ol>
+<h3 id="problem-48">Problem 4.8<a class="headerlink" href="#problem-48" title="Permanent link">&para;</a></h3>
+<p>We are given a sample of an ergodic, <em>continuous-time</em>, white-noise
+random process, <span class="arithmatex">\(x(t).\)</span> We want to use samples of this continuous-time
+process to drive (as input to) a discrete-time system.</p>
+<p>Discuss the following proposition and its consequences:</p>
+<p><em>&ldquo;There does not exist a finite sampling frequency, <span class="arithmatex">\({\omega _s} = 2\pi {f_s},\)</span> that satisfies the Nyquist sampling theorem for x(t).&rdquo;</em></p>
+<h3 id="problem-49">Problem 4.9<a class="headerlink" href="#problem-49" title="Permanent link">&para;</a></h3>
+<p>In many discussions of random variables we encounter a phrase such as
+“without loss of generality we use the standardized (or normalized)
+random variable <span class="arithmatex">\(z = \left( {x - {\mu _x}} \right)/{\sigma _x}\)</span>” where <span class="arithmatex">\({\mu _x}\)</span> and <span class="arithmatex">\({\sigma _x}\)</span> are the mean and standard deviation,
+respectively, of the random variable <span class="arithmatex">\(x.\)</span></p>
+<ol>
+<li>Based upon what mathematical conditions is this statement justifiable?</li>
+<li>What are the mean <span class="arithmatex">\({\mu _z}\)</span> and the standard deviation <span class="arithmatex">\({\sigma _z}\)</span> of the random variable <span class="arithmatex">\(z\)</span> if the conditions from part (<em>a</em>) have been satisfied?</li>
+<li>Why is the expression “without loss of generality…” so frequently used?</li>
+</ol>
+<h2 class="labexp" id="laboratory-exercises">Laboratory Exercises<a class="headerlink" href="#laboratory-exercises" title="Permanent link">&para;</a></h2>
+<h3 id="laboratory-exercise-41">Laboratory Exercise 4.1<a class="headerlink" href="#laboratory-exercise-41" title="Permanent link">&para;</a></h3>
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_4.1.html'>
+                <img src='images/CoinFlipping_80.png' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+            Flipping (tossing) a coin is a well-known way to describe the 
+            generation of random events. If the coin is “fair” then we expect 
+            just as many occurrences of “Heads” as “Tails”. In this experiment 
+            we flip a coin <i>N</i> times with 1 ≤ <i>N</i> ≤ 81 and a 
+            probability of Heads where 0 ≤ <i>p</i> ≤ 1. The number of Heads 
+            <i>n<sub>H</sub></i> and the number of Tails <i>n<sub>T</sub></i> 
+            that result from <i>N</i> tosses of the coin will be displayed 
+            as a bar chart known as a histogram. You will also see a 
+            stochastic signal that is based upon your outcome and a lot of 
+            coins. To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+<h3 id="laboratory-exercise-42">Laboratory Exercise 4.2<a class="headerlink" href="#laboratory-exercise-42" title="Permanent link">&para;</a></h3>
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_4.2.html'>
+                <img src='images/Histogram_80.png' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+            An <i>N</i> &times; <i>N</i>  image consists of <i>N</i><sup>2</sup> pixels. We can 
+            choose the grey-level brightness for each pixel from almost any distribution 
+            provided that the chosen value is real and non-negative. To start the exercise, 
+            click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+<!-- 
+### Laboratory Exercise 4.3
+
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_4.3.html'>
+                <img src='images/mic_80.png' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        Speech, music, and environmental sounds can be considered as stochastic signals. 
+        In this exercise you will investigate the probability distribution of the amplitudes of such signals.
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+### Laboratory Exercise 4.4
+
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_4.4.html'>
+                <img src='images/mic_80.png' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        How good is the microphone in this device? Let's make some measurements to find out.
+        Read the instructions carefully.
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+
+### Laboratory Exercise 4.5
+
+<table class="imgtxt">
+    <tr>
+        <td>
+            <div><a href='LabExps/Lab_4.5.html'>
+                <img src='images/TruiAndCamera.png' width=auto height=auto
+                    style="padding:2px; border:2px solid steelblue; border-radius:11px;"></a>
+            </div>
+        </td>
+        <td>
+        How good is the camera in this device? Let's make some measurements to find out.
+        You will need, for example, scissors, a small piece of soft, black cloth, and a Kleenex™ 
+        tissue. Read the instructions carefully.
+        To start the exercise, click on the icon to the left.
+        </td>
+    </tr>
+</table>
+ -->
+
+<div class="footnote">
+<hr />
+<ol>
+<li id="fn:average">
+<p>There are other definitions of a “mean” than just the arithmetic mean. These are discussed briefly <a href="Chap_11.html#_Aspects_of_Estimation">here</a>.&#160;<a class="footnote-backref" href="#fnref:average" title="Jump back to footnote 1 in the text">&#8617;</a></p>
+</li>
+<li id="fn:feynman1963">
+<p>Feynman, R. P., R. B. Leighton and M. Sands (1963). The Feynman Lectures on Physics: Mainly Mechanics, Radiation, and Heat. Reading, Massachusetts, Addison-Wesley, Vol. I&#160;<a class="footnote-backref" href="#fnref:feynman1963" title="Jump back to footnote 2 in the text">&#8617;</a></p>
+</li>
+<li id="fn:cramer1946">
+<p>Cramér, H. (1946). Mathematical Methods of Statistics. Princeton, New Jersey, Princeton University Press&#160;<a class="footnote-backref" href="#fnref:cramer1946" title="Jump back to footnote 3 in the text">&#8617;</a></p>
+</li>
+<li id="fn:ensembleaverage">
+<p>For economy of notation, we will express <span class="arithmatex">\({{p_{x[n]}}(x,n)}\)</span> (and similar forms) as <span class="arithmatex">\(p(x[n])\)</span>.&#160;<a class="footnote-backref" href="#fnref:ensembleaverage" title="Jump back to footnote 4 in the text">&#8617;</a></p>
+</li>
+<li id="fn:sumformulation">
+<p>The sum formulation can be included within the integral formulation by describing the probability with the aid of impulse functions. In the die example, we would write the probability density function on the <em>continuous</em> variable <span class="arithmatex">\(x\)</span> as <span class="arithmatex">\(p(x) = \sum\limits_{i = 1}^6 {\left( {\frac{1}{6}} \right)} \,\delta (x - i).\)</span>&#160;<a class="footnote-backref" href="#fnref:sumformulation" title="Jump back to footnote 5 in the text">&#8617;</a></p>
+</li>
+<li id="fn:porat1994">
+<p>Porat, B. (1994). Digital Processing of Random Signals: Theory &amp; Methods. Englewood Cliffs, New Jersey, Prentice-Hall&#160;<a class="footnote-backref" href="#fnref:porat1994" title="Jump back to footnote 6 in the text">&#8617;</a></p>
+</li>
+<li id="fn:oppenheim1999">
+<p>Oppenheim, A. V., R. W. Schafer and J. R. Buck (1999). Discrete-Time Signal Processing. Upper Saddle River, New Jersey, Prentice-Hall, Section 2.10&#160;<a class="footnote-backref" href="#fnref:oppenheim1999" title="Jump back to footnote 7 in the text">&#8617;</a></p>
+</li>
+<li id="fn:ergodic">
+<p>The word <em>ergodic</em> originated in the 20th century to describe the mathematical concept of a system or process with the property that, given sufficient time, it “visits” all points in a given space. Using the dictionary function of this iBook you can see the complete definition.&#160;<a class="footnote-backref" href="#fnref:ergodic" title="Jump back to footnote 8 in the text">&#8617;</a></p>
+</li>
+</ol>
+</div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+
+<footer class="md-footer" id="jumpToBottom">
+
+  <!-- Link to previous and/or next page -->
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        <!-- Link to previous page -->
+        
+          <a
+            href="Chap_3.html"
+            title="3. Introduction"
+            class="md-footer-nav__link md-footer-nav__link--prev"
+            rel="prev"
+          >
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                3. Introduction
+              </div>
+            </div>
+          </a>
+        
+
+        <!-- Link to next page -->
+        
+          <a
+            href="Chap_5.html"
+            title="5. Correlations and Spectra"
+            class="md-footer-nav__link md-footer-nav__link--next"
+            rel="next"
+          >
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                5. Correlations and Spectra
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+</footer>
+      
+    </div>
+    
+      <script src="assets/javascripts/vendor.77e55a48.min.js"></script>
+      <script src="assets/javascripts/bundle.9554a270.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+
+	<script src="js/polyfill/index.js"></script>
+	<script src="search/search_index.js"></script>
+
+
+      <script>
+        app = initialize({
+          base: ".",
+          features: [],
+          search: Object.assign({
+            worker: "assets/javascripts/worker/search.4ac00218.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="js/extra.js"></script>
+      
+        <script src="js/SSPextra.js"></script>
+      
+        <script src="js/mathjax_3_generic_conf.js"></script>
+      
+        <script src="js/mathjax/tex-svg.js"></script>
+      
+    
+  </body>
+</html>
