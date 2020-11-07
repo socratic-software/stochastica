@@ -1,0 +1,200 @@
+table.T7_1 {
+	background-color: white;
+	width: 100%;
+	vertical-align: middle;
+	border: 1px solid black;
+	font-family: Georgia, Palatino, Bodoni, serif;
+}
+
+table.T7_1 th {
+	background-color: #f0f0ff;
+	text-align: center;
+	vertical-align: middle;
+	padding: 5px 0px
+}
+
+table.T7_1 th:nth-child(1) {
+	text-align: left;
+	padding-left: 7px;
+}
+
+table.T7_1 tr, table.T7_1 td {
+	text-align: center;
+	vertical-align: middle;
+	padding: 10px 0px
+}
+
+table.T7_1 tr:nth-child(even) {
+	background-color: #f0f0ff;
+}
+
+table.T7_1 td:nth-child(1) {
+	font-style: italic;
+	text-align: left;
+	padding-left: 7px;
+}
+
+table.T7_1 td:nth-child(1) {
+	width: 38%;
+}
+
+table.T7_1 td:nth-child(2) {
+	width: 30%;
+}
+
+table.T7_1 td:nth-child(3) {
+	width: 30%;
+}
+
+
+table.T7_2 {
+	background-color: white;
+	width: 100%;
+	text-align: center;
+	vertical-align: middle;
+	border: 1px solid black;
+	font-family: Georgia, Palatino, Bodoni, serif;
+}
+
+table.T7_2 th {
+	background-color: #f0f0ff;
+	text-align: center;
+	vertical-align: middle;
+	padding: 5px 0px
+}
+
+table.T7_2 th:nth-child(1) {
+	text-align: left;
+	padding-left: 7px;
+}
+
+table.T7_2 tr, table.T7_2 td {
+	text-align: center;
+	vertical-align: middle;
+	padding: 10px 0px
+}
+
+table.T7_2 tr:nth-child(even) {
+	background-color: #f0f0ff;
+}
+
+table.T7_2 td:nth-child(1) {
+	font-style: italic;
+	text-align: left;
+	padding-left: 7px;
+}
+
+table.T7_2 td:nth-child(1) {
+	width: 30%;
+}
+
+table.T7_2 td:nth-child(2) {
+	width: 33%;
+}
+
+table.T7_2 td:nth-child(3) {
+	width: 30%;
+}
+
+
+table.T12_1 {
+	background-color: white;
+	width: 100%;
+	vertical-align: middle;
+	border: 1px solid black;
+	font-family: Georgia, Palatino, Bodoni, serif;
+}
+
+table.T12_1 th {
+	background-color: #f0f0ff;  <!-- family of steelblue -->
+	text-align: left;
+	vertical-align: middle;
+	padding: 3px 0px
+}
+
+table.T12_1 th:nth-child(2) {
+	text-align: center;
+}
+
+table.T12_1 th:nth-child(3) {
+	text-align: center;
+}
+
+table.T12_1 tr, table.T12_1 td {
+	text-align: left;
+	vertical-align: middle;
+	padding: 6px 0px;
+}
+
+table.T12_1 tr:nth-child(2) {
+	border-style: hidden hidden solid hidden;
+}
+
+table.T12_1 tr:nth-child(5) {
+	background-color: #f0f0ff;
+}
+
+table.T12_1 tr:nth-child(6) {
+	background-color: #f0f0ff;
+}
+
+table.T12_1 tr:nth-child(7) {
+	background-color: #f0f0ff;
+}
+
+table.T12_1 td:nth-child(1) {
+	font-style: italic;
+	text-align: left;
+	width: 15%;
+}
+
+table.T12_1 td:nth-child(2) {
+	text-align: center;
+	width: 35%;
+}
+
+table.T12_1 td:nth-child(3) {
+	text-align: center;
+	width: 50%;
+}
+
+
+table.T12_2 {
+	background-color: white;
+	width: 100%;
+	vertical-align: middle;
+	border: 1px solid black;
+	font-family: Georgia, Palatino, Bodoni, serif;
+}
+
+table.T12_2 th {
+	background-color: #f0f0ff;
+	text-align: center;
+	vertical-align: middle;
+	padding: 3px 0px;
+}
+
+table.T12_2 th:nth-child(1) {
+	text-align: left;
+	padding-left: 4px;
+}
+
+table.T12_2 tr, table.T12_2 td {
+	text-align: center;
+	vertical-align: middle;
+	padding: 16px 0px;
+}
+
+table.T12_2 tr:nth-child(even) {
+	background-color: #f0f0ff;
+}
+
+table.T12_2 td:nth-child(1) {
+	font-style: italic;
+	text-align: left;
+	padding-left: 4px;
+}
+
+table.T12_2 td:nth-child(2) {
+	width: 50%;
+}

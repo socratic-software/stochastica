@@ -1,0 +1,31 @@
+.imgtxt {
+	width: 95%;
+	box-shadow: 0px 2px 5px 1px #bbb;
+	padding: 0.5rem;
+	}
+
+.imgtxt tr, .imgtxt td {
+	vertical-align: middle;
+	padding-top: 0.5rem;
+	padding-bottom: 0.5rem;
+	padding-right: 0.5rem;
+	padding-left: 1rem;
+	}
+
+.imgtxt td:nth-child(1) {
+	text-align:center;
+	vertical-align: middle;
+	width: 20%;
+	}
+
+.imgtxt td:nth-child(2) {
+	text-align:left;
+	vertical-align: middle;
+	width: auto;
+	}
+
+td.tdimg {
+  text-align: center;
+  vertical-align: middle;
+  width: 100px;
+}

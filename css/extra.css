@@ -1,0 +1,233 @@
+body {
+	overflow-x: hidden;
+	}
+
+a.nolink {
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+    color: inherit;
+}
+
+a.mjx-svg-href {
+    fill: #3f51b5;
+    stroke: #3f51b5;
+}
+
+.indentlist ol {
+	margin-left: 1em;
+}
+
+ol.listroman {
+    list-style-type: lower-roman;
+}
+ol.listalpha {
+    list-style-type: lower-alpha;
+}
+
+.problems ~ ol {
+    list-style-type: lower-alpha;
+}
+
+.labexp ~ ol {
+    list-style-type: lower-roman;
+}
+
+.mainresult .MJX-TEX {
+    background-color:rgb(255,153,255);
+}
+.mainresult .mjx-mtr {
+    background-color:rgb(255,153,255);
+}
+.mainresult .MathJax_SVG {
+    background-color:rgb(255,153,255);
+}
+.mainresult svg {
+    background-color:rgb(255,153,255);
+    border: solid rgb(255,153,255);
+}
+
+a.mainresult {
+    background-color:rgb(255,153,255);
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+    color: inherit;
+}
+
+a.specialresult {
+    background-color: yellow;
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+    color: inherit;
+}
+.specialresult .MJX-TEX {
+    background-color: yellow;
+}
+.specialresult .mjx-mtr {
+    background-color: yellow;
+}
+.specialresult .MathJax_SVG {
+    background-color: yellow;
+}
+.specialresult svg {
+    background-color: yellow;
+    border: solid yellow;
+}
+
+a.quote {
+    display: inline-block;
+    font-style: italic;
+    margin-left: 10%;
+    margin-right: 10%;
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+    color: inherit;
+}
+
+.inspiringquote {
+	font-family: Snell Roundhand, cursive;
+	font-size: 120%;
+	font-weight: bold;
+	color: darkred;
+	text-align: right;
+}
+
+a.stoch_signal {
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+    color: inherit;
+}
+
+a.deter_signal {
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+    color: blue;
+}
+
+a.graph_signal {
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+    color: orange;
+}
+
+figure.figaltcap {
+    padding-top: 50px;
+    margin-top: -50px;
+}
+
+figure.figaltcap img {
+    box-shadow: 0px 2px 5px 1px #bbb;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    vertical-align: middle;
+}
+
+figcaption {
+    /* this must be turned off after migration to mkdocs-material 5 */
+    /* font-size: 1.5rem; */
+    font-size: 0.7rem;
+    margin-top: 1rem;
+}
+
+.md-typeset figcaption {
+    max-width: 90%;
+    text-align: left;
+}
+
+.md-typeset ul li, .md-typeset ol li {
+    margin-bottom: 0.8em;
+}
+
+.md-typeset table:not([class]) td {
+
+    /* padding: 1.2rem 1.6rem; */
+    /* border-top: 0.1rem solid rgba(0, 0, 0, 0.07); */
+    vertical-align: middle;
+    font-size: initial;
+}
+
+.md-typeset table:not([class]) th {
+    
+    min-width: 0rem;
+    padding: 0rem;
+    background-color: inherit;
+    color: inherit;
+    vertical-align: inherit;
+    font-size: initial;
+}
+
+.md-typeset div.arithmatex>* {
+    min-width: 90%;
+}
+
+.sturdy td:nth-child(1) {
+  width: 25%;
+}
+.sturdy td:nth-child(2) {
+  width: 75%;
+} 
+
+table.eqTable {
+    width: 100%;
+    padding-top: 50px;
+    margin-top: -50px;
+}
+
+td.eqTableTag {
+    vertical-align: middle;
+    width: 10%;
+}
+
+td.eqTableEq {
+    vertical-align: middle;
+    width: 90%;
+}
+
+:root {
+  --md-primary-fg-color:        steelblue;
+  --md-primary-fg-color--light: steelblue;
+  --md-primary-fg-color--dark:  steelblue;
+  --md-footer-bg-color:         steelblue;
+  --md-footer-bg-color--dark:   steelblue;
+}
+
+.md-footer-nav {
+  background-color: steelblue;
+  color: $md-color-white;
+  font-family: "Helvetica Neue", Helvatica, Arial, sans-serif;
+  }
+
+.md-footer-nav__inner {
+  padding: 0;  // originally 0.4rem
+  }
+
+.md-footer-nav__link {
+  padding-top:0;
+  padding-bottom:0;
+	}
+
+.md-header {
+  position: fixed;
+	}
+
+.md-header-nav__title {
+  font-family: "Helvetica Neue", Helvatica, Arial, sans-serif;
+  font-size: 0.9rem;
+}
+
+.md-header-nav__topic {
+  font-family: "Helvetica Neue", Helvatica, Arial, sans-serif;
+  font-size: 0.9rem;
+}
+
+.md-ellipsis {
+  font-size: 0.75rem;
+  }
+

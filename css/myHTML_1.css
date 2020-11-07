@@ -1,0 +1,1641 @@
+/*
+/* **************************************************************** */
+
+	Central repository for HTML CSS descriptions of table, divs, etc.
+	
+	GEORGIA is the font that is being used for text in the book. If not,
+	then PALATINO.
+	
+	There is an assumption that 16pt is the default size of fonts for all
+	browsers. This means to get to an easy size, the html font size is 62.5% =
+	5/8 of this = 10 pt = 1rem. Thus a display size of 22 pt (empirically
+	determined as an excellent choice) is 2.2 x 10 pt = 2.2rem.
+	
+	NOTE: id= changed to class= whenever feasible
+	
+	ity Wednesday, 28 June 2017
+	ity Wednesday, 5 July 2017
+	ity Monday, 7 August 2017
+	Tuesday, 8 August 2017
+	Tuesday, 15 August 2017
+	Thursday, 24 August 2017
+	Sunday, 3 September 2017
+	Wednesday, 13 September 2017
+	Thursday, 14 September 2017
+	Monday, 25 September 2017
+	Wednesday, 27 September 2017
+	Monday, 9 October 2017
+	Monday, 25 December 2017
+	Tuesday, 3 April 2018
+	Wednesday, 4 April 2018
+	Saturday, 5 May 2018
+	Monday, 14 May 2018
+	Saturday, 23 June 2018
+	Wednesday, 11 July 2018
+	Saturday, 14 July 2018
+	Saturday, 15 September 2018
+	Saturday, 5 January 2019
+	Thursday, 21 February 2019
+	Saturday, 23 March 2019
+	Wednesday, 27 March 2019
+	Sunday, 22 September 2019 /* changed rem to vw to make fonts scalable with window size */
+
+/* **************************************************************** */
+*/
+
+/* General definitions */
+
+html {
+	font-family: Helvetica, Arial, GillSans, san-serif;
+	font-size: 62.5%; /* 10px is the base size for all fonts */
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+	text-align: center;
+	background-color: white;
+	}
+
+body {
+	font-family: Helvetica, Arial, GillSans, san-serif;
+	font-size: 0.8rem;
+	margin: 0; /* top-bot, left-right */
+	padding: 0;
+	height: 100%;
+	text-align: justify;
+	background-color: white;
+	overflow-x: hidden;
+	}
+
+.bodyDisplayLabs {
+	display: block;
+	}
+
+/*  all tables have these characteristics unless locally changed */
+table {
+	table-layout: fixed;
+	background-color: white;
+	border: 0px dashed blue;
+	border-collapse: collapse;
+	color: Black;
+	vertical-align: middle;
+	overflow-x: hidden;
+	}
+
+/*  all divs have these characteristics unless locally changed */
+div {
+	top: 0;
+	background-color: inherit;
+	width: auto;
+	height: auto;
+	font-family: Helvetica, Arial, GillSans, san-serif;
+	font-size: inherit;
+	text-align: center;
+	margin: 0px auto;
+}
+
+div.scrollBrd {
+	width: 85vw;
+	height: 20vh;
+	min-height: 120px;
+	font-family: Georgia, Palatino, Bodoni, serif;
+	font-size: 0.8rem; /* 1.7rem but scalable */
+	text-align: justify;
+	line-height: 150%; /* of current font-size */
+	padding: 10px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	border: 1px solid Maroon;
+	margin-bottom: 10px;
+}
+
+div.scrollNoBrd {
+	text-align: center;
+	width: 100vw;
+	height: 70vh;
+	overflow-x: hidden;
+	overflow-y: auto;
+	border: 0px dashed Red;
+	margin: 0px auto;
+}
+
+.div3D {
+	text-align: center;
+	display: block;
+	width: 350;
+	height: 350;
+	border: 0px solid maroon;
+}
+
+p {
+	font-family: Helvetica, Arial, GillSans, san-serif;
+	font-size: inherit;
+	text-align: left;
+	}
+
+.inlineIcon {
+	height: 1rem; /* ??? vw ??? */
+	font-size: 0.8rem; /* 2rem but scalable */
+	line-height: 1rem; /* ??? vw ??? */
+	vertical-align: -0.2rem; /* ??? vw ??? */
+	}
+
+.inlineEqn {
+	height: 2.56vw; /* ??? vw ??? */
+	font-size: 2.56vw; /* 2rem but scalable */
+	vertical-align: middle; /* ??? vw ??? */
+	}
+
+.p_footnote {
+	font-family: Georgia, Palatino, Bodoni, serif;
+	font-size: 85%;
+	text-align: left;
+	font-style: normal;
+	padding: 5px 0;
+	}
+
+p_serif_cntr {
+	font-family: Georgia, Palatino, Bodoni, serif;
+	font-size: inherit;
+	font-style: italic;
+	text-align: center;
+	padding: 0% 2.5%;
+	}
+
+p_mono {
+	font-family: Courier, Lucida, Console, monospace-serif;
+	font-size: inherit;
+	text-align: left;
+	}
+
+h3	{
+	font-family: Helvetica, Arial, GillSans, san-serif;
+	font-size: 6.28vw; /* 4.9rem but scalable */
+	font-weight: bold;
+	font-variant: small-caps;
+	color: steelblue;
+	}
+	
+h4	{
+	padding: 0% 2.5%;
+	font-family: Helvetica, Arial, GillSans, san-serif;
+	font-size: 3.84vw; /* 3.0rem but scalable */
+	font-weight: bold;
+	font-variant: small-caps;
+	color: green;
+	}
+	
+h5	{
+	margin: 0px 0px 30px 0px; /* top-bot, left-right */
+	padding: 0% 2.5%;
+	font-family: Helvetica, Arial, GillSans, san-serif;
+	font-size: 2.82vw; /* 2.2rem but scalable */
+	font-weight: bold;
+	color: #666;
+	text-align: left;
+	}
+	
+label {
+	font-size: inherit;
+	text-align: center;
+	}
+
+ol	{
+	list-style-position: inside;
+	list-style-type: lower-roman;
+	background: #ccdcea; /* http://www.html-color-names.com/steelblue.php */
+	margin-left: 20;
+	margin-right: 20;
+	margin-bottom: 20;
+	padding: 10;
+	}
+
+span.ss
+	{
+	position: relative; /* ss = Superscript & Subscript */
+	}
+
+span.ss sub
+	{
+	position:absolute;
+	left: 0.02em;
+	bottom: 0.25em;
+	font-size: 0.75em;
+	}
+	
+button
+	{
+	margin:0;
+	padding:0;
+	border:0;
+	outline-style:none;
+	background:transparent;
+	font-size:inherit
+	}
+
+.smallSpace
+	{
+	font-size: 50%;
+	}
+	
+.fullScreenCamera
+	{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	font-weight: bold;
+	font-size: 1.79vw; /* 1.4rem but scalable */
+	color: white;
+	background-color: #2c5272;
+	overflow: hidden;
+	}
+
+/* **************************************************************** */
+/* here are id definitions that seem to be unavoidable */
+
+#snrImage {
+	text-align: center;
+	margin: auto;
+	border: 0px dashed red;
+	}
+
+#cSolvay {
+	text-align: center;
+	margin: auto;
+	border: 0px dashed blue;
+	}
+
+/* **************************************************************** */
+/* here is a button format  */
+
+.linLogBtn {
+	background-color: rgb(71, 133, 184);
+	border: darkblue;
+	color: white;
+	text-align: center;
+	font-weight: bold;
+	font-size: 0.7rem; /* 1.4rem but scalable */
+	display: inline-block;
+	line-height: 1.1rem; /* ??? vw ??? */
+	border-radius: 8px;
+	cursor:pointer;
+	}
+	
+.inLineBtn {
+	background-color: rgb(71, 133, 184);
+	border: darkblue;
+	font-family: Helvetica, Arial, GillSans, san-serif;
+	color: white;
+	font-weight: bold;
+	font-size: 0.6rem; /* 1.1rem but scalable */
+	vertical-align:middle;
+	display: inline-block;
+	line-height: 1rem; /* ??? vw ??? */
+	border-radius: 4px;
+	}
+
+/* **************************************************************** */
+/* mechanism to make things blink  */
+
+.anime
+	{
+	background-color: white;
+	border-radius: 7px;
+	animation-name: cycle;
+	animation-duration: 0s; // time per cycle
+	animation-timing-function: ease-out;
+	animation-iteration-count: infinite; // number of cycles
+	}
+
+/* white->pink->white  Friday, 6 December 2019*/
+@keyframes cycle
+	{
+	0%		{background-color: white;}
+	1%		{background-color: #ffccd5;}
+	51%		{background-color: white;}
+	100%	{background-color: white;}
+	}
+
+.loader
+	{
+	border: 12px solid transparent;
+	border-radius: 50%;
+	border-top: 12px solid #0000cc;
+	border-right: 12px solid #009900;
+	border-bottom: 12px solid #dd0000;
+	width: 80px;
+	height: 80px;
+	animation-name: spin;
+	animation-duration: 1.2s; // time per cycle
+	animation-timing-function: linear;
+	animation-iteration-count: infinite; // number of cycles
+	background-color: transparent;
+	z-index: 10;
+	}
+
+@keyframes spin
+	{
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+	}
+
+
+/* **************************************************************** */
+/* here are class definitions some of which were tranferred from id */
+
+/* class definitions as in class='super' for superscript */
+.super{
+	vertical-align: super;
+	font-size: 2.31vw; /* 1.8rem but scalable */
+	}
+	
+.sub{
+	vertical-align: sub;
+	font-size: 2.31vw; /* 1.8rem but scalable */
+	}
+
+.box { /* used with class='box' to frame a graph or image in a "div" */
+	border: 1px solid Maroon;
+	}
+	
+.cursive {
+	font-family: 'Snell Roundhand', Zapfino, 'Savoye Let', cursive;
+	font-weight: bold;
+	font-size: 0.75rem;
+	}
+	
+.centerTable {
+	margin: 0px auto;
+	color: inherit;
+	font-size: inherit;
+	border: 0px dashed blue;
+	}
+
+.centerEqTable {
+	font-family: Georgia, Palatino, Bodoni, serif;
+	text-align:center;
+	font-style: italic;
+	margin: 0px auto; /* ??? vw ??? */
+	line-height: 5rem; /* ??? vw ??? */
+	width:100%;
+	}
+
+.centerEqTable tr, .centerEqTable td {
+	font-family:inherit;
+	text-align:inherit;
+	font-style: inherit;
+	margin: 0px auto;
+	border: 0px dashed blue;
+	}
+
+.centerEqTable td:nth-child(1) {
+	text-align: left;
+	font-style: normal;
+	vertical-align:middle;
+	padding-right: 10px;
+	width: 10%;
+	}
+
+.centerEqTable td:nth-child(2) {
+	text-align: center;
+	vertical-align:middle;
+	padding-top: 15px;
+	padding-right: 10px;
+	width: 90%;
+	}
+
+.centerEq {
+	font-family: Georgia, Palatino, Bodoni, serif;
+	text-align:center;
+	font-style: italic;
+	margin: 0px auto; /* ??? vw ??? */
+	line-height: 5rem; /* ??? vw ??? */
+	width:100%;
+	}
+
+.centerEq tr, .centerEq td {
+	font-family:inherit;
+	text-align:inherit;
+	font-style: inherit;
+	margin: 0px auto; /* ??? vw ??? */
+	border: 0px dashed blue;
+	}
+
+.centerEq td:nth-child(1) {
+	text-align: left;
+	font-style: normal;
+	vertical-align:middle;
+	padding-right: 10px;
+	width: 10%;
+	}
+
+.centerEq td:nth-child(2) {
+	text-align: center;
+	padding-right: 10px;
+	width: 90%;
+	}
+
+.specialSize {
+	font-size: 105%;
+	}
+
+.captionTableSans {
+	margin: 0px auto;
+	font-family: Helvetica, Arial, GillSans, san-serif;
+	font-size: 2.18vw; /* 1.7rem but scalable */
+	line-height: 4rem; /* ??? vw ??? */
+	}
+
+.captionTableSerif {
+	margin: 0px auto;
+	font-family: Georgia, Palatino, Bodoni, serif;
+	font-style: italic;
+	font-size: 1.92vw; /* 1.5rem but scalable */
+	vertical-align: middle;
+	}
+
+/* id definitions as in id='footer' for footer */
+.footer {
+	position: absolute;
+	left:10px;
+	right: 0;
+	bottom:0px;
+	width:100%;
+	height:60px; /* Height of the footer */
+	text-align: left;
+	}
+
+.footer td:nth-child(1) {
+	text-align: left;
+	}
+	
+.footer td:nth-child(2) {
+	text-align: center;
+	}
+	
+.footer td:nth-child(3) {
+	text-align: right;
+	}
+	
+.manyCoins {
+	padding: 0em;
+	font-family: Helvetica, Arial, GillSans, san-serif;
+	font-size: inherit;
+	width: auto;
+	margin: auto;
+	text-align: center;
+	}
+
+.buttonImg, .beetleImg {
+	width: auto;
+	height: auto;
+	vertical-align: middle
+	}
+
+.tableGen {
+	font-family: Georgia, Palatino, Bodoni, serif;
+	font-style: italic;
+	font-weight: bold;
+	font-size: 0.8rem; /* Base size for all fonts = 2.2rem */
+	color: Maroon;
+	line-height: 25px; /* of current font-size */
+	text-align: center;
+	width: 85vw;
+	margin: 0px auto;
+	position: relative;
+	}
+
+.tableGen tr, .tableGen td {
+	padding-top: 0.8rem; /* ??? vw ??? */
+	padding-bottom: 0.8rem; /* ??? vw ??? */
+	border: 0px dashed blue;
+	vertical-align: middle;
+	font-weight: bold;
+	overflow-x: hidden;
+	position: relative;
+	}
+
+.table1x1Cols {
+	font-family: Georgia, Palatino, Bodoni, serif;
+	font-style: italic;
+	font-weight: normal;
+	font-size: 0.8rem;
+	color: black;
+	line-height: 25px; /* of current font-size */
+	text-align: center;
+	width: 95vw;
+	margin: 0px auto;
+	position: relative;
+	}
+
+.table1x1Cols tr, .table1x1Cols td {
+	padding-top: 0.8rem; /* ??? vw ??? */
+	padding-bottom: 0.8rem; /* ??? vw ??? */
+	border: 0px dashed blue;
+	vertical-align: middle;
+	font-weight: normal;
+	overflow-x: hidden;
+	position: relative;
+	}
+
+.table1x1ColsAlt {
+	font-family: Georgia, Palatino, Bodoni, serif;
+	font-style: italic;
+	font-weight: bold;
+	font-size: 0.8rem;
+	line-height: 25px; /* of current font-size */
+	text-align: center;
+	width: 75%;
+	margin: 0px auto;
+	color: Maroon
+	}
+
+.table1x1ColsAlt tr, .table1x1ColsAlt td {
+	padding-top: 0.8rem; /* ??? vw ??? */
+	padding-bottom: 0.8rem; /* ??? vw ??? */
+	border: 0px dashed blue;
+	vertical-align: middle;
+	font-weight: bold;
+	overflow-x: hidden;
+	}
+
+.table1x1ColsAlt tr:nth-child(3) {
+	text-align: right;
+	}
+
+.table1x1ColsAlt tr:nth-child(4) {
+	text-align: right;
+	}
+
+.table1x2Cols {
+	font-family: Georgia, Palatino, Bodoni, serif;
+	font-style: italic;
+	font-weight: normal;
+	font-size: 0.8rem; /* Base size for all fonts = 2.2rem */
+	color: black;
+	line-height: 25px; /* of current font-size */
+	text-align: center;
+	width: 95vw;
+	margin: 0px auto;
+	position: relative;
+	}
+
+.table1x2Cols tr, .table1x2Cols td {
+	padding-top: 0.8rem; /* ??? vw ??? */
+	padding-bottom: 0.8rem; /* ??? vw ??? */
+	border: 0px dashed blue;
+	vertical-align: middle;
+	font-weight: normal;
+	overflow-x: hidden;
+	position: relative;
+	}
+
+.table1x2ColsAlt {
+	font-family: Georgia, Palatino, Bodoni, serif;
+	font-style: italic;
+	font-weight: bold;
+	font-size: 0.8rem; /* Base size for all fonts = 2.2rem */
+	color: Maroon;
+	line-height: 25px; /* of current font-size */
+	text-align: center;
+	width: 95vw;
+	margin: 0px auto;
+	position: relative;
+	}
+
+.table1x2ColsAlt tr, .table1x2ColsAlt td {
+	padding-top: 0.8rem; /* ??? vw ??? */
+	padding-bottom: 0.8rem; /* ??? vw ??? */
+	border: 0px dashed blue;
+	vertical-align: middle;
+	font-weight: bold;
+	overflow-x: hidden;
+	position: relative;
+	}
+
+.table1x3Cols {
+	font-family: Georgia, Palatino, Bodoni, serif;
+	font-style: italic;
+	font-weight: bold;
+	font-size: 0.8rem; /* 1.6rem but scalable */
+	color: Maroon;
+	line-height: 25px; /* of current font-size */
+	text-align: center;
+	width: 92%;
+	margin: 0px auto;
+	}
+
+.table1x3Cols tr, .table1x3Cols td {
+	padding-top: 0.8rem; /* ??? vw ??? */
+	padding-bottom: 0.8rem; /* ??? vw ??? */
+	border: 0px dashed blue;
+	vertical-align: middle;
+	font-weight: bold;
+	overflow-x: hidden;
+	}
+
+.table1x3Cols td:nth-child(1) {
+	text-align: right;
+	padding-right: 10px;
+	width: 15%;
+	}
+
+.table1x3Cols td:nth-child(2) {
+	text-align: center;
+	width: 60%;
+	}
+
+.table1x3Cols td:nth-child(3) {
+	text-align: right;
+	width: 25%;
+	}
+
+.table1x3ColsAlt {
+	padding: 0em;
+	font-family: Georgia, Palatino, Bodoni, serif;
+	font-style: italic;
+	font-weight: bold;
+	font-size: 2.05vw; /* 1.6rem but scalable */
+	color: Maroon;
+	text-align: center;
+	line-height: 25px; /* of current font-size */
+	width: 100%;
+	margin: 0px auto;
+	}
+
+.table1x3ColsAlt tr, .table1x3ColsAlt td {
+	text-align: center;
+	font-weight: bold;
+	border: 0px dashed red;
+	vertical-align: middle;
+	overflow-x: hidden;
+	}
+
+.table1x3ColsAlt td:nth-child(1) {
+	width: 46%;
+	}
+
+.table1x3ColsAlt td:nth-child(2) {
+	width: 46%;
+	}
+
+.table1x3ColsAlt td:nth-child(3) {
+	width: 8%;
+	line-height: 20px; /* of current font-size */
+	font-size: 1.54vw; /* 1.2rem but scalable */
+	}
+	
+.cameraBkgP {
+	padding: 0em;
+	font-family: Helvetica, Arial, GillSans, san-serif;
+	font-weight: bold;
+	font-size: 2.05vw; /* 1.6rem but scalable */
+	background-color: #2c5272;
+	color: white;
+	text-align: center;
+	width: 100%;
+	margin: 0px auto;
+	}
+
+.cameraBkgP tr, .cameraBkgP td {
+	text-align: center;
+	font-weight: bold;
+	border: 0px dashed yellow;
+	vertical-align: middle;
+	overflow-x: hidden;
+	}
+
+.cameraBkgL {
+	padding: 0em;
+	font-family: Helvetica, Arial, GillSans, san-serif;
+	font-weight: bold;
+	font-size: 1.92vw; /* 1.6rem but scalable */
+	background-color: #2c5272;
+	color: white;
+	text-align: center;
+	width: 50%;
+	margin: 0px 10px 0px 0px;
+	float:right;
+	}
+
+.cameraBkgL tr, .cameraBkgL td {
+	text-align: center;
+	font-weight: bold;
+	border: 0px dashed yellow;
+	vertical-align: middle;
+	overflow-x: hidden;
+	}
+
+.tableImageLine {
+	padding: 0em;
+	font-family: Georgia, Palatino, Bodoni, serif;
+	font-style: italic;
+	font-weight: bold;
+	font-size: 0.8rem; /* 1.6rem but scalable */
+	color: Maroon;
+	text-align: center;
+	line-height: 25px; /* of current font-size */
+	width: 100%;
+	margin: 0px auto;
+	position: relative;
+	}
+
+.tableImageLine tr, .tableImageLine td {
+	text-align: center;
+	border: 0px dashed red;
+	width: auto;
+	vertical-align: middle;
+	font-weight: bold;
+	overflow-x: hidden;
+	}
+
+.tableImageLine td:nth-child(1) {
+	width: 20%;
+	text-align: right;
+	padding-bottom: 0.2rem; /* ??? vw ??? */
+	}
+
+.tableImageLine td:nth-child(2) {
+	width: auto;
+	}
+
+.tableImageLine td:nth-child(3) {
+	width: 20%;
+	text-align: left;
+	padding-bottom: 0.2rem; /* ??? vw ??? */
+	}
+
+.table1x4Cols {
+	font-family: Georgia, Palatino, Bodoni, serif;
+	font-style: italic;
+	font-weight: normal;
+	font-size: 0.8rem;
+	color: black;
+	line-height: 25px; /* of current font-size */
+	text-align: center;
+	width: 97vw;
+	margin: 0px auto;
+	position: relative;
+	}
+
+.table1x4Cols tr, .table1x4Cols td {
+	padding-top: 0.8rem; /* ??? vw ??? */
+	padding-bottom: 0.8rem; /* ??? vw ??? */
+	border: 0px dashed blue;
+	vertical-align: middle;
+	font-weight: normal;
+	overflow-x: hidden;
+	position: relative;
+	}
+
+.table1x4ColsAlt {
+	padding: 0em;
+	font-family: Georgia, Palatino, Bodoni, serif;
+	font-style: italic;
+	font-weight: bold;
+	font-size: 0.8rem; /* 1.6rem but scalable */
+	color: Maroon;
+	line-height: 25px; /* of current font-size */
+	text-align: center;
+	width: 95%;
+	margin: 0px auto;
+	}
+
+.table1x4ColsAlt tr, .table1x4ColsAlt td {
+	padding-top: 0.6rem; /* ??? vw ??? */
+	padding-bottom: 0.6rem; /* ??? vw ??? */
+	border: 0px dashed green;
+	font-weight: bold;
+	vertical-align: middle;
+	overflow-x: hidden;
+	}
+
+.table1x4ColsAlt td:nth-child(odd) {
+	text-align: right;
+	padding-right: 10px;
+	padding-bottom: 10px;
+	width: auto;
+	}
+
+.table1x4ColsAlt td:nth-child(even) {
+	text-align: center;
+	width: 33%;
+	background-color: white;
+	}
+
+.table1x5ColsAlt {
+	padding: 0em;
+	font-family: Georgia, Palatino, Bodoni, serif;
+	font-style: italic;
+	font-weight: bold;
+	font-size: 2.05vw; /* 1.6rem but scalable */
+	color: Maroon;
+	line-height: 25px; /* of current font-size */
+	text-align: center;
+	width: 99%;
+	margin: 0px auto;
+	}
+
+.table1x5ColsAlt tr, .table1x5ColsAlt td {
+	padding-top: 0.6rem; /* ??? vw ??? */
+	padding-bottom: 0.6rem; /* ??? vw ??? */
+	border: 0px dashed green;
+	font-weight: bold;
+	vertical-align: middle;
+	overflow-x: hidden;
+	}
+
+.table1x5ColsAlt td:nth-child(1) {
+	text-align: center;
+	width: auto;
+	vertical-align: middle;
+	background-color: white;
+	}
+
+.table1x5ColsAlt td:nth-child(2) {
+	text-align: right;
+	padding-right: 10px;
+	padding-bottom: 10px;
+	width:auto;
+	}
+
+.table1x5ColsAlt td:nth-child(3) {
+	text-align: middle;
+	width: 25%;
+	vertical-align: middle;
+	background-color: white;
+	}
+
+.table1x5ColsAlt td:nth-child(4) {
+	text-align: right;
+	width: auto;
+	vertical-align: middle;
+	background-color: white;
+	}
+
+.table1x5ColsAlt td:nth-child(5) {
+	text-align: left;
+	width: 15%;
+	vertical-align: middle;
+	background-color: white;
+	}
+
+.table1x8ColsAlt {
+	padding: 0em;
+	font-family: Georgia, Palatino, Bodoni, serif;
+	font-style: italic;
+	font-weight: bold;
+	font-size: 0.8rem; /* 1.6rem but scalable */
+	color: Maroon;
+	line-height: 25px; /* of current font-size */
+	text-align: center;
+	width: 95%;
+	margin: 0px auto;
+	}
+
+.table1x8ColsAlt tr, .table1x8ColsAlt td {
+	padding-top: 0.6rem; /* ??? vw ??? */
+	padding-bottom: 0.6rem; /* ??? vw ??? */
+	border: 0px dashed green;
+	font-weight: bold;
+	vertical-align: middle;
+	overflow-x: hidden;
+	}
+
+.table1x8ColsAlt td:nth-child(4n+1) {
+	text-align: right;
+	padding-right: 5px;
+	padding-bottom: 10px;
+	width: auto;
+	}
+
+.table1x8ColsAlt td:nth-child(4n+2) {
+	text-align: center;
+	padding-bottom: 10px;
+	width: 35px;
+	}
+
+.table1x8ColsAlt td:nth-child(4n+3) {
+	text-align: center;
+	width: 30%;
+	}
+
+.table1x8ColsAlt td:nth-child(4n+4) {
+	text-align: center;
+	padding-bottom: 10px;
+	width: 35px;
+	}
+
+.fineCoarse {
+	font-family: Georgia, Palatino, Bodoni, serif;
+	font-style: italic;
+	font-size: 75%; /* Base size for all fonts = 2.2rem */
+	line-height: 50%; /* of current font-size */
+	text-align: center;
+	vertical-align: bottom;
+	color: grey;
+	}
+
+.cameraRadioTable {
+	font-family: Helvetica, Arial, GillSans, san-serif;
+	font-size: 2.05vw; /* 1.8rem but scalable */
+	text-align: left;
+	vertical-align: middle;
+	width: auto;
+	margin: 0px auto;
+	}
+
+.cameraRadioTable tr, .cameraRadioTable td {
+	font-size: 2.05vw; /* 1.8rem but scalable */
+	text-align: left;
+	vertical-align: middle;
+	padding-left: 0.8rem; /* ??? vw ??? */
+	padding-top: 0.8rem; /* ??? vw ??? */
+	padding-bottom: 0.8rem; /* ??? vw ??? */
+	margin: auto;
+	width: auto;
+	border: 0px dashed maroon;
+	vertical-align: middle;
+	overflow-x: hidden;
+	}
+
+.radioTable {
+	font-family: Helvetica, Arial, GillSans, san-serif;
+	font-size: 0.8rem; /* 1.8rem but scalable */
+	text-align: left;
+	width: auto;
+	margin: 0px auto;
+	}
+
+.radioTable tr, .radioTable td {
+	font-size: 0.8rem; /* 1.8rem but scalable */
+	text-align: left;
+	padding-left: 0.8rem; /* ??? vw ??? */
+	padding-top: 0.8rem; /* ??? vw ??? */
+	padding-bottom: 0.8rem; /* ??? vw ??? */
+	margin: auto;
+	vertical-align: middle;
+	border: 0px dashed maroon;
+	vertical-align: middle;
+	overflow-x: hidden;
+	}
+
+.radioTable td:nth-child(1) {
+	font-size: 0.8rem; /* 1.8rem but scalable */
+	text-align: right;
+	vertical-align: middle;
+	width: auto;
+	margin: auto;
+	}
+	
+.radioTable td:nth-child(n+2) {
+	font-size: 0.8rem; /* 1.8rem but scalable */
+	text-align: left;
+	vertical-align: middle;
+	width: auto;
+	margin: auto;
+	}
+
+.windowTable {
+	font-family: Helvetica, Arial, GillSans, san-serif;
+	font-size: 2.31vw; /* 1.8rem but scalable */
+	text-align: left;
+	width: 75%;
+	margin: 0px auto;
+	}
+
+.windowTable tr, .windowTable td {
+	padding-left: 0.8rem; /* ??? vw ??? */
+	padding-top: 0.8rem; /* ??? vw ??? */
+	padding-bottom: 0.8rem; /* ??? vw ??? */
+	border: 0px dashed maroon;
+	background-color: white;
+	vertical-align: middle;
+	overflow-x: hidden;
+	}
+
+.windowTable td:nth-child(n) {
+	width: auto;
+	}
+
+.winTable {
+	padding: 0em;
+	font-family: Helvetica, Arial, GillSans, san-serif;
+	font-size: 0.8rem;
+	line-height: 25px;  of current font-size	text-align: center;
+	width: auto;
+	margin: 0px auto 0px auto;
+	border: 1px solid Maroon;
+	}
+		
+.winTable tr, .winTable td {
+	padding: 1rem 2rem; /* ??? vw ??? */
+	border: 0px dashed maroon;
+	width: auto;
+	vertical-align: middle;
+	overflow-x: hidden;
+	}
+
+.winTable td:nth-child(1) {
+	text-align: center;
+	font-weight: bold;
+	}
+
+.tableRecPlay {
+	font-family: Georgia, Palatino, Bodoni, serif;
+	font-style: italic;
+	font-weight: bold;
+	font-size: 0.8rem; /* 1.6rem but scalable */
+	color: Maroon;
+	line-height: 25px; /* of current font-size */
+	text-align: right;
+	margin: 0px auto;
+	}
+
+.tableRecPlay tr, .tableRecPlay td {
+	padding-top: 0.8rem; /* ??? vw ??? */
+	padding-bottom: 0.8rem; /* ??? vw ??? */
+	text-align: right;
+	border: 0px dashed Maroon;
+	width: auto;
+	font-weight: bold;
+	vertical-align: middle;
+	overflow-x: hidden;
+	}
+
+.musicTable {
+	font-family: HelveticaNeue, Helvetica, Arial, GillSans, san-serif;
+	font-size: 2.05vw; /* 1.6rem but scalable */
+	text-align: left;
+	width: 90%;
+	margin: auto;
+	}
+
+.musicTable tr, .musicTable td  {
+	border: 0px dashed maroon;
+	vertical-align: middle;
+	overflow-x: hidden;
+	}
+
+.musicTable td:nth-child(1) {
+	text-align: right;
+	vertical-align: middle;
+	width: 25%;
+	margin: auto;
+	}
+	
+.musicTable td:nth-child(2) {
+	width: 8%;
+	}
+	
+.musicTable td:nth-child(3) {
+	width: 8%;
+	}
+	
+.musicTable td:nth-child(4) {
+	width: 8%;
+	}
+	
+.musicTable td:nth-child(5) {
+	width: 25%;
+	}
+	
+.musicTableAlt {
+	font-family: HelveticaNeue, Helvetica, Arial, GillSans, san-serif;
+	font-size: 0.8rem; /* 1.6rem but scalable */
+	text-align: left;
+	width: 100%;
+	margin: auto;
+	}
+
+.musicTableAlt tr, .musicTableAlt td  {
+	border: 0px dashed maroon;
+	vertical-align: middle;
+	overflow-x: hidden;
+	}
+
+.musicTableAlt td:nth-child(odd) {
+	text-align: right;
+	width: 12%;
+	margin: auto;
+	}
+	
+.musicTableAlt td:nth-child(even) {
+	text-align: left;
+	width: 20%;
+	margin: auto;
+	}
+	
+/* Graphs have a layout defined here */
+.singleGraphTable {
+	font-family: Helvetica, Arial, GillSans, san-serif;
+	font-size: 2.82vw; /* 2.2rem but scalable */
+	font-style: bold;
+	text-align: center;
+	width: auto;
+	margin: 0px auto;
+	border: 0px dashed blue;
+	}
+
+.twoGraphTable {
+	padding: 0em;
+	font-family: Helvetica, Arial, GillSans, san-serif;
+	font-size: 2.31vw;
+	text-align: center;
+	width: 96%;
+	margin: 0px auto;
+	}
+
+.twoGraphTable tr, .twoGraphTable td {
+	border: 0px dashed maroon;
+	vertical-align: middle;
+	text-align: center;
+	overflow-x: hidden;
+	}
+
+.threeGraphTableAlt {
+	font-family: Georgia, Palatino, Bodoni, serif;
+	font-size: 2.05vw; /* 1.6rem but scalable */
+	color: Maroon;
+	text-align: center;
+	line-height: 25px; /* of current font-size */
+	width: 100%;
+	margin: 0px auto;
+	}
+
+.threeGraphTableAlt tr, .threeGraphTableAlt td {
+	border: 0px dashed blue;
+	vertical-align: middle;
+	overflow-x: hidden;
+	}
+
+.threeGraphTableAlt td:nth-child(1) {
+	width: 33%
+	}
+
+.threeGraphTableAlt td:nth-child(2) {
+	width: 33%
+	}
+
+.threeGraphTableAlt td:nth-child(3) {
+	width: 33%
+	}
+
+table.waldo {
+	margin-left:auto; 
+	margin-right:auto;
+	padding: 0em;
+	font-family: Helvetica, Arial, GillSans, san-serif;
+	font-size: inherit;
+	width: 100%;
+	text-align: center;
+	}
+
+.solvayTable {
+	margin: 0px auto;
+	padding: 0em;
+	font-family: Georgia, Palatino, Bodoni, serif;
+	font-style: italic;
+	font-weight: normal;
+	font-size: 0.8rem;
+	color: black;
+	line-height: 25px; /* of current font-size */
+	text-align: center;
+	width: 100%;
+	}
+	
+.solvayTable tr, .solvayTable td {
+	border: 0px solid blue;
+	vertical-align: middle;
+	overflow-x: hidden;
+	}
+
+.standardTable {
+	padding: 0em;
+	font-family: Helvetica, Arial, GillSans, san-serif;
+	font-size: 0.9rem; /* 1.8rem but scalable */
+	text-align: center;
+	width: 95%;
+	margin: 0px auto;
+	}
+
+.standardTable tr, .standardTable td {
+	border: 0px dashed Maroon;
+	vertical-align: middle;
+	overflow-x: hidden;
+	}
+
+.standardTableAlt {
+	padding: 0em;
+	font-family: Georgia, Palatino, Bodoni, serif;
+	font-style: italic;
+	font-weight: normal;
+	font-size: 0.8rem; /* 1.8rem but scalable */
+	text-align: center;
+	width: 95%;
+	margin: 0px auto;
+	}
+
+.standardTableAlt tr, .standardTableAlt td {
+	border: 0px dashed Maroon;
+	vertical-align: middle;
+	overflow-x: hidden;
+	}
+
+.buttonText {
+	font-family: Georgia, Palatino, Bodoni, serif;
+	font-style: italic;
+	font-size: 0.8rem; /* 1.4rem but scalable */
+	color: black;
+	text-align: left;
+	}
+
+.textBlankPage {
+	font-family: Georgia, Palatino, Bodoni, serif;
+	font-style: italic;
+	font-size: 0.9rem; /* 1.7rem but scalable */
+	text-align: left;
+	}
+
+.textBlankPageLeft {
+	font-family: Georgia, Palatino, Bodoni, serif;
+	font-style: italic;
+	font-size: 0.8rem; /* 1.4rem but scalable */
+	color: black;
+	text-align: left;
+	line-height: 135%; /* of current font-size */
+	display: none;
+	}
+
+.textBlankPageCntr {
+	font-family: Georgia, Palatino, Bodoni, serif;
+	font-style: italic;
+	font-size: 0.8rem; /* 1.4rem but scalable */
+	color: black;
+	text-align: center;
+	line-height: 135%; /* of current font-size */
+	display: none;
+	}
+
+.textBlankPageTitle {
+	font-family: Helvetica, Arial, GillSans, san-serif;
+	font-style: italic;
+	font-size: 0.8rem; /* 1.4rem but scalable */
+	font-weight: normal;
+	color: black;
+	text-align: center;
+	line-height: 120%; /* of current font-size */
+	display: none;
+	}
+
+.textBlankPageTitleAlt {
+	font-family: Georgia, Palatino, Bodoni, serif;
+	font-style: italic;
+	font-size: 0.8rem;
+	font-weight: normal;
+	color: black;
+	text-align: center;
+	line-height: 120%; /* of current font-size */
+	}
+
+.bridgeTable {
+	font-family: Helvetica, Arial, GillSans, san-serif;
+	font-size: 0.9rem; /* 1.8rem but scalable */
+	width: auto;
+	margin: auto auto 10px auto;
+	text-align: left;
+	line-height: 180%;
+	}
+
+.bridgeTable td, .bridgeTable tr {
+	border: 0px solid Maroon;
+	vertical-align: middle;
+	overflow-x: hidden;
+	}
+
+.bridgeTable td:nth-child(1) {
+	text-align: left;
+	width: auto;
+	margin: auto;
+	}
+
+.bridgeTable td:nth-child(2) {
+	text-align: left;
+	width: 25%;
+	margin: auto;
+	}
+
+.bridgeTable td:nth-child(3) {
+	text-align: left;
+	width: auto;
+	margin: auto;
+	}
+
+.bridgeHeader {
+	font-family: Helvetica, Arial, GillSans, san-serif;
+	color: steelblue;
+	font-style: italic;
+	font-size: 0.9rem; /* 1.8rem but scalable */
+	text-decoration: underline;
+	vertical-align: middle;
+	}
+	
+.invisibleBackgroundTop {
+	width:100%;
+	height:25px;
+	position: absolute;
+	top:0px
+	background: transparent;
+	color: white;
+	}
+
+#invisibleButtonTop {
+	position:absolute;
+	bottom:0px;
+	left:0px;
+	font-size:16px;
+	background: transparent;
+	border: none !important;
+	width:100%;
+	color:#ff000000; /* alpha=0 gives transparency */
+	cursor: pointer;
+	}
+
+.invisibleButtonTable {
+	margin: 0px auto;
+	padding: 0em;
+	width:100%;
+	text-align:left;
+	background-color: steelblue;
+	font-size: 2.05vw;
+	line-height: 250%; /* of current font-size */
+	color: white;
+	cursor: pointer;
+	}
+
+.invisibleButtonTable tr, .invisibleButtonTable td {
+	border: 0px dashed red;
+	vertical-align: middle;
+	overflow-x: hidden;
+	}
+
+.invisibleButton {
+	left:0px;
+	width:100%;
+	clear: both;
+	text-align:left;
+	background-color: steelblue;
+	font-size: 0.75rem; /* same as extra.css/.md-ellipsis */
+	color: white;
+	cursor: pointer;
+	}
+
+
+/* **************************************************************** */
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 24px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgb(204, 89, 51);
+  border: 1px solid #c8daea;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 4px;
+  top: 2px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: rgb(51, 204, 51);
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px rgb(204, 89, 51);
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(28px);
+  -ms-transform: translateX(28px);
+  transform: translateX(28px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 24px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/* **************************************************************** */
+/* Used, as necessary, to format a vertical slider, i.e. range */
+/* first, initialization */
+/* webkit = android, opera, chrome, safari */
+/* moz = firefox */
+/* ms = IE */
+/* 
+input[type=range][orient=vertical] {
+  -webkit-appearance: slider-vertical;
+  appearance: none;
+  writing-mode: bt-lr;
+  width: 10px;
+  height: 320px;
+  margin: 5px 5px;
+  background: white;
+  outline: none;
+}
+
+input[type=range]::-moz-range-track {
+  -moz-appearance: none;
+}
+
+input[type=range]::-moz-range-thumb {
+  -moz-appearance: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+}
+
+input[type=range]:focus {
+  outline: none;
+}
+ */
+
+/* webkit = android, opera, chrome, safari */
+/* 
+input[type=range]::-webkit-slider-runnable-track {
+  width: 10px;
+  height: 100%;
+  cursor: pointer;
+  background: #3071a9;
+  border-radius: 8px;
+  border: 0.2px solid #000001;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+  outline: none;
+  background: #367ebd;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 1.5px solid #000000;
+  height: 24px;
+  width: 36px;
+  border-radius: 12px;
+  background: #e600e6;
+  cursor: pointer;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: -12px;
+}
+
+input[type=range]:focus::-webkit-slider-thumb {
+  background: #ff99ff;
+}
+ */
+
+/* moz = firefox */
+/* 
+input[type=range]::-moz-range-track {
+  width: 10px;
+  height: 100%;
+  cursor: pointer;
+  background: #3071a9;
+  border-radius: 16px;
+  border: 0.2px solid #000001;
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 1.5px solid #000000;
+  height: 24px;
+  width: 36px;
+  background: url('../images/camera_transp.png');
+  border-radius: 12px;
+  background: #ffff00;
+  cursor: pointer;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: -12px;
+}
+ */
+
+/* ms = IE */
+/* 
+input[type=range]::-ms-track {
+  appearance: none;
+  width: 10px;
+  height: 100%;
+  cursor: pointer;
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  appearance: none;
+  background: #2a6495;
+  border: 0.2px solid #000001;
+  border-radius: 16px;
+}
+input[type=range]::-ms-fill-upper {
+  appearance: none;
+  background: #3071a9;
+  border: 0.2px solid #000001;
+  border-radius: 16px;
+}
+input[type=range]::-ms-thumb {
+  appearance: none;
+  box-shadow: 0px 0px 0px #000000, 0px 0px 0px #0d0d0d;
+  border: 1.5px solid #000000;
+  height: 12px;
+  width: 24px;
+  border-radius: 12px;
+  background: #ff00ff;
+  cursor: pointer;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: -12px;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #3071a9;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #367ebd;
+}
+ */
+
+/* **************************************************************** */
+/* Following from 
+<cssnewbie.com/creating-a-footer-that-sticks-to-the-bottom-of-the-viewport/#.XDCbEi3sa-q> */
+
+/* 
+#labWrap {min-height: 100%;}
+
+#labMain {
+	overflow:auto;
+	padding-bottom: 55px;  // must be same height as the footer
+	}
+
+#labFooter {
+	position: relative;
+	margin-top: -55px; // negative value of footer height
+	height: 55px;
+	width: 100%;
+	clear:both;
+	color: white;
+	text-align: left;
+	font-family: Helvetica, Arial, GillSans, san-serif;
+	font-size: 1.3rem;
+	background:steelblue;
+	} 
+	
+// Opera Fix
+body:before 
+	{
+	content:"";
+	height:100%;
+	float:left;
+	width:0;
+	margin-top:-32767px;  // negate effect of float
+	}
+*/
+
+
