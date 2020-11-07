@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+	<head>
+		<meta name="format-detection" content="telephone=no">
+		<meta name="msapplication-tap-highlight" content="no">
+		<meta name="viewport" content=
+			"user-scalable=no,
+			 initial-scale=1,
+			 maximum-scale=1,
+			 minimum-scale=1,
+			 width=device-width">
+		<meta charset='UTF-8'>
+		<meta name="copyright" content="I.T. Young & R. Ligteringen, 1984, 2010–2020">
+		
+		<link rel="stylesheet" type="text/css" href="../css/myHTML_1.css" media="screen" />
+		<link rel='stylesheet' type='text/css' href='../css/myControls.css' media='screen' />
+		
+		<script type="text/javascript" src="../js/d3-format.min.js" charset="utf-8"></script>
+		<script type="text/javascript" src="../js/plotly.min.js" charset="utf-8"></script>  
+		
+		<script type="text/javascript" src='../js/SSPconstants.js'></script>
+		<script type="text/javascript" src='../js/SSPfourier.js'></script>
+		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src='../js/SSPplotting.js'></script>
+		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
+		<script type="text/javascript" src="../js/extra.js"></script>
+
+		<title>Laboratory Exercise 12.1</title>
+		<br>
+		<script src='js/Lab_12-1.js'></script>
+		
+		<link rel="shortcut icon" href="../images/favicon.png">
+		<link rel="stylesheet" href="../assets/stylesheets/main.38780c08.min.css">
+	</head>
+	
+	<body class="bodyDisplayLabs">
+		<script>
+		// *****************************************************************
+		// Before proceeding check which platform is being used and take appropriate action
+
+// 		var answerOS = getPlatform().toLowerCase();
+		returnAddress = "../Chap_12.html#laboratory-exercise-121";
+		sessionStorage.setItem("xReturnAddress", returnAddress);
+		console.log('Device Configuration = ',navigator.userAgent);
+		</script>
+		
+<!-- Note the text "Click Me!" is transparent so you don't see it -->
+	<div class="invisibleBackgroundTop">
+		<button type="button" id="invisibleButtonTop" 
+			onclick="window.location.href = '#jumpToExit'">Click Me!</button>
+	</div>
+	
+	<br>
+	<h5>Laboratory Exercise 12.1</h5>
+	
+	<div class="scrollBrd">
+		The purpose of this exercise is to review the methodology for computing the Fourier transform 
+		of a discrete-time signal based upon a given set of data <i>x</i>[<i>n</i>] with 
+		<i>n = 0, 1, ..., N–1</i>. This is frequently referred to as the DFT (Discrete Fourier 
+		Transform) and is defined by
+		Oppenheim<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>:
+		
+		<table class="centerEqTable">
+			<tr>
+				<td>(12.25)</td>
+				<td id="fig:Eqn_Lab_12.1">
+					<img width=80% src="../images/Eqn_Lab_12.1.gif" alt="Missing Lab_12.1 equation"/>
+				</td>
+			</tr>
+		</table>
+
+		It is important to note that <i>X</i>[<i>k</i>] = <i>X</i>(<i>&Omega;<sub>k</sub></i>)/<i>N</i> 
+		if the signal is identically zero outside the interval <i>0 ≤ n ≤ N–1</i>. The DFT is then 
+		a version of <i><span class="cursive"><b>F </b></span></i>{<i>x</i>[<i>n</i>]} that is 
+		harmonically-sampled (<i>&Omega;<sub>k</sub> = k&Omega;<sub>0</sub></i> with <i>&Omega;<sub>0</sub> 
+		= 2&pi;/N</i>) and scaled (by 1/<i>N</i>).
+		
+		<ol type="i">
+			<li>Consider the continuous-time signal x(t) = sin(2&pi;<i>f<sub>0</sub>t</i>). What is 
+			the Fourier transform <i>X</i>(<i>&omega;</i>) of this signal?</li><br>
+			<li>Now consider the discrete-time signal x[n] = sin(<i>&Omega;<sub>0</sub>n</i>) 
+			What is the Fourier transform <i>X</i>(<i>&Omega;</i>) of this signal?</li>
+		</ol>
+
+		In the following experiments we work with a sampled sinusoidal signal with a variable 
+		frequency <i>f<sub>0</sub></i> and variable phase <i>φ</i>. The signal <i>x</i>[<i>n</i>], 
+		depending upon the number of samples shown, is displayed as a smooth curve or as discrete 
+		samples. The power spectral density spectrum <i>S<sub>xx</sub></i>(&Omega;) based on the DFT 
+		spectrum <i>X</i>[<i>k</i>] is indicated by vertical bars for the various values of <i>k</i>. 
+		To make the connection between <i>k</i> and continuous-time frequency, the horizontal axis is 
+		labeled in units of Hz (<i>f = &omega;</i>/2&pi;) instead of <i>&Omega;</i>, a concept used 
+		in previous chapters as well. At any time you can listen to a signal using the 
+		( <img src="../images/play_triangle1.png" class="inlineIcon">) 
+		button.
+		<br><br>
+		The signal is sampled at a rate of <output id="sampF">44.1</output> kHz and consists of 
+		<output id="totSamp1">3700</output> samples. From these samples, a window of <i>N</i> samples 
+		is displayed.
+		<br><br>
+		
+		<ol start="3" type="i">
+			<li>Does the power spectral density <i>S<sub>xx</sub></i>(<i>&omega;</i>) corresponding 
+			to the frequency <i>f<sub>0</sub></i> match your expectations? Explain.</li><br>
+			<li>Does changing the “<i>zoom</i>” change <i>S<sub>xx</sub></i>(<i>&omega;</i>)?</li><br>
+			<li>Does changing the phase <i>φ</i> change the <i>S<sub>xx</sub></i>(<i>&omega;</i>)? 
+			Explain.</li><br>
+			<li>If you choose another frequency <i>f<sub>1</sub> ≠ f<sub>0</sub></i>, does the new 
+			power spectral density differ from the original <i>S<sub>xx</sub></i>(<i>&omega;</i>)? 
+			If so, in what ways does it change?</li><br>
+			<li>Are there other frequencies, <i>f<sub>1</sub> ≠ f<sub>0</sub></i>, for which the 
+			power spectral density appears to be a purely shifted version of the original 
+			<i>S<sub>xx</sub></i>(<i>&omega;</i>)?</li><br>
+			<li>Explain why the power spectral density <i>S<sub>xx</sub></i>(<i>&omega;</i>) for 
+			some values of <i>f</i> is a shifted version of the original 
+			<i>S<sub>xx</sub></i>(<i>&omega;</i>) and for some values of <i>f</i> it is not.</li>
+		</ol>
+
+		<p id="fn1" class="p_footnote"><sup>1</sup>Oppenheim, A. V., A. S. Willsky and S. H. 
+			Nawab (1996). Signals and Systems. Upper Saddle River, New Jersey, 
+			Prentice-Hall&nbsp;<a href="#fnref1" style="color:royalBlue;"> <b>&crarr;</b></a></p>
+		
+	</div>
+	<br>
+	<div id="scrollNoBrd">
+		<!-- Sliders to choose Zoom, Frequency, Pan, & Phase  -->
+		<table class='tableRecPlay'>
+			<tr>
+				<td>Synthetic sound:     
+					<button id="playCapture-0">
+						<img id='play_0' class='buttonImg' src='../images/playback_transp.png'>
+					</button>
+					<button id="startCapture-0" style="display:none;">
+						<div id='animX0' class='anime'>
+							<img id='mic_0' class='buttonImg' src='../images/microphone_transp_1.png' >
+						</div>
+					</button>
+					<button id="stopCapture-0" style="display:none;">Stop 0:</button>     
+				</td>
+			</tr>
+		</table>
+		
+		<table class='table1x4ColsAlt'>
+			<tr>
+				<td style="text-align:right;">Zoom:</td>
+				<td><input
+						type='range'
+						oninput="sliderChoices(this.value, 'Z')"
+						min='0'
+						max='4'
+						step='1'
+						value='0'
+						id='zm'>
+				</td>
+				<td style="text-align:right;">f<sub>0</sub>:</td>
+				<td><input
+						type='range'
+						oninput="sliderChoices(this.value, 'F')"
+						min='0'
+						max='21'
+						value='0'
+						id='fq'>
+				</td>
+			</tr>
+			<tr>
+				<td style="text-align:center;">                    </td>
+				<td>
+				<output id="placeZ">N = 900  samples</output></td>
+				<td style="text-align:center;">           </td>
+				<td><i>f<sub>0</sub></i> = <output id="placeF">192 Hz</output>
+			</tr>
+			<tr>
+				<td style="text-align:right;">Pan:</td>
+				<td><input
+						type='range'
+						oninput="sliderChoices(this.value, 'Pa')"
+						min='0'
+						max='900'
+						step='30'
+						value='450'
+						id='pan'>
+				</td>
+				<td style="text-align:right;">&phi;:</td>
+				<td><input
+						type='range'
+						oninput="sliderChoices(this.value, 'Ph')"
+						min='0'
+						max='355'
+						step='5'
+						value='0'
+						id='ph'>
+				</td>
+			</tr>
+			<tr>
+				<td style="text-align:center;">                    </td>
+				<td>
+					From <output id="placePa1">0</output> ms to <output id="placePa2">20.4</output> ms
+				</td>
+				<td style="text-align:center;">           </td>
+				<td><output id="placePh">&phi; = 0 º = 0 radians</output>
+				</td>
+			</tr>
+		</table>
+
+		<table class='table1x2Cols'>
+			<tr>
+				<td><div id="Lab12.1T"></div></td>
+				<td><div id="Lab12.1B"></div></td>
+			</tr>
+		</table>
+
+		<br>
+
+		<script>
+		
+// *****************************************************************
+		//  Javascript starts here
+		//  'Lab12.1T' means Lab 12.1, Top
+		//  'Lab12.1B' means Lab 12.1, Bottom
+
+		// set up global variables
+		experiment = '12.1';
+
+		window.onload = function init()
+			{
+			// global variables
+			theName0 = {fS: sampFreq, data: []} // global definition of raw 1D audio
+			theNames = [theName0]; // initial definition but global
+			nDisRec = theNames.length; // number of places to be reserved
+			
+			nMics = document.querySelectorAll('*[id^="startCapture-"]').length; // microphones this exercise
+			lengthMax = 16*Math.floor(sampFreq/f0); // sampFreq = (2*3*5*7)^2
+			myDuration = Array(nMics).fill(1000*lengthMax/sampFreq); // time in milliseconds
+			nPlays = document.querySelectorAll('*[id^="playCapture-"]').length; // playbacks this exercise
+			acquired = Array(nPlays).fill(false); // data have not yet been acquired
+
+			plotList = []; // global list of arguments for Plotly.newPlot()
+
+			// two windows in 1 x 2 array
+			wA = 'Lab12.1T';
+			wB = 'Lab12.1B';
+			
+			window.addEventListener("resize", resizeWindow);
+			console.log('Starting experiment ' + experiment)
+			prepareLab_12_1();
+			};
+		</script>
+		
+		<table class="invisibleButtonTable" id="jumpToExit">
+			<tr><td>
+				<div >
+					<button type="button"  class="invisibleButton" id="backBtn"
+					onclick="jumpToButton(returnAddress)">
+					    &larr;  Laboratory Exercises</button>
+				</div>
+			</td></tr>
+		</table>
+
+		<script type="text/javascript" src="../js/WavAudioEncoder.js"></script>
+		<script type="text/javascript" src="../js/utils.js"></script>
+		<script type="text/javascript" src='../js/SSPmedia.js'></script>
+
+</div>
+</body>
+</html>

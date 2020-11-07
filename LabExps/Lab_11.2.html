@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+	<head>
+		<meta charset='UTF-8'>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="copyright" content="I.T. Young & R. Ligteringen, 1984, 2010–2020">
+		
+		<link rel="stylesheet" type="text/css" href="../css/myHTML_1.css" media="screen" />
+		<link rel='stylesheet' type='text/css' href='../css/myControls.css' media='screen' />
+		
+		<script type="text/javascript" src="../js/d3-format.min.js" charset="utf-8"></script>  
+		<script type="text/javascript" src="../js/plotly.min.js" charset="utf-8"></script>  
+		
+		<script type="text/javascript" src='../js/SSPconstants.js'></script>
+		<script type="text/javascript" src='../js/SSPfourier.js'></script>
+		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src='../js/SSPplotting.js'></script>
+		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
+		<script type="text/javascript" src="../js/extra.js"></script>
+		<title>Laboratory Exercise 11.2</title>
+		<br>
+		<script src='../images/dartBoardLibrary.js'></script>
+		<script src='js/Lab_11-2.js'></script>
+		
+		<link rel="shortcut icon" href="../images/favicon.png">
+		<link rel="stylesheet" href="../assets/stylesheets/main.38780c08.min.css">
+	</head>
+
+	<body class="bodyDisplayLabs">
+		<script>
+		// *****************************************************************
+		// Before proceeding check which platform is being used and take appropriate action
+
+// 		var answerOS = getPlatform().toLowerCase();
+		returnAddress = "../Chap_11.html#laboratory-exercise-112";
+		sessionStorage.setItem("xReturnAddress", returnAddress);
+		console.log('Device Configuration = ',navigator.userAgent);
+		</script>
+		
+<!-- Note the text "Click Me!" is transparent so you don't see it -->
+	<div class="invisibleBackgroundTop">
+		<button type="button" id="invisibleButtonTop" 
+			onclick="window.location.href = '#jumpToExit'">Click Me!</button>
+	</div>
+	
+	<br>
+	<h5>Laboratory Exercise 11.2</h5>
+		
+	<div class="scrollBrd">
+		<a href="../Chap_11.html#fig:fig_Est2"><font color="royalBlue">Figure 11.2</font></a> 
+		illustrated the concept of accuracy and precision with the use of a hypothetical game of darts. 
+		We will continue with this hypothetical game whose rules differ from the 
+		<a href="https://en.wikipedia.org/wiki/Darts#Scoring"><font color="royalBlue">standard competition 
+		game</font></a>.<br><br>
+		
+		In this game we throw <i>N</i> darts and the goal is to get as many of 
+		them as possible close to the center of the dart board. The measure of 
+		“closeness” that we will use is the <i>rms</i> (root-mean-square) 
+		distance of the <i>N</i> darts to the center of the dart board, the
+		bullseye. There are six players involved in this dart competition. Each 
+		player has her or his own way of throwing darts.<br><br>
+		
+		Choose the number of darts that are being thrown and the player.
+		<br>
+		
+		<ol type="i">
+			<li>If each player throws only one dart, which player would you back in 
+				a competition? (By “back”, we mean bet money on that player winning.)</li><br>
+			
+			<li>Of the two players <em>Jack</em> and <em>Tobin</em>, which player is more 
+				<em>accurate</em> when 15 darts are thrown?</li><br>
+			
+			<li>Of the two players <em>Jack</em> and <em>Tobin</em> which player is more 
+				<em>precise</em> when 15 darts are thrown?</li><br>
+			
+			<li>Do either of the answers to the above two questions change when 101 darts 
+				are thrown?</li><br>
+				
+			<li>Repeat your experiments with 15 darts but now for players <em>Casey</em> 
+				and <em>Yael.</em></li><br>
+			
+			<li>Repeat your experiments with 47 darts but now for players <em>Jamie</em> 
+				and <em>Johanna.</em></li><br>
+			
+			<li>Which of the six players do you think is the best according to the 
+				criterion of “closeness”?</li><br>
+			
+			<li>The definition of precision as developed in this chapter can lead to 
+				interesting situations. Which player, <em>Casey</em> or <em>Yael,</em> 
+				is more precise according to the definition?</li><br>
+			
+			<li>Does that definition match your intuitive feeling about their capacity 
+				for being precise?</li>
+		</ol>
+	</div>
+	<br>
+	<div id="scrollNoBrd">
+		<table class="table1x3Cols">
+		<!-- Row 1 = Slider to choose number of darts -->
+			<tr>
+				<td style="width:22%">Number of darts:</td>
+				<td><input
+						type="range"
+						oninput="moveDartSlider(this.value)"
+						onchange="distributionDisp(this.value)"
+						min="0"
+						max="8"
+						step="1"
+						value="0"
+						id="rows_cols">
+				</td>
+				<td style="width:20%"><output for="size" id="clickN">N = 1 dart</output></td>
+			</tr>
+		</table>
+
+		<p style="font-size:0.8rem;  margin-left:6.8vw; margin-bottom:1.54vw;">Choose a player:</p>
+
+		<table class="radioTable">
+		<!-- Row 2 = Radio buttons to choose player  -->
+			<tr>
+				<td> 
+					<label class="container">Jack&nbsp;&nbsp;
+					<input type="radio" checked="checked"
+						onclick="throwDarts('Jack');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td><td>
+					<label class="container">Tobin&nbsp;&nbsp;
+					<input type="radio"
+						onclick="throwDarts('Tobin');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td><td>
+					<label class="container">Casey&nbsp;&nbsp;
+					<input type="radio"
+						onclick="throwDarts('Casey');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td><td>
+					<label class="container">Yael&nbsp;&nbsp;
+					<input type="radio"
+						onclick="throwDarts('Yael');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td><td>
+					<label class="container">Jamie&nbsp;&nbsp;
+					<input type="radio"
+						onclick="throwDarts('Jamie');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td><td>
+					<label class="container">Johanna&nbsp;&nbsp;
+					<input type="radio"
+						onclick="throwDarts('Johanna');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td>
+			</tr>
+		</table>
+
+		<table class="standardTable">
+		<!-- Display of target & darts  -->
+			<tr><td>&nbsp;</td></tr>
+			<tr>
+				<td>
+					<canvas id="dummy" width="512" height="512"></canvas>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<canvas id="dartboard" width="512" height="512"></canvas>
+				</td>
+			</tr>
+			<tr><td>&nbsp;</td></tr>
+		</table>
+		
+		<script>
+// *****************************************************************
+		//  Javascript starts here
+		// set up global variables
+
+		experiment = '11.2';
+
+		wA = 'dummy'; // Dummy image (not seen)
+		wB = 'dartboard'; // Color image
+
+		window.onload = function init()
+			{
+			window.addEventListener("resize", resizeWindow);
+			prepareLab_11_2();
+			console.log('Starting experiment ' + experiment);
+		};
+		</script>
+		
+		<table class="invisibleButtonTable" id="jumpToExit">
+			<tr><td>
+				<div >
+					<button type="button"  class="invisibleButton" id="backBtn"
+					onclick="jumpToButton(returnAddress)">
+					    &larr;  Laboratory Exercises</button>
+				</div>
+			</td></tr>
+		</table>
+
+		<script type="text/javascript" src="../js/WavAudioEncoder.js"></script>
+		<script type="text/javascript" src="../js/utils.js"></script>
+		<script type="text/javascript" src='../js/SSPmedia.js'></script>
+
+</div>
+</body>
+</html>

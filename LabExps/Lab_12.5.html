@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+	<head>
+		<meta name="format-detection" content="telephone=no">
+		<meta name="msapplication-tap-highlight" content="no">
+		<meta name="viewport" content=
+			"user-scalable=no,
+			 initial-scale=1,
+			 maximum-scale=1,
+			 minimum-scale=1,
+			 width=device-width">
+		<meta charset='UTF-8'>
+		<meta name="copyright" content="I.T. Young & R. Ligteringen, 1984, 2010–2020">
+		
+		<link rel="stylesheet" type="text/css" href="../css/myHTML_1.css" media="screen" />
+		<link rel='stylesheet' type='text/css' href='../css/myControls.css' media='screen' />
+		
+		<script type="text/javascript" src="../js/d3-format.min.js" charset="utf-8"></script>
+		<script type="text/javascript" src="../js/plotly.min.js" charset="utf-8"></script>  
+		
+		<script type="text/javascript" src='../js/SSPconstants.js'></script>
+		<script type="text/javascript" src='../js/SSPfourier.js'></script>
+		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src='../js/SSPplotting.js'></script>
+		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
+
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
+		<script type="text/javascript" src="../js/extra.js"></script>
+
+<!-- 
+		<title>Laboratory Exercise 12.5</title>
+ -->
+		<title>Laboratory Exercise 12.4</title>
+		<br>
+		<script src='js/Lab_12-5.js'></script>
+		
+		<link rel="shortcut icon" href="../images/favicon.png">
+		<link rel="stylesheet" href="../assets/stylesheets/main.38780c08.min.css">
+	</head>
+	
+	<body class="bodyDisplayLabs">
+		<script>
+		// *****************************************************************
+		// Before proceeding check which platform is being used and take appropriate action
+
+// 		var answerOS = getPlatform().toLowerCase();
+// 		returnAddress = "../Chap_12.html#laboratory-exercise-125";
+		returnAddress = "../Chap_12.html#laboratory-exercise-124";
+		sessionStorage.setItem("xReturnAddress", returnAddress);
+		console.log('Device Configuration = ',navigator.userAgent);
+		</script>
+		
+<!-- Note the text "Click Me!" is transparent so you don't see it -->
+	<div class="invisibleBackgroundTop">
+		<button type="button" id="invisibleButtonTop" 
+			onclick="window.location.href = '#jumpToExit'">Click Me!</button>
+	</div>
+	
+	<br>
+<!-- 
+	<h5>Laboratory Exercise 12.5</h5>
+ -->
+	<h5>Laboratory Exercise 12.4</h5>
+		
+	<div class="scrollBrd">
+		We return to the situation studied in <a href="Lab_12.4.html">
+		<font color='royalBlue'>Laboratory Exercise 12.3</font></a> and ask if the use of windows other 
+		than the Block window can help us estimate the spectral components in a signal. In the following,
+		 you can hear the synthesized signal, view the (sampled) signal <i>x</i>[<i>n</i>] and its 
+		 windowed version <i>y</i>[<i>n</i>] = <i>w</i>[<i>n</i>]<i>x</i>[<i>n</i>], and estimate the power 
+		spectral densities <i>S<sub>xx</sub></i>(<i>&omega;=2&pi;f</i>) and 
+		<i>S<sub>yy</sub></i>(<i>&omega;=2&pi;f</i>). Use the zoom controls to examine both 
+		time domain and frequency domain characteristics. The 
+		<span class="inLineBtn">  Linear / Logarithmic  </span> button (below) switches the power 
+		spectral density amplitude display from linear to log<sub>10</sub>(). This can help to pick 
+		out spectral details.
+		
+			<ol type="i">
+				<li>Listen to the musical tone so that you will know what signal you are dealing with 
+				and what you might expect in a spectral analysis.</li><br>
+				<li>What power spectral density do you observe when you use 2<sup>15</sup> samples of 
+				the signal? How many spectral components do you think this signal has?</li><br>
+				<li>What power spectral density do you observe when you use 2<sup>12</sup> samples of 
+				the signal?</li><br>
+				<li>The HM (Half Maximum) criterion requires that the “dip” between the two peaks is 
+				at least—that is below—50% of the values at the peaks. With 2<sup>12</sup> samples, 
+				which windows do <i>not</i> meet the HM criterion?</li><br>
+				<li>How does this list change if there are 2<sup>11</sup> samples?</li>
+			</ol>
+	
+		Until now, the tones we have heard are “pure”, uncorrupted by noise. In the following we 
+		will add independent, zero-mean, Gaussian noise with a certain value of &sigma; to achieve 
+		a signal-to-noise ratio, <i>SNR</i> as defined in 
+		<a href="../Chap_8.html#eq:snreq3"><font color="royalBlue">Equation 8.3</font><a>. To answer 
+		the following questions, use a reasonable amount of zoom on the frequency axis.
+	
+			<ol start="6" type="i">
+				<li>Listen to the musical tone at each noise level so that you will know what 
+				signal you are dealing with and what you might expect in a spectral analysis.</li><br>
+				<li>What spectrum do you observe based upon 2<sup>15</sup> samples with additive, 
+				independent Gaussian noise? Use a Block window and examine the spectral estimate 
+				for different values of the <i>SNR</i></li><br>
+				<li>Can you distinguish between the two peaks (using the HM criterion) when 
+				<i>SNR</i> = 0.1?</li><br>
+				<li>If you now reduce the number of samples to 2<sup>11</sup> can you distinguish 
+				between the two peaks?</li><br>
+				<li>If you use 2<sup>12</sup> samples with which windows can you distinguish 
+				two peaks? Can you “reliably” estimate their positions? Assume that reliable means 
+				within 5%. Note that you are not being asked to estimate the amplitude of the 
+				spectral components but rather their positions.</li><br>
+				<li>How many samples (approximately) are required to distinguish two peaks and 
+				reliably estimate their positions with all of the windows?</li><br>
+				<li>With the number found above and <i>SNR</i> = 0.1, how would you describe 
+				the differences among the spectral estimates as you change the window shape?</li>
+			</ol>
+		
+		Now choose <i>SNR</i> = 10 and perform the following experiments.
+		
+			<ol start="13" type="i">
+			<li>Can you distinguish between the two peaks with 2<sup>11</sup> samples?</li><br>
+			<li>If you use 2<sup>12</sup> samples with which windows can you distinguish two 
+			peaks? Can you “reliably” estimate their positions? Assume that reliable again means 
+			within 5%. Again, you are not being asked to estimate the amplitude of the spectral 
+			components but rather their positions.</li><br>
+			<li>How many samples (approximately) are required to distinguish two peaks and 
+			reliably estimate their positions with all of the windows?</li><br>
+			<li>What is your conclusion about the usefulness of the HM criterion?</li><br>
+			<li>Why are telescopes with large lenses necessary to resolve two proximate 
+			stars?</li>
+		</ol>
+	</div>
+	
+	<div id="scrollNoBrd">
+		
+		<table class='tableRecPlay'>
+			<tr>
+				<td>Synthetic sound:     
+					<button id="playCapture-0">
+						<img id='play_0' class='buttonImg' src='../images/playback_transp.png'>
+					</button>
+					<button id="startCapture-0" style="display:none;">
+						<div id='animX0' class='anime'>
+							<img id='mic_0' class='buttonImg' src='../images/microphone_transp_1.png' >
+						</div>
+					</button>
+					<button id="stopCapture-0" style="display:none;">Stop 0:</button>     
+				</td>
+			</tr>
+		</table>
+		
+		<p style="font-size:0.8rem; margin-left:6.8vw; margin-bottom:1.54vw;">Choose a window w[n]:</p>
+		<table class="windowTable">
+		<!-- Radio buttons to choose underlying window  -->
+			<tr>
+				<td> 
+					<label class="container">Block
+					<input type="radio" checked="checked"
+						onclick="chooseWindow('Block');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td><td>
+					<label class="container">Bartlett
+					<input type="radio"
+						onclick="chooseWindow('Bartlett');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td><td>
+					<label class="container">Parzen
+					<input type="radio"
+						onclick="chooseWindow('Parzen');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td><td>
+					<label class="container">Gauss
+					<input type="radio"
+						onclick="chooseWindow('Gauss');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+			</tr>
+			<tr>
+				</td><td>
+					<label class="container">Verbeek
+					<input type="radio"
+						onclick="chooseWindow('Verbeek');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td><td>
+					<label class="container">Tukey
+					<input type="radio"
+						onclick="chooseWindow('Tukey');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td><td>
+					<label class="container">Hamming
+					<input type="radio"
+						onclick="chooseWindow('Hamming');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td><td>
+					<label class="container">Hann
+					<input type="radio"
+						onclick="chooseWindow('Hann');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td>
+			</tr>
+		</table>
+		<br>
+
+		<!-- Slider to choose Samples  -->
+		<table class='table1x4ColsAlt'>
+			<tr>
+				<td style="text-align:right;">Samples:</td>
+				<td><input
+						type='range'
+						oninput="sliderChoices(this.value, 'N')"
+						min='0'
+						max='7'
+						step='1'
+						value='0'
+						id='N'>
+				</td>
+				<td style="text-align:right;">SNR:</td>
+				<td><input
+						type='range'
+						oninput="moveSlider(this.value)"
+						onchange="getSNR(this.value)"
+						min='0'
+						max='7'
+						step='1'
+						value='7'
+						id='snr'>
+				</td>
+			</tr>
+		</table>
+		<br>
+
+		<table class='winTable'>
+			<tr>  <!-- These are fixed -->
+				<td><span style="color:steelBlue;">x[n] & S<sub>xx</sub>(&omega;)</span>:</td>
+				<td>N<sub>x</sub> = 32768</td>
+				<td>SNR = ∞:1</td>
+				<td>Block window</td>
+			</tr>
+			<tr>  <!-- These are variable -->
+				<td><span style="color:rgba(253,128,130,1);">y[n] & S<sub>yy</sub>(&omega;)</span>:</td>
+				<td>N<sub>y</sub> = <output id="placeN1">0</output></td>
+				<td>SNR = <output id="placeN2">0</output>:1</td>
+				<td><output id="placeW">Block</output> window</td>
+			</tr>
+		</table>
+		<br>
+
+		<!-- Sliders to choose Zoom & Frequency  -->
+		<table class='table1x4ColsAlt'>
+			<tr>
+				<td style="text-align:right;">Zoom (t):</td>
+				<td><input
+						type='range'
+						oninput="sliderChoices(this.value, 'Zt')"
+						min='0'
+						max='5'
+						step='1'
+						value='0'
+						id='zt'>
+				</td>
+				<td style="text-align:right;">Zoom (f):</td>
+				<td><input
+						type='range'
+						oninput="sliderChoices(this.value, 'Zf')"
+						min='0'
+						max='4'
+						step='1'
+						value='0'
+						id='zf'>
+				</td>
+			</tr>
+		</table>
+		<br>
+
+		<table class='twoGraphTable'>
+			<tr>
+				<td> </td>
+				<td style="text-align: center;">
+				<button type="button" class="linLogBtn" onclick="linLog()">
+					  Linear / Logarithmic  
+				</button>
+				</td>
+			</tr>
+		</table>
+		<br>
+		<table class='table1x2Cols'>
+			<tr>
+				<td><div id='Lab12.5L'></div></td>
+				<td><div id='Lab12.5R'></div></td>
+			</tr>
+		</table>
+		
+		<br>
+
+		<script>
+// *****************************************************************
+		//  Javascript starts here
+		//  'Lab12.5L' means Lab 12.5, Left
+		//  'Lab12.5R' means Lab 12.5, Right
+		
+		// set up global variables
+		experiment = '12.5';
+
+		window.onload = function init()
+			{
+			// global variables
+			theName0 = {fS: sampFreq, data: []} // global definition of raw 1D audio
+			theNames = [theName0]; // initial definition but global
+			nDisRec = theNames.length; // number of places to be reserved
+			
+			nMics = document.querySelectorAll('*[id^="startCapture-"]').length; // microphones this exercise
+			lengthMax = 2**(factor2-2); // defined in SSPmedia.js
+			myDuration = Array(nMics).fill(1000*lengthMax/sampFreq); // time in milliseconds
+			nPlays = document.querySelectorAll('*[id^="playCapture-"]').length; // playbacks this exercise
+			acquired = Array(nPlays).fill(false); // data have not yet been acquired
+
+			plotList = []; // global list of arguments for Plotly.newPlot()
+			
+			// two windows in 1 x 2 array
+			wA = 'Lab12.5L';
+			wB = 'Lab12.5R';
+			
+			window.addEventListener("resize", resizeWindow);
+			prepareLab_12_5();
+			console.log('Starting experiment ' + experiment);
+			};
+		</script>
+		
+		<table class="invisibleButtonTable" id="jumpToExit">
+			<tr><td>
+				<div >
+					<button type="button"  class="invisibleButton" id="backBtn"
+					onclick="jumpToButton(returnAddress)">
+					    &larr;  Laboratory Exercises</button>
+				</div>
+			</td></tr>
+		</table>
+
+		<script type="text/javascript" src="../js/WavAudioEncoder.js"></script>
+		<script type="text/javascript" src="../js/utils.js"></script>
+		<script type="text/javascript" src='../js/SSPmedia.js'></script>
+
+</div>
+</body>
+</html>

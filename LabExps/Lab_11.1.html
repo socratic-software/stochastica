@@ -1,0 +1,236 @@
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           <!DOCTYPE html>
+	<head>
+		<meta name="format-detection" content="telephone=no">
+		<meta name="msapplication-tap-highlight" content="no">
+		<meta name="viewport" content=
+			"user-scalable=no,
+			 initial-scale=1,
+			 maximum-scale=1,
+			 minimum-scale=1,
+			 width=device-width">
+		<meta charset='UTF-8'>
+		<meta name="copyright" content="I.T. Young & R. Ligteringen, 1984, 2010–2020">
+		
+		<link rel="stylesheet" type="text/css" href="../css/myHTML_1.css" media="screen" />
+		<link rel='stylesheet' type='text/css' href='../css/myControls.css' media='screen' />
+		
+		<script type="text/javascript" src="../js/d3-format.min.js" charset="utf-8"></script>  
+		<script type="text/javascript" src="../js/plotly.min.js" charset="utf-8"></script>  
+		
+		<script type="text/javascript" src='../js/SSPconstants.js'></script>
+		<script type="text/javascript" src='../js/SSPfourier.js'></script>
+		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src='../js/SSPplotting.js'></script>
+		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
+		<script type="text/javascript" src="../js/extra.js"></script>
+		<title>Laboratory Exercise 11.1</title>
+		<br>
+		<script src='js/Lab_11-1.js'></script>
+		
+		<link rel="shortcut icon" href="../images/favicon.png">
+		<link rel="stylesheet" href="../assets/stylesheets/main.38780c08.min.css">
+	</head>
+	
+	<body class="bodyDisplayLabs">
+		<script>
+		// *****************************************************************
+		// Before proceeding check which platform is being used and take appropriate action
+
+// 		var answerOS = getPlatform().toLowerCase();
+		returnAddress = "../Chap_11.html#laboratory-exercise-111";
+		sessionStorage.setItem("xReturnAddress", returnAddress);
+		console.log('Device Configuration = ',navigator.userAgent);
+		</script>
+		
+<!-- Note the text "Click Me!" is transparent so you don't see it -->
+	<div class="invisibleBackgroundTop">
+		<button type="button" id="invisibleButtonTop" 
+			onclick="window.location.href = '#jumpToExit'">Click Me!</button>
+	</div>
+	
+	<br>
+	<h5>Laboratory Exercise 11.1</h5>
+
+	<div class="scrollBrd">
+		In the introduction to this chapter we describe three ways of estimating
+		the mean of a process: the arithmetic mean <i>&mu;<sub>A</sub>,</i> the
+		geometric mean <i>&mu;<sub>G</sub>,</i> and the harmonic mean
+		<i>&mu;<sub>H</sub></i>.<br><br>
+		
+		An image is generated that contains a certain number
+		of pixels and whose intensity distribution is governed by
+		one of five probability distributions. The histogram of the
+		intensities is displayed in <b><font color="#66b3ff">blue</font></b>.
+		One of the Pythagorean means will be indicated in
+		<b><font color="red">red</font></b>, one in
+		<b><font color="#00bb00">green</font></b> and one in
+		<b><font color="#990033">purple</font></b>.
+		
+		Choose the number of pixels in the image and the underlying
+		probability distribution of the intensities.
+		<br>
+		
+		<ol type="i">
+			<li>At the smallest image size of four pixels, which distributions 
+				show the greatest spread among the Pythagorean means?</li><br>
+				
+			<li>Which of the three means <i>{&mu;<sub>A</sub>, &mu;<sub>G</sub>, 
+			&mu;<sub>H</sub>,}</i> is shown in <b><font color="red">red</font></b>?
+			Which in <b><font color="#00bb00">green</font></b>? Which in <b><font
+			color="purple">purple</font></b>?</li><br>
+			
+			<li>Why does the order of the three means in the window remain the 
+			same as you change distribution and/or image size?</li><br>
+			
+			<li>Based upon your answer to the previous question, what might be a 
+			reasonable definition for the spread of the Pythagorean means?</li><br>
+
+			<li>As the number of pixels in the image increases, what characteristic 
+			of the distribution appears to control the spread among the 
+			Pythagorean means?</li><br>
+
+			<li>The random variable being investigated in this exercise is the 
+			intensity of pixels. What constraints does this impose on the random 
+			variable?</li><br>
+
+			<li>If we were to look at another stochastic signal such as speech, 
+			which of the Pythagorean means might be considered inappropriate and 
+			why?</li><br>
+
+			<li>If we were to look at a low-level pixel intensity where random 
+			variations were due to photon statistics, which of the Pythagorean 
+			means might be considered inappropriate and why? (Remember that 
+			photon statistics are characterized by a Poisson process.)</li>
+		</ol>
+	</div>
+	<br>
+	<div id="scrollNoBrd">
+		<table class="table1x3Cols">
+		<!-- Row 1 = Slider to choose number of rows & columns -->
+			<tr>
+				<td style="width:20%">Image Size:</td>
+				<td><input
+						type="range"
+						oninput="moveSizeSlider(this.value)"
+						onchange="distributionDisp(this.value)"
+						min="1"
+						max="8"
+						step="1"
+						value="1"
+						id="rows_cols">
+				</td>
+				<td><output for="size" id="clickN">2 x 2 pixels</output></td>
+			</tr>
+		</table>
+
+		<p style="font-size:0.8rem;  margin-left:6.8vw; margin-bottom:1.54vw;">Choose a distribution:</p>
+
+		<table class="radioTable">
+		<!-- Row 2 = Radio buttons to choose underlying distribution  -->
+			<tr>
+				<td> 
+					<label class="container">Rayleigh&nbsp;&nbsp;
+					<input type="radio"
+						onclick="fillImage('Rayleigh');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td><td>
+					<label class="container">Uniform&nbsp;&nbsp;
+					<input type="radio" checked="checked"
+						onclick="fillImage('Uniform');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td><td>
+					<label class="container">Gaussian&nbsp;&nbsp;
+					<input type="radio"
+						onclick="fillImage('Gaussian');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td><td>
+					<label class="container">Laplace&nbsp;&nbsp;
+					<input type="radio"
+						onclick="fillImage('Laplace');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td><td>
+					<label class="container">Exponential&nbsp;&nbsp;
+					<input type="radio"
+						onclick="fillImage('Exponential');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td>
+			</tr>
+		</table>
+		<br>
+		<table class='table1x2Cols'>
+		<!-- Display of image and associated histogram  -->
+			<tr>
+				<td>Random image</td>
+				<td>Grey-level histogram</td>
+			</tr>
+			<tr>
+				<td><div id="Lab11.1L"></div></td>
+				<td style="vertical-align:top;"><div id="Lab11.1R"></div></td>
+			</tr>
+		</table>
+		
+		<table class="centerTable" style="text-align:center; line-height:1.25rem;">
+			<tr>
+				<td>
+				<output id='statistics1' style="font-size:0.9rem;">
+				histogram with 4 pixels
+				</output><br>
+				<output id='statistics2' style="font-size:0.9rem;">
+				minimum = 0, maximum = 255
+				</output><br>
+				<font color="red" size=4rem><b>red</b> = </font>
+				<output id='stat3H' style="font-size:0.9rem;">0</output>
+				<font color="#00bb00" size=4rem><b>green</b> = </font>
+				<output id='stat3G' style="font-size:0.9rem;">128</output>
+				<font color="#990033" size=4rem ><b>purple</b> = </font>
+				<output id='stat3A' style="font-size:0.9rem;">255</output>
+				</td>
+			</tr>
+		</table>
+		<br>
+		<script>
+
+// *****************************************************************
+		//  Javascript starts here
+		//  'Lab11.1T' means Lab 11.1, row 1
+		//  'Lab11.1B' means Lab 11.1, row 2
+		// set up global variables
+	
+		experiment = '11.1';
+
+		wA = 'Lab11.1L';
+		wB = 'Lab11.1R';
+		wC = '';
+		wD = '';
+
+		window.onload = function init()
+			{
+			window.addEventListener("resize", resizeWindow);
+			console.log('Starting experiment ' + experiment)
+			prepareLab_11_1();
+			};
+		</script>
+		
+		<table class="invisibleButtonTable" id="jumpToExit">
+			<tr><td>
+				<div >
+					<button type="button"  class="invisibleButton" id="backBtn"
+					onclick="jumpToButton(returnAddress)">
+					    &larr;  Laboratory Exercises</button>
+				</div>
+			</td></tr>
+		</table>
+
+		<script type="text/javascript" src="../js/WavAudioEncoder.js"></script>
+		<script type="text/javascript" src="../js/utils.js"></script>
+		<script type="text/javascript" src='../js/SSPmedia.js'></script>
+
+</div>
+</body>
+</html>

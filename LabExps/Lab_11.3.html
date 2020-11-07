@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+	<head>
+		<meta charset='UTF-8'>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="copyright" content="I.T. Young & R. Ligteringen, 1984, 2010–2020">
+		
+		<link rel="stylesheet" type="text/css" href="../css/myHTML_1.css" media="screen" />
+		<link rel='stylesheet' type='text/css' href='../css/myControls.css' media='screen' />
+		
+		<script type="text/javascript" src="../js/d3-format.min.js" charset="utf-8"></script>  
+		<script type="text/javascript" src="../js/plotly.min.js" charset="utf-8"></script>  
+		
+		<script type="text/javascript" src='../js/SSPconstants.js'></script>
+		<script type="text/javascript" src='../js/SSPfourier.js'></script>
+		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src='../js/SSPplotting.js'></script>
+		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
+		<script type="text/javascript" src="../js/extra.js"></script>
+		<title>Laboratory Exercise 11.3</title>
+		<br>
+		<script src='js/Lab_11-3.js'></script>
+		
+		<link rel="shortcut icon" href="../images/favicon.png">
+		<link rel="stylesheet" href="../assets/stylesheets/main.38780c08.min.css">
+	</head>
+	
+	<body class="bodyDisplayLabs">
+		<script>
+		// *****************************************************************
+		// Before proceeding check which platform is being used and take appropriate action
+
+// 		var answerOS = getPlatform().toLowerCase();
+		returnAddress = "../Chap_11.html#laboratory-exercise-113";
+		sessionStorage.setItem("xReturnAddress", returnAddress);
+		console.log('Device Configuration = ',navigator.userAgent);
+		</script>
+		
+<!-- Note the text "Click Me!" is transparent so you don't see it -->
+	<div class="invisibleBackgroundTop">
+		<button type="button" id="invisibleButtonTop" 
+			onclick="window.location.href = '#jumpToExit'">Click Me!</button>
+	</div>
+	
+	<br>
+	<h5>Laboratory Exercise 11.3</h5>
+		
+	<div class="scrollBrd">
+		Dave drove a 1959 Volkswagen Beetle to and from MIT. In that model the 
+		odometer (distance meter) indicated the distance in miles not tenths of miles.
+		<br>
+		<figure>
+			<img width="100%"src="../images/Fig_11_6.gif" alt="Figure 11.6: Speedometer and 
+			odometer from a Volkswagen Beetle from the late 1950s. The maximum indicated speed 
+			is 80 mph and the odometer distance is to the nearest mile." id="fig:fig_Est6" 
+			 class="fullsize">
+			<figcaption style="font-size:0.8rem">Figure 11.6: Speedometer and odometer 
+			from a Volkswagen Beetle from the late 1950s. The maximum indicated speed is 
+			80 mph and the odometer distance is to the nearest mile.</figcaption>
+		</figure>
+		
+		Part of his daily (Monday through Friday) travels involved driving over the 
+		Harvard Bridge that connects Cambridge and Boston. In the morning he would 
+		drive from Boston’s Back Bay <em>to</em> MIT but <em>not</em> go over the 
+		Harvard Bridge. In the evening he would drive from MIT over the Harvard Bridge 
+		<em>back</em> to Boston. (This complete route is still recommended by satellite 
+		navigation systems.)
+		<br><br>
+		Some days he would take <em>exactly</em> the same route which we will term a 
+		“fixed route”. Other days he would take a “random route”. Every day, however, 
+		he would take the Harvard Bridge only on his way back to Boston.
+		<br><br>
+		The length of the bridge was (and still is) less than 1 mile. For the purposes 
+		of this problem we will consider the length to be measured from water’s edge to 
+		water’s edge. (This is slightly different from the accepted definition which 
+		is measured in smoots.)
+		<br><br>
+		The length of the fixed route is 3 miles from the end of the bridge (Boston) back 
+		to the beginning of the bridge (Cambridge). The two odometer readings in the 
+		window represent the value seen when starting to cross the bridge on the MIT 
+		side and when reaching the end of the bridge on the Boston side.
+		<br><br>
+		Choose the route that you are driving (fixed or random). Then drive to the 
+		start of the bridge, the MIT/Cambridge side. Now drive across the bridge to 
+		Boston and record the odometer change. Finally, return to your home on Bay 
+		State Road.
+		<br>
+		
+		<ol type="i">
+			<li>Drive 10 times across the bridge using the <em>fixed</em> route. 
+				What information do the two odometer readings give you about the length 
+				of the bridge?</li><br>
+			
+			<li>Drive 10 times across the bridge using the <em>random</em> route. What 
+				information do the two odometer readings give you about the length of the 
+				bridge?</li><br>
+			
+			<li>Using the <i>fixed</i> route, how many trips across the bridge would you 
+				have to make to estimate the length of the bridge to within 10%?</li><br>
+			
+			<li>Using the <i>random</i> route, how many trips across the bridge would you 
+				have to make to estimate the length of the bridge to within 10%?</li><br>
+			
+			<li>Using a modern Volkswagen Beetle with a modern odometer as shown in Figure 11.7 (below), 
+			how many trips across the bridge would you have to make to estimate the length of the 
+			bridge to within 10%?</li>
+		</ol>
+		<figure>
+			<img width="100%" src="../images/Fig_11_7.gif" alt="Figure 11.7: Meters from a 
+				modern Volkswagen Beetle. The maximum indicated speed is 160 mph and the total 
+				odometer distance traveled is 6319 miles." id="fig:fig_Est7" class="fullsize">
+			<figcaption style="font-size:0.8rem">Figure 11.7: Meters from a modern 
+				Volkswagen Beetle. The maximum indicated speed is 160 mph and the total 
+				odometer distance traveled is 6319 miles.
+			</figcaption>
+		</figure>
+	</div>
+	<br>
+	<div id="scrollNoBrd">
+		<table class="bridgeTable">
+		<!-- Radio buttons to choose travel  -->
+			<tr>
+				<td style="text-align:center"><font class='bridgeHeader'>Route choice:</font></td>
+				<td>&nbsp;</td>
+				<td>&nbsp;&nbsp;<font class='bridgeHeader'>Next destination:</font></td>
+			</tr>
+			<tr>
+				<td> 
+					<label class="container" style="text-align:left">
+						&nbsp;Fixed route: Boston to MIT
+					<input type="radio" checked="checked"
+						onclick="chooseRoute('fixed');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td>
+				<td>&nbsp;</td>
+				<td rowspan="2"> 
+					<button class='button' onclick="travel()">
+					<img class='beetleImg' src='../images/BeetleIcon.png'
+						style="padding:2px; border:2px solid steelBlue; border-radius:11px;">
+					</button>
+					<output id='destinationLabel' style="font-size:0.9rem;">to MIT</output>
+				</td>
+			</tr>
+			<tr>
+				<td> 
+					<label class="container" style="text-align:left">
+						&nbsp;Random route: Boston to MIT
+					<input type="radio"
+						onclick="chooseRoute('random');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+		
+		<br>
+		
+		<table class="standardTable">
+			<tr>
+				<td>Odometer start = <output id='odometerStart' style='font-weight:bold'>
+					82756</output> miles&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					Odometer finish = <output id='odometerStop' style='font-weight:bold'>
+					82757</output> miles
+				</td>
+			</tr>
+			<!-- Display of bridge & VW  -->
+			<tr><td>&nbsp;</td></tr>
+			<tr><td>
+				<canvas id='canvas' style='background-image: 
+					url(../images/Harvard-Bridge680.gif)'></canvas>
+			</td></tr>
+			<tr><td>&nbsp;</td></tr>
+		</table>
+		
+		<script>
+// *****************************************************************
+		//  Javascript starts here
+	
+		experiment = '11.3';
+
+		window.onload = function getStarted()
+			{
+			canvas = document.getElementById('canvas');
+			canvas.width = canvasWidth;
+			canvas.height = canvasHeight;
+			canvas.style.border = "1px solid Maroon";
+			ctx = canvas.getContext("2d");
+			document.querySelector('#odometerStart').value =
+				Math.floor(odometerInit);
+			document.querySelector('#odometerStop').value =
+				Math.floor(odometerInit);
+
+			window.addEventListener("resize", resizeWindow);
+			goHome();
+			console.log('Starting experiment ' + experiment);
+			document.getElementById("scrollNoBrd").scrollTop = 0;
+
+			};
+		</script>
+		
+		<table class="invisibleButtonTable" id="jumpToExit">
+			<tr><td>
+				<div >
+					<button type="button"  class="invisibleButton" id="backBtn"
+					onclick="jumpToButton(returnAddress)">
+					    &larr;  Laboratory Exercises</button>
+				</div>
+			</td></tr>
+		</table>
+
+		<script type="text/javascript" src="../js/WavAudioEncoder.js"></script>
+		<script type="text/javascript" src="../js/utils.js"></script>
+		<script type="text/javascript" src='../js/SSPmedia.js'></script>
+
+</div>
+</body>
+</html>

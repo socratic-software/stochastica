@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+	<head>
+		<meta charset='UTF-8'>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="copyright" content="I.T. Young & R. Ligteringen, 1984, 2010–2020">
+		
+		<link rel="stylesheet" type="text/css" href="../css/myHTML_1.css" media="screen" />
+		<link rel='stylesheet' type='text/css' href='../css/myControls.css' media='screen' />
+		
+		<script type="text/javascript" src="../js/d3-format.min.js" charset="utf-8"></script>  
+		<script type="text/javascript" src="../js/plotly.min.js" charset="utf-8"></script>  
+		
+		<script type="text/javascript" src='../js/SSPconstants.js'></script>
+		<script type="text/javascript" src='../js/SSPfourier.js'></script>
+		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src='../js/SSPplotting.js'></script>
+		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
+		<script type="text/javascript" src="../js/extra.js"></script>
+		<script src='js/Lab_6-3b.js'></script>
+		<title>Laboratory Exercise 6.3b</title>
+		<br>
+		
+		<link rel="shortcut icon" href="../images/favicon.png">
+		<link rel="stylesheet" href="../assets/stylesheets/main.38780c08.min.css">
+	</head>
+	
+	<body class="bodyDisplayLabs">
+		<script>
+		// *****************************************************************
+		// Before proceeding check which platform is being used and take appropriate action
+
+// 		var answerOS = getPlatform().toLowerCase();
+		returnAddress = "../Chap_6.html#laboratory-exercise-63";
+		sessionStorage.setItem("xReturnAddress", returnAddress);
+		console.log('Device Configuration = ',navigator.userAgent);
+		</script>
+		
+<!-- Note the text "Click Me!" is transparent so you don't see it -->
+	<div class="invisibleBackgroundTop">
+		<button type="button" id="invisibleButtonTop" 
+			onclick="window.location.href = '#jumpToExit'">Click Me!</button>
+	</div>
+	
+	<br>
+	<h5>Laboratory Exercise 6.3b (continued)</h5>
+
+	<div class="scrollBrd">
+	
+		We continue with a <output id="placeT">1.5</output> second sample of a Poisson-distributed 
+		random process whose probability <i>mass</i> function 
+		<i>p(n|&lambda;) = p(x) = &lambda;<sup>n</sup>e<sup>–&lambda;</sup>/n!</i> where 
+		<i>&lambda;</i> > 0 and <i>n</i> ≥ 0. The process has a single parameter <i>&lambda;</i> 
+		randomly chosen from the set {0.1, 0.2, 0.4, 0.8, 1.6, 3.2, 6.4, 12.8, 25.6}. Each time 
+		you perform this exercise by pressing the “retry” button below 
+		(<img src="../images/retry_56.png" class="inlineIcon">) another sample of the process will 
+		be generated but with a new, <i>probably different</i> value for the parameter <i>&lambda;</i>.
+
+			<ol type="i">
+				<li>Using the expression <i>f, N,</i> and the measured value 
+					<i>&phi;<sub>0</sub></i> estimate the value of <i>&lambda;</i> that was used 
+					to generate this sample. Call this estimate <i>&lambda;<sub>f</sub>.</i></li><br>
+					
+				<li>Using the expression <i>g, N,</i> and the measured value <i>S<sub>0</sub></i> as well
+					as the measured <i>&phi;<sub>0</sub></i> estimate the value of <i>&lambda;</i> that 
+					was used to generate this sample. Call this estimate 
+					<i>&lambda;<sub>g</sub>.</i></li><br>
+					
+				<li>By what percentage do <i>&lambda;<sub>f</sub></i> and <i>&lambda;<sub>g</sub></i> 
+					differ from each other? By what percentage do they differ from the true value 
+					<i>&lambda;?</i></li><br>
+					
+				<li>Can you hear any difference between the exponential and Poisson noise signals?</li><br>
+				
+				<li>Do these two random signals—<i>e[n]</i> and/or<i> P[n]</i>—meet the definition 
+					of white noise as presented in 
+					<a href="../Chap_4.html#example-is-that-coin-fair">
+					<font color="firebrick">Example: Is that coin fair?</font></a>. 
+					</li><br>
+				
+				<li>Could you justify processing any of these noise signals (from this or the 
+					previous exercise)—<i>b(t)</i>, <i>e(t)</i>, or <i>P(t)</i>—with algorithms designed 
+					for white noise? And, if so, under what conditions?</li>
+			</ol>
+	</div>
+	
+	<div id="scrollNoBrd">
+		<br>
+		
+		<table class='radioTable'>
+			<tr>
+				<td style="font-size:2.05vw;">Choose lab variant:      </td>
+				<td>
+					<label class="container"><span class="buttonText">a</span>
+					<input type="radio" name="unique" id="A" 
+						onclick="nextPage('A','Lab_6.3a.html')">
+					<span class="checkmark"></span>
+					</label>
+				</td>
+				<td>&rarr;</td>
+				<td>
+					<label class="container"><span class="buttonText">b</span>
+					<input type="radio" checked="checked" name="unique" id="B" 
+						onclick="nextPage('B','Lab_6.3b.html')">
+					<span class="checkmark"></span>
+					</label>
+				</td>
+				<td>&rarr;</td>
+				<td>
+					<label class="container"><span class="buttonText">c</span>
+					<input type="radio" name="unique" id="C" 
+						onclick="nextPage('C','Lab_6.3c.html')">
+					<span class="checkmark"></span>
+					</label>
+				</td>
+			</tr>
+		</table>
+		<br>
+		<table class='table1x2Cols'>
+			<tr>
+				<td colspan="2" style='text-align: center; vertical-align:middle;'>
+					<button id="playCapture-0">               
+						<img id='play_0' class='buttonImg' src='../images/playback_transp.png'>
+					</button>  Play noise sample
+					<button id="startCapture-0" style="display:none;">
+						<div id='animX0' class='anime'>
+							<img id='mic_0' class='buttonImg' src='../images/microphone_transp_1.png' >
+						</div>
+					</button>
+					<button id="stopCapture-0" style="display:none;">Stop 0:</button>     
+				</td>
+			</tr>
+			<tr>
+				<td>Zoom: <input style="width:80%; vertical-align:middle;"
+						id="zoomG"
+						type='range'
+						oninput="myFunctionZoom(this.value)"
+						min='0'
+						max='11'
+						step='1'
+						value='0'
+						id='zm'>
+				</td>
+				<td>
+					<output id="placeN1">N = ----- samples</output>
+					<output id="placeN2">= ----- ms</output>
+				</td>
+			</tr>
+			<tr><td> </td><td> </td></tr>
+			<tr>
+				<td>
+					Poisson noise sample P<output id="tn">[n]</output>
+				</td>
+				<td>
+					Estimate <b>&lambda;</b>
+				</td>
+			</tr>
+			<tr>
+				<td><div id='Lab6.3bL1'></div></td>
+				<td style="vertical-align:top">
+					<br><br>
+					p(x) = &lambda;<sup>n</sup> e<sup>–&lambda;</sup>/n!        &lambda; > 0   &   n ≥ 0
+					<br><br>
+					<button class='button' onclick="prepareLab_6_3b()">
+						<img class='buttonImg' src='../images/retry_56.png' style="padding:2px;">
+					</button><font style="color:black;">  Try again</font>
+				</td>
+			</tr>
+			<tr><td colspan = "2">
+					Estimates of &phi;<sub>PP </sub> & S<sub>PP</sub>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					&phi;<sub>0</sub> = &phi;<sub>PP </sub>
+					<output id="tauk">[k=0] = 10000</output>
+				</td>
+				<td>
+					S<sub>0</sub> = S<sub>PP</sub>(&Omega;=0) = 
+					<output id="pdsZero">8 x 10<sup>8</sup></output>
+				</td>
+			</tr>
+			<tr>
+				<td><div id='Lab6.3bL2'></div></td>
+				<td><div id='Lab6.3bR2'></div></td>
+			</tr>
+		</table>
+		<script>
+// *****************************************************************
+		//  Javascript starts here
+		//  'Lab6.3bL1' means Lab 6.1, part a, Left side, row 1
+		//  'Lab6.3bR2' means Lab 6.1, part a, Right side, row 2
+		// set up global variables
+		experiment = '6.3b';
+		
+		window.onload = function init()
+			{
+			theName0 = {fS: 0, data: []} // global definition of raw 1D audio
+			theNames = [theName0]; // initial definition but global
+			nDisRec = theNames.length; // number of places to be reserved
+			
+			nMics = document.querySelectorAll('*[id^="startCapture-"]').length; // microphones in exercise
+			lengthMax = 2**Math.floor(Math.log2(100000/binningFactor))*binningFactor;
+			myDuration = Array(nMics).fill(1000*lengthMax/sampFreq); // time in milliseconds
+			nPlays = document.querySelectorAll('*[id^="playCapture-"]').length; // playbacks this exercise
+			acquired = Array(nPlays).fill(false); // data have not yet been acquired
+
+			// four windows in 2 x 2 array
+			wA = 'Lab6.3bL1'; // signal
+			wB = 'Lab6.3bR1'; // text
+			wC = 'Lab6.3bL2'; // autocorrelation
+			wD = 'Lab6.3bR2'; // power density spectrum
+	
+			window.addEventListener("resize", resizeWindow);
+			prepareLab_6_3b();
+			console.log('Starting experiment ' + experiment);
+			};
+		</script>
+		
+		<table class="invisibleButtonTable" id="jumpToExit">
+			<tr><td>
+				<div >
+					<button type="button"  class="invisibleButton" id="backBtn"
+					onclick="jumpToButton(returnAddress)">
+					    &larr;  Laboratory Exercises</button>
+				</div>
+			</td></tr>
+		</table>
+
+		<script type="text/javascript" src="../js/WavAudioEncoder.js"></script>
+		<script type="text/javascript" src="../js/utils.js"></script>
+		<script type="text/javascript" src='../js/SSPmedia.js'></script>
+
+</div>
+</body>
+</html>

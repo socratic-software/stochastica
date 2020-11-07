@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+	<head>
+		<meta charset='UTF-8'>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="copyright" content="I.T. Young & R. Ligteringen, 1984, 2010–2020">
+		
+		<link rel="stylesheet" type="text/css" href="../css/myHTML_1.css" media="screen" />
+		<link rel='stylesheet' type='text/css' href='../css/myControls.css' media='screen' />
+		
+		<script type="text/javascript" src="../js/d3-format.min.js" charset="utf-8"></script>  
+		<script type="text/javascript" src="../js/plotly.min.js" charset="utf-8"></script>  
+		
+		<script type="text/javascript" src='../js/SSPconstants.js'></script>
+		<script type="text/javascript" src='../js/SSPfourier.js'></script>
+		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src='../js/SSPplotting.js'></script>
+		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
+		<script type="text/javascript" src="../js/extra.js"></script>
+		<script src='js/Lab_6-1a.js'></script>
+		<title>Laboratory Exercise 6.1a</title>
+		<br>
+		
+		<link rel="shortcut icon" href="../images/favicon.png">
+		<link rel="stylesheet" href="../assets/stylesheets/main.38780c08.min.css">
+	</head>
+	
+	<body class="bodyDisplayLabs">
+		<script>
+		// *****************************************************************
+		// Before proceeding check which platform is being used and take appropriate action
+
+// 		var answerOS = getPlatform().toLowerCase();
+		returnAddress = "../Chap_6.html#laboratory-exercise-61";
+		sessionStorage.setItem("xReturnAddress", returnAddress);
+		console.log('Device Configuration = ',navigator.userAgent);
+		</script>
+		
+<!-- Note the text "Click Me!" is transparent so you don't see it -->
+	<div class="invisibleBackgroundTop">
+		<button type="button" id="invisibleButtonTop" 
+			onclick="window.location.href = '#jumpToExit'">Click Me!</button>
+	</div>
+	
+	<br>
+	<h5>Laboratory Exercise 6.1a</h5>
+
+	<div class="scrollBrd">
+		In this and other laboratory exercises we will sometimes use the “digital” frequency <i>&Omega;</i> 
+		and sometimes use the “analog” frequency <i>&omega; = 2&pi;f</i>. Although the free use of both 
+		concepts in one exercise may be a bit unorthodox, the sampling frequency is 44.1 kHz so there 
+		should not be any confusion as to their relation.
+		<br><br>
+		In Chapters <a href="../Chap_4.html"><font color="royalBlue">4</font></a> and 
+		<a href="../Chap_5.html"><font color="royalBlue">5</font></a> we defined white noise and pink 
+		noise and presented two mathematical examples: <a href="../Chap_5.html#example-white-noise">
+		<font color="royalBlue">Example: White noise</font></a> and 
+		<a href="../Chap_5.html#example-pink-noise"><font color="royalBlue">Example: Pink noise</font>
+		</a>. In this and the subsequent laboratory exercise we will look at various “physical” examples.
+		<br><br>
+		In the top-left panel below, the Gaussian noise signal <i>g[n]</i> is displayed and in the 
+		top-right, the amplitude histogram <i>h[g]</i> as a <i>measure</i> of 
+		<i>p[g]</i>, the Gaussian probability density function based upon the data in 
+		<i>g[n] </i><a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>. 
+		
+		In the lower-right panel the normalized power spectral density <i>S<sub>gg</sub>(&Omega;)</i> 
+		is displayed as computed from <a href="../Chap_5.html#eq:summ_pds_real">
+		<font color="royalBlue">Equation 5.31</font></a>. In the associated left panel, the normalized 
+		autocorrelation function <i>&phi;<sub>gg</sub>[k]</i> is displayed—not from application of 
+		<a href="../Chap_5.html#eq:acorrtimeavg_scaled"><font color="royalBlue">Equation 5.13</font>
+		</a>—but computed, instead, from the inverse Fourier transform of <i>S<sub>gg</sub>(&Omega;)</i> 
+		as in <a href="../Chap_5.html#eq:invpds_def"><font color="royalBlue">Equation 5.23</font></a>.
+		<br><br>
+		This seemingly indirect route allows us to use the computationally efficient FFT routine. This is 
+		an example of where we have used <i>&omega; = 2&pi;f</i> (in the lower-right panel) together with 
+		<i>&Omega;</i> (in the formula).
+	
+			<ol type="i">
+				<li>Based upon a stochastic signal of length <i>N</i>, how much faster is the 
+					computation of <i>&phi;<sub>gg</sub>[k]</i> using the FFT algorithm compared to a 
+					direct computation of the autocorrelation?</li><br>
+				<li>What does this imply about a speed improvement for <output id="placeT1">1.5</output> 
+					seconds of signal sampled at 44.1 kHz?</li>
+			</ol>
+
+		The “Zoom” slider allows you to “zoom in” on the <i>center</i> of each display. On the top row a 
+		smaller sample of <i>g[n]</i> is displayed and the amplitude histogram 
+		from <i>that</i> segment is displayed. On the bottom row the centers of 
+		<i>&phi;<sub>gg</sub>[k]</i> and <i>S<sub>gg</sub>(&Omega;)</i> are displayed but based upon 
+		the <i>complete</i> <output id="placeT2">1.5</output> second long signal <i>g[n]</i>.
+
+			<ol type="i" start="3">
+				<li>Based upon the data shown in the bottom row, is it reasonable to conclude that 
+				<i>g[n]</i> is a sample of a white noise process? Explain your reasoning.</li>
+			</ol>
+		
+		Proceeed to another part of this exercise by choosing the variant below.
+		<br>
+		<p id="fn1" class="p_footnote"><sup>1</sup>
+		<span style="font-style:normal;">The random signals presented here and in other laboratory 
+		exercises are based upon the random number generators 
+		contained in <a href="https://reference.wolfram.com/language/guide/RandomNumberGeneration.html">
+		<font color="royalBlue">Mathematica</font></a> and 
+		<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random">
+		<font color="royalBlue">Javascript</font></a>. Professor Donald Knuth in his excellent book 
+		“Seminumerical Algorithms” presents a number of such algorithms together with John van 
+		Neumann’s warning that “<i>Anyone who attempts to generate random numbers by deterministic 
+		means is, of course, living in a state of sin</i>”</span>.&nbsp;
+		<a href="#fnref1" style="color:royalBlue;"> <b>&crarr;</b></a></p>
+
+	</div>
+	
+	<div id="scrollNoBrd">
+		<br>
+		
+		<table class='radioTable'>
+			<tr>
+<!-- 				<td style="font-size:2.05vw;">Choose lab variant:      </td> -->
+				<td style="font-size:0.8rem;">Choose lab variant:      </td>
+				<td>
+					<label class="container"><span class="buttonText">a</span>
+					<input type="radio" checked="checked" name="unique" id="A" 
+						onclick="nextPage('A','Lab_6.1a.html')">
+					<span class="checkmark"></span>
+					</label>
+				</td>
+				<td>&rarr;</td>
+				<td>
+					<label class="container"><span class="buttonText">b</span>
+					<input type="radio" name="unique" id="B" 
+						onclick="nextPage('B','Lab_6.1b.html')">
+					<span class="checkmark"></span>
+					</label>
+				</td>
+				<td>&rarr;</td>
+				<td>
+					<label class="container"><span class="buttonText">c</span>
+					<input type="radio" name="unique" id="C" 
+						onclick="nextPage('C','Lab_6.1c.html')">
+					<span class="checkmark"></span>
+					</label>
+				</td>
+			</tr>
+		</table>
+		<br>
+
+		<table class='table1x2Cols'>
+			<tr>
+				<td colspan="2" style='text-align: center; vertical-align:middle;'>
+					<button id="playCapture-0">               
+						<img id='play_0' class='buttonImg' src='../images/playback_transp.png'>
+					</button>  Play noise sample
+					<button id="startCapture-0" style="display:none;">
+						<div id='animX0' class='anime'>
+							<img id='mic_0' class='buttonImg' src='../images/microphone_transp_1.png' >
+						</div>
+					</button>
+					<button id="stopCapture-0" style="display:none;">Stop 0:</button>     
+				</td>
+			</tr>
+			<tr>
+				<td>Zoom: <input style="width:80%; vertical-align:middle;"
+						type='range'
+						oninput="myFunctionZoom(this.value)"
+						min='0'
+						max='11'
+						step='1'
+						value='0'
+						id='zm'>
+				</td>
+				<td>
+					<output id="placeN1">N = ----- samples</output>
+					<output id="placeN2">= ----- ms</output>
+				</td>
+			</tr>
+			<tr><td> </td><td> </td></tr>
+			<tr>
+				<td>
+					<font style="color:black; font-weight:normal">Gaussian noise sample 
+					g<output id="tn">[n]</output></font>
+				</td>
+				<td>
+					<font style="color:black; font-weight:normal">amplitude histogram h[g]</font>
+				</td>
+			</tr>
+		</table>
+
+		<table class='table1x2Cols'>
+			<tr>
+				<td><div id='Lab6.1aL1'></div></td>
+				<td><div id='Lab6.1aR1'></div></td>
+			</tr>
+			<tr>
+				<td>
+					<font style="color:black; font-weight:normal">normalized 
+					&phi;<sub>gg </sub><output id="tauk">[k]</output></font>
+				</td>
+				<td>
+					<font style="color:black; font-weight:normal">normalized 
+					S<sub>gg</sub>(&Omega;)</font>
+				</td>
+			<tr>
+				<td><div id='Lab6.1aL2'></div></td>
+				<td><div id='Lab6.1aR2'></div></td>
+			</tr>
+		</table>
+		<script>
+// *****************************************************************
+		//  Javascript starts here
+		//  'Lab6.1aL1' means Lab 6.1, part a, Left side, row 1
+		//  'Lab6.1aR2' means Lab 6.1, part a, Right side, row 2
+		// set up global variables
+		experiment = '6.1a';
+		
+		window.onload = function init()
+			{
+			theName0 = {fS: 0, data: []} // global definition of raw 1D audio
+			theNames = [theName0]; // initial definition but global
+			nDisRec = theNames.length; // number of places to be reserved
+			
+			nMics = document.querySelectorAll('*[id^="startCapture-"]').length; // microphones in exercise
+			lengthMax = 2**Math.floor(Math.log2(100000/binningFactor))*binningFactor;
+			myDuration = Array(nMics).fill(1000*lengthMax/sampFreq); // time in milliseconds
+			nPlays = document.querySelectorAll('*[id^="playCapture-"]').length; // playbacks this exercise
+			acquired = Array(nPlays).fill(false); // data have not yet been acquired
+		
+			// four windows in 2 x 2 array
+			wA = 'Lab6.1aL1'; // signal
+			wB = 'Lab6.1aR1'; // histogram
+			wC = 'Lab6.1aL2'; // autocorrelation
+			wD = 'Lab6.1aR2'; // power density spectrum
+	
+			window.addEventListener("resize", resizeWindow);
+			prepareLab_6_1();
+			console.log('Starting experiment ' + experiment);
+			};
+		</script>
+		
+		<table class="invisibleButtonTable" id="jumpToExit">
+			<tr><td>
+				<div >
+					<button type="button"  class="invisibleButton" id="backBtn"
+					onclick="jumpToButton(returnAddress)">
+					    &larr;  Laboratory Exercises</button>
+				</div>
+			</td></tr>
+		</table>
+
+		<script type="text/javascript" src="../js/WavAudioEncoder.js"></script>
+		<script type="text/javascript" src="../js/utils.js"></script>
+		<script type="text/javascript" src='../js/SSPmedia.js'></script>
+
+</div>
+</body>
+</html>

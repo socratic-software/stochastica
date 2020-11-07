@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+	<head>
+		<meta charset='UTF-8'>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="copyright" content="I.T. Young & R. Ligteringen, 1984, 2010–2020">
+		
+		<link rel="stylesheet" type="text/css" href="../css/myHTML_1.css" media="screen" />
+		<link rel='stylesheet' type='text/css' href='../css/myControls.css' media='screen' />
+		
+		<script type="text/javascript" src="../js/d3-format.min.js" charset="utf-8"></script>  
+		<script type="text/javascript" src="../js/plotly.min.js" charset="utf-8"></script>  
+		
+		<script type="text/javascript" src='../js/SSPconstants.js'></script>
+		<script type="text/javascript" src='../js/SSPfourier.js'></script>
+		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src='../js/SSPplotting.js'></script>
+		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
+		<script type="text/javascript" src="../js/extra.js"></script>
+		<script src='../images/solvayImageLibrary_new.js'></script>
+		
+		<title>Laboratory Exercise 9.2</title>
+		<br>
+		<script src='js/Lab_9-3.js'></script>
+		
+		<link rel="shortcut icon" href="../images/favicon.png">
+		<link rel="stylesheet" href="../assets/stylesheets/main.38780c08.min.css">
+	</head>
+	
+	<body class="bodyDisplayLabs">
+		<script>
+		// *****************************************************************
+		// Before proceeding check which platform is being used and take appropriate action
+
+// 		var answerOS = getPlatform().toLowerCase();
+// 		returnAddress = "../Chap_9.html#laboratory-exercise-93";
+		returnAddress = "../Chap_9.html#laboratory-exercise-92";
+		sessionStorage.setItem("xReturnAddress", returnAddress);
+		console.log('Device Configuration = ',navigator.userAgent);
+		</script>
+		
+		<div class="invisibleBackgroundTop">
+			<button type="button" id="invisibleButtonTop" 
+				onclick="window.location.href = '#jumpToExit'">Click Me!</button>
+		</div>
+
+		<br>
+<!-- 
+		<h5>Laboratory Exercise 9.3</h5>
+ -->
+		<h5>Laboratory Exercise 9.2</h5>
+	
+		<div class="scrollBrd">
+			Matched filters can be multi-dimensional. In this exercise we look at two-dimensional images as both signals and matched filters. The filters can also be thought of as templates.
+			
+			The image is one of the photographs taken in Brussels, Belgium at the famous Solvay conference in 1927 where most of the world’s great physicists were present. The image is in color meaning that each pixel value is a triplet of numbers {<b><i><font color="red">r</font></i></b>, <b><i><font color="#00bb00">g</font></i></b>, <b><i><font color="blue">b</font></i></b>}. The actual computation will be performed on the basis of an intensity image derived from the color image. The intensity <i><b>Y'</b></i> is a linear combination of <b><i><font color="red">r</font></i></b>, <b><i><font color="#00bb00">g</font></i></b>, and <b><i><font color="blue">b</font></i></b>. (See the <a href="https://en.wikipedia.org/wiki/YCbCr"><font color="royalBlue">definition of <i><b>Y'</b></i></font></a> for an example of how this can be done.)<br><br>
+			
+			The <i>Y'</i> (grey level) image on top shows the effects of the additive, independent, Gaussian noise process. The <b><i><font color="#00e6e6" font-weight="bold">aqua</font></i></b> rectangle in the bottom color photograph shows the part of the picture that has produced the maximum cross-correlation between the template and the noisy image.
+					
+			<ol type="i">
+				<li>Starting from a <i>SNR</i> = 1000:1, choose one of the four physicist templates 
+					and see if the correct person is identified in the Solvay photograph.</li><br>
+				<li>How does this change if the <i>SNR</i> is decreased? In particular, at what <i>SNR</i> is 
+					it no longer possible to correctly identify the individual in the photograph?</li><br>
+				<li>As you choose other templates, that is other physicists, does the <i>SNR</i>—where 
+					correct identification is no longer possible—change? Can you explain this?</li><br>
+				<li>At what <i>SNR</i> are <i>you</i> no longer able to identify a face in the intensity 
+					(grey level) photograph?</li>
+			</ol>
+		</div>
+		
+		<div id="scrollNoBrd">
+		<br>
+		
+		<!-- Slider to choose SNR  -->
+		<table class='table1x3Cols'>
+			<tr>
+				<td>SNR: </td>
+				<td><input
+						type='range'
+						oninput="moveSnrSlider(this.value)"
+						onchange="getSNR(this.value)"
+						min='0'
+						max='7'
+						step='1'
+						value='7'
+						id='snr'>
+				</td>
+				<td><output id="placeSNR">SNR = -----:1</output></td>
+			</tr>
+		</table>
+		
+		<br>
+		
+		<table class="radioTable">
+		<!-- Row 2 = Radio buttons to choose template  -->
+		<!-- Note: template images are shown as 50% larger -->
+<!-- 			<tr style="font-size:2.05vw;"> -->
+			<tr style="font-size:0.8rem;">
+<!-- 				<td style="font-size:2.05vw;">Choose a template &rarr;&nbsp;</td> -->
+				<td style="font-size:0.8rem;">Choose a template &rarr;&nbsp;</td>
+				<td> <br>
+				<label class="rad" for="radio1">
+					<input id="radio1" type="radio" name="distr"
+						onclick="getTemplate('1');" checked>
+					<img src="../images/Langevin.png">
+<!-- 				<div style="font-size:1.92vw;">&nbsp;&nbsp;Langevin&nbsp;</div> -->
+					<div style="font-size:0.8rem;">&nbsp;&nbsp;Langevin&nbsp;</div>
+				</label>
+				</td><td><br>
+				<label class="rad" for="radio2">
+					<input id="radio2" type="radio" name="distr"
+						onclick="getTemplate('2');">
+					<img src="../images/Lorentz.png">
+					<div style="font-size:0.8rem;">&nbsp;&nbsp;Lorentz&nbsp;&nbsp;</div>
+				</label>
+				</td><td><br>
+				<label class="rad" for="radio3">
+					<input id="radio3" type="radio" name="distr"
+						onclick="getTemplate('3');">
+					<img src="../images/Schrodinger.png">
+					<div style="font-size:0.8rem;">Schrödinger</div>
+				</label>
+				</td><td><br>
+				<label class="rad" for="radio4">
+					<input id="radio4" type="radio" name="distr"
+						onclick="getTemplate('4');">
+					<img src="../images/Pauli.png">
+					<div style="font-size:0.8rem;">&nbsp;&nbsp;&nbsp;Pauli&nbsp;&nbsp;&nbsp;</div>
+				</td>
+			</tr>
+		</table>
+
+		<!-- The table for images -->
+		<table class="solvayTable">
+			<tr>
+				<td>
+					<canvas id="dummyBW" width="1024" height="512"></canvas>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<canvas id="dummyC" width="1024" height="512"></canvas>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<canvas id="snrImage" width="680" height="340"></canvas>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<output id='placeTime' style="font-size:0.8rem;">Computation time = 0 ms</output>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<canvas id="cSolvay" width="680" height="340"></canvas>
+				</td>
+			</tr>
+		</table>
+		<br>
+		
+		<script>
+// *****************************************************************
+		//  Javascript starts here
+		//  'Lab9.3C1' means Lab 9.3, center, row 1
+		//  'Lab9.3C2' means Lab 9.3, center, row 2
+		// set up global variables
+	
+		experiment = '9.3';
+
+		wDummyBW = 'dummyBW'; // Black & White
+		wDummyC = 'dummyC'; // Color
+		wBW = 'snrImage';
+		wC = 'cSolvay';
+
+		window.onload = function getStarted()
+			{
+			window.addEventListener("resize", resizeWindow);
+			console.log('Starting experiment ' + experiment)
+			prepareLab_9_3();
+			};
+		</script>
+		
+		<table class="invisibleButtonTable" id="jumpToExit">
+			<tr><td>
+				<div >
+					<button type="button"  class="invisibleButton" id="backBtn"
+					onclick="jumpToButton(returnAddress)">
+					    &larr;  Laboratory Exercises</button>
+				</div>
+			</td></tr>
+		</table>
+
+		<script type="text/javascript" src="../js/WavAudioEncoder.js"></script>
+		<script type="text/javascript" src="../js/utils.js"></script>
+		<script type="text/javascript" src='../js/SSPmedia.js'></script>
+
+</div>
+</body>
+</html>

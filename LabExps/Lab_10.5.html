@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+	<head>
+		<meta charset='UTF-8'>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="copyright" content="I.T. Young & R. Ligteringen, 1984, 2010–2020">
+		
+<!-- 
+		<title>Laboratory Exercise 10.5</title>
+ -->
+		<title>Laboratory Exercise 10.3</title>
+		<br>
+		<link rel="stylesheet" type="text/css" href="../css/myHTML_1.css" media="screen" />
+		<link rel='stylesheet' type='text/css' href='../css/myControls.css' media='screen' />
+		
+		<script type="text/javascript" src="../js/d3-format.min.js" charset="utf-8"></script>  
+		<script type="text/javascript" src="../js/plotly.min.js" charset="utf-8"></script>  
+		
+		<script type="text/javascript" src='../js/SSPconstants.js'></script>
+		<script type="text/javascript" src='../js/SSPfourier.js'></script>
+		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src='../js/SSPplotting.js'></script>
+		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
+		<script type="text/javascript" src="../js/extra.js"></script>
+		<script src='../images/truiImageLibrary.js'></script>
+		<script src='js/Lab_10-5.js'></script>
+
+		<link rel="shortcut icon" href="../images/favicon.png">
+		<link rel="stylesheet" href="../assets/stylesheets/main.38780c08.min.css">
+
+		<script>
+// *****************************************************************
+		//  Javascript starts here
+		//  'LabC1' means Lab 10.5, center, row 1
+		//  'LabC2' means Lab 10.5, center, row 2
+		// set up global variables
+
+		experiment = '10.5';
+
+		wDummyBW = 'dummyBW';
+		wDummyPH = 'dummyPH';
+		wDummyMG = 'dummyMG';
+		wA = 'cOriginal';
+		wB = 'snrImage';
+		wC = 'restored';
+		wD = '';
+		
+		window.onload = function init()
+			{
+			window.addEventListener("resize", resizeWindow);
+			console.log('Starting experiment ' + experiment)
+			prepareLab_10_5();
+			};
+// *****************************************************************
+		</script>
+	</head>
+	
+	<body class="bodyDisplayLabs">
+		<script>
+		// *****************************************************************
+		// Before proceeding check which platform is being used and take appropriate action
+
+// 		var answerOS = getPlatform().toLowerCase();
+// 		returnAddress = "../Chap_10.html#laboratory-exercise-105";
+		returnAddress = "../Chap_10.html#laboratory-exercise-103";
+		sessionStorage.setItem("xReturnAddress", returnAddress);
+		console.log('Device Configuration = ',navigator.userAgent);
+		</script>
+		
+		<div class="invisibleBackgroundTop">
+			<button type="button" id="invisibleButtonTop" 
+				onclick="window.location.href = '#jumpToExit'">Click Me!</button>
+		</div>
+
+		<br>
+<!-- 
+		<h5>Laboratory Exercise 10.5</h5>
+ -->
+		<h5>Laboratory Exercise 10.3</h5>
+	
+		<div class="scrollBrd">
+		The previous exercises have dealt with acoustic signals. We will now look at the usefulness 
+		of Wiener filtering when applied to an image. The image is in color and both the 
+		“distortion” filter and the subsequent Wiener filter are applied separately to each of the 
+		colors {<b><i><font color="red">r</font></i>, <i><font color="#00bb00">g</font></i>, 
+		<i><font color="blue">b</font></i></b>}. The magnitude of the spectrum of the distortion 
+		filter is displayed as well as the <em>SNR</em>. You can rotate the display of the spectrum.
+		<br><br>
+		Choose  among different filters and different levels of additive, independent, Gaussian noise.
+		For each of the filters, including the “identity” filter which is simply no filtering at 
+		all, answer the following:  
+
+		<ol type="i">
+			<li>At the highest value of the <em>SNR</em>, which version resembles the original version 
+			most: the noisy and distorted version (lower, left panel) or the restored version 
+			(lower, right panel)?</li><br>
+			<li>As the <em>SNR</em> decreases, which version resembles the original version most: 
+			the noisy and distorted version (lower, left panel) or the restored version (lower, 
+			right panel)?</li><br>
+			<li>At what <em>SNR</em> is the filter no longer useful to restore the image? You might also 
+			consider making a distinction between “recognizing an image” and “restoring an 
+			image”.</li>
+		</ol>
+		</div>
+		
+		<div id="scrollNoBrd">
+		<br>
+		
+		<!-- Slider to choose SNR  -->
+		<table class='table1x3Cols'>
+			<tr>
+				<td>SNR: </td>
+				<td><input
+						type='range'
+						orient='horizontal'
+						oninput='moveSlider(this.value)'
+						onchange='getNoiseAndFilter(this.value)'
+						min='0'
+						max='10'
+						step='1'
+						value='10'
+						id='snr'>
+				</td>
+				<td><output id="placeSNR0">SNR = ∞:1</output></td>
+			</tr>
+		</table>
+		<br>
+
+		<p style="font-size:0.8rem;  margin-left:6.8vw; margin-bottom:1.54vw;">Choose a filter:</p>
+
+		<table class="radioTable">
+		<!-- Radio buttons to choose 2D filter  -->
+			<tr>
+				<td>
+					<label class="container">No Filter&nbsp;&nbsp;&nbsp;
+					<input type="radio" checked="checked" 
+						onclick="getFilter('1');" name="filter">
+					<span class="checkmark"></span>
+					</label>
+				</td><td>
+					<label class="container">Low Pass&nbsp;&nbsp;&nbsp;
+					<input type="radio" 
+						onclick="getFilter('2');" name="filter">
+					<span class="checkmark"></span>
+					</label>
+				</td><td>
+					<label class="container">High Pass&nbsp;&nbsp;&nbsp;
+					<input type="radio" 
+						onclick="getFilter('3');" name="filter">
+					<span class="checkmark"></span>
+					</label>
+				</td><td>
+					<label class="container">Notch&nbsp;&nbsp;&nbsp;
+					<input type="radio" 
+						onclick="getFilter('4');" name="filter">
+					<span class="checkmark"></span>
+					</label>
+				</td><td>
+					<label class="container">2D Derivative
+					<input type="radio" 
+						onclick="getFilter('5');" name="filter">
+					<span class="checkmark"></span>
+					</label>
+				</td>
+			</tr>
+		</table>
+		
+		<br><br>
+		
+		<!-- The table for images -->
+		<table class="table1x2Cols">
+			<tr>
+				<td style="display:none"><canvas id="dummyBW" width="512" height="512"></canvas></td>
+				<td style="display:none"><canvas id="dummyPH" width="512" height="512"></canvas></td>
+			</tr><tr>
+				<td style="display:none"><canvas id="dummyMG" width="512" height="512"></canvas></td>
+				<td style="display:none">&nbsp;</td>
+			</tr>
+
+			<tr>
+				<td>Spectrum |<span 
+					class="smallSpace"> </span>H(&#937<sub>x</sub>,<span 
+					class="smallSpace"> </span>&#937<sub>y</sub>)<span 
+					class="smallSpace"> </span>|</td>
+				<td>Original Color Image</td>
+			</tr>
+			<tr>
+				<td>
+					<div id='Spectrum_2D' class="div3D"></div>
+				</td>
+				<td>
+					<canvas id="cOriginal" width="350" height="350"></canvas>
+				</td>
+			</tr>
+			<tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+			<tr>
+				<td>
+				<output id='placeSNR1'>Distorted Image + Noise (SNR = ∞:1)</output>
+				</td>
+				<td>Wiener-Restored Color Image</td>
+			</tr>
+			<tr>
+				<td>
+					<canvas id="snrImage" width="350" height="350"></canvas>
+				</td>
+				<td>
+					<canvas id="restored" width="350" height="350"></canvas>
+				</td>
+			</tr>
+			<tr></tr>
+		</table>
+		<br>
+		
+		<table class="invisibleButtonTable" id="jumpToExit">
+			<tr><td>
+				<div >
+					<button type="button"  class="invisibleButton" id="backBtn"
+					onclick="jumpToButton(returnAddress)">
+					    &larr;  Laboratory Exercises</button>
+				</div>
+			</td></tr>
+		</table>
+
+		<script type="text/javascript" src="../js/WavAudioEncoder.js"></script>
+		<script type="text/javascript" src="../js/utils.js"></script>
+		<script type="text/javascript" src='../js/SSPmedia.js'></script>
+
+</div>
+</body>
+</html>

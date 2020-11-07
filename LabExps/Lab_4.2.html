@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+	<head>
+		<meta charset='UTF-8'>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="copyright" content="I.T. Young & R. Ligteringen, 1984, 2010–2020">
+		
+		<link rel="stylesheet" type="text/css" href="../css/myHTML_1.css" media="screen" />
+		<link rel='stylesheet' type='text/css' href='../css/myControls.css' media='screen' />
+		
+		<script type="text/javascript" src="../js/d3-format.min.js" charset="utf-8"></script>  
+		<script type="text/javascript" src="../js/plotly.min.js" charset="utf-8"></script>  
+		
+		<script type="text/javascript" src='../js/SSPconstants.js'></script>
+		<script type="text/javascript" src='../js/SSPfourier.js'></script>
+		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src='../js/SSPplotting.js'></script>
+		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
+		<script type="text/javascript" src="../js/extra.js"></script>
+		
+		<script src='js/Lab_4-2.js'></script>
+		<title>Laboratory Exercise 4.2</title>
+		<br>
+		
+		<link rel="shortcut icon" href="../images/favicon.png">
+		<link rel="stylesheet" href="../assets/stylesheets/main.38780c08.min.css">
+	</head>
+	
+	<body class="bodyDisplayLabs">
+		<script>
+		// *****************************************************************
+		// Before proceeding check which platform is being used and take appropriate action
+
+// 		var answerOS = getPlatform().toLowerCase();
+		returnAddress = "../Chap_4.html#laboratory-exercise-42";
+		sessionStorage.setItem("xReturnAddress", returnAddress);
+		console.log('Device Configuration = ',navigator.userAgent);
+		</script>
+		
+<!-- Note the text "Click Me!" is transparent so you don't see it -->
+	<div class="invisibleBackgroundTop">
+		<button type="button" id="invisibleButtonTop" 
+			onclick="window.location.href = '#jumpToExit'">Click Me!</button>
+	</div>
+	
+	<br>
+	<h5>Laboratory Exercise 4.2</h5>
+	
+	<div class="scrollBrd">
+	<i>Generate an image:</i> An <i>N</i> &times; <i>N</i>  image consists of <i>N</i><sup>2</sup> 
+	pixels. We can choose the grey-level brightness for each pixel from almost any distribution 
+	provided that the chosen value is real and non-negative.<br>
+		<ol type="i">
+			<li>What is the usual basis for requiring non-negativity?</li>
+		</ol>
+	In the following experiment we choose the brightness from one of seven possible distributions. 
+	We then generate an <i>N</i> &times; <i>N</i> image.<br><br>
+	
+	Use the slider to generate an image with <i>N</i><sup>2</sup> pixels using the selected “mystery” 
+	distribution for the grey levels. Radio buttons allow you to 1) choose the underlying distribution 
+	and 2) display either the histogram of brightnesses, the estimated probability density/mass 
+	function, or the cumulative distribution function.<br>
+		<ol start="2" type="i">
+			<li>What is the conventional name for each of these distributions?<br /></li><br>
+			<li>How many pixels did you need to identify the distribution with a reasonable amount 
+			of confidence?</li>
+		</ol>
+	</div>
+	<br>
+	<div id="scrollNoBrd">
+		<table class="table1x3Cols">
+		<!-- Row 1 = Slider to choose number of rows & columns -->
+			<tr>
+				<td style="width:20%">Image Size:</td>
+				<td><input
+						type="range"
+						oninput="distributionDisp(this.value, 'N')"
+						min="1"
+						max="8"
+						step="1"
+						value="1"
+						id="rows_cols">
+				</td>
+				<td>
+					<output for="size" id="clickN">2 x 2 pixels</output>
+				</td>
+			</tr>
+		</table>
+
+		<br>
+
+<!-- 		<p style="font-size:2.05vw; margin-left:6.8vw; margin-bottom:1.54vw;">Choose a distribution:</p> -->
+		<p style="font-size:0.8rem; margin-left:6.8vw; margin-bottom:1.54vw;">Choose a distribution:</p>
+		<table class="radioTable">
+		<!-- Radio buttons to choose underlying distribution  -->
+			<tr>
+				<td> </td>
+				<td> 
+					<label class="container">1&nbsp;&nbsp;
+					<input type="radio" checked="checked"
+						onclick="fillImage('1');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td><td>
+					<label class="container">2&nbsp;&nbsp;
+					<input type="radio"
+						onclick="fillImage('2');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td><td>
+					<label class="container">3&nbsp;&nbsp;
+					<input type="radio"
+						onclick="fillImage('3');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td><td>
+					<label class="container">4&nbsp;&nbsp;
+					<input type="radio"
+						onclick="fillImage('4');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td><td>
+					<label class="container">5&nbsp;&nbsp;
+					<input type="radio"
+						onclick="fillImage('5');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td><td>
+					<label class="container">6&nbsp;&nbsp;
+					<input type="radio"
+						onclick="fillImage('6');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td><td>
+					<label class="container">7&nbsp;&nbsp;
+					<input type="radio"
+						onclick="fillImage('7');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td>
+			</tr>
+		</table>
+		<br>
+		
+		<p style="font-size:0.8rem; margin-left:6.8vw; margin-bottom:1.54vw;">Choose display mode:</p>
+		<table class="radioTable">
+		<!-- Radio buttons to choose display mode  -->
+			<tr>
+				<td> </td>
+				<td>
+					<label class="container">Count&nbsp;
+					<input type="radio" value="Cnt" checked="checked"
+						onclick="distributionDisp(this.value,'Cnt');" name="display">
+					<span class="checkmark"></span>
+					</label>
+				</td>
+				<td>&nbsp;</td>
+				<td>
+					<label class="container">Probability&nbsp;
+					<input type="radio" value="Prob"
+						onclick="distributionDisp(this.value,'Prob');" name="display">
+					<span class="checkmark"></span>
+					</label>
+				</td>
+				<td>&nbsp;</td>
+				<td>
+					<label class="container">CDF&nbsp;
+					<input type="radio" value="CDF"
+						onclick="distributionDisp(this.value,'CDF');" name="display">
+					<span class="checkmark"></span>
+					</label>
+				</td>
+				<td>&nbsp;</td>
+			</tr>
+		</table>
+		<br>
+
+		<table class='table1x2Cols'>
+		<!-- Display of image and associated histogram  -->
+			<tr>
+				<td>Random image</td>
+				<td>Grey-level histogram</td>
+			</tr>
+			<tr>
+				<td><div id="Lab4.2L1"></div></td>
+				<td style="vertical-align:top;"><div id="Lab4.2R1"></div></td>
+			</tr>
+		</table>
+		
+
+		<script>
+// *****************************************************************
+		//  Javascript starts here
+		//  'Lab4.2L1' means Lab 4.2, Left side, row 1
+		//  'Lab4.2R2' means Lab 4.2, Right side, row 2
+		// set up global variables
+
+		experiment = '4.2';
+
+		wA = 'Lab4.2L1';
+		wB = 'Lab4.2R1';
+		wC = '';
+		wD = '';
+
+		window.onload = function init()
+			{
+			window.addEventListener("resize", resizeWindow);
+			prepareLab_4_2();
+			console.log('Starting experiment ' + experiment);
+		};
+		</script>
+		
+		<table class="invisibleButtonTable" id="jumpToExit">
+			<tr><td>
+				<div >
+					<button type="button"  class="invisibleButton" id="backBtn"
+					onclick="jumpToButton(returnAddress)">
+					    &larr;  Laboratory Exercises</button>
+				</div>
+			</td></tr>
+		</table>
+
+		<script type="text/javascript" src="../js/WavAudioEncoder.js"></script>
+		<script type="text/javascript" src="../js/utils.js"></script>
+		<script type="text/javascript" src='../js/SSPmedia.js'></script>
+
+</div>
+</body>
+</html>

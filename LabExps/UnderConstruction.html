@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+	<head>
+		<meta name="format-detection" content="telephone=no">
+		<meta name="msapplication-tap-highlight" content="no">
+		<meta name="viewport" content=
+			"user-scalable=no,
+			 initial-scale=1,
+			 maximum-scale=1,
+			 minimum-scale=1,
+			 width=device-width">
+		<meta charset='UTF-8'>
+		<meta name="copyright" content="I.T. Young & R. Ligteringen, 1984, 2010–2020">
+		
+		<link rel="stylesheet" type="text/css" href="../css/myHTML_1.css" media="screen" />
+		<link rel='stylesheet' type='text/css' href='../css/myControls.css' media='screen' />
+		
+		<script type="text/javascript" src="../js/d3-format.min.js" charset="utf-8"></script>  
+		<script type="text/javascript" src="../js/plotly.min.js" charset="utf-8"></script>  
+		
+		<script type="text/javascript" src='../js/SSPconstants.js'></script>
+		<script type="text/javascript" src='../js/SSPfourier.js'></script>
+		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src='../js/SSPplotting.js'></script>
+		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
+		
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
+		<script type="text/javascript" src="../js/extra.js"></script>
+	</head>
+	
+	<body class="bodyDisplayLabs">
+		<br><br><br>
+		<table class="centerTable">
+			<tr><td><a id="Construction1" href=''>
+<!-- 
+				<img src='../images/PrimeTime.jpg' width=auto height=auto>
+ -->
+				<img src='../images/Sorry.png' width=auto height=auto  style="border:2px solid maroon">
+			</a></td></tr>
+	
+			<tr><td style="text-align:right; font-variant: small-caps; font-weight: bold;"><br><br>
+				<a	id="Construction2" href="tempHREF" 
+					style="color:#a6a6a6; text-decoration:none;">Tap to return</a>
+			</td></tr>
+		</table>
+
+	<script>
+		returnAddress = sessionStorage.getItem("xReturnAddress");
+		console.log('returnAddress: ',returnAddress);
+		var tempH1 = document.getElementById('Construction1');
+		tempH1.setAttribute("href", returnAddress);
+		var tempH2 = document.getElementById('Construction2');
+		tempH2.setAttribute("href", returnAddress);
+	</script>
+
+	</body>
+</html>

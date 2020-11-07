@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+	<head>
+		<meta name="format-detection" content="telephone=no">
+		<meta name="msapplication-tap-highlight" content="no">
+		<meta name="viewport" content=
+			"user-scalable=no,
+			 initial-scale=1,
+			 maximum-scale=1,
+			 minimum-scale=1,
+			 width=device-width">
+		<meta charset='UTF-8'>
+		<meta name="copyright" content="I.T. Young & R. Ligteringen, 1984, 2010–2020">
+		
+		<link rel="stylesheet" type="text/css" href="../css/myHTML_1.css" media="screen" />
+		<link rel='stylesheet' type='text/css' href='../css/myControls.css' media='screen' />
+		
+		<script type="text/javascript" src="../js/d3-format.min.js" charset="utf-8"></script>  
+		<script type="text/javascript" src="../js/plotly.min.js" charset="utf-8"></script>  
+		
+		<script type="text/javascript" src='../js/SSPconstants.js'></script>
+		<script type="text/javascript" src='../js/SSPfourier.js'></script>
+		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src='../js/SSPplotting.js'></script>
+		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
+
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
+		<script type="text/javascript" src="../js/extra.js"></script>
+
+		<title>Laboratory Exercise 5.1</title>
+		<br>
+		<script src='js/Lab_5-1.js'></script>
+		
+		<link rel="shortcut icon" href="../images/favicon.png">
+		<link rel="stylesheet" href="../assets/stylesheets/main.38780c08.min.css">
+	</head>
+	
+	<body class="bodyDisplayLabs">
+		<script>
+		// *****************************************************************
+		// Before proceeding check which platform is being used and take appropriate action
+
+// 		var answerOS = getPlatform().toLowerCase();
+		returnAddress = "../Chap_5.html#laboratory-exercise-51";
+		sessionStorage.setItem("xReturnAddress", returnAddress);
+		console.log('Device Configuration = ',navigator.userAgent);
+		</script>
+		
+<!-- Note the text "Click Me!" is transparent so you don't see it -->
+	<div class="invisibleBackgroundTop">
+		<button type="button" id="invisibleButtonTop" 
+			onclick="window.location.href = '#jumpToExit'">Click Me!</button>
+	</div>
+	
+	<br>
+	<h5>Laboratory Exercise 5.1</h5>
+
+	<div class="scrollBrd">
+		In terms of their mathematical definitions, convolution and correlation are closely related. 
+		Given <i>deterministic</i> signals <i>x</i>[<i>n</i>], <i>h</i>[<i>n</i>], and <i>y</i>[<i>n</i>], convolution is 
+		defined by <a href="../Chap_3.html#eq:timedomconv"><font color="royalBlue">Equation 3.1</font></a> 
+		and cross-correlation as in <a href="../Chap_5.html#problem-55">
+		<font color="royalBlue">Problem 5.5</font></a>. (Note that the sum in 
+		<a href="../Chap_3.html#eq:timedomconv"><font color="royalBlue">Equation 3.1</font></a> could 
+		just as well have been written with <i>n</i> as the dummy variable to produce <i>y</i>[<i>k</i>].) 
+		In this laboratory exercise we will review your understanding of the difference between 
+		convolution and correlation.<br><br>
+
+		<i>Easy</i>: Each time you press the <span class="inLineBtn">  Generate two signals  </span> 
+		button, a real signal <i>x<sub>1</sub></i>[<i>n</i>] of random length <i>L</i> will be 
+		generated. This signal and its time-reversed version 
+		<i>x<sub>2</sub></i>[<i>n</i>] = <i>x<sub>1</sub></i>[<i>L - n</i>] will then be used to compute 
+		a convolution and a cross-correlation. The two signals, <i>x<sub>1</sub></i>[<i>n</i>] and 
+		<i>x<sub>2</sub></i>[<i>n</i>] will be displayed in the top row. The two results will be 
+		displayed in the bottom row. Each time you repeat the experiment you will generate an 
+		<i>x<sub>1</sub></i>[<i>n</i>] with a new random length.
+
+			<ol type="i">
+				<li>Which of the two signals displayed in the bottom row is the convolution and 
+					which is the cross-correlation?</li><br>
+				<li>To what extent does your confidence in your answer depend upon the random choice 
+					of <i>L</i>?</li><br>
+				<li>The horizontal time axis units are not displayed in the convolution and 
+					correlation results. Why would displaying them make the problem trivial?</li>
+			</ol>
+
+		<i>Demanding</i>: In the experiment above, we always used the same form for 
+		<i>x<sub>1</sub></i>[<i>n</i>] and changed only its length. Now we will randomly choose both 
+		<i>x<sub>1</sub></i>[<i>n</i>] from a family of signals as well as its length. Thus each time you press the 
+		<span class="inLineBtn">  Generate two signals  </span> button, a real signal 
+		<i>x<sub>1</sub></i>[<i>n</i>] will be chosen at random with a random length <i>L</i>. 
+		This signal and its time-reversed version <i>x<sub>2</sub></i>[<i>n</i>] = 
+		<i>x<sub>1</sub></i>[<i>L - n</i>] will then be used to compute a convolution and a 
+		cross-correlation. 
+
+			<ol type="i" start="4">
+				<li>Which of the two signals displayed in the bottom row is the convolution and which 
+					is the cross-correlation?</li><br>
+				<li>To what extent does your confidence in your answer depend upon the random choice 
+					of the signal and the random choice of <i>L</i>?</li>
+			</ol>
+
+		<i>Very Demanding</i>: In this next experiment, we will use two signals, <i>x<sub>1</sub></i>[<i>n</i>] 
+		and <i>x<sub>2</sub></i>[<i>n</i>] each of which has been chosen at random from a family of 
+		signals. Each signal has the same randomly chosen length <i>L</i>. Thus each time you press the 
+		<span class="inLineBtn">  Generate two signals  </span> button, two real signals 
+		<i>x<sub>1</sub></i>[<i>n</i>] and <i>x<sub>2</sub></i>[<i>n</i>] will be chosen at random, each 
+		with the same random length <i>L</i>. These two signals will be used to compute a convolution 
+		and a cross-correlation.
+		
+			<ol type="i" start="6">
+				<li>Which of the two signals displayed in the bottom row is the convolution and which 
+					is the cross-correlation?</li><br>
+				<li>To what extent does your confidence in your answer depend upon the random choice 
+					of the signal and the random choice of <i>L</i>?</li>
+			</ol>
+	</div>
+
+	<div id="scrollNoBrd">
+		<br>
+		
+<!-- 		<p style="font-size:2.05vw; margin-left:6.8vw; margin-bottom:1.54vw;">Choose lab variant:</p> -->
+		<p style="font-size:0.8rem; margin-left:6.8vw; margin-bottom:1.54vw;">Choose lab variant:</p>
+		<table class='radioTable' >
+			<tr>
+				<td> </td>
+				<!-- This is where variant gets chosen  -->
+				<td>
+					<label class="container">Easy
+					<input type="radio" checked="checked" name="unique" id="A" 
+						onclick="generate('Easy')">
+					<span class="checkmark"></span>
+					</label>
+				</td>
+				<td>      </td>
+				<td>
+					<label class="container">Demanding
+					<input type="radio" name="unique" id="B" 
+						onclick="generate('Difficult')">
+					<span class="checkmark"></span>
+					</label>
+				</td>
+				<td>     </td>
+				<td>
+					<label class="container">Very Demanding
+					<input type="radio" name="unique" id="B" 
+						onclick="generate('More_Difficult')">
+					<span class="checkmark"></span>
+					</label>
+				</td>
+			</tr>
+		</table>
+		<br><br>
+		<table class='table1x2Cols' style="margin-top: -15px;">
+			<tr>
+				<td colspan="2"><button type="button" class="linLogBtn" onclick='regenerate()'>
+						    Generate two signals    </button>
+				</td>
+			</tr>
+
+			<!-- The row for input signals -->
+			<tr>
+				<td style="vertical-align:top;">
+					<div id="Lab5.1L1title" class="textBlankPageLeft" 
+						style="display:block; text-align:center;">x<sub>1 </sub>[n]</div>
+					<div id="Lab5.1L1"></div>
+				</td>
+				<td style="vertical-align:top;">
+					<div id="Lab5.1R1title" class="textBlankPageLeft" 
+						style="display:block; text-align:center;">x<sub>2 </sub>[n]</div>
+					<div id="Lab5.1R1"></div>
+				</td>
+			</tr>
+
+			<!-- The row for output signals -->
+			<tr>
+				<td style="vertical-align:top;">
+					<div id="Lab5.1L2title" class="textBlankPageLeft" 
+						style="display:block; text-align:center;">y<sub>1</sub></div>
+					<div id="Lab5.1L2"></div>
+				</td>
+				<td style="vertical-align:top;">
+					<div id="Lab5.1R2title" class="textBlankPageLeft" 
+						style="display:block; text-align:center;">y<sub>2</sub></div>
+					<div id="Lab5.1R2"></div>
+				</td>
+			</tr>
+		</table>
+
+	<script>
+		// *****************************************************************
+		//  Javascript starts here
+		//  'Lab5.1C1' means Lab 5.1, Center, row 1
+		// set up global variables
+	
+		experiment = '5.1';
+
+		window.onload = function init()
+			{
+			// global variables
+
+			// four windows
+			wA = 'Lab5.1L1';
+			wB = 'Lab5.1R1';
+			wC = 'Lab5.1L2';
+			wD = 'Lab5.1R2';
+			
+			choice = 'Easy';
+
+			window.addEventListener("resize", resizeWindow);
+			console.log('Starting experiment ' + experiment)
+			prepareLab_5_1();
+			};
+		</script>
+		
+		<table class="invisibleButtonTable" id="jumpToExit">
+			<tr><td>
+				<div >
+					<button type="button"  class="invisibleButton" id="backBtn"
+					onclick="jumpToButton(returnAddress)">
+					    &larr;  Laboratory Exercises</button>
+				</div>
+			</td></tr>
+		</table>
+
+		<script type="text/javascript" src="../js/WavAudioEncoder.js"></script>
+		<script type="text/javascript" src="../js/utils.js"></script>
+		<script type="text/javascript" src='../js/SSPmedia.js'></script>
+
+</div>
+</body>
+</html>

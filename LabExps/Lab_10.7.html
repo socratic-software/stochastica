@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+	<head>
+		<meta charset='UTF-8'>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="copyright" content="I.T. Young & R. Ligteringen, 1984, 2010–2020">
+		
+<!-- 
+		<title>Laboratory Exercise 10.7</title>
+ -->
+		<title>Laboratory Exercise 10.5</title>
+		<br>
+		<link rel="stylesheet" type="text/css" href="../css/myHTML_1.css" media="screen" />
+		<link rel='stylesheet' type='text/css' href='../css/myControls.css' media='screen' />
+		
+		<script type="text/javascript" src="../js/d3-format.min.js" charset="utf-8"></script>  
+		<script type="text/javascript" src="../js/plotly.min.js" charset="utf-8"></script>  
+		
+		<script type="text/javascript" src='../js/SSPconstants.js'></script>
+		<script type="text/javascript" src='../js/SSPfourier.js'></script>
+		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src='../js/SSPplotting.js'></script>
+		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
+		<script type="text/javascript" src="../js/extra.js"></script>
+		<script src='../images/truiImageLibrary.js'></script>
+		<script src='js/Lab_10-7.js'></script>
+
+		<link rel="shortcut icon" href="../images/favicon.png">
+		<link rel="stylesheet" href="../assets/stylesheets/main.38780c08.min.css">
+
+		<script>
+// *****************************************************************
+		//  Javascript starts here
+		//  'Lab10.9C1' means Lab 10.9, center, row 1
+		//  'Lab10.9C2' means Lab 10.9, center, row 2
+		// set up global variables
+
+		experiment = '10.7';
+
+		wDummyBW = 'dummyBW';
+		wDummyPH = 'dummyPH';
+		wDummyMG = 'dummyMG';
+		wA = 'cOriginal';
+		wB = 'snrImage';
+		wC = 'restored';
+		wD = '';
+		
+		window.onload = function init()
+			{
+			window.addEventListener("resize", resizeWindow);
+			console.log('Starting experiment ' + experiment)
+			prepareLab_10_7();
+			};
+// *****************************************************************
+		</script>
+	</head>
+	
+	<body class="bodyDisplayLabs">
+		<script>
+		// *****************************************************************
+		// Before proceeding check which platform is being used and take appropriate action
+
+// 		var answerOS = getPlatform().toLowerCase();
+		returnAddress = "../Chap_10.html#laboratory-exercise-105";
+		sessionStorage.setItem("xReturnAddress", returnAddress);
+		console.log('Device Configuration = ',navigator.userAgent);
+		</script>
+		
+		<div class="invisibleBackgroundTop">
+			<button type="button" id="invisibleButtonTop" 
+				onclick="window.location.href = '#jumpToExit'">Click Me!</button>
+		</div>
+
+		<br>
+<!-- 
+		<h5>Laboratory Exercise 10.7</h5>
+ -->
+		<h5>Laboratory Exercise 10.5</h5>
+	
+		<div class="scrollBrd">
+		The application of <a href="../Chap_10.html#eq:Weq29"><font 
+		color="royalBlue">Equation 10.29</font></a>&mdash;repeated below&mdash;
+		requires a lot of prior knowledge.
+		
+		<table class="centerEqTable">
+			<tr>
+				<td>(10.36)</td>
+				<td id="fig:fig_Wiener36">
+					<img width=55% src="../images/Eqn_Lab_10.9.1.gif" alt="Missing DFT equation"/>
+				</td>
+			</tr>
+		</table>
+		
+		We need to know <i>H<sub>0</sub></i>(&Omega;), <i>S<sub>xx</sub></i>(&Omega;), 
+		and <i>S<sub>nn</sub></i>(&Omega;). There are ways to measure the transfer 
+		function of the distortion filter <i>H<sub>0</sub></i>(&Omega;). But what 
+		about the power spectral densities of the signal and the noise?
+		<br><br>
+		In this exercise we suggest a “<i>poor man’s Wiener filter</i>”. It is based 
+		upon a rewritten form of the Wiener filter <a href="../Chap_10.html#eq:Weq30">
+		<font color="royalBlue">Equation 10.30</font></a> that is given below. 
+		
+		<table class="centerEqTable">
+			<tr>
+				<td>(10.37)</td>
+				<td id="fig:fig_Wiener37">
+					<img width=45% src="../images/Eqn_Lab_10.9.2.gif" alt="Missing DFT equation"/>
+				</td>
+			</tr>
+		</table>
+		
+		We have frequently assumed that the noise process is white noise, that the 
+		power spectral density is flat. This means that <i>S<sub>nn</sub></i>(&Omega;) 
+		= <i>K<sub>nn</sub></i>. This is only a small leap of faith.
+
+		<ol type="i">
+			<li>What physical constraint stands in the way of this assumption being 
+				valid in our real, physical world?</li>
+		</ol>
+
+		Let us now take a much bigger leap. Let us assume that as we do not know the 
+		actual signal&mdash;if we did why would we try to restore it?&mdash;the power 
+		spectral density of the signal is also flat, <i>S<sub>xx</sub></i>(&Omega;) = 
+		<i>K<sub>xx</sub></i>. Our ignorance of the actual form of 
+		<i>S<sub>xx</sub></i>(&Omega;) gives us no basis to assume that any 
+		particular frequency band is greater than any other. This means that the 
+		“poor man’s Wiener filter”, <i>H<sub>pm</sub></i>(&Omega;), is given by:
+
+		<table class="centerEqTable">
+			<tr>
+				<td>(10.38)</td>
+				<td id="fig:fig_Wiener38">
+					<img width=70% src="../images/Eqn_Lab_10.9.3.gif" alt="Missing DFT equation"/>
+				</td>
+			</tr>
+		</table>
+		
+		We have replaced the ratio of two constants 
+		<i>K<sub>nn</sub></i>/<i>K<sub>xx</sub></i> 
+		with the single constant <i>K</i>. The only thing that is now missing is 
+		the value of <i>K</i>.
+		<br><br>
+		In the experiments below, choose the radius of the aperture (starting from 
+		the smallest), different levels of additive, independent, Gaussian noise, 
+		and different values of <i>K</i>. As before, the magnitude of the spectrum 
+		of the aperture filter will be displayed as well as the <em>SNR</em> and you 
+		can rotate the display of the spectrum.
+
+		<ol type="i" start='2'>
+			<li>At the highest value of the <i>SNR</i> and the smallest radius, what 
+				range of values for <i>K</i> leads to restorations that are comparable 
+				to the original.</li><br>
+			
+			<li>Now change the <i>SNR</i> to 10:1 and adjust <i>K</i> to produce 
+				(in your estimation) the best possible restoration. Which version 
+				resembles the original version most: the noisy and distorted version (lower, left panel) or the restored version you have produced by 
+				adjusting <i>K</i> (lower, right panel)?</li><br>
+			
+			<li>Repeat the previous experiment while systematically decreasing the 
+				<i>SNR</i> from its highest value and looking for the value of <i>K</i> 
+				that yields the best restoration. As the <i>SNR</i> decreases which 
+				version resembles the original version most: the noisy and distorted 
+				version (lower, left panel) or the restored version (lower, right 
+				panel)?</li><br>
+			
+			<li>Does there seem to be a relationship between the choice of <i>K</i> 
+				and the <i>SNR</i>? Is there an explanation possible based upon the 
+				<a href="#fig:fig_Wiener38"><font color="firebrick">above</font></a> 
+				equation?</li>
+		</ol>
+
+		Now repeat the above experiments for various values of the aperture radius.  
+
+		<ol type="i" start='6'>
+			<li start='5'>For each aperture size, at what <i>SNR</i> is the filter 
+				<i>not</i> useful in restoring the image? You might also consider 
+				making a distinction between “recognizing an image” and “restoring 
+				an image”.</li>
+		</ol>
+		</div>
+		
+		<div id="scrollNoBrd">
+		<br>
+		
+		<!-- Slider to choose SNR, Radius, K  -->
+		<table class='table1x3Cols'>
+			<tr>
+				<td>SNR: </td>
+				<td><input
+						type='range'
+						oninput="moveSnrSlider(this.value)"
+						onchange="getNoiseAndFilter(this.value)"
+						min='0'
+						max='10'
+						step='1'
+						value='10'
+						id='snr'>
+				</td>
+				<td><output id="placeSNR0">SNR = ∞:1</output></td>
+			</tr>
+			<tr>
+				<td>Radius: </td>
+				<td><input
+						type='range'
+						oninput="moveRadiusSlider(this.value)"
+						onchange="getRadiusAndFilter(this.value)"
+						min='1'
+						max='25'
+						step='1'
+						value='1'
+						id='radial'>
+				</td>
+				<td><output id="placeR">R = 1 pixel</output></td>
+			</tr>
+			<tr>
+				<td>K: </td>
+				<td><input
+						type='range'
+						oninput="moveKSlider(this.value)"
+						onchange="getKandFilter(this.value)"
+						min='0'
+						max='30'
+						step='0.1'
+						value='0'
+						id='k'>
+				</td>
+				<td><output id="placeK0">K = 0</output></td>
+			</tr>
+		</table>
+		
+		<br>
+		
+		<!-- The table for images -->
+		<table class="table1x2Cols">
+			<tr>
+				<td style="display:none"><canvas id="dummyBW" width="512" height="512"></canvas></td>
+				<td style="display:none"><canvas id="dummyPH" width="512" height="512"></canvas></td>
+			</tr><tr>
+				<td style="display:none"><canvas id="dummyMG" width="512" height="512"></canvas></td>
+				<td style="display:none">&nbsp;</td>
+			</tr>
+
+			<tr>
+				<td>Spectrum |<span 
+					class="smallSpace"> </span>H(&#937<sub>x</sub>,<span 
+					class="smallSpace"> </span>&#937<sub>y</sub>)<span 
+					class="smallSpace"> </span>|</td>
+				<td>Original Color Image</td>
+			</tr>
+			<tr>
+				<td>
+					<div id='Spectrum_2D' class="div3D"></div>
+				</td>
+				<td>
+					<canvas id="cOriginal" width="350" height="350"></canvas>
+				</td>
+			</tr>
+			<tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+			<tr>
+				<td colspan="2" class="tableImageLine">
+				<b><output id='placeSNR1'>Circular aperture with Area = 1 
+				pixel), SNR = ∞:1, and K = 0</output></b><br><br>
+				</td>
+			</tr>
+			<tr>
+				<td>Distorted Image + Noise</td>
+				<td>Wiener-Restored Color Image</td>
+			</tr>
+			<tr>
+				<td>
+					<canvas id="snrImage" width="350" height="350"></canvas>
+				</td>
+				<td>
+					<canvas id="restored" width="350" height="350"></canvas>
+				</td>
+			</tr>
+			<tr></tr>
+		</table>
+		<br>
+		
+		<table class="invisibleButtonTable" id="jumpToExit">
+			<tr><td>
+				<div >
+					<button type="button"  class="invisibleButton" id="backBtn"
+					onclick="jumpToButton(returnAddress)">
+					    &larr;  Laboratory Exercises</button>
+				</div>
+			</td></tr>
+		</table>
+
+		<script type="text/javascript" src="../js/WavAudioEncoder.js"></script>
+		<script type="text/javascript" src="../js/utils.js"></script>
+		<script type="text/javascript" src='../js/SSPmedia.js'></script>
+
+</div>
+</body>
+</html>

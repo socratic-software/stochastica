@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+	<head>
+		<meta charset='UTF-8'>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="copyright" content="I.T. Young & R. Ligteringen, 1984, 2010–2020">
+		
+		<link rel="stylesheet" type="text/css" href="../css/myHTML_1.css" media="screen" />
+		<link rel='stylesheet' type='text/css' href='../css/myControls.css' media='screen' />
+		
+		<script type="text/javascript" src="../js/d3-format.min.js" charset="utf-8"></script>  
+		<script type="text/javascript" src="../js/plotly.min.js" charset="utf-8"></script>  
+		
+		<script type="text/javascript" src='../js/SSPconstants.js'></script>
+		<script type="text/javascript" src='../js/SSPfourier.js'></script>
+		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src='../js/SSPplotting.js'></script>
+		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
+		<script type="text/javascript" src="../js/extra.js"></script>
+		<script src='js/Lab_6-8.js'></script>
+		<script src='js/Lab_6-8.js'></script>
+		<title>Laboratory Exercise 6.8</title>
+		<br>
+		
+		<link rel="shortcut icon" href="../images/favicon.png">
+		<link rel="stylesheet" href="../assets/stylesheets/main.38780c08.min.css">
+	</head>
+	
+	<body class="bodyDisplayLabs">
+		<script>
+		// *****************************************************************
+		// Before proceeding check which platform is being used and take appropriate action
+
+// 		var answerOS = getPlatform().toLowerCase();
+		returnAddress = "../Chap_6.html#laboratory-exercise-68";
+		sessionStorage.setItem("xReturnAddress", returnAddress);
+		console.log('Device Configuration = ',navigator.userAgent);
+		</script>
+		
+<!-- Note the text "Click Me!" is transparent so you don't see it -->
+	<div class="invisibleBackgroundTop">
+		<button type="button" id="invisibleButtonTop" 
+			onclick="window.location.href = '#jumpToExit'">Click Me!</button>
+	</div>
+	
+	<br>
+	<h5>Laboratory Exercise 6.8</h5>
+
+	<div class="scrollBrd">
+		We now return to the real, FIR filter used in <a href="Lab_6.7a.html"><font 
+		color="royalBlue">Laboratory Exercise 6.7a</font></a> and <a href="Lab_6.7b.html">
+		<font color="royalBlue">Laboratory Exercise 6.7b</font></a> and described as: 
+		
+		<table class="centerEqTable">
+			<tr>
+				<td>(6.48)</td>
+				<td id="eq:bpf_1">
+					<img width=55% src="../images/Eqn_Lab_6.7a.1.gif" alt="Missing Filter specification"/>
+				</td>
+			</tr>
+		</table>
+		
+		The sampling frequency remains 44.1 kHz. The input <i>x[n]</i> is <output id="placeT">--</output> 
+		seconds of a white noise signal with a Gaussian amplitude distribution <i>g[n]</i>. The output 
+		<i>y[n] = g<sub>F</sub>[n]</i> is the filtered version of <i>g[n]</i>, that is, 
+		<i>g<sub>F</sub>[n] = h[n]</i> &otimes; <i>g[n]</i>. As in <a href="Lab_6.7b.html">
+		<font color="royalBlue">Laboratory Exercise 6.7b</font></a>, the frequency-domain technique is 
+		used to produce <i>g<sub>F</sub>[n]</i> that is: 
+		
+		<table class="centerEq">
+			<tr>
+				<td>(6.49)</td>
+				<td id="eq:bpf_1" class="specialSize">
+				g<sub>F</sub>[n] = <font class="cursive">F  <sup>-1</sup></font> {<font 
+				class="cursive">F </font>{ h[n] } • <font class="cursive">F </font>{ g[n] }}
+				</td>
+			</tr>
+		</table>
+		
+		where <font class="cursive">F </font>{•} is the Fourier transform operator. 
+		Notice that in the results below the correlation function and the power spectral density are 
+		now the <i>cross</i>-correlation function <i>&phi;<sub>gF</sub>(&tau; = kT)</i> and the 
+		<i>cross</i>-power spectral density <i>S<sub>gF</sub>(2&pi;f)</i><a 
+		href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>.
+		
+			<ol type="i">
+				<li>Why is the <i>cross</i>-power spectral density displayed as 
+					|<i>S<sub>gF</sub>(2&pi;f)</i>| instead of <i>S<sub>gF</sub>(2&pi;f)</i> ?</li><br>
+				
+				<li>Sketch the impulse response <i>h[n]</i> in as much detail as possible. At what 
+					time (in ms), for example, does <i>h[n]</i> have its maximum value?</li><br>
+				
+				<li>At what time sample (in <i>n</i>) does <i>h[n]</i> have its maximum value?</li><br>
+				
+				<li>What difference do you expect between <i>S<sub>gF</sub>(2&pi;f)</i> and 
+					<i>S<sub>FF</sub>(2&pi;f)</i> ? (Refer, for example, to <a href="Lab_6.7b.html">
+					<font color="firebrick">Laboratory Exercise 6.7b</font></a> and to material in this 
+					chapter starting at <a href="../Chap_6.html#eq:filt_crosspds3"><font 
+					color="firebrick">Equation 6.20</font></a>.)</li><br>
+				
+				<li>Which of the signals { <i>h<sub>i </sub>[n]</i> | <i>i=1,2,3,4 </i>}, shown in the 
+					bottom row of this section, could be the impulse response <i>h[n]</i> used in 
+					this laboratory exercise?</li>
+			</ol>
+			
+		<i>What does it mean?</i> Understanding the formal relationship between correlation functions, 
+		power spectral densities, and linear time-invariant (LTI) filters gives us the tools to understand 
+		how ergodic signals will be affected by filtering. Further, given the input and output 
+		signals—particularly when the input signal is white noise—allows us to characterize the 
+		LTI filter.
+
+		<p id="fn1" class="p_footnote"><sup>1</sup>Each of the signals and correlation functions 
+			contains far more samples than can be displayed across the screen of your device. The data 
+			are therefore “binned” to fit on the screen. Slight distortions—artefacts of the binning 
+			process—are therefore possible.<a href="#fnref1" style="color:royalBlue;"> <b>&crarr;</b></a></p>
+	</div>
+	
+	<div id="scrollNoBrd">
+		<br>
+		
+		<table class='radioTable'>
+			<tr>
+				<td style="font-size:0.8rem;">Choose display:         </td>
+				<td> 
+					<label class="container">
+					<span style="font-family:Georgia,Palatino,Bodoni,serif;">
+						<i>Signal & Histogram</i>     </span>
+					<input type="radio" value='SH' checked="checked"
+						onclick="myFunctionDisp(this.value,'SH',
+							'Lab6.8L1','Lab6.8R1','Lab6.8L2','Lab6.8R2')"
+						name="display">
+					<span class="checkmark"></span>
+					</label>
+				</td>
+				<td>
+					<!-- display correlation function & power spectal density = 'CP'  -->
+					<label class="container">
+					<span style="font-family:Georgia,Palatino,Bodoni,serif;">
+						<i>&phi;(&tau;) & S(&Omega;)</i></span>
+					<input type="radio" value='CP'
+						onclick="myFunctionDisp(this.value,'CP',
+							'Lab6.8L1','Lab6.8R1','Lab6.8L2','Lab6.8R2')"
+						name="display">
+					<span class="checkmark"></span>
+					</label>
+				</td>
+			</tr>
+		</table>
+		<br>
+		<!-- Slider to choose Zoom  -->
+		<table class='table1x3Cols'>
+			<tr>
+				<td>Zoom: </td>
+				<td><input
+						type='range'
+						oninput="myFunctionZoom(this.value)"
+						min='0'
+						max='9'
+						step='1'
+						value='0'
+						id='zm'>
+				</td>
+				<td>
+					<output id="placeN1">N = ----- samples</output><br>
+					<output id="placeN2">= ----- ms</output>
+				</td>
+			</tr>
+		</table>
+		<br>
+		<table class='table1x1Cols'>
+			<tr>
+				<td>
+					<button id="playCapture-0">               
+						<img id='play_0' class='buttonImg' src='../images/playback_transp.png'>
+					</button>  Play signal g(t)
+					<button id="startCapture-0" style="display:none;">
+						<div id='animX0' class='anime'>
+							<img id='mic_0' class='buttonImg' src='../images/microphone_transp_1.png' >
+						</div>
+					</button>
+					<button id="stopCapture-0" style="display:none;">Stop 0:</button>     
+				</td>
+			</tr>
+		</table>
+		<br>
+		<table class='table1x2Cols'>
+			<tr>
+				<td><div id='Lab6.8L1'></div></td>
+				<td><div id='Lab6.8R1'></div></td>
+			</tr>
+		</table>
+		
+		<table class='table1x1Cols'>
+			<tr>
+				<td>
+					<button id="playCapture-1">               
+						<img id='play_1' class='buttonImg' src='../images/playback_transp.png'>
+					</button>  Play signal g<sub>F </sub>(t)
+					<button id="startCapture-1" style="display:none;">
+						<div id='animX0' class='anime'>
+							<img id='mic_1' class='buttonImg' src='../images/microphone_transp_1.png' >
+						</div>
+					</button>
+					<button id="stopCapture-1" style="display:none;">Stop 1:</button>     
+				</td>
+			</tr>
+		</table>
+		<br>
+		<table class='table1x2Cols'>
+			<tr>
+				<td><div id='Lab6.8L2'></div></td>
+				<td><div id='Lab6.8R2'></div></td>
+			</tr>
+		</table>
+		<br>
+		<table class='table1x4Cols'>
+			<tr>
+				<td><div id='Lab6.8.3a'></div></td>
+				<td><div id='Lab6.8.3b'></div></td>
+				<td><div id='Lab6.8.3c'></div></td>
+				<td><div id='Lab6.8.3d'></div></td>
+			</tr>
+		</table>
+		<br>
+	<script>
+// *****************************************************************
+		//  Javascript starts here
+		//  'Lab6.8L1' means Lab 6.8, part a, Left side, row 1
+		//  'Lab6.8R2' means Lab 6.8, part a, Right side, row 2
+		//  'Lab6.8.3c' means Lab 6.8, part c, row 3
+		// set up global variables
+		experiment = '6.8';
+		
+		window.onload = function init()
+			{
+			theName0 = {fS: 0, data: []} // global definition of raw 1D audio
+			theName1 = {fS: 0, data: []} // global definition of raw 1D audio
+			theNames = [theName0,theName1]; // initial definition but global
+			nDisRec = theNames.length; // number of places to be reserved
+			
+			nMics = document.querySelectorAll('*[id^="startCapture-"]').length; // microphones this exercise
+			lengthMax = 2**Math.floor(Math.log2(100000/binningFactor))*binningFactor;
+			myDuration = Array(nMics).fill(1000*lengthMax/sampFreq); // time in milliseconds
+			nPlays = document.querySelectorAll('*[id^="playCapture-"]').length; // playbacks this exercise
+			acquired = Array(nPlays).fill(true); // data have not yet been acquired
+
+			// four windows in 2 x 2 array
+			wA = 'Lab6.8L1';
+			wB = 'Lab6.8R1';
+			wC = 'Lab6.8L2';
+			wD = 'Lab6.8R2';
+			
+			wE = 'Lab6.8.3a';
+			wF = 'Lab6.8.3b';
+			wG = 'Lab6.8.3c';
+			wH = 'Lab6.8.3d';
+
+			window.addEventListener("resize", resizeWindow);
+			prepareLab_6_8();
+			console.log('Starting experiment ' + experiment);
+			};
+		</script>
+		
+		<table class="invisibleButtonTable" id="jumpToExit">
+			<tr><td>
+				<div >
+					<button type="button"  class="invisibleButton" id="backBtn"
+					onclick="jumpToButton(returnAddress)">
+					    &larr;  Laboratory Exercises</button>
+				</div>
+			</td></tr>
+		</table>
+
+		<script type="text/javascript" src="../js/WavAudioEncoder.js"></script>
+		<script type="text/javascript" src="../js/utils.js"></script>
+		<script type="text/javascript" src='../js/SSPmedia.js'></script>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+	<head>
+		<meta name="format-detection" content="telephone=no">
+		<meta name="msapplication-tap-highlight" content="no">
+		<meta name="viewport" content=
+			"user-scalable=no,
+			 initial-scale=1,
+			 maximum-scale=1,
+			 minimum-scale=1,
+			 width=device-width">
+		<meta charset='UTF-8'>
+		<meta name="copyright" content="I.T. Young & R. Ligteringen, 1984, 2010–2020">
+		
+		<link rel="stylesheet" type="text/css" href="../css/myHTML_1.css" media="screen" />
+		<link rel='stylesheet' type='text/css' href='../css/myControls.css' media='screen' />
+		
+		<script type="text/javascript" src="../js/d3-format.min.js" charset="utf-8"></script>  
+		<script type="text/javascript" src="../js/plotly.min.js" charset="utf-8"></script>  
+		
+		<script type="text/javascript" src='../js/SSPconstants.js'></script>
+		<script type="text/javascript" src='../js/SSPfourier.js'></script>
+		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src='../js/SSPplotting.js'></script>
+		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
+
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
+		<script type="text/javascript" src="../js/extra.js"></script>
+
+		<title>Laboratory Exercise 9.1</title>
+		<br>
+		<script src='js/Lab_9-1.js'></script>
+		
+		<link rel="shortcut icon" href="../images/favicon.png">
+		<link rel="stylesheet" href="../assets/stylesheets/main.38780c08.min.css">
+	</head>
+	
+	<body class="bodyDisplayLabs">
+		<script>
+		// *****************************************************************
+		// Before proceeding check which platform is being used and take appropriate action
+
+// 		var answerOS = getPlatform().toLowerCase();
+		returnAddress = "../Chap_9.html#laboratory-exercise-91";
+		sessionStorage.setItem("xReturnAddress", returnAddress);
+		console.log('Device Configuration = ',navigator.userAgent);
+		</script>
+		
+<!-- Note the text "Click Me!" is transparent so you don't see it -->
+	<div class="invisibleBackgroundTop">
+		<button type="button" id="invisibleButtonTop" 
+			onclick="window.location.href = '#jumpToExit'">Click Me!</button>
+	</div>
+	
+	<br>
+	<h5>Laboratory Exercise 9.1</h5>
+	
+	<div class="scrollBrd">
+
+		To appreciate how well a matched filter works in the presence of noise, let 
+		us examine the estimation of the delay of an exponentially-decaying signal 
+		segment. This exercise builds upon 
+		<a href="../Chap_5.html#laboratory-exercise-51"><font color="royalBlue">
+		Laboratory Exercise 5.1</font></a> and 
+		<a href="../Chap_9.html#eq:match13"><font color="royalBlue">
+		Equation 9.13</font></a>. The filter is described by:
+		
+		<table class="centerEq" style="margin:10px auto 5px auto;">
+			<tr>
+				<td>(9.19)</td>
+				<td id="eq:matchedFilter1" style="padding-top:10px;">
+					<img width=65% src="../images/Eqn_Lab_9.1.1.png" 
+						alt="Missing Eqn_Lab_9.1.1.png"/>
+				</td>
+			</tr>
+		</table>
+		
+		The signal <i>h</i>[<i>n – 21</i>] is a delayed version of the filter. 
+		The noise, <i>N</i>[<i>n</i>], is zero-mean, Gaussian, and independent 
+		of the signal. The “corrupted” signal <i>r</i>[<i>n</i>] is given by 
+		<i>r</i>[<i>n</i>] = <i>h</i>[<i>n – 21</i>] + <i>N</i>[<i>n</i>].
+
+			<ol type="i">
+				<li>Starting from <i>&alpha;</i> = 0.9 and <i>SNR</i> = 1000:1, the 
+					results in the bottom row appear to differ. Explain why this is 
+					so.</li><br>
+				
+				<li>According to 
+					<a href="Chap_5.html#laboratoryExercise:le51">Section 5.1</a>, we 
+					should <i>not</i> expect that <i>&phi;<sub>rh</sub></i>[<i>k</i>] 
+					is even. Nevertheless, it appears to be symmetric (even) about its 
+					peak value. Explain why this is reasonable. (Note that the peak 
+					positions are illustrated in 
+					<font color="red" style="font-weight:bold;">red</font>.)</li><br>
+				
+				<li>The peak positions of the two computations <i>r</i>[<i>n</i>] 
+					&otimes; <i>h</i>[<i>-n</i>] and <i>r</i>[<i>n</i>] &otimes; 
+					<i>h</i>[<i>n</i>] are shown. If we hold the <i>SNR</i> constant 
+					at 1000:1. which computation—the correlation or the convolution—
+					gives a stable and correct estimate of the delay as we vary the 
+					value of <i>&alpha;</i>?</li><br>
+				
+				<li>If we hold the parameter <i>&alpha;</i> constant, which 
+					computation—the correlation or the convolution—gives a stable and 
+					correct estimate of the delay as we vary the value of the 
+					<i>SNR</i>? At what value of the <i>SNR</i> do both techniques 
+					cease to give a reliable estimate of the delay?</li><br>
+				
+				<li>Which computation—the correlation or the convolution—gives the best 
+					estimate of the delay as we vary the values of both <i>&alpha;</i> 
+					and the <i>SNR</i>?</li>
+			</ol>
+	</div>
+	
+	<div id="scrollNoBrd">
+		<br>
+		<table class='table1x2ColsAlt'>
+			<tr>
+				<td>&alpha;:   <input style="width:70%; vertical-align:middle;"
+						type='range'
+						oninput="showAlpha(this.value)"
+						onchange="chooseAlpha(this.value)"
+						min='0.1'
+						max='1'
+						step='0.1'
+						value='0.9'
+						id='rangeAlpha'>
+				</td>
+				<td>SNR:   <input style="width:70%; vertical-align:middle;"
+						type='range'
+						oninput="showSNR(this.value)"
+						onchange="chooseSNR(this.value)"
+						min='0'
+						max='7'
+						step='1'
+						value='7'
+						id='rangeSNR'>
+				</td>
+			</tr>
+			<tr>
+				<td>&alpha; = <output id="placeAlpha">0.9</output></td>
+				<td>SNR = <output id="placeSNR">1000</output>:1
+			</tr>
+			<tr>
+				<td colspan="2">
+					Retry: <button class='button' onclick="reTry()">
+						<img width="75%" height="75%" style="vertical-align:middle;" id="retryImage" src='../images/retry_56.png' style="padding:2px;">
+					</button>
+				</td>
+			</tr>
+		</table>
+
+		<table class='table1x2Cols'>
+			<tr>
+				<td>
+					<i>h</i>[<i>n</i>]
+				</td>
+				<td>
+					<i>r</i>[<i>n</i>] = h[n–n<sub>o</sub>] + N[n]
+				</td>
+			</tr>
+			<tr>
+				<td><div id="Lab9.1R1L"></div></td>
+				<td><div id="Lab9.1R1R"></div></td>
+			</tr>
+			<tr>
+				<td>
+					<i>&phi;<sub>rh </i></sub></font>[<i>k</i>] = r[n] 
+					<span style="font-style:normal;">&otimes;</span> h[–n]
+					<br>peak @ k = <output id="peakPosK">0</output>
+				</td>
+				<td>
+					r[n] <span style="font-style:normal;">&otimes;</span> h[n]
+					<br>peak @ n = <output id="peakPosN">0</output>
+				</td>
+			<tr>
+				<td><div id="Lab9.1R2L"></div></td>
+				<td><div id="Lab9.1R2R"></div></td>
+			</tr>
+		</table>
+
+	<script>
+		// *****************************************************************
+		//  Javascript starts here
+		//  'Lab9.1R2L' means Lab 9.1, row 2, Left 
+		// set up global variables
+	
+		experiment = '9.1';
+
+		window.onload = function init()
+			{
+			// global variables
+			wA = 'Lab9.1R1L';
+			wB = 'Lab9.1R1R';
+			wC = 'Lab9.1R2L';
+			wD = 'Lab9.1R2R';
+
+			window.addEventListener("resize", resizeWindow);
+			console.log('Starting experiment ' + experiment)
+			prepareLab_9_1();
+			};
+		</script>
+		
+		<table class="invisibleButtonTable" id="jumpToExit">
+			<tr><td>
+				<div >
+					<button type="button"  class="invisibleButton" id="backBtn"
+					onclick="jumpToButton(returnAddress)">
+					    &larr;  Laboratory Exercises</button>
+				</div>
+			</td></tr>
+		</table>
+
+		<script type="text/javascript" src="../js/WavAudioEncoder.js"></script>
+		<script type="text/javascript" src="../js/utils.js"></script>
+		<script type="text/javascript" src='../js/SSPmedia.js'></script>
+
+</div>
+</body>
+</html>

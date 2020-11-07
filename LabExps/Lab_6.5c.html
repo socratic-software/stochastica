@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+	<head>
+		<meta charset='UTF-8'>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="copyright" content="I.T. Young & R. Ligteringen, 1984, 2010–2020">
+		
+		<link rel="stylesheet" type="text/css" href="../css/myHTML_1.css" media="screen" />
+		<link rel='stylesheet' type='text/css' href='../css/myControls.css' media='screen' />
+		
+		<script type="text/javascript" src="../js/d3-format.min.js" charset="utf-8"></script>  
+		<script type="text/javascript" src="../js/plotly.min.js" charset="utf-8"></script>  
+		
+		<script type="text/javascript" src='../js/SSPconstants.js'></script>
+		<script type="text/javascript" src='../js/SSPfourier.js'></script>
+		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src='../js/SSPplotting.js'></script>
+		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
+		<script type="text/javascript" src="../js/extra.js"></script>
+		<script src='js/Lab_6-5.js'></script>
+		<script src='js/Lab_6-5c.js'></script>
+		<title>Laboratory Exercise 6.5c</title>
+		<br>
+		
+		<link rel="shortcut icon" href="../images/favicon.png">
+		<link rel="stylesheet" href="../assets/stylesheets/main.38780c08.min.css">
+	</head>
+	
+	<body class="bodyDisplayLabs">
+		<script>
+		// *****************************************************************
+		// Before proceeding check which platform is being used and take appropriate action
+
+// 		var answerOS = getPlatform().toLowerCase();
+		returnAddress = "../Chap_6.html#laboratory-exercise-65";
+		sessionStorage.setItem("xReturnAddress", returnAddress);
+		console.log('Device Configuration = ',navigator.userAgent);
+		</script>
+		
+<!-- Note the text "Click Me!" is transparent so you don't see it -->
+	<div class="invisibleBackgroundTop">
+		<button type="button" id="invisibleButtonTop" 
+			onclick="window.location.href = '#jumpToExit'">Click Me!</button>
+	</div>
+	
+	<br>
+	<h5>Laboratory Exercise 6.5c (conclusion)</h5>
+
+	<div class="scrollBrd">
+
+		Finally, we consider the input <i>e[n]</i>, a <output id="placeT">1.5</output> second white noise 
+		signal with an exponentially-distributed amplitude. The output is <i>e<sub>F </sub>[n]</i>, 
+		the filtered version of <i>e[n]</i>, that is, <i>e<sub>F </sub>[n] = h[n]</i> &otimes; <i>e[n]</i>.
+		
+		<ol type="i">
+			<li>Is the stochastic signal <i>e<sub>F </sub>[n]</i> a “white” noise signal? Explain your 
+				reasoning.</li><br>
+	
+			<li>When you <i>listen</i> to each of the signals <i>e[n]</i> and <i>e<sub>F </sub>[n]</i>, 
+				do you hear the result of the filtering? How does this filtered result compare to the 
+				resuts from the previous sections?</li><br>
+	
+			<li>How does the loudness of <i>e[n]</i> and <i>e<sub>F</sub>[n]</i> compare to 
+				the loudness of the results from the previous sections?</li><br>
+			
+			<li>How do you explain the change in the estimates of the probability density 
+				function between <i>e[n]</i> and <i>e<sub>F </sub>[n]</i>?</li><br>
+			
+			<li>Can you estimate <i>H(&Omega;=0)</i>? Explain your estimate</li>
+		</ol>
+		
+		Proceeed to another part of this exercise by choosing the variant below.
+		<br><br>
+	</div>
+	
+	<div id="scrollNoBrd">
+		<br>
+		
+		<table class='radioTable'>
+			<tr>
+				<td style="font-size:0.8rem;">Choose lab variant:      </td>
+				<td>
+					<label class="container"><span class="buttonText">a</span>
+					<input type="radio" name="unique" id="A" 
+						onclick="nextPage('A','Lab_6.5a.html')">
+					<span class="checkmark"></span>
+					</label>
+				</td>
+				<td>&rarr;</td>
+				<td>
+					<label class="container"><span class="buttonText">b</span>
+					<input type="radio" name="unique" id="B" 
+						onclick="nextPage('B','Lab_6.5b.html')">
+					<span class="checkmark"></span>
+					</label>
+				</td>
+				<td>&rarr;</td>
+				<td>
+					<label class="container"><span class="buttonText">c</span>
+					<input type="radio" checked="checked" name="unique" id="C" 
+						onclick="nextPage('C','Lab_6.5c.html')">
+					<span class="checkmark"></span>
+					</label>
+				</td>
+			</tr>
+		</table>
+		<br>
+
+		<table class='radioTable'>
+			<tr>
+				<td style="font-size:0.8rem;">Choose display:         </td>
+				<td> 
+					<label class="container">
+					<span style="font-family:Georgia,Palatino,Bodoni,serif;">
+						<i>Signal & Histogram</i>     </span>
+					<input type="radio" value='SH' checked="checked"
+						onclick="myFunctionDisp(this.value,'SH',
+							'Lab6.5cL1','Lab6.5cR1','Lab6.5cL2','Lab6.5cR2')"
+						name="display">
+					<span class="checkmark"></span>
+					</label>
+				</td>
+				<td>
+					<!-- display correlation function & power spectal density = 'CP'  -->
+					<label class="container">
+					<span style="font-family:Georgia,Palatino,Bodoni,serif;">
+						<i>&phi;(&tau;) & S(&omega;)</i></span>
+					<input type="radio" value='CP'
+						onclick="myFunctionDisp(this.value,'CP',
+							'Lab6.5cL1','Lab6.5cR1','Lab6.5cL2','Lab6.5cR2')"
+						name="display">
+					<span class="checkmark"></span>
+					</label>
+				</td>
+			</tr>
+		</table>
+		<br>
+		<!-- Slider to choose Zoom  -->
+		<table class='table1x3Cols'>
+			<tr>
+				<td>Zoom: </td>
+				<td><input
+						id='zm'
+						type='range'
+						oninput="myFunctionZoom(this.value)"
+						min='0'
+						max='11'
+						step='1'
+						value='0'
+						id='zm'>
+				</td>
+				<td>
+					<output id="placeN1">N = ----- samples</output><br>
+					<output id="placeN2">= ----- ms</output>
+				</td>
+			</tr>
+		</table>
+		<br>
+		<table class='table1x1Cols'>
+			<tr>
+				<td>
+					<button id="playCapture-0">               
+						<img id='play_0' class='buttonImg' src='../images/playback_transp.png'>
+					</button>  Play signal e(t)
+					<button id="startCapture-0" style="display:none;">
+						<div id='animX0' class='anime'>
+							<img id='mic_0' class='buttonImg' src='../images/microphone_transp_1.png' >
+						</div>
+					</button>
+					<button id="stopCapture-0" style="display:none;">Stop 0:</button>     
+				</td>
+			</tr>
+		</table>
+		
+		<table class='table1x2Cols'>
+			<tr>
+				<td><div id='Lab6.5cL1'></div></td>
+				<td><div id='Lab6.5cR1'></div></td>
+			</tr>
+		</table>
+		
+		<table class='table1x1Cols'>
+			<tr>
+				<td>
+					<button id="playCapture-1">               
+						<img id='play_1' class='buttonImg' src='../images/playback_transp.png'>
+					</button>  Play signal e<sub>F </sub>(t)
+					<button id="startCapture-1" style="display:none;">
+						<div id='animX1' class='anime'>
+							<img id='mic_1' class='buttonImg' src='../images/microphone_transp_1.png' >
+						</div>
+					</button>
+					<button id="stopCapture-1" style="display:none;">Stop 1:</button>     
+				</td>
+			</tr>
+		</table>
+
+		<table class='table1x2Cols'>
+			<tr>
+				<td><div id='Lab6.5cL2'></div></td>
+				<td><div id='Lab6.5cR2'></div></td>
+			</tr>
+		</table>
+		<br>
+	<script>
+// *****************************************************************
+		//  Javascript starts here
+		//  'Lab6.5cL1' means Lab 6.5, part c, Left side, row 1
+		//  'Lab6.5cR2' means Lab 6.5, part c, Right side, row 2
+		// set up global variables
+		experiment = '6.5c';
+		
+		window.onload = function init()
+			{
+			theName0 = {fS: 0, data: []} // global definition of raw 1D audio
+			theName1 = {fS: 0, data: []} // global definition of raw 1D audio
+			theNames = [theName0,theName1]; // initial definition but global
+			nDisRec = theNames.length; // number of places to be reserved
+			
+			nMics = document.querySelectorAll('*[id^="startCapture-"]').length; // microphones this exercise
+			lengthMax = 2**Math.floor(Math.log2(100000/binningFactor))*binningFactor;
+			myDuration = Array(nMics).fill(1000*lengthMax/sampFreq); // time in milliseconds
+			nPlays = document.querySelectorAll('*[id^="playCapture-"]').length; // playbacks this exercise
+			acquired = Array(nPlays).fill(true); // data have been synthesized
+
+			// four windows in 2 x 2 array
+			wA = 'Lab6.5cL1';
+			wB = 'Lab6.5cR1';
+			wC = 'Lab6.5cL2';
+			wD = 'Lab6.5cR2';
+	
+			window.addEventListener("resize", resizeWindow);
+			prepareLab_6_5();
+			executeLab_6_5c( );
+			console.log('Starting experiment ' + experiment);
+			};
+		</script>
+		
+		<table class="invisibleButtonTable" id="jumpToExit">
+			<tr><td>
+				<div >
+					<button type="button"  class="invisibleButton" id="backBtn"
+					onclick="jumpToButton(returnAddress)">
+					    &larr;  Laboratory Exercises</button>
+				</div>
+			</td></tr>
+		</table>
+
+		<script type="text/javascript" src="../js/WavAudioEncoder.js"></script>
+		<script type="text/javascript" src="../js/utils.js"></script>
+		<script type="text/javascript" src='../js/SSPmedia.js'></script>
+
+</div>
+</body>
+</html>

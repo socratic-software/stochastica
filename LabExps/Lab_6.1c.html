@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+	<head>
+		<meta charset='UTF-8'>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="copyright" content="I.T. Young & R. Ligteringen, 1984, 2010–2020">
+		
+		<link rel="stylesheet" type="text/css" href="../css/myHTML_1.css" media="screen" />
+		<link rel='stylesheet' type='text/css' href='../css/myControls.css' media='screen' />
+		
+		<script type="text/javascript" src="../js/d3-format.min.js" charset="utf-8"></script>  
+		<script type="text/javascript" src="../js/plotly.min.js" charset="utf-8"></script>  
+		
+		<script type="text/javascript" src='../js/SSPconstants.js'></script>
+		<script type="text/javascript" src='../js/SSPfourier.js'></script>
+		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src='../js/SSPplotting.js'></script>
+		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
+		<script type="text/javascript" src="../js/extra.js"></script>
+		<script src='js/Lab_6-1c.js'></script>
+		<title>Laboratory Exercise 6.1c</title>
+		<br>
+		
+		<link rel="shortcut icon" href="../images/favicon.png">
+		<link rel="stylesheet" href="../assets/stylesheets/main.38780c08.min.css">
+	</head>
+	
+	<body class="bodyDisplayLabs">
+		<script>
+		// *****************************************************************
+		// Before proceeding check which platform is being used and take appropriate action
+
+// 		var answerOS = getPlatform().toLowerCase();
+		returnAddress = "../Chap_6.html#laboratory-exercise-61";
+		sessionStorage.setItem("xReturnAddress", returnAddress);
+		console.log('Device Configuration = ',navigator.userAgent);
+		</script>
+		
+<!-- Note the text "Click Me!" is transparent so you don't see it -->
+	<div class="invisibleBackgroundTop">
+		<button type="button" id="invisibleButtonTop" 
+			onclick="window.location.href = '#jumpToExit'">Click Me!</button>
+	</div>
+	
+	<br>
+	<h5>Laboratory Exercise 6.1c (conclusion)</h5>
+
+	<div class="scrollBrd">
+		We now generate <output id="placeT">1.5</output> seconds of binary noise. In this noise 
+		process there are only two possible amplitudes at each time point: either +1 with 
+		probability <i>p</i> or –1 with probability 1–<i>p</i>. Further, we choose <i>p</i> = 1/2 
+		and this implies the “fair coin” that we have looked at in 
+		<a href="../Chap_4.html#example:coin_example"><font color="royalBlue">Example 4.1</font></a> and 
+		<a href="../Chap_4.html#example-is-that-coin-fair"><font color="royalBlue">Example 4.4</font></a>.
+		
+			<ol type="i">
+				<li>Based upon the data shown in the bottom row, is it reasonable to conclude that 
+					<i>b[n]</i> is a sample of a white noise process? Explain your reasoning.</li><br>
+					
+				<li>How do you perceive the loudness of <i>b[n]</i> compared to <i>g[n]</i> and 
+					<i>u[n]</i> from the two amplitude histograms and/or the signals themselves 
+					explain your answer?</li><br>
+				<li><i>What does this mean?</i> Although we devote a good deal of time to
+					examining the Gaussian noise process (and for good reason), is it the only
+					noise process that can be described as white noise?</li><br>
+				<li><i>Hard</i>: Are all stationary Gaussian noise processes white?</li>
+			</ol>
+		
+		Proceeed to another part of this exercise by choosing the variant below.
+		<br><br>
+	</div>
+	
+	<div id="scrollNoBrd">
+		<br>
+		
+		<table class='radioTable'>
+			<tr>
+				<td style="font-size:0.8rem;">Choose lab variant:      </td>
+				<td>
+					<label class="container"><span class="buttonText">a</span>
+					<input type="radio" name="unique" id="A" 
+						onclick="nextPage('A','Lab_6.1a.html')">
+					<span class="checkmark"></span>
+					</label>
+				</td>
+				<td>&rarr;</td>
+				<td>
+					<label class="container"><span class="buttonText">b</span>
+					<input type="radio" name="unique" id="B" 
+						onclick="nextPage('B','Lab_6.1b.html')">
+					<span class="checkmark"></span>
+					</label>
+				</td>
+				<td>&rarr;</td>
+				<td>
+					<label class="container"><span class="buttonText">c</span>
+					<input type="radio" checked="checked" name="unique" id="C" 
+						onclick="nextPage('C','Lab_6.1c.html')">
+					<span class="checkmark"></span>
+					</label>
+				</td>
+			</tr>
+		</table>
+		<br>
+
+		<table class='table1x2Cols'>
+			<tr>
+				<td colspan="2" style='text-align: center; vertical-align:middle;'>
+					<button id="playCapture-0">               
+						<img id='play_0' class='buttonImg' src='../images/playback_transp.png'>
+					</button>  Play noise sample
+					<button id="startCapture-0" style="display:none;">
+						<div id='animX0' class='anime'>
+							<img id='mic_0' class='buttonImg' src='../images/microphone_transp_1.png' >
+						</div>
+					</button>
+					<button id="stopCapture-0" style="display:none;">Stop 0:</button>     
+				</td>
+			</tr>
+			<tr>
+				<td>Zoom: <input style="width:80%; vertical-align:middle;"
+						type='range'
+						oninput="myFunctionZoom(this.value)"
+						min='0'
+						max='11'
+						step='1'
+						value='0'
+						id='zm'>
+				</td>
+				<td>
+					<output id="placeN1">N = ----- samples</output>
+					<output id="placeN2">= ----- ms</output>
+				</td>
+			</tr>
+			<tr><td> </td><td> </td></tr>
+			<tr>
+				<td>
+					<font style="color:black; font-weight:normal">Binary noise sample
+					b<output id="tn">[n]</output></font>
+				</td>
+				<td>
+					<font style="color:black; font-weight:normal">
+					amplitude histogram h[b]</font>
+				</td>
+			</tr>
+			<tr>
+				<td><div id='Lab6.1cL1'></div></td>
+				<td><div id='Lab6.1cR1'></div></td>
+			</tr>
+			<tr>
+				<td>
+					<font style="color:black; font-weight:normal">normalized 
+					&phi;<sub>bb </sub><output id="tauk">[k]</output></font>
+				</td>
+				<td>
+					<font style="color:black; font-weight:normal">normalized 
+					S<sub>bb</sub>(&Omega;)</font>
+				</td>
+			<tr>
+				<td><div id='Lab6.1cL2'></div></td>
+				<td><div id='Lab6.1cR2'></div></td>
+			</tr>
+		</table>
+		<script>
+// *****************************************************************
+		//  Javascript starts here
+		//  'Lab6.1cL1' means Lab 6.1, part a, Left side, row 1
+		//  'Lab6.1cR2' means Lab 6.1, part a, Right side, row 2
+		// set up global variables
+		experiment = '6.1c';
+		
+		window.onload = function init()
+			{
+			theName0 = {fS: 0, data: []} // global definition of raw 1D audio
+			theNames = [theName0]; // initial definition but global
+			nDisRec = theNames.length; // number of places to be reserved
+			
+			nMics = document.querySelectorAll('*[id^="startCapture-"]').length; // microphones in exercise
+			lengthMax = 2**Math.floor(Math.log2(100000/binningFactor))*binningFactor;
+			myDuration = Array(nMics).fill(1000*lengthMax/sampFreq); // time in milliseconds
+			nPlays = document.querySelectorAll('*[id^="playCapture-"]').length; // playbacks this exercise
+			acquired = Array(nPlays).fill(false); // data have not yet been acquired
+
+			// four windows in 2 x 2 array
+			wA = 'Lab6.1cL1';
+			wB = 'Lab6.1cR1';
+			wC = 'Lab6.1cL2';
+			wD = 'Lab6.1cR2';
+	
+			window.addEventListener("resize", resizeWindow);
+			console.log('Starting experiment ' + experiment)
+			prepareLab_6_1();
+			};
+		</script>
+		
+		<table class="invisibleButtonTable" id="jumpToExit">
+			<tr><td>
+				<div >
+					<button type="button"  class="invisibleButton" id="backBtn"
+					onclick="jumpToButton(returnAddress)">
+					    &larr;  Laboratory Exercises</button>
+				</div>
+			</td></tr>
+		</table>
+
+		<script type="text/javascript" src="../js/WavAudioEncoder.js"></script>
+		<script type="text/javascript" src="../js/utils.js"></script>
+		<script type="text/javascript" src='../js/SSPmedia.js'></script>
+
+</div>
+</body>
+</html>

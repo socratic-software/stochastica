@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+	<head>
+		<meta name="format-detection" content="telephone=no">
+		<meta name="msapplication-tap-highlight" content="no">
+		<meta name="viewport" content=
+			"user-scalable=no,
+			 initial-scale=1,
+			 maximum-scale=1,
+			 minimum-scale=1,
+			 width=device-width">
+		<meta charset='UTF-8'>
+		<meta name="copyright" content="I.T. Young & R. Ligteringen, 1984, 2010–2020">
+		
+		<link rel="stylesheet" type="text/css" href="../css/myHTML_1.css" media="screen" />
+		<link rel='stylesheet' type='text/css' href='../css/myControls.css' media='screen' />
+		
+		<script type="text/javascript" src="../js/d3-format.min.js" charset="utf-8"></script>
+		<script type="text/javascript" src="../js/plotly.min.js" charset="utf-8"></script>  
+		
+		<script type="text/javascript" src='../js/SSPconstants.js'></script>
+		<script type="text/javascript" src='../js/SSPfourier.js'></script>
+		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src='../js/SSPplotting.js'></script>
+		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
+
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
+		<script type="text/javascript" src="../js/extra.js"></script>
+		
+<!-- 
+		<title>Laboratory Exercise 12.4</title>
+ -->
+		<title>Laboratory Exercise 12.3</title>
+		<br>
+		<script src='js/Lab_12-4.js'></script>
+		
+		<link rel="shortcut icon" href="../images/favicon.png">
+		<link rel="stylesheet" href="../assets/stylesheets/main.38780c08.min.css">
+	</head>
+	
+	<body class="bodyDisplayLabs">
+		<script>
+		// *****************************************************************
+		// Before proceeding check which platform is being used and take appropriate action
+
+// 		var answerOS = getPlatform().toLowerCase();
+// 		returnAddress = "../Chap_12.html#laboratory-exercise-124";
+		returnAddress = "../Chap_12.html#laboratory-exercise-123";
+		sessionStorage.setItem("xReturnAddress", returnAddress);
+		console.log('Device Configuration = ',navigator.userAgent);
+		</script>
+		
+<!-- Note the text "Click Me!" is transparent so you don't see it -->
+	<div class="invisibleBackgroundTop">
+		<button type="button" id="invisibleButtonTop" 
+			onclick="window.location.href = '#jumpToExit'">Click Me!</button>
+	</div>
+	
+	<br>
+<!-- 
+	<h5>Laboratory Exercise 12.4</h5>
+ -->
+	<h5>Laboratory Exercise 12.3</h5>
+		
+	<div class="scrollBrd">
+		Can the use of windows other than the rectangular (Block) window help us to estimate 
+		power spectral densities? We start with the pure musical tone A<sub>3</sub> to examine 
+		the interplay between the number of samples and the form (shape) of the window 
+		<i>w</i>[<i>n</i>] that is used to estimate the power spectral density.
+		<br><br>
+		In the following, you can hear the original note, view the (sampled) signal 
+		<i>x</i>[<i>n</i>] and its windowed version <i>y</i>[<i>n</i>] = 
+		<i>w</i>[<i>n</i>]<i>x</i>[<i>n</i>], and estimate the power spectral densities 
+		<i>S<sub>xx</sub></i>(<i>&omega;=2&pi;f</i>) and 
+		<i>S<sub>yy</sub></i>(<i>&omega;=2&pi;f</i>). Use the zoom controls to examine 
+		both time domain and frequency domain characteristics.
+			<ol type="i">
+					<li>Listen to the musical tone so that you will know what signal you are dealing 
+					with and what you might expect in a spectral analysis.</li><br>
+					<li>What “theoretical” spectrum should you expect for 
+					<i>S<sub>xx</sub></i>(<i>&omega;=2&pi;f</i>)? Why do you think that this is 
+					the proper choice?</li><br>
+					<li>Using 2<sup>15</sup> samples, how does the estimate of the power spectral 
+					density change when a window other than the Block window is used to select 
+					and weight the data that are to be analyzed?</li><br>
+					<li>Which of the eight windows leads to the narrowest main peak of the 
+					spectral estimate? Which is the next best? Which is the widest main peak?</li><br>
+					<li>Repeat the above two questions but now with 2<sup>10</sup> samples.</li><br>
+					<li>What is the reason to use the width of the main peak in comparing 
+					various windows?</li>
+			</ol>
+		Until now, we have looked at the main lobe associated with the window. Now let us look 
+		at the sidelobes.
+			<ol type="i" start="7">
+				<li>Press the <span class="inLineBtn">  Linear / Logarithmic  </span> button. The window 
+				shows the same display as before except that the log<sub>10</sub>() of the power 
+				spectral density is displayed. This can help to pick out spectral details.</li><br>
+				<li>Examine the side lobes of the spectrum of 
+				<i>S<sub>xx</sub></i>(<i>&omega;=2&pi;f</i>) with 2<sup>15</sup> samples and a 
+				Block window.</li>
+			</ol>
+		In the following it may help to use a reasonable amount of zoom on the frequency axis.
+			<ol type="i" start="9">
+				<li>Reduce the number of samples to 2<sup>11</sup>. How do the sidelobes change 
+				with fewer samples?</li><br>
+				<li>How do the sidelobes of the Bartlett window compare to the Block window? 
+				Does this match the prediction from theory? <i>Hint</i>: A Bartlett window 
+				can be considered as the convolution of two Block windows.</li><br>
+				<li>Considering the eight windows shown, which window has the smallest 
+				sidelobes?</li><br>
+				<li>What is the relevance of sidelobes in evaluating different window choices?</li>
+			</ol>
+	</div>
+	<br>
+	<div id="scrollNoBrd">
+		<p style="font-size:0.8rem; margin-left:6.8vw; margin-top:0.64vw; margin-bottom:1.54vw;">
+			Choose a window w[n]:
+		</p>
+		<table class="windowTable">
+		<!-- Radio buttons to choose underlying window  -->
+			<tr>
+				<td> 
+					<label class="container">Block
+					<input type="radio" checked="checked"
+						onclick="chooseWindow('Block');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td><td>
+					<label class="container">Bartlett
+					<input type="radio"
+						onclick="chooseWindow('Bartlett');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td><td>
+					<label class="container">Parzen
+					<input type="radio"
+						onclick="chooseWindow('Parzen');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td><td>
+					<label class="container">Gauss
+					<input type="radio"
+						onclick="chooseWindow('Gauss');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+			</tr>
+			<tr>
+				</td><td>
+					<label class="container">Verbeek
+					<input type="radio"
+						onclick="chooseWindow('Verbeek');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td><td>
+					<label class="container">Tukey
+					<input type="radio"
+						onclick="chooseWindow('Tukey');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td><td>
+					<label class="container">Hamming
+					<input type="radio"
+						onclick="chooseWindow('Hamming');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td><td>
+					<label class="container">Hann
+					<input type="radio"
+						onclick="chooseWindow('Hann');" name="distr">
+					<span class="checkmark"></span>
+					</label>
+				</td>
+			</tr>
+		</table>
+		<br>
+
+		<!-- Slider to choose Samples  -->
+		<table class='table1x4ColsAlt'>
+			<tr>
+				<td style="text-align:right; width:15%;">Samples: </td>
+				<td style="text-align:left; width:30%;"><input
+						type='range'
+						oninput="sliderChoices(this.value, 'N')"
+						min='0'
+						max='7'
+						step='1'
+						value='0'
+						id='N'>
+				</td>
+				<td style="text-align:right; width:25%;">Synthetic note:</td>
+				<td style="text-align:left; width:20%;">
+					<button id="playCapture-0">
+						<img id='play_0' class='buttonImg' src='../images/playback_transp.png'>
+					</button>
+					<button id="startCapture-0" style="display:none;">
+						<div id='animX0' class='anime'>
+							<img id='mic_0' class='buttonImg' src='../images/microphone_transp_1.png' >
+						</div>
+					</button>
+					<button id="stopCapture-0" style="display:none;">Stop 0:</button>     
+				</td>
+			</tr>
+		</table>
+		<br>
+
+		<table class='winTable'>
+			<tr>  <!-- These are fixed -->
+				<td><span style="color:steelBlue;">x[n] & S<sub>xx</sub>(&omega;)</span>:</td>
+				<td>N<sub>x</sub> = <output id="placeN1">0</output></td>
+				<td>Block window</td>
+			</tr>
+			<tr>  <!-- These are variable -->
+				<td><span style="color:rgba(253,128,130,1);">y[n] & S<sub>yy</sub>(&omega;)</span>:</td>
+				<td>N<sub>y</sub> = <output id="placeN2">0</output></td>
+				<td><output id="placeW">Block</output> window</td>
+			</tr>
+		</table>
+		<br>
+
+		<!-- Sliders to choose Zoom & Frequency  -->
+		<table class='table1x4ColsAlt'>
+			<tr>
+				<td style="text-align:right; width:15%;">Zoom (t): </td>
+				<td style="text-align:left; width:30%;"><input
+						type='range'
+						oninput="sliderChoices(this.value, 'Zt')"
+						min='0'
+						max='5'
+						step='1'
+						value='0'
+						id='zt'>
+				</td>
+				<td style="text-align:right; width:15%;">Zoom (f): </td>
+				<td style="text-align:left; width:30%;"><input
+						type='range'
+						oninput="sliderChoices(this.value, 'Zf')"
+						min='0'
+						max='4'
+						step='1'
+						value='0'
+						id='zf'>
+				</td>
+			</tr>
+		</table>
+		<br>
+
+		<table class='twoGraphTable'>
+			<tr>
+				<td> </td>
+				<td style="text-align: center;">
+				<button type="button" class="linLogBtn" onclick="linLog()">
+					  Linear / Logarithmic  
+				</button>
+				</td>
+			</tr>
+		</table>
+		<br>
+		<table class='table1x2Cols'>
+			<tr>
+				<td><div id='Lab12.4L'></div></td>
+				<td><div id='Lab12.4R'></div></td>
+			</tr>
+		</table>
+		
+		<br>
+
+		<script>
+// *****************************************************************
+		//  Javascript starts here
+		//  'Lab12.3L' means Lab 12.3, Left
+		//  'Lab12.3R' means Lab 12.3, Right
+		
+		// set up global variables
+		experiment = '12.4';
+
+		window.onload = function init()
+			{
+			// global variables
+			theName0 = {fS: sampFreq, data: []} // global definition of raw 1D audio
+			theNames = [theName0]; // initial definition but global
+			nDisRec = theNames.length; // number of places to be reserved
+			
+			nMics = document.querySelectorAll('*[id^="startCapture-"]').length; // microphones this exercise
+			lengthMax = 2**(factor2-2); // defined in SSPmedia.js
+			myDuration = Array(nMics).fill(1000*lengthMax/sampFreq); // time in milliseconds
+			nPlays = document.querySelectorAll('*[id^="playCapture-"]').length; // playbacks this exercise
+			acquired = Array(nPlays).fill(false); // data have not yet been acquired
+
+			plotList = []; // global list of arguments for Plotly.newPlot()
+			
+			// two windows in 1 x 2 array
+			wA = 'Lab12.4L';
+			wB = 'Lab12.4R';
+			
+			window.addEventListener("resize", resizeWindow);
+			prepareLab_12_4();
+			console.log('Starting experiment ' + experiment);
+			};
+		</script>
+		
+		<table class="invisibleButtonTable" id="jumpToExit">
+			<tr><td>
+				<div >
+					<button type="button"  class="invisibleButton" id="backBtn"
+					onclick="jumpToButton(returnAddress)">
+					    &larr;  Laboratory Exercises</button>
+				</div>
+			</td></tr>
+		</table>
+
+		<script type="text/javascript" src="../js/WavAudioEncoder.js"></script>
+		<script type="text/javascript" src="../js/utils.js"></script>
+		<script type="text/javascript" src='../js/SSPmedia.js'></script>
+
+</div>
+</body>
+</html>

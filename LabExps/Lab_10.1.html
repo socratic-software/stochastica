@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+	<head>
+		<meta charset='UTF-8'>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="copyright" content="I.T. Young & R. Ligteringen, 1984, 2010–2020">
+		
+		<link rel="stylesheet" type="text/css" href="../css/myHTML_1.css" media="screen" />
+		<link rel='stylesheet' type='text/css' href='../css/myControls.css' media='screen' />
+		
+		<script type="text/javascript" src="../js/d3-format.min.js" charset="utf-8"></script>  
+		<script type="text/javascript" src="../js/plotly.min.js" charset="utf-8"></script>  
+		
+		<script type="text/javascript" src='../js/SSPconstants.js'></script>
+		<script type="text/javascript" src='../js/SSPfourier.js'></script>
+		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src='../js/SSPplotting.js'></script>
+		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
+		<script type="text/javascript" src="../js/extra.js"></script>
+
+		<title>Laboratory Exercise 10.1</title>
+		<br>
+		<script src='js/Lab_10-1.js'></script>
+		
+		<link rel="shortcut icon" href="../images/favicon.png">
+		<link rel="stylesheet" href="../assets/stylesheets/main.38780c08.min.css">
+	</head>
+	
+	<body class="bodyDisplayLabs">
+		<script>
+		// *****************************************************************
+		// Before proceeding check which platform is being used and take appropriate action
+
+// 		var answerOS = getPlatform().toLowerCase();
+		returnAddress = "../Chap_10.html#laboratory-exercise-101";
+		sessionStorage.setItem("xReturnAddress", returnAddress);
+		console.log('Device Configuration = ',navigator.userAgent);
+		</script>
+		
+<!-- Note the text "Click Me!" is transparent so you don't see it -->
+	<div class="invisibleBackgroundTop">
+		<button type="button" id="invisibleButtonTop" 
+			onclick="window.location.href = '#jumpToExit'">Click Me!</button>
+	</div>
+	
+	<br>
+		<h5>Laboratory Exercise 10.1</h5>
+	
+		<div class="scrollBrd">
+			We begin with a synthetic signal <b>s</b> distorted by stationary, additive, 
+			white, Gaussian noise <b>N</b> resulting in <b>r</b> = <b>s</b> + <b>N</b> 
+			where <i>s</i>[<i>n</i>] is a delayed impulse <i>&delta;</i>[<i>n</i> – 
+			<i>n<sub>o</sub></i>] and the noise power density is <i>N<sub>o</sub></i>. 
+			The Wiener filter <b>h</b> to restore the signal <b>s</b> 
+			from <b>r</b> is given by <a href="../Chap_10.html#eq:Weq22">
+			<font color="darkblue">Equation 10.22</font></a> which is specified in 
+			the frequency domain <b>H</b> and is repeated below:  
+			
+			<table class="centerEqTable">
+				<tr>
+					<td>(10.35)</td>
+					<td id="fig:fig_Wiener7">
+						<img width=40% src="../images/Eqn_Lab_10.1.1.gif" alt="Missing Wiener equation"/>
+					</td>
+				</tr>
+			</table>
+
+			In this exercise we will examine how well this technique works. Use the slider control 
+			to adjust the signal-to-noise ratio. <i>SNR</i>. Use the playback buttons to listen to 
+			the original signal, the signal corrupted by noise, or the "restored" signal that 
+			results from Wiener filtering.<br>
+		
+			<ol type="i">
+				<li>Based upon the information given above, determine a simple expression 
+					for <i>H</i>(<i>&Omega;</i>).</li><br>
+				<li>Starting from <i>SNR</i> = 1000:1, look at the output of the Wiener filter in 
+					the lower, right panel as the <i>SNR</i> is decreased. At what <i>SNR</i> 
+					is the signal no longer discernible from the noise?</li><br>
+				<li>When comparing the result of the Wiener filtering to the noise signal displayed 
+					in the top, left panel, can the restoration filter make the signal visible after 
+					you would expect it to be buried (invisible) in the noise?</li><br>
+				<li>After listening to the original signal, at what <i>SNR</i> can you no longer 
+					distinguish (hear) the signal embedded in the noise? Is the signal recognizable 
+					in the Wiener-filtered version? Is it visible in the panel in the bottom 
+					right?</li>
+			</ol>
+		</div>
+		
+		<div id="scrollNoBrd">
+		<br><br>
+		
+		<!-- Slider to choose SNR  -->
+		<table class='table1x3Cols'>
+			<tr>
+				<td>SNR: </td>
+				<td><input
+						type='range'
+						oninput="showSNR(this.value)"
+						onchange="getSNR(this.value)"
+						min='0'
+						max='7'
+						step='1'
+						value='7'
+						id='snr'>
+				</td>
+				<td>
+					<output id="placeN1">N = ----- samples</output><br>
+					<output id="placeN2">= ----- ms</output><br>
+					<output id="placeN3">SNR = 1000:1</output>
+				</td>
+			</tr>
+		</table>
+		<br>
+
+		<table class="musicTableAlt" style="margin-top:-10px; margin-bottom:20px; ">
+			<tr>
+				<td>
+					<button id="playCapture-0">
+						<img id='play_0' class='buttonImg' src='../images/playback_transp.png'>
+					</button>
+					<button id="startCapture-0" style="display:none;">
+						<div id='animX0' class='anime'>
+							<img id='mic_0' class='buttonImg' src='../images/microphone_transp_1.png' >
+						</div>
+					</button>
+					<button id="stopCapture-0" style="display:none;">Stop 0:</button>     
+				</td>
+				<td>= Original signal</td>
+				<td>
+					<button id="playCapture-1">
+						<img id='play_1' class='buttonImg' src='../images/playback_transp.png'>
+					</button>
+					<button id="startCapture-1" style="display:none;">
+						<div id='animX1' class='anime'>
+							<img id='mic_1' class='buttonImg' src='../images/microphone_transp_1.png' >
+						</div>
+					</button>
+					<button id="stopCapture-1" style="display:none;">Stop 1:</button>     
+				</td>
+				<td>= Signal + Noise</td>
+			</tr>
+		</table>
+
+		<table class='table1x2Cols'>
+			<tr>
+				<td>
+					Signals 
+					<span style="color: royalBlue"><b>s</b></span> & 
+					<span style="color: hotPink"><b>N</b></span>
+				</td>
+				<td>
+					Power spectral densities 
+					<span style="color: royalBlue"><b>S<sub>ss</sub>(2&pi;f)</b></span> & 
+					<span style="color: hotPink"><b>S<sub>NN</sub>(2&pi;f)</b></span>
+				</td>
+			</tr>
+			<tr>
+				<td><div id='Lab10.1L1'></div></td>
+				<td><div id='Lab10.1R1'></div></td>
+			</tr>
+		</table>
+		
+		<table class="musicTableAlt" style="margin-bottom:20px; ">
+			<tr>
+				<td></td>
+				<td></td>
+				<td>
+					<button id="playCapture-2">
+						<img id='play_2' class='buttonImg' src='../images/playback_transp.png'>
+					</button>
+					<button id="startCapture-2" style="display:none;">
+						<div id='animX2' class='anime'>
+							<img id='mic_2' class='buttonImg' src='../images/microphone_transp_1.png' >
+						</div>
+					</button>
+					<button id="stopCapture-2" style="display:none;">Stop 2:</button>     
+				</td>
+				<td>= Restored signal</td>
+			</tr>
+		</table>
+		<table class='table1x2Cols'>
+			<tr>
+				<td>
+					Wiener filter <font 
+					style="color:royalBlue; font-weight:bold">H<sub>W </sub>(2&pi;f)
+					</font>
+				</td>
+				<td>
+					Wiener filter output with <b>SNR = 
+					<output id="snr1">1000</output>:1</b>
+				</td>
+			</tr>
+			<tr>
+				<td><div id='Lab10.1L2'></div></td>
+				<td><div id='Lab10.1R2'></div></td>
+			</tr>
+		</table>
+
+		<script>
+// *****************************************************************
+		//  Javascript starts here
+		//  'Lab10.1L1' means Lab 10.1, Left side, row 1
+		//  'Lab10.1R2' means Lab 10.1, Right side, row 2
+
+		// set up global variables
+		experiment = '10.1';
+
+		window.onload = function init()
+			{
+			// global variables
+			theName0 = {fS: 0, data: []} // global definition of raw 1D audio
+			theName1 = {fS: 0, data: []} // global definition of raw 1D audio
+			theName2 = {fS: 0, data: []} // global definition of raw 1D audio
+			theNames = [theName0,theName1,theName2]; // initial definition but global
+			nDisRec = theNames.length; // number of places to be reserved
+
+			nMics = document.querySelectorAll('*[id^="startCapture-"]').length; // microphones this exercise
+			lengthMax = 2**Math.floor(Math.log2(100000/binningFactor))*binningFactor;
+			myDuration = Array(nMics).fill(1000*lengthMax/sampFreq); // time in milliseconds
+			nPlays = document.querySelectorAll('*[id^="playCapture-"]').length; // playbacks this exercise
+			acquired = Array(nPlays).fill(false); // data have not yet been acquired
+
+			// four windows in 2 x 2 array
+			wA = 'Lab10.1L1';
+			wB = 'Lab10.1R1';
+			wC = 'Lab10.1L2';
+			wD = 'Lab10.1R2';
+			
+			window.addEventListener("resize", resizeWindow);
+			console.log('Starting experiment ' + experiment)
+			prepareLab_10_1();
+			};
+		</script>
+		
+		<table class="invisibleButtonTable" id="jumpToExit">
+			<tr><td>
+				<div >
+					<button type="button"  class="invisibleButton" id="backBtn"
+					onclick="jumpToButton(returnAddress)">
+					    &larr;  Laboratory Exercises</button>
+				</div>
+			</td></tr>
+		</table>
+
+		<script type="text/javascript" src="../js/WavAudioEncoder.js"></script>
+		<script type="text/javascript" src="../js/utils.js"></script>
+		<script type="text/javascript" src='../js/SSPmedia.js'></script>
+
+</div>
+</body>
+</html>

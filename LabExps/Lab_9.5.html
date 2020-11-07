@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+	<head>
+		<meta name="format-detection" content="telephone=no">
+		<meta name="msapplication-tap-highlight" content="no">
+		<meta name="viewport" content=
+			"user-scalable=no,
+			 initial-scale=1,
+			 maximum-scale=1,
+			 minimum-scale=1,
+			 width=device-width">
+		<meta charset='UTF-8'>
+		<meta name="copyright" content="I.T. Young & R. Ligteringen, 1984, 2010–2020">
+		
+		<link rel="stylesheet" type="text/css" href="../css/myHTML_1.css" media="screen" />
+		<link rel='stylesheet' type='text/css' href='../css/myControls.css' media='screen' />
+		
+		<script type="text/javascript" src="../js/d3-format.min.js" charset="utf-8"></script>  
+		<script type="text/javascript" src="../js/plotly.min.js" charset="utf-8"></script>  
+		
+		<script type="text/javascript" src='../js/SSPconstants.js'></script>
+		<script type="text/javascript" src='../js/SSPfourier.js'></script>
+		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src='../js/SSPplotting.js'></script>
+		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
+
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
+		<script type="text/javascript" src="../js/extra.js"></script>
+
+		<title>Laboratory Exercise 9.3</title>
+		<br>
+		<script src='js/Lab_9-5.js'></script>
+		
+		<link rel="shortcut icon" href="../images/favicon.png">
+		<link rel="stylesheet" href="../assets/stylesheets/main.38780c08.min.css">
+	</head>
+	
+	<body class="bodyDisplayLabs">
+		<script>
+		// *****************************************************************
+		// Before proceeding check which platform is being used and take appropriate action
+
+// 		var answerOS = getPlatform().toLowerCase();
+// 		returnAddress = "../Chap_9.html#laboratory-exercise-95";
+		returnAddress = "../Chap_9.html#laboratory-exercise-93";
+		sessionStorage.setItem("xReturnAddress", returnAddress);
+		console.log('Device Configuration = ',navigator.userAgent);
+		</script>
+		
+<!-- Note the text "Click Me!" is transparent so you don't see it -->
+	<div class="invisibleBackgroundTop">
+		<button type="button" id="invisibleButtonTop" 
+			onclick="window.location.href = '#jumpToExit'">Click Me!</button>
+	</div>
+	
+	<br>
+	<h5>Laboratory Exercise 9.3</h5>
+
+	<div class="scrollBrd">
+	
+		Using the Fourier transform (or Fourier series), signals can be decomposed 
+		into weighted sums of sines and cosines. If we examine the defining equations
+		for Fourier analysis they almost resemble a convolution or correlation. In 
+		this laboratory exercise we will explore this similarity.
+
+			<ol type="i">
+				<li>A synthetic audio signal <i><b>s</b></i> has been generated and 
+					is displayed below.<a href="#fn1" class="footnote-ref" 
+					id="fnref1"><sup>1</sup></a> You can listen to it by pressing the 
+					<b><i>s</i></b> control (<img src="../images/play_triangle1.png" 
+					class="inlineIcon">). This might involve the 
+					adjustment of the volume of your device.</li>
+			</ol>
+
+		In the top panel we show the sinusoidal matched-filter <font color="hotPink" 
+		><b><i>h</i></b></font> and a synthetic audio signal 
+		<font color="royalBlue"><b><i>s</i></b></font>. The matched filter 
+		<i><b>h</b></i> has a frequency (<i>&omega; = 2πf</i>) and a <i>finite</i> 
+		duration (width) as shown below. The finite duration can be thought of as a 
+		<i>window</i> on an infinite-duration sinusoidal signal. The topic of 
+		“windows” will be dealt with extensively in <a href="../Chap_12.html"><font 
+		style="color:royalBlue">Chapter 12</font></a>
+		<br><br>
+		In the bottom panel we show the noise-contaminated synthetic signal <font 
+		color="royalBlue"><b><i>r</i></b></font><i>=s+N</i> where <b><i>N</i></b> is 
+		additive, independent, Gaussian noise. The output of the matched filter is 
+		<font color="hotPink"><b><i>&phi;<sub>rh</sub></i></b></font>.
+		<br><br>
+		There are controls for choosing the window width, the <i>SNR</i>, and the 
+		frequency <i>f</i>. By changing the frequency <i>f</i>, you can see in the bottom 
+		panel which sections of the audio signal <b><i>r=s+N</i></b> have a strong 
+		“match”&mdash;a strong correlation&mdash;with the sinusoidal matched filter.
+		<br><br>
+		A formal Fourier analysis involves both an even function, the cosine, and 
+		an odd function, the sine. Further, a Fourier spectrum requires a summation 
+		(or integration) interval from –∞ to +∞. Nevertheless, we can use the sine 
+		function to determine a “short-time spectrum”.
+
+			<ol type="i" start="2">
+				<li>Does the use of a sine function represent a serious constraint? 
+					Do we miss the spectral components that might be found with a 
+					cosine function?</li><br>
+					
+				<li>How does the result of the matched filtering change as we increase 
+					the frequency <i>f</i>.</li><br>
+				
+				<li>By listening to the synthetic audio signal and looking at the 
+					output of the matched filter, estimate the frequency components of 
+					the audio signal.</li><br>
+				
+				<li>How do the results change as you increase the number of samples 
+					in the matched filter window?</li><br>
+				
+				<li>How does this short-time Fourier analysis change as the <i>SNR</i> 
+					is decreased, that is, as the noise level is increased? At what 
+					<i>SNR</i> is the spectrum of the tones no longer 
+					recognizable? At this <i>SNR</i> are the tones still audible 
+					to you?</li><br>
+				
+				<li>Explain the hexagonal <i>envelope</i> of the matched filter output 
+					<i>&phi;<sub>rh</sub></i> when the filter window is slightly less 
+					than a tone duration and the frequency <i>f</i> is close to the 
+					tone frequency.</li>
+			</ol>
+		
+		<p id="fn1" class="p_footnote"><sup>1</sup>Each of the signals and 
+			correlation functions contains far more samples than can be displayed 
+			across the screen of your device. The data are therefore “binned” 
+			to fit on the screen. Slight distortions&mdash;artefacts of the binning 
+			process&mdash;are therefore possible.<a href="#fnref1" 
+			style="color:royalBlue;"> <b>&crarr;</b></a></p>
+	</div>
+	
+	<div id="scrollNoBrd">
+		<br><br>
+
+		<!-- tables for matched filter & dirty data -->
+		<table class="tableGen" 
+			style="font-size:0.8rem; line-height: 0px;">
+			<tr>
+				<td>          <output id="placeDur">1</output> ms</td>
+				<td>          <output id="placeSNR">1000</output>:1</td>
+			</tr>
+		</table>
+		<table class="tableGen" style="font-size:0.8rem; margin-top:-0.4rem;">
+			<tr>
+				<td style="width:50%; text-align:left;">Width: 
+					<input style="width:70%; vertical-align:middle;"
+						id="wind"
+						type="range"
+						oninput="showWindowWidth(this.value)"
+						onchange="windowWidth(this.value)"
+						min="0"
+						max="11"
+						step="1"
+						value="0">
+				</td>
+				<td style="text-align:left;">       SNR: 
+					<input style="width:70%; vertical-align:middle;"
+						type='range'
+						oninput="showSNR(this.value)"
+						onchange="chooseSNR(this.value)"
+						min='0'
+						max='10'
+						step='1'
+						value='10'
+						id='rangeSNR'>
+				</td>
+			</tr>
+		</table>
+		<table class="tableGen" style="width:80%;">
+			<tr>
+				<td class="fineCoarse" style="width:25%;"></td>
+				<td class="fineCoarse" style="width:7.5%;">fine</td>
+				<td class="fineCoarse">coarse                </td>
+				<td class="fineCoarse" style="width:7.5%;">fine</td>
+			</tr>
+			<tr>
+				<td style="text-align:right;">Matched filter f: </td>
+				<td><button class='buttonRight' 
+						onclick="fineStepF('down')">
+						<img class='buttonImg' src='../images/leftArrow_15.png' 
+							style="border:2px solid royalBlue; border-radius:6px;">
+					</button>
+				</td>
+				<td  style="text-align:center;">
+					<input style="width:70%; vertical-align:middle;"
+						id="freq"
+						type="range"
+						oninput="showFiltFreq(this.value)"
+						onchange="filtFreq(this.value)"
+						min=100
+						max=1000
+						step="1"
+						value=A3> <output id='placeFreq'>100</output> Hz
+				</td>
+				<td><button class='buttonLeft' 
+						onclick="fineStepF('up')">
+						<img class='buttonImg' src='../images/rightArrow_15.png' 
+							style="border:2px solid royalBlue; border-radius:6px;">
+					</button>
+				</td>
+			</tr>
+		</table>
+		<br>
+		<table class="tableGen">
+			<tr>
+				<td style="width:25%; text-align:center;">h:    
+					<button id="stopCapture-1" style="display:none;"></button>
+					<button id="playCapture-1" >
+						<img id='play_1' class='buttonImg' src='../images/playback_transp.png'>
+					</button>
+				</td>
+				<td style="width:25%; text-align:center;">s:    
+					<button id="stopCapture-0" style="display:none;"></button>
+					<button id="playCapture-0" >
+						<img id='play_0' class='buttonImg' src='../images/playback_transp.png'>
+					</button>
+				</td>
+				<td style="width:25%; text-align:center;">r=s+N:    
+					<button id="stopCapture-2" style="display:none;"></button>
+					<button id="playCapture-2" >
+						<img id='play_2' class='buttonImg' src='../images/playback_transp.png'>
+					</button>
+				</td>
+				<td style="width:25%; text-align:center;">&phi;<sub>rh<span 
+					class="smallSpace"> </span></sub>:    
+					<button id="stopCapture-3" style="display:none;"></button>
+					<button id="playCapture-3" >
+						<img id='play_3' class='buttonImg' src='../images/playback_transp.png'>
+					</button>
+				</td>
+			</tr>
+		</table>
+		<br>
+		<table class="table1x8ColsAlt">
+			<tr>
+				<td class="fineCoarse"></td>
+				<td class="fineCoarse"></td>
+				<td class="fineCoarse"></td>
+				<td class="fineCoarse"></td>
+				<td class="fineCoarse"></td>
+				<td class="fineCoarse">fine</td>
+				<td class="fineCoarse">coarse</td>
+				<td class="fineCoarse">fine</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align:right;">Zoom (t): </td>
+				<td><input style="width:100%"
+						id="zmT"
+						type="range"
+						onchange="sliderChoicesT(this.value, 'Zt')"
+						min="0"
+						max="12"
+						step="1"
+						value="0">
+				</td>
+				<td colspan="2" style="text-align:right;">Pan (t): </td>
+				<td><button class='buttonRight' 
+						onclick="fineStepT(-1, 'Pt')">
+						<img class='buttonImg' src='../images/leftArrow_15.png' 
+							style="border:2px solid royalBlue; border-radius:6px;">
+					</button>
+				</td>
+				<td><input style="width:100%"
+						id="panT"
+						type="range"
+						onchange="sliderChoicesT(this.value, 'Pt')"
+						min="1"
+						max="111104"
+						step="1"
+						value="0">
+				</td>
+				<td><button class='buttonLeft' 
+						onclick="fineStepT(+1, 'Pt')">
+						<img class='buttonImg' src='../images/rightArrow_15.png' 
+							style="border:2px solid royalBlue; border-radius:6px;">
+					</button>
+				</td>
+			</tr>
+		</table>
+		<br>
+<!-- 		<table class='singleGraphTable' style="font-size:2.3vw;"> -->
+		<table class='singleGraphTable' style="font-size:1rem;">
+			<tr>
+				<td>
+					<div id="LabR1Ctitle" class="textBlankPageTitleAlt">
+						<output id="sigsTimeType0">Continuous</output>-Time Signals: 
+						<font style="color:royalBlue; font-weight:bold;"><i>s</i></font> 
+						<font style="color:black; font-weight:normal;">&</font> 
+						<font style="color:deepPink;  font-weight:bold;"><i>h</i></font>
+						<font style="color:black; font-weight:normal"><i><output 
+							id="sigsTimeType3">with 131072 samples = 2.972 s</output></i></font>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td><div id='LabR1C'></div></td>
+			</tr>
+		</table>
+		<!-- tables for matched filter output -->
+		<table class="table1x8ColsAlt">
+			<tr>
+				<td class="fineCoarse"></td>
+				<td class="fineCoarse"></td>
+				<td class="fineCoarse"></td>
+				<td class="fineCoarse"></td>
+				<td class="fineCoarse"></td>
+				<td class="fineCoarse">fine</td>
+				<td class="fineCoarse">coarse</td>
+				<td class="fineCoarse">fine</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align:right;">Zoom (t): </td>
+				<td><input style="width:100%"
+						id="zmC"
+						type="range"
+						onchange="sliderChoicesC(this.value, 'Zc')"
+						min="0"
+						max="12"
+						step="1"
+						value="0">
+				</td>
+				<td colspan="2" style="text-align:right;">Pan (t): </td>
+				<td><button class='buttonRight' 
+						onclick="fineStepC(-1, 'Pt')">
+						<img class='buttonImg' src='../images/leftArrow_15.png' 
+							style="border:2px solid royalBlue; border-radius:6px;">
+					</button>
+				</td>
+				<td><input style="width:100%"
+						id="panC"
+						type="range"
+						onchange="sliderChoicesC(this.value, 'Pc')"
+						min="1"
+						max="111104"
+						step="1"
+						value="55552">
+				</td>
+				<td><button class='buttonLeft' 
+						onclick="fineStepC(+1, 'Pt')">
+						<img class='buttonImg' src='../images/rightArrow_15.png' 
+							style="border:2px solid royalBlue; border-radius:6px;">
+					</button>
+				</td>
+			</tr>
+		</table>
+		<br>
+		<table class='singleGraphTable' style="font-size:2.3vw;">
+			<tr>
+				<td>
+					<div id="LabR1Ctitle" class="textBlankPageTitleAlt">
+						Normalized 
+						<output id="sigsTimeType00">Continuous</output>-Time Signals: 
+						<font style="color:royalBlue; font-weight:bold;"><i>r</i></font> 
+						<font style="color:black; font-weight:normal;">&</font> 
+						<font style="color:deepPink;  font-weight:bold;"><i>&phi;<sub>rh</sub></i></font>
+						<font style="color:black; font-weight:normal"><i><output 
+							id="corrTimeType3">with 131072 samples = 2.972 s</output></i></font>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td><div id='LabR2C'></div></td>
+			</tr>
+		</table>
+	<script>
+		// *****************************************************************
+		//  Javascript starts here
+		//  'LabR1C' means Lab, Row 1, Center
+		// set up global variables
+	
+		experiment = '9.5';
+
+		window.onload = function init()
+			{
+			// global variables
+			sound0 = {fS: sampFreq, data: []};
+			theNames = [sound0];
+			nDisRec = theNames.length; // number of places to be reserved
+
+			nMics = document.querySelectorAll('*[id^="startCapture-"]').length; // microphones this exercise
+			lengthMax = 2**factor2; // defined in SSPmedia.js
+			myDuration = Array(nMics).fill(1000*lengthMax/sampFreq); // time in milliseconds
+			nPlays = document.querySelectorAll('*[id^="playCapture-"]').length; // playbacks this exercise
+			acquired = Array(nPlays).fill(false); // data have not yet been acquired
+			
+			xLength = Array(nDisRec).fill(0); // global
+			newSamples = Array(nDisRec).fill(0); // if there are recordings to be made
+			startSample = Array(nDisRec).fill(0); // global
+			stopSample = Array(nDisRec).fill(0); // global
+
+			wA = 'LabR1C';
+			wB = 'LabR2C';
+			
+			window.addEventListener("resize", resizeWindow);
+			console.log('Starting experiment ' + experiment)
+			prepareLab_9_5();
+			};
+		</script>
+		
+		<table class="invisibleButtonTable" id="jumpToExit">
+			<tr><td>
+				<div >
+					<button type="button"  class="invisibleButton" id="backBtn"
+					onclick="jumpToButton(returnAddress)">
+					    &larr;  Laboratory Exercises</button>
+				</div>
+			</td></tr>
+		</table>
+
+		<script type="text/javascript" src="../js/WavAudioEncoder.js"></script>
+		<script type="text/javascript" src="../js/utils.js"></script>
+		<script type="text/javascript" src='../js/SSPmedia.js'></script>
+
+</div>
+</body>
+</html>

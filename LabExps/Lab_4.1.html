@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+	<head>
+		<meta charset='UTF-8'>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="copyright" content="I.T. Young & R. Ligteringen, 1984, 2010–2020">
+		
+		<link rel="stylesheet" type="text/css" href="../css/myHTML_1.css" media="screen" />
+		<link rel='stylesheet' type='text/css' href='../css/myControls.css' media='screen' />
+		
+		<script type="text/javascript" src="../js/d3-format.min.js" charset="utf-8"></script>  
+		<script type="text/javascript" src="../js/plotly.min.js" charset="utf-8"></script>  
+		
+		<script type="text/javascript" src='../js/SSPconstants.js'></script>
+		<script type="text/javascript" src='../js/SSPfourier.js'></script>
+		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src='../js/SSPplotting.js'></script>
+		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
+		<script type="text/javascript" src="../js/extra.js"></script>
+		
+		<title>Laboratory Exercise 4.1</title>
+		<br>
+		<script src='js/Lab_4-1.js'></script>
+		
+		<link rel="shortcut icon" href="../images/favicon.png">
+		<link rel="stylesheet" href="../assets/stylesheets/main.38780c08.min.css">
+	</head>
+	
+	<body class="bodyDisplayLabs">
+		<script>
+		// *****************************************************************
+		// Before proceeding check which platform is being used and take appropriate action
+
+// 		var answerOS = getPlatform().toLowerCase();
+		returnAddress = "../Chap_4.html#laboratory-exercise-41";
+		sessionStorage.setItem("xReturnAddress", returnAddress);
+		console.log('Device Configuration = ',navigator.userAgent);
+		</script>
+		
+<!-- Note the text "Click Me!" is transparent so you don't see it -->
+	<div class="invisibleBackgroundTop">
+		<button type="button" id="invisibleButtonTop" 
+			onclick="window.location.href = '#jumpToExit'">Click Me!</button>
+	</div>
+	
+	<br>
+	<h5>Laboratory Exercise 4.1</h5>
+	
+	<div class="scrollBrd">
+	Two sliders allow you to choose both the number of “flips” <i>N</i> and the probability of 
+	Heads <i>p(H)</i>. Each time you repeat the experiment you will generate another signal from 
+	this random process.
+
+	<ol type="i">
+		<li>Why is there usually a difference between the number of Heads that results and the number 
+		you <em>expect</em> given the <i>p(H)</i> that you have used?</li><br>
+
+		<li>As <i>N</i> increases it appears that the number of Heads gets closer to the number that 
+		you expect. Why is this?</li><br>
+
+		<li>What probability distribution governs the number of Heads (and thus Tails as well) that you 
+		produce? What is the average value &mu; and the standard deviation &sigma; of that distribution 
+		for a given <i>p(H)</i> and <i>N?</i></li><br>
+
+		<li>Is the random number of Heads generated in each experiment really random? Explain your 
+		reasoning.</li>
+	</ol>
+
+	</div>
+	<br>
+	<div id="scrollNoBrd">
+		<!-- The table for controls -->
+		<table class="tableImageLine">
+			<tr>
+				<td style="font-size:0.8rem;">p(H):</td>
+				<td><input
+						type="range"
+						oninput="flipCoins(this.value, 'prob')"
+						min="0.0"
+						max="1.0"
+						step="0.05"
+						value="0.4"
+						id="prob">
+				</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td style="font-size:0.8rem;">coin flips:</td>
+				<td><input
+						type="range"
+						oninput="flipCoins(this.value, 'N')"
+						min="1"
+						max="81"
+						step="1"
+						value="7"
+						id="flips">
+				</td>
+				<td></td>
+			</tr>
+		</table>
+
+		<table class="table1x2Cols">
+			<tr>
+				<td> </td>
+				<td>Discrete-time stochastic signal</td>
+			</tr>
+			<tr>
+				<td class="textBlankPage" style="text-align:center">
+				With N = <output id='placeN'>n</output> and p(H) = 
+				<output id='placeP'>p</output>,<br><br>the estimated probability 
+				of Heads = <output id='placeH'>estpHeads</output>
+				</td>
+				<td><div id='Lab4.1R1'></div></td>
+			</tr>
+		</table>
+		<table class="standardTableAlt">
+			<tr>
+				<td>Histogram of Heads & Tails</td>
+				<td> </td>
+			</tr>
+			<tr>
+				<td><div id='Lab4.1L2'></div></td>
+				<td><div id='Lab4.1R2'></div></td>
+			</tr>
+		</table>
+
+		<script>
+// *****************************************************************
+		// Javascript starts here
+		// 'Lab4.1L1' means Lab 4.1, Left side, row 1
+		// 'Lab4.1R2' means Lab 4.1, Right side, row 2
+		// set up global variables
+
+		experiment = '4.1';
+
+		window.onload = function init()
+			{
+			wA = '';
+			wB = 'Lab4.1R1';
+			wC = 'Lab4.1L2';
+			wD = 'Lab4.1R2';
+
+			window.addEventListener("resize", resizeWindow);
+			prepareLab_4_1();
+			console.log('Starting experiment ' + experiment);
+			document.getElementById("scrollNoBrd").scrollTop = 0;
+			};
+		</script>
+		
+		<table class="invisibleButtonTable" id="jumpToExit">
+			<tr><td>
+				<div >
+					<button type="button"  class="invisibleButton" id="backBtn"
+					onclick="jumpToButton(returnAddress)">
+					    &larr;  Laboratory Exercises</button>
+				</div>
+			</td></tr>
+		</table>
+
+		<script type="text/javascript" src="../js/WavAudioEncoder.js"></script>
+		<script type="text/javascript" src="../js/utils.js"></script>
+		<script type="text/javascript" src='../js/SSPmedia.js'></script>
+
+</div>
+</body>
+</html>

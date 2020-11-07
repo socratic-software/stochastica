@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+	<head>
+		<meta charset='UTF-8'>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="copyright" content="I.T. Young & R. Ligteringen, 1984, 2010–2020">
+		
+<!-- 
+		<title>Laboratory Exercise 10.3</title>
+ -->
+		<title>Laboratory Exercise 10.2</title>
+		<br>
+		<link rel="stylesheet" type="text/css" href="../css/myHTML_1.css" media="screen" />
+		<link rel='stylesheet' type='text/css' href='../css/myControls.css' media='screen' />
+		
+		<script type="text/javascript" src="../js/d3-format.min.js" charset="utf-8"></script>  
+		<script type="text/javascript" src="../js/plotly.min.js" charset="utf-8"></script>  
+		
+		<script type="text/javascript" src='../js/SSPconstants.js'></script>
+		<script type="text/javascript" src='../js/SSPfourier.js'></script>
+		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src='../js/SSPplotting.js'></script>
+		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
+		<script type="text/javascript" src="../js/extra.js"></script>
+		<script src='../images/solvayImageLibrary_new.js'></script>
+		<script src='js/Lab_10-3.js'></script>
+		
+		<link rel="shortcut icon" href="../images/favicon.png">
+		<link rel="stylesheet" href="../assets/stylesheets/main.38780c08.min.css">
+
+
+		<script>
+// *****************************************************************
+		//  Javascript starts here
+		//  'Lab10.3C1' means Lab 10.3, center, row 1
+		//  'Lab10.3C2' means Lab 10.3, center, row 2
+		// set up global variables
+
+		experiment = '10.3';
+
+		wDummyOR = 'dummyOR'; // original image
+		wDummySN = 'dummySN'; // noisy image
+		wDummyRE = 'dummyRE'; // restored image
+		wA = 'cOriginal';
+		wB = 'snrImage';
+		wC = 'restored';
+		wD = '';
+		window.onload = function init()
+			{
+			window.addEventListener("resize", resizeWindow);
+			console.log('Starting experiment ' + experiment)
+			prepareLab_10_3();
+			};
+// *****************************************************************
+		</script>
+
+	</head>
+	
+	<body class="bodyDisplayLabs">
+		<script>
+		// *****************************************************************
+		// Before proceeding check which platform is being used and take appropriate action
+
+// 		var answerOS = getPlatform().toLowerCase();
+// 		returnAddress = "../Chap_10.html#laboratory-exercise-103";
+		returnAddress = "../Chap_10.html#laboratory-exercise-102";
+		sessionStorage.setItem("xReturnAddress", returnAddress);
+		console.log('Device Configuration = ',navigator.userAgent);
+		</script>
+
+		<div class="invisibleBackgroundTop">
+			<button type="button" id="invisibleButtonTop" 
+				onclick="window.location.href = '#jumpToExit'">Click Me!</button>
+		</div>
+	
+		<br>
+		<h5>Laboratory Exercise 10.2</h5>
+	
+		<div class="scrollBrd">
+			We can apply Wiener filtering to multi-dimensional signals including the Solvay 
+			photograph shown in <a href="Lab_9.3.html"><font color="royalBlue">Laboratory 
+			Exercise 9.2</font></a>. In this exercise the 
+			filter is applied independently to each of the three, noisy color channels 
+			{<b><i><font color="red">r</font></i>, <i><font color="#00bb00">g</font></i>, 
+			<i><font color="blue">b</font></i></b>}. Use the slider in the window to adjust the 
+			signal-to-noise ratio, <i>SNR</i>.<br>
+		
+			<ol type="i">
+				<li>How does the Wiener-filtered restoration of a noisy version of the Solvay 
+					photograph compare to the original version and the noisy version?</li><br>
+				<li>At what <i>SNR</i> is the filter no longer useful? Compare the filtered version to 
+					the noisy version.</li><br>
+				<li>Why does the Wiener-filtered version seem to have less and less 
+					contrast as the <i>SNR</i> decreases?</li><br>
+				<li>Comparing the results in this exercise to those in 
+					<a href="Lab_10.1.html" >
+					<font color='firebrick'>Laboratory Exercise 10.1</font></a>, 
+					do you consider Wiener filtering to be a universal solution, a 
+					panacea, to the problem of noise contamination? Explain your 
+					reasoning.</li>
+			</ol>
+		</div>
+		
+		<div id="scrollNoBrd">
+		<br>
+		
+		<!-- Slider to choose SNR  -->
+		<table class='table1x3Cols'>
+			<tr>
+				<td>SNR: </td>
+				<td><input
+						type='range'
+						oninput="moveSlider(this.value)"
+						onchange="getNoiseAndFilter(this.value)"
+						min='0'
+						max='9'
+						step='1'
+						value='9'
+						id='snr'>
+				</td>
+				<td><output id="placeSNR0">SNR = ∞:1</output></td>
+			</tr>
+		</table>
+		
+		<br>
+		
+		<!-- The table for images -->
+		<table class="solvayTable">
+			<tr>
+				<td>
+					<canvas id="dummyOR" width="1024" height="512"></canvas>
+				</td>
+			<tr>
+				<td>
+					<canvas id="dummySN" width="1024" height="512"></canvas>
+				</td>
+			<tr>
+				<td>
+					<canvas id="dummyRE" width="1024" height="512"></canvas>
+				</td>
+			</tr>
+			<tr>
+				<td style="font-size:0.8rem;">Original color Solvay image</td>
+			</tr>
+			<tr>
+				<td>
+					<canvas id="cOriginal" width="680" height="340"></canvas>
+				</td>
+			</tr>
+			<tr><td>
+				<output id='placeSNR1' style="font-size:0.8rem;">
+					Noisy Solvay image (SNR = ∞:1)
+				</output>
+			</td></tr>
+			<tr>
+				<td>
+					<canvas id="snrImage" width="680" height="340"></canvas>
+				</td>
+			</tr>
+			<tr>
+				<td style="font-size:0.8rem;">
+					Wiener-filter "restored" color Solvay image (1024 x 512 x 3)      
+					<output id='placeTime' style="font-size:0.8rem;">
+						Computation time = 0 ms</output>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<canvas id="restored" width="680" height="340"></canvas>
+				</td>
+			</tr>
+		</table>
+		<br>
+		
+		<table class="invisibleButtonTable" id="jumpToExit">
+			<tr><td>
+				<div >
+					<button type="button"  class="invisibleButton" id="backBtn"
+					onclick="jumpToButton(returnAddress)">
+					    &larr;  Laboratory Exercises</button>
+				</div>
+			</td></tr>
+		</table>
+
+		<script type="text/javascript" src="../js/WavAudioEncoder.js"></script>
+		<script type="text/javascript" src="../js/utils.js"></script>
+		<script type="text/javascript" src='../js/SSPmedia.js'></script>
+
+</div>
+</body>
+</html>
