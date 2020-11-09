@@ -1,26 +1,9 @@
-<!-- 
-<br><br>
-<img src="images/StochasticA.png" alt="drawing" height="25%" 
-	style="margin-right:25px; border:2px solid #dde8f1; border-radius:30px;"/>
-<img src="images/StochasticS.png" alt="drawing" height="25%" 
-	style="margin-left:25px; border:2px solid #dde8f1; border-radius:30px;"/>
-<br>
-
-| ![StochasticA](images/StochasticA.png)  | ![StochasticS](images/StochasticS.png)  | 
-|:---:|:---:|
-
-|![Alt](images/StochasticA.png =100x "Title")
- -->
-
 <table style="margin:0px auto;">
 	<tr style="text-align:center; border: 0px">
 		<td style="text-align:right; padding-right:25px;"><img src="images/StochasticA.png" height="30%"></td>
 		<td style="text-align:left; padding-left:25px;"><img src="images/StochasticS.png" height="30%"></td>
 	</tr>
 </table>
-
-| ![AltA](images/StochasticA.png =100x "Title") | ![AltS](images/StochasticS.png =100x "Title") |
-|:-:|:-:|
 
 # StochasticA
 
