@@ -1,9 +1,15 @@
+<!-- 
 <table style="margin:0px auto;">
 	<tr style="text-align:center; border: 0px">
 		<td style="text-align:right; padding-right:25px;"><img src="images/StochasticA.png" height="30%"></td>
 		<td style="text-align:left; padding-left:25px;"><img src="images/StochasticS.png" height="30%"></td>
 	</tr>
 </table>
+ -->
+
+  |  
+:-------------------------:|:-------------------------:
+<img src="images/StochasticA.png" height="30%">  |  <img src="images/StochasticS.png" height="30%">
 
 # StochasticA
 
