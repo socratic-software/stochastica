@@ -12,10 +12,10 @@
 |![Alt](images/StochasticA.png =100x "Title")
  -->
 
-<table>
+<table style="margin:0px auto;">
 	<tr style="text-align:center;">
-		<td><img src="images/StochasticA.png" width="30%" height="30%"></td>
-		<td><img src="images/StochasticS.png" width="30%" height="30%"></td>
+		<td style="text-align:right; padding-right:25px;"><img src="images/StochasticA.png" height="30%"></td>
+		<td style="text-align:left; padding-left:25px;"><img src="images/StochasticS.png" height="30%"></td>
 	</tr>
 </table>
 
