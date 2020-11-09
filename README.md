@@ -1,17 +1,28 @@
-<div style="background-color:#2c5272; text-align:center;">
+<!-- 
 <br><br>
 <img src="images/StochasticA.png" alt="drawing" height="25%" 
 	style="margin-right:25px; border:2px solid #dde8f1; border-radius:30px;"/>
 <img src="images/StochasticS.png" alt="drawing" height="25%" 
 	style="margin-left:25px; border:2px solid #dde8f1; border-radius:30px;"/>
 <br>
-<h1 style="font-family:Arial,Helvetica,sans-serif; font-weight: 100; 
-	color:#dde8f1; background-color:#2c5272; 
-	text-align:left;">&nbsp;StochasticA</h1>
-<br>
-</div>
 
-##  <span style="color:#2c5272;">Background</span>
+| ![StochasticA](images/StochasticA.png)  | ![StochasticS](images/StochasticS.png)  | 
+|:---:|:---:|
+
+|![Alt](images/StochasticA.png =100x "Title")
+ -->
+
+<table>
+	<tr style="text-align:center;">
+		<td><img src="images/StochasticA.png" width="30%" height="30%"></td>
+		<td><img src="images/StochasticS.png" width="30%" height="30%"></td>
+	</tr>
+</table>
+
+
+# StochasticA
+
+## Background
 This repository contains the *iBook* / website for *Introduction to Stochastic Signal Processing*. The short name is *StochasticA*.
 
 Speech, music, seismic vibrations, oil prices, and climate measurements are all examples of stochastic (random) signals. In this textbook, intended for individuals with prior training in introductory signal processing and introductory probability theory, we develop techniques to process such signals to extract useful information. We present case studies ranging from music to photographic images to oil prices to climate data to the motion of individual biomolecules.
@@ -22,13 +33,13 @@ A new and exciting aspect is that we make use of your device's interactive capab
 <br><br>
 These experiments are not simulations; they are examples of real digital processing of signals in your device. In this time of at-home and online learning, this is the way to learn signal processing through study and experimentation.
 
-##  <span style="color:#2c5272;">IPR</span>
+## IPR
 Unless otherwise specified, *html* files are copyrighted and do not fall under the MIT License. Javascript (*js*) files do, in general, fall under the MIT License unless explicitly stated otherwise.
 
-##  <span style="color:#2c5272;">Privacy Policy
+## Privacy Policy
 Our *Privacy Policy* can be found [here](https://sites.google.com/socraticsoftware.org/socraticsoftware/privacy-policy)
 
-##  <span style="color:#2c5272;">Chapter Contents</span>
+## Chapter Contents
 
 1. How to use this iBook
 1. Prologue
@@ -45,6 +56,5 @@ Our *Privacy Policy* can be found [here](https://sites.google.com/socraticsoftwa
 1. Appendices
 1. Information
 
-<br>
 
-<span style="color:#1f3b51; font-style:italic;">Last revision: 9 November 2020</span>
+*Last revision: 9 November 2020*
