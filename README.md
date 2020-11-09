@@ -5,7 +5,7 @@ This repository contains the iBook / website for *Introduction to Stochastic Sig
 Unless otherwise specified, *html* files are copyrighted and do not fall under the MIT License. Javascript (*js*) files do, in general, fall under the MIT License unless explicitly stated otherwise.
 
 Our *Privacy Policy* can be found 
-<a href='https://sites.google.com/socraticsoftware.org/socraticsoftware/'>here</a>.
+<a href='https://sites.google.com/socraticsoftware.org/socraticsoftware/privacy-policy'>here</a>.
 
 <br><br><br>
 
