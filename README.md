@@ -1,7 +1,18 @@
 <table style="margin:0px auto; border:0px">
 	<tr style="text-align:center; border:0px">
-		<td style="text-align:right; padding-right:25px; border:0px"><img src="images/StochasticA.png" height="30%"></td>
-		<td style="text-align:left; padding-left:25px; border:0px"><img src="images/StochasticS.png" height="30%"></td>
+		<td style="text-align:center; padding:10px 20px;
+			border:2px steelblue solid; border-radius:25px;">
+		<a href="https://socratic-software.github.io/stochastica.github.io/">
+		<img src="images/StochasticA.png" height="30%" style="margin-bottom:15px;">
+		<br><span style="font-family:Arial, Helvetica, sans-serif; font-size:80%;">
+		StochasticA<br>26 Laboratory Experiments</span></a></td>
+		<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+		<td style="text-align:center; padding:10px 20px;
+			border:2px steelblue solid; border-radius:25px;">
+		<a href="https://apps.apple.com/us/app/stochastic-signal-processing/id1450268179">
+		<img src="images/StochasticS.png" height="30%" style="margin-bottom:15px;">
+		<br><span style="font-family:Arial, Helvetica, sans-serif; font-size:80%;">
+		StochasticS<br>58 Laboratory Experiments</span></a></td>
 	</tr>
 </table>
 
@@ -42,4 +53,4 @@ Our *Privacy Policy* can be found [here](https://sites.google.com/socraticsoftwa
 1. Information
 
 
-*Last revision: 9 November 2020*
+*Last revision: 10 November 2020*
