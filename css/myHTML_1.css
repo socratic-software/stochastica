@@ -218,8 +218,8 @@ span.ss
 span.ss sub
 	{
 	position:absolute;
-	left: 0.02em;
-	bottom: 0.25em;
+	left: 0.01em;
+	bottom: -0.25em;
 	font-size: 0.75em;
 	}
 	
