@@ -2,7 +2,7 @@
 	<tr style="text-align:center; border:0px">
 		<td style="text-align:center; padding:10px 20px;
 			border:2px steelblue solid; border-radius:25px;">
-		<a href="https://socratic-software.github.io/stochastica.github.io/">
+		<a href="https://socratic-software.github.io/stochastica/">
 		<img src="images/StochasticA.png" height="30%" style="margin-bottom:15px;">
 		<br><span style="font-family:Arial, Helvetica, sans-serif; font-size:80%;">
 		StochasticA<br>26 Laboratory Experiments</span></a></td>
