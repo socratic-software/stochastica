@@ -83,6 +83,7 @@ const posPiSymbol = '+π';
 const BofAred = 'rgba(174,24,16,1.0)';
 const japanRed1 = 'rgba(221,33,36,1.0)';
 const japanRed2 = 'rgba(159,40,45,1.0)';
+const pantoneClassicBlue = 'rgba(30,68,126,1.0)'; // Pantone 19-4052 TCX
 const darkRedSpectrumDots = BofAred;
 const bottomCurve = 'steelblue';
 const overlayStart = 'rgba(254, 129, 252,'; // pink
