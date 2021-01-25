@@ -53,4 +53,4 @@ Our *Privacy Policy* can be found [here](https://sites.google.com/socraticsoftwa
 1. Information
 
 
-*Last revision: 10 November 2020*
+*Last revision: 25 January 2021*

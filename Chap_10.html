@@ -854,8 +854,7 @@ statistics.</p>
 <p>That is, we vary the filter to choose the one that gives the minimum mean-square error. Note that the restriction to real signals and systems ensures that we can replace the non-differentiable absolute value operation <span class="arithmatex">\({\left|  \bullet  \right|^2}\)</span> with the differentiable operation <span class="arithmatex">\({\left(  \bullet  \right)^2}\)</span> in <a href="Chap_10.html#eq:Weq3">Equation 10.3</a>.  </p>
 <p>The equation above, of course, yields an extremum but it can be shown that this is a minimum; see <a href="#problem-101">Problem 10.1</a>. The development of this approach follows those in the references Castleman<sup id="fnref:castleman1996"><a class="footnote-ref" href="#fn:castleman1996">1</a></sup>, Lee<sup id="fnref:lee1960"><a class="footnote-ref" href="#fn:lee1960">2</a></sup>, and Papoulis<sup id="fnref:papoulis1977"><a class="footnote-ref" href="#fn:papoulis1977">3</a></sup>.</p>
 <h2 id="expressing-the-mean-square-error">Expressing the mean-square error<a class="headerlink" href="#expressing-the-mean-square-error" title="Permanent link">&para;</a></h2>
-<p>Based upon <a href="Chap_13.html#appendix-i-mean-square-error-minimization">Appendix I</a>, and starting from <a href="Chap_10.html#eq:Weq1">Equation 10.1</a> and the result in
-<a href="Chap_12.html#eq:SEeq9">Equation 12.9</a>, we have:</p>
+<p>Based upon <a href="Chap_13.html#appendix-i-mean-square-error-minimization">Appendix I</a>, and starting from <a href="Chap_10.html#eq:Weq1">Equation 10.1</a> and <a href="Chap_10.html#eq:Weq2">Equation 10.2</a>, we have:</p>
 <div class="" id="eq:Weq4">
 <table class="eqTable">
 <tr>
@@ -871,7 +870,7 @@ e&amp;{ = E\left\{ {{{\left( {{x_e} - x} \right)}^2}} \right\} = E\left\{ {{{\le
 </table>
 </div>
 <p>We might have expected that the left-hand side of <a href="Chap_10.html#eq:Weq4">Equation 10.4</a> would be <span class="arithmatex">\(e[n]\)</span> instead of <span class="arithmatex">\(e.\)</span> The expectation operation, <span class="arithmatex">\(E\left\{  \bullet  \right\},\)</span> combined with the assumption of ergodicity assures that the result <span class="arithmatex">\(e\)</span> is independent of <span class="arithmatex">\(n.\)</span></p>
-<p>We now apply the key result—orthogonality—from <a href="Chap_12.html#eq:SEeq9">Equation 12.9</a> and rewrite this as:</p>
+<p>We now apply the key result—orthogonality—from <a href="Chap_13.html#eq:Ap1eq3">Equation 13.3</a> and rewrite this as:</p>
 <div class="" id="eq:Weq5">
 <table class="eqTable">
 <tr>
