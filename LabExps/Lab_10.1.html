@@ -24,9 +24,9 @@
 		<script type="text/javascript" src='../js/SSPconstants.js'></script>
 		<script type="text/javascript" src='../js/SSPfourier.js'></script>
 		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src='../js/SSPplotting.js'></script>
 		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
-		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src="../js/extra.js"></script>
 
 		<title>Laboratory Exercise 10.1</title>
@@ -57,7 +57,7 @@
 	<br>
 		<h5>Laboratory Exercise 10.1</h5>
 	
-		<div class="scrollBrd">
+		<div class="scrollBrd" id="scrollBrd" style="font-size:0.9rem;">
 			We begin with a synthetic signal <b>s</b> distorted by stationary, additive, 
 			white, Gaussian noise <b>N</b> resulting in <b>r</b> = <b>s</b> + <b>N</b> 
 			where <i>s</i>[<i>n</i>] is a delayed impulse <i>&delta;</i>[<i>n</i> – 
@@ -71,7 +71,9 @@
 				<tr>
 					<td>(10.35)</td>
 					<td id="fig:fig_Wiener7">
-						<img width=40% src="../images/Eqn_Lab_10.1.1.gif" alt="Missing Wiener equation"/>
+						<img id="fixEqn-0" style="width:95%" 
+							src="../images/Eqn_Lab_10.1.1.gif" 
+							alt="Missing Wiener equation"/>
 					</td>
 				</tr>
 			</table>
@@ -104,7 +106,7 @@
 		<table class='table1x3Cols'>
 			<tr>
 				<td>SNR: </td>
-				<td><input
+				<td style="width:55%;"><input
 						type='range'
 						oninput="showSNR(this.value)"
 						onchange="getSNR(this.value)"
@@ -114,7 +116,7 @@
 						value='7'
 						id='snr'>
 				</td>
-				<td>
+				<td style="width:30%; font-size:0.8rem">
 					<output id="placeN1">N = ----- samples</output><br>
 					<output id="placeN2">= ----- ms</output><br>
 					<output id="placeN3">SNR = 1000:1</output>
@@ -160,7 +162,7 @@
 					<span style="color: hotPink"><b>N</b></span>
 				</td>
 				<td>
-					Power spectral densities 
+					Log spectral densities 
 					<span style="color: royalBlue"><b>S<sub>ss</sub>(2&pi;f)</b></span> & 
 					<span style="color: hotPink"><b>S<sub>NN</sub>(2&pi;f)</b></span>
 				</td>
@@ -218,6 +220,8 @@
 
 		window.onload = function init()
 			{
+			fixEqn();
+
 			// global variables
 			theName0 = {fS: 0, data: []} // global definition of raw 1D audio
 			theName1 = {fS: 0, data: []} // global definition of raw 1D audio

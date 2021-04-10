@@ -24,9 +24,9 @@
 		<script type="text/javascript" src='../js/SSPconstants.js'></script>
 		<script type="text/javascript" src='../js/SSPfourier.js'></script>
 		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src='../js/SSPplotting.js'></script>
 		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
-		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src="../js/extra.js"></script>
 		<script src='js/Lab_6-7.js'></script>
 		<script src='js/Lab_6-7c.js'></script>
@@ -57,17 +57,17 @@
 	<br>
 	<h5>Laboratory Exercise 6.7c (continued)</h5>
 
-	<div class="scrollBrd">
+	<div class="scrollBrd" id="scrollBrd" style="font-size:0.9rem;">
 		We now change the filter but continue to use the frequency domain technique to study the results. 
 		Further, we use white noise with a <i>uniform</i> amplitude distribution, <i>u</i>[<i>n</i>]. 
 		Again we append sufficient zeroes to the <i>FIR</i> filter so that <i>h</i>[<i>n</i>] and 
 		<i>u</i>[<i>n</i>] have the same length. This gives:
 		
-		<table class="centerEq">
+		<table class="centerEqTable">
 			<tr>
 				<td>(6.45)</td>
 				<td id="eq:uDef_1" class="specialSize">
-				u<sub>F</sub>[n] = <font class="cursive">F  <sup>-1</sup></font> {<font 
+				u<sub>F </sub>[n] = <font class="cursive">F  <sup>–1</sup></font> {<font 
 				class="cursive">F </font>{ h[n] } • <font class="cursive">F </font>{ u[n] }}
 				</td>
 			</tr>
@@ -81,7 +81,9 @@
 			<tr>
 				<td>(6.46)</td>
 				<td id="eq:bpf_1">
-					<img width=55% src="../images/Eqn_Lab_6.7c.1.gif" alt="Missing Filter specification"/>
+					<img id="fixEqn-0" style="width:95%" 
+						src="../images/Eqn_Lab_6.7c.1.gif" 
+						alt="Missing Filter specification"/>
 				</td>
 			</tr>
 		</table>
@@ -105,7 +107,7 @@
 				
 			<li>Is the width of the probability distribution associated with the amplitudes of 
 				<i>u</i>[<i>n</i>] smaller than the width associated with 
-				<i>u<sub>F</sub></i>[<i>n</i>]?</li>
+				<i>u<sub>F </sub></i>[<i>n</i>]?</li>
 		</ol>
 		
 		Proceeed to another part of this exercise by choosing the variant below.
@@ -117,7 +119,7 @@
 		
 		<table class='radioTable'>
 			<tr>
-				<td style="font-size:0.8rem;">Choose lab variant:      </td>
+				<td style="font-size:0.9rem;">Choose lab variant:      </td>
 				<td>
 					<label class="container"><span class="buttonText">a</span>
 					<input type="radio" name="unique" id="A" 
@@ -155,7 +157,7 @@
 
 		<table class='radioTable'>
 			<tr>
-				<td style="font-size:0.8rem;">Choose display:         </td>
+				<td style="font-size:0.9rem;">Choose display:         </td>
 				<td> 
 					<label class="container">
 					<span style="font-family:Georgia,Palatino,Bodoni,serif;">
@@ -195,7 +197,7 @@
 						value='0'
 						id='zm'>
 				</td>
-				<td>
+				<td style="font-size:0.8rem">
 					<output id="placeN1">N = ----- samples</output><br>
 					<output id="placeN2">= ----- ms</output>
 				</td>
@@ -204,7 +206,8 @@
 		<br>
 		<table class='table1x1Cols'>
 			<tr>
-				<td>
+				<td style='text-align: center; vertical-align:middle; 
+						font-size:0.8rem; color:maroon; font-weight:bold;'>
 					<button id="playCapture-0">               
 						<img id='play_0' class='buttonImg' src='../images/playback_transp.png'>
 					</button>  Play signal u(t)
@@ -227,7 +230,8 @@
 		
 		<table class='table1x1Cols'>
 			<tr>
-				<td>
+				<td style='text-align: center; vertical-align:middle; 
+						font-size:0.8rem; color:maroon; font-weight:bold;'>
 					<button id="playCapture-1">               
 						<img id='play_1' class='buttonImg' src='../images/playback_transp.png'>
 					</button>  Play signal u<sub>F </sub>(t)
@@ -258,6 +262,8 @@
 		
 		window.onload = function init()
 			{
+			fixEqn();
+
 			theName0 = {fS: 0, data: []} // global definition of raw 1D audio
 			theName1 = {fS: 0, data: []} // global definition of raw 1D audio
 			theNames = [theName0,theName1]; // initial definition but global

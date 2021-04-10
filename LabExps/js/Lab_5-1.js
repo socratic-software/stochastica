@@ -33,10 +33,10 @@ var samples = 12;
 
 function displayData()
 	{
-	Plotly.newPlot(wA, [x1Plot], DTlayoutTop, noMode);
-	Plotly.newPlot(wB, [x2Plot], DTlayoutTop, noMode);
-	Plotly.newPlot(wC, [y1Plot], DTlayoutBot, noMode);
-	Plotly.newPlot(wD, [y2Plot], DTlayoutBot, noMode);
+	Plotly.react(wA, [x1Plot], DTlayoutTop, noMode);
+	Plotly.react(wB, [x2Plot], DTlayoutTop, noMode);
+	Plotly.react(wC, [y1Plot], DTlayoutBot, noMode);
+	Plotly.react(wD, [y2Plot], DTlayoutBot, noMode);
 	};
 
 // *****************************************************************
@@ -205,10 +205,6 @@ function prepareLab_5_1( )
 	DTlayoutTop.xaxis2.showgrid = false;
 	DTlayoutTop.yaxis2.showgrid = false;
 
-	DTlayoutTop.annotations[1].x = 0.5;
-	DTlayoutTop.annotations[1].xanchor = 'left';
-	DTlayoutTop.annotations[1].y = 6*titleBelowAxis/3;
-	DTlayoutTop.annotations[1].yanchor = 'auto';
 	DTlayoutTop.annotations[1].text = 'n';
 
 	DTlayoutBot = cloneObj(DTlayoutTop); // defined in SSPplotting.js
@@ -232,3 +228,4 @@ function prepareLab_5_1( )
 
 	//  await interaction};
 	};
+	

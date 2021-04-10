@@ -29,9 +29,9 @@
 		<script type="text/javascript" src='../js/SSPconstants.js'></script>
 		<script type="text/javascript" src='../js/SSPfourier.js'></script>
 		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src='../js/SSPplotting.js'></script>
 		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
-		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src="../js/extra.js"></script>
 		<script src='../images/solvayImageLibrary_new.js'></script>
 		<script src='js/Lab_10-3.js'></script>
@@ -87,7 +87,7 @@
 		<br>
 		<h5>Laboratory Exercise 10.2</h5>
 	
-		<div class="scrollBrd">
+		<div class="scrollBrd" id="scrollBrd" style="font-size:0.9rem;">
 			We can apply Wiener filtering to multi-dimensional signals including the Solvay 
 			photograph shown in <a href="Lab_9.3.html"><font color="royalBlue">Laboratory 
 			Exercise 9.2</font></a>. In this exercise the 
@@ -151,28 +151,32 @@
 				</td>
 			</tr>
 			<tr>
-				<td style="font-size:0.8rem;">Original color Solvay image</td>
+				<!-- special font-size case -->
+				<td  id="fontSize-2" style="font-size:0.7rem;">
+					Original color Solvay image
+				</td>
 			</tr>
 			<tr>
 				<td>
 					<canvas id="cOriginal" width="680" height="340"></canvas>
 				</td>
 			</tr>
-			<tr><td>
-				<output id='placeSNR1' style="font-size:0.8rem;">
-					Noisy Solvay image (SNR = ∞:1)
-				</output>
-			</td></tr>
+			<tr>
+				<!-- special font-size case -->
+				<td id="fontSize-3" style="font-size:0.7rem;">
+					<output id='placeSNR1'>Noisy Solvay image (SNR = ∞:1)</output>
+				</td>
+			</tr>
 			<tr>
 				<td>
 					<canvas id="snrImage" width="680" height="340"></canvas>
 				</td>
 			</tr>
 			<tr>
-				<td style="font-size:0.8rem;">
+				<!-- special font-size case -->
+				<td id="fontSize-1" style="font-size:0.63rem;">
 					Wiener-filter "restored" color Solvay image (1024 x 512 x 3)      
-					<output id='placeTime' style="font-size:0.8rem;">
-						Computation time = 0 ms</output>
+					<output id='placeTime'">Computation time = 0 ms</output>
 				</td>
 			</tr>
 			<tr>

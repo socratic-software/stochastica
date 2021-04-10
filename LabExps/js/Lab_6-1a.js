@@ -170,19 +170,19 @@ function getData(target)
 		{
 		document.querySelector('#tn').value = '(t)';
 		document.querySelector('#tauk').value = '(\u03C4)'; // (tau)
-		Plotly.newPlot(wA, rst[0], rst[1], noMode); // raw CT signal
-		Plotly.newPlot(wB, rh[0], rh[1], noMode); // raw histogram
-		Plotly.newPlot(wC, rct[0], rct[1], noMode); // CT correlation
-		Plotly.newPlot(wD, rp[0], rp[1], noMode); // power spectral density
+		Plotly.react(wA, rst[0], rst[1], noMode); // raw CT signal
+		Plotly.react(wB, rh[0], rh[1], noMode); // raw histogram
+		Plotly.react(wC, rct[0], rct[1], noMode); // CT correlation
+		Plotly.react(wD, rp[0], rp[1], noMode); // power spectral density
 		}
 	else if (digiState === 'DIGITAL')
 		{
 		document.querySelector('#tn').value = '[n]';
 		document.querySelector('#tauk').value = '[k]';
-		Plotly.newPlot(wA, rsd[0], rsd[1], noMode); // raw DT signal
-		Plotly.newPlot(wB, rh[0], rh[1], noMode); // raw histogram
-		Plotly.newPlot(wC, rcd[0], rcd[1], noMode); // DT correlation
-		Plotly.newPlot(wD, rp[0], rp[1], noMode); // power spectral density
+		Plotly.react(wA, rsd[0], rsd[1], noMode); // raw DT signal
+		Plotly.react(wB, rh[0], rh[1], noMode); // raw histogram
+		Plotly.react(wC, rcd[0], rcd[1], noMode); // DT correlation
+		Plotly.react(wD, rp[0], rp[1], noMode); // power spectral density
 		};
 	};
 
@@ -317,19 +317,19 @@ function myFunctionZoom(val)
 		{
 		document.querySelector('#tn').value = '(t)';
 		document.querySelector('#tauk').value = '(\u03C4)'; // (tau)
-		Plotly.newPlot(wA, rst[0], rst[1], noMode); // raw CT signal
-		Plotly.newPlot(wB, rh[0], rh[1], noMode); // raw histogram
-		Plotly.newPlot(wC, rct[0], rct[1], noMode); // CT correlation
-		Plotly.newPlot(wD, rp[0], rp[1], noMode); // power spectral density
+		Plotly.react(wA, rst[0], rst[1], noMode); // raw CT signal
+		Plotly.react(wB, rh[0], rh[1], noMode); // raw histogram
+		Plotly.react(wC, rct[0], rct[1], noMode); // CT correlation
+		Plotly.react(wD, rp[0], rp[1], noMode); // power spectral density
 		}
 	else if (digiState === 'DIGITAL')
 		{
 		document.querySelector('#tn').value = '[n]';
 		document.querySelector('#tauk').value = '[k]';
-		Plotly.newPlot(wA, rsd[0], rsd[1], noMode); // raw DT signal
-		Plotly.newPlot(wB, rh[0], rh[1], noMode); // raw histogram
-		Plotly.newPlot(wC, rcd[0], rcd[1], noMode); // DT correlation
-		Plotly.newPlot(wD, rp[0], rp[1], noMode); // power spectral density
+		Plotly.react(wA, rsd[0], rsd[1], noMode); // raw DT signal
+		Plotly.react(wB, rh[0], rh[1], noMode); // raw histogram
+		Plotly.react(wC, rcd[0], rcd[1], noMode); // DT correlation
+		Plotly.react(wD, rp[0], rp[1], noMode); // power spectral density
 		};
 	};
 
@@ -397,7 +397,7 @@ function prepareLab_6_1( )
 	rstg.x = binning(xDataCT,binningFactor);
 	rstg.y = binning(yData,binningFactor);
 	rstl.annotations[0].text = 't [ms]';
-	
+
 	rhg.x = yData;
 	let dynRange = getDynRange(rhg.x)[0]; // get dynamic range
 	nbins = Math.floor(Math.sqrt(rhg.x.length));

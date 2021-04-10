@@ -15,6 +15,7 @@
 // Sunday, 6 May 2018
 // Wednesday, 20 February 2019
 // Wednesday, 25 September 2019
+// Tuesday, 6 April 2021
 
 // The "universal" signal format is characterized by an array name (e.g. "data"),
 // an array "nn", and a number of dimensions "ndim". The "data" array takes data
@@ -92,8 +93,17 @@ const secondOverlayStart = 'rgba(255, 102, 0,'; // orange
 const secondOverlayFinish = ')';
 const myiPadWidth = 768; // in pixels
 const myiPadFontSize = 22; // standard Plotly font size specification
+const myiPadLabFontSize = 0.9; // standard Plotly font size specification
+var androidFontSize = '0.75rem';
 
 var margins = {top:0, bottom:0};
+
+// used in portrait camera window; see lines 804- 824 in Lab_10-10.js
+// absolute vertical position at Bottom of Cancel button
+const previewCancelHeight = 176;
+// absolute vertical position at Top of Choose button
+const chooseRecordHeight = 124;
+const verticalSpacer = 70;
 
 // **************************************************************
 // ****************************************************************
@@ -103,7 +113,7 @@ var myOrientation = readDeviceOrientation();
 window.onorientationchange = function()
 	{
 	myOrientation = readDeviceOrientation();
-	if (doRotate) location.reload(false);
+	if (doRotate) location.replace(window.location.href);
 	};
 
 // **************************************************************
@@ -112,17 +122,6 @@ function validatePlotly(label,data,layout)
 	let check = Plotly.validate([data], layout, noMode);
 	console.log(label+': ',check[0].msg);
 	return;
-	};
-
-/// **************************************************************
-function readDeviceOrientation()
-	{
-	let temp = null;
-	if (Math.abs(window.orientation) === 90)
-		temp = 'Landscape'
-	else
-		temp = 'Portrait';
-	return temp;
 	};
 
 // **************************************************************
@@ -138,6 +137,104 @@ function setLeftMargin()
 	};
 
 // **************************************************************
+// Parameters & functions for various SVG routines
+const xmlns = "http://www.w3.org/2000/svg";
+var mySVG = null;
+var myDiv = null;
+var myDivSVG = null;
+var mySvgDescr = null;
+var myFrame = null;
+var theFrame = null;
+var crossHair = 40; // length of crosshair
+
+var lineStyleVis = "stroke:aqua;stroke-width:3;fill:none;";
+var lineStyleHid = "stroke:aqua;stroke-width:0;fill:none;";
+var frameStyle = "stroke:firebrick;stroke-width:2;fill:none;";
+
+function prepareSVG(which)
+	{
+	'use strict';
+
+	let x1=0, x2=0, y1=0, y2=0;
+
+	let x0 = cameraCoordX0;
+	// correct iPhone landscape position
+	if (navigator.platform === 'iPhone') x0 = cameraCoordX0 - deltaX0;
+	let y0 = cameraCoordY0;
+
+	let vertical = (which === 'VL') || (which === 'VP');
+	let horizontal = (which === 'HL') || (which === 'HP');
+	if (vertical)
+		{
+		// create vertical SVG path description
+		mySvgDescr = document.createElementNS(xmlns, 'line');
+		if (which === 'VL')
+			mySvgDescr.setAttributeNS(null,"id","crossVL")
+		else if (which === 'VP')
+			mySvgDescr.setAttributeNS(null,"id","crossVP")
+		else throw('prepareSVG vertical: Huh?')
+		mySvgDescr.setAttributeNS(null,"style",lineStyleVis);
+	
+		x1 = x0 + (previewCols >> 1);
+		x2 = x1;
+
+		if (windowOrientation() === 'Landscape')
+			y1 = y0 - crossHair
+		else
+			y1 = y0 - crossHair - previewCancelHeight;
+		y2 = y1 + previewRows + (2*crossHair);
+
+		mySvgDescr.setAttributeNS(null, "x1", ''+x1);
+		mySvgDescr.setAttributeNS(null, "x2", ''+x2);
+		mySvgDescr.setAttributeNS(null, "y1", ''+y1);
+		mySvgDescr.setAttributeNS(null, "y2", ''+y2);
+		}
+	else if (horizontal)
+		{
+		// create vertical SVG path description
+		mySvgDescr = document.createElementNS(xmlns, 'line');
+		if (which === 'HL')
+			mySvgDescr.setAttributeNS(null,"id","crossHL")
+		else if (which === 'HP')
+			mySvgDescr.setAttributeNS(null,"id","crossHP")
+		else throw('prepareSVG horizontal: Huh?')
+		mySvgDescr.setAttributeNS(null,"style",lineStyleVis);
+
+		x1 = x0 - crossHair;
+		x2 = x1 + previewCols + (2*crossHair);
+
+		if (windowOrientation() === 'Landscape')
+			y1 = y0 + (previewRows >> 1)
+		else
+			y1 = y0 + (previewRows >> 1) - previewCancelHeight;
+		y2 = y1;
+
+		mySvgDescr.setAttributeNS(null, "x1", ''+x1);
+		mySvgDescr.setAttributeNS(null, "x2", ''+x2);
+		mySvgDescr.setAttributeNS(null, "y1", ''+y1);
+		mySvgDescr.setAttributeNS(null, "y2", ''+y2);
+		}
+	else if (which === 'F')
+		{
+		// create frame around camera preview 
+		mySvgDescr = document.createElementNS(xmlns, 'rect');
+		mySvgDescr.setAttributeNS(null,"style",frameStyle);
+
+		mySvgDescr.setAttributeNS(null, "x", ''+x0);
+
+		if (windowOrientation() === 'Landscape')
+			mySvgDescr.setAttributeNS(null, "y", ''+y0)
+		else
+			mySvgDescr.setAttributeNS(null, "y", ''+(y0 - previewCancelHeight));
+
+		mySvgDescr.setAttributeNS(null, "width", ''+previewCols);
+		mySvgDescr.setAttributeNS(null, "height", ''+previewRows);
+		}
+	else throw('prepareSVG: Trouble in paradise.');
+	
+	return mySvgDescr;
+	};
+
 // **************************************************************
 // Parameters & functions for various canvas & plotly.js routines
 //
@@ -148,43 +245,55 @@ var d2round = d3.format('.2f');
 var d3round = d3.format('.3f');
 var d4round = d3.format('.4f');
 
+var windowDimensions = {height: 0, width: 0};
+var wRows = windowDimensions.height;
+var wCols = windowDimensions.width;
+
 // get display dimensions
-var availableWidth = window.innerWidth ||
-	document.documentElement.clientWidth ||
-	document.body.clientWidth;
+var availableWidth = window.innerWidth || document.documentElement.clientWidth;
 
 // not used as yet but maybe in the future
-var availableHeight = window.innerHeight ||
-	document.documentElement.clientHeight ||
-	document.body.clientHeight;
+var availableHeight = window.innerHeight || document.documentElement.clientHeight;
 
 // also not used but monitor - (menus + docks)
-var windowWidth = window.screen.availWidth;
-var windowHeight = window.screen.availHeight;
+// var windowWidth = window.screen.availWidth;
+// var windowHeight = window.screen.availHeight;
 
 // canvas
 const standardBlackBorder = "1px solid black";
 const imgBorder = "1px solid maroon";
 
 // plotly
-var r = 0.95; // rescale with a little more empty space
-var baseSize1 = r*Math.floor(availableWidth); // one item per row
-var baseSize2 = r*Math.floor(availableWidth/2); // two items per row
-var baseSize3 = r*Math.floor(availableWidth/3); // three items per row
-var baseSize4 = r*Math.floor(availableWidth/4); // three items per row
-var graphWidth = [baseSize1, 1.125*baseSize2, 1.15*baseSize3, 1.5*baseSize4]; // graphs or images/row
-var graphHeight = [0.5*baseSize1, 0.9*baseSize2, baseSize3, 1.4*baseSize4]; // graphs or images/row
+var r = 1; // rescale with a little more empty space
+var baseSizeW1 = r*availableWidth; // one item per row
+var baseSizeW2 = r*availableWidth/2; // two items per row
+var baseSizeW3 = r*availableWidth/3; // three items per row
+var baseSizeW4 = r*availableWidth/4; // four items per row
+var graphWidth = [baseSizeW1, baseSizeW2, baseSizeW3, baseSizeW4]; // graphs or images
+
+var baseSizeH1 = 0.75*baseSizeW1; // one item per row
+var baseSizeH2 = baseSizeH1/2; // two items per row
+var baseSizeH3 = baseSizeH1/3; // three items per row
+var baseSizeH4 = baseSizeH1/4; // four items per row
+var graphHeight = [baseSizeH1, baseSizeH2, baseSizeH3, baseSizeH4]; // graphs or images
+
 var verticalScale = 1.2; // expand graphHeight in certain displays
 
 // font names for iOS can be found at <http://iosfonts.com>
 // this includes bold and italic
 // baseFontSize = myiPadFontSize*(availableWidth/myiPadWidth);
-baseFontSize = 24;
+var baseFontSize = 22;
 
 var myTitleFont = 'Helvetica, Arial, GillSans, san-serif';
 var myTitleSize = 0.6*baseFontSize;
 var myTitleColor = 'black';
 var annotateFontSize = 0.6*baseFontSize;
+
+var legendFont = 'Georgia, Palatino, Bodoni, serif';
+var legendFontSize = 0.6*baseFontSize; // size of dimension label, i.e. 'time'
+var legendColor = 'black';
+var legendBkgColor = 'rgba(255,255,40,0.5)'; // lightyellow variant
+var legendBorderColor = 'black';
 
 var axisLabelFont = 'Georgia, Palatino, Bodoni, serif';
 var axisLabelSize = 0.6*baseFontSize; // size of dimension label, i.e. 'time'
@@ -288,6 +397,8 @@ function scaleForCanvas(pixels,rImage,gImage,bImage,minVal,maxVal)
 	// Caveat Emptor: pixels are in a data format that is CLAMPED to
 	// the integer range 0 to 255. Do all processing with "float" and
 	// then rescale to this range before writing in pixels.
+	// Warning the input array 'pixels' is modified
+
 	let dynRange = maxVal - minVal;
 	let temp = 0;
 	if (dynRange == 0)
@@ -395,16 +506,17 @@ var annotateTemplate =
 		yref: 'paper',
 		x: 0.5,
 		xanchor: 'center',
-		y: 7*titleBelowAxis/8,
+		y: 3*titleBelowAxis/4,
 		yanchor: 'top',
 		text: '',
 		font:
 			{
 			family: axisTitleFont,
-			size: 0.6*baseFontSize,
+			size: 0.7*baseFontSize,
 			color: axisTitleColor
 			},
-		showarrow: false
+		showarrow: false,
+		bgcolor: 'rgba(0,0,0,0)'
 	}
 
 var textTemplate =
@@ -481,7 +593,7 @@ var layoutCT =
 		t: 100, //top margin
 		l: 80, //left margin
 		r: 80, //right margin
-		b: 100 //bottom margin
+		b: 125 //bottom margin
 		},
 
 	xaxis1:
@@ -592,7 +704,7 @@ var layoutDT =
 		t: 100, //top margin
 		l: 80, //left margin
 		r: 80, //right margin
-		b: 100 //bottom margin
+		b: 125 //bottom margin
 		},
 
 	xaxis2:
@@ -688,7 +800,7 @@ var Histogram =
 var layoutH =
 	{
 	showlegend: false,
-	
+
 	title :'Amplitude Histogram',
 	font:
 		{
@@ -702,7 +814,7 @@ var layoutH =
 		t: 100, //top margin
 		l: 80, //left margin
 		r: 80, //right margin
-		b: 100 //bottom margin
+		b: 125 //bottom margin
 		},
 
 	bargap: 0.0,
@@ -807,7 +919,7 @@ var layoutSpect =
 		t: 100, //top margin
 		l: 80, //left margin
 		r: 80, //right margin
-		b: 100 //bottom margin
+		b: 125 //bottom margin
 		},
 
 	xaxis4:
@@ -908,7 +1020,7 @@ var layoutBlank =
 		t: 100, //top margin
 		l: 80, //left margin
 		r: 80, //right margin
-		b: 100 //bottom margin
+		b: 125 //bottom margin
 		},
 
 	xaxis5:
@@ -988,7 +1100,7 @@ var layoutBar =
 		t: 100, //top margin
 		l: 80, //left margin
 		r: 80, //right margin
-		b: 100 //bottom margin
+		b: 125 //bottom margin
 		},
 
 	xaxis6:
@@ -1106,7 +1218,7 @@ var layoutImage =
 		t: 100, //top margin
 		l: 80, //left margin
 		r: 80, //right margin
-		b: 100 //bottom margin
+		b: 125 //bottom margin
 		},
 
 	xaxis7:
@@ -1376,7 +1488,7 @@ var DataPlot = // continuous-time plot
 		type: 'scatter',
 		visible: true,
 		mode: 'markers',
-		line: {shape: 'linear'},
+		line: {dash: 'solid', width: 2, shape: 'linear'},
 		hoverinfo: 'none',
 		marker: { symbol: "circle-dot", size: 8, color: signalLineColor },
 		xaxis: 'x8',
@@ -1391,7 +1503,15 @@ var layoutData =
 	
 	legend:
 		{
-		bgcolor: 'transparent',
+		font:
+			{
+			family: legendFont,
+			size: legendFontSize,
+			color: legendColor
+			},
+		bgcolor: legendBkgColor,
+		bordercolor: legendBorderColor,
+		borderwidth: 0,
 		x: 0.02,
 		xanchor: 'left',
 		y: 1,
@@ -1534,36 +1654,36 @@ function myFunctionDisp(val,target,wA,wB,wC,wD)
 	dispState = val;
 	if (digiState === 'ANALOG' && dispState === 'SH')
 		{
-		Plotly.newPlot(wA, rst[0], rst[1], noMode); // CT signal
-		Plotly.newPlot(wB, rh[0], rh[1], noMode); // histogram
-		Plotly.newPlot(wC, fst[0], fst[1], noMode); // CT signal
-		Plotly.newPlot(wD, fh[0], fh[1], noMode); // histogram
+		Plotly.react(wA, rst[0], rst[1], noMode); // CT signal
+		Plotly.react(wB, rh[0], rh[1], noMode); // histogram
+		Plotly.react(wC, fst[0], fst[1], noMode); // CT signal
+		Plotly.react(wD, fh[0], fh[1], noMode); // histogram
 		}
 	// display DT signal and histogram
 	else if (digiState === 'DIGITAL' && dispState === 'SH')
 		{
-		Plotly.newPlot(wA, rsd[0], rsd[1], noMode); // DT signal
-		Plotly.newPlot(wB, rh[0], rh[1], noMode); // histogram
-		Plotly.newPlot(wC, fsd[0], fsd[1], noMode); // DT signal
-		Plotly.newPlot(wD, fh[0], fh[1], noMode); // histogram
+		Plotly.react(wA, rsd[0], rsd[1], noMode); // DT signal
+		Plotly.react(wB, rh[0], rh[1], noMode); // histogram
+		Plotly.react(wC, fsd[0], fsd[1], noMode); // DT signal
+		Plotly.react(wD, fh[0], fh[1], noMode); // histogram
 		}
 	// display CT correlation and power spectrum
 	else if (digiState === 'ANALOG' && dispState === 'CP')  
 		{
-		Plotly.newPlot(wA, rct[0], rct[1], noMode); // CT correlation
-		Plotly.newPlot(wB, rp[0], rp[1], noMode); // power spectral density
-		if(experiment === '6.6c') Plotly.newPlot(wC, op[0], op[1], noMode) // CT signal 
-		else Plotly.newPlot(wC, fct[0], fct[1], noMode); // CT correlation
-		Plotly.newPlot(wD, fp[0], fp[1], noMode); // power spectral density
+		Plotly.react(wA, rct[0], rct[1], noMode); // CT correlation
+		Plotly.react(wB, rp[0], rp[1], noMode); // power spectral density
+		if(experiment === '6.6c') Plotly.react(wC, op[0], op[1], noMode) // CT signal 
+		else Plotly.react(wC, fct[0], fct[1], noMode); // CT correlation
+		Plotly.react(wD, fp[0], fp[1], noMode); // power spectral density
 		}
 	// display DT correlation and power spectrum
 	else if (digiState === 'DIGITAL' && dispState === 'CP')
 		{
-		Plotly.newPlot(wA, rcd[0], rcd[1], noMode); // DT correlation
-		Plotly.newPlot(wB, rp[0], rp[1], noMode); // power spectral density
-		if(experiment === '6.6c') Plotly.newPlot(wC, op[0], op[1], noMode) // CT signal 
-		else Plotly.newPlot(wC, fcd[0], fcd[1], noMode); // CT correlation
-		Plotly.newPlot(wD, fp[0], fp[1], noMode); // power spectral density
+		Plotly.react(wA, rcd[0], rcd[1], noMode); // DT correlation
+		Plotly.react(wB, rp[0], rp[1], noMode); // power spectral density
+		if(experiment === '6.6c') Plotly.react(wC, op[0], op[1], noMode) // CT signal 
+		else Plotly.react(wC, fcd[0], fcd[1], noMode); // CT correlation
+		Plotly.react(wD, fp[0], fp[1], noMode); // power spectral density
 		}
 	else
 		throw('Houston, we have a problem in myFunctionDisp.');

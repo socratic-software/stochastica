@@ -733,15 +733,12 @@ function prepareLab_9_5( )
 	sigsCTLayout = cloneObj(layoutCT); // defined in SSPplotting.js
 	sigsCTLayout.title = '';
 	sigsCTLayout.margin.t = 25;
-	sigsCTLayout.margin.b = 70;
+	sigsCTLayout.margin.b = 140;
 	sigsCTLayout.width = Math.floor(graphWidth[oneImage]);
-	sigsCTLayout.height = Math.floor(graphHeight[oneImage]);
+	sigsCTLayout.height = Math.floor(0.75*graphHeight[oneImage]);
 	sigsCTLayout.yaxis1.tickmode = 'auto';
 	sigsCTLayout.yaxis1.range = [-1.05, +1.05];
 
-	sigsCTLayout.annotations[1].x = 0.95*titleRightAxis;
-	sigsCTLayout.annotations[1].y = titleBelowAxis/2;
-	sigsCTLayout.annotations[1].yanchor = 'auto';
 	sigsCTLayout.annotations[1].text = 't [ms]';
 
 	figsCTLayout = cloneObj(sigsCTLayout); // defined in SSPplotting.js
@@ -756,9 +753,9 @@ function prepareLab_9_5( )
 	sigsDTLayout.width =  sigsCTLayout.width;
 	sigsDTLayout.height =  sigsCTLayout.height;
 
-	sigsDTLayout.annotations[1].x = sigsCTLayout.annotations[1].x;
-	sigsDTLayout.annotations[1].y = sigsCTLayout.annotations[1].y;
-	sigsDTLayout.annotations[1].yanchor = sigsCTLayout.annotations[1].yanchor;
+// 	sigsDTLayout.annotations[1].x = sigsCTLayout.annotations[1].x;
+// 	sigsDTLayout.annotations[1].y = sigsCTLayout.annotations[1].y;
+// 	sigsDTLayout.annotations[1].yanchor = sigsCTLayout.annotations[1].yanchor;
 	sigsDTLayout.annotations[1].text = 'n';
 
 	figsDTLayout = cloneObj(sigsDTLayout); // defined in SSPplotting.js

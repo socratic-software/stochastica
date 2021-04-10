@@ -486,6 +486,8 @@ function gammln(xx)
 // Here begin the various density functions currently supported in this test
 function gaussDensity(mu,sigma,totalN,delimiters)
 	{
+	'use strict';
+
 	// Gaussian does NOT need these:
 	// delimiters[0] = -Infinity;
 	// delimiters[delimiters.length - 1] = Infinity;
@@ -506,7 +508,7 @@ function gaussDensity(mu,sigma,totalN,delimiters)
 		
 	// correct for the use of a limited number of bins of finite width
 	var bconst = totalN / normalize;
-	let tTotal = 0;
+	let tTotal = 0; // diagnostic
 	for (var i = 0; i < bins; i++)
 		{
 		cells[i] *= bconst;
@@ -517,6 +519,8 @@ function gaussDensity(mu,sigma,totalN,delimiters)
 
 function laplaceDensity(mid,b,totalN,delimiters)
 	{
+	'use strict';
+
 	// Laplace needs these:
 	delimiters[0] = -Infinity;
 	delimiters[delimiters.length - 1] = Infinity;
@@ -548,6 +552,8 @@ function laplaceDensity(mid,b,totalN,delimiters)
 
 function uniformDensity(left,right,totalN,delimiters)
 	{
+	'use strict';
+
 	// the expected histogram cells to be returned
 	var cells = Array(delimiters.length-1).fill(0);
 	var bins = cells.length;
@@ -571,7 +577,6 @@ function chiSquaredGoodnessOfFit(data, distributionType)
 	var avg = mean(data)[0]; // ML estimate of mean
 	var std = stdev(data)[0]; // ML estimate of sigma
 	var middle = median(data)[0]; // ML estimate of middle
-
 	var myData = uRs(data);
 	var histoResults = histogramList(myData);
 	var totalN = myData.length; // real data format
@@ -622,9 +627,6 @@ function chiSquaredGoodnessOfFit(data, distributionType)
 	var observed = histoResults[1].slice(); // binned histogram
 	var expected = hypothesizedN.slice(); // same length as observed
 	
-	let tO = observed.slice();
-	let tE = expected.slice();
-
 	// Working backward and forwards through the hypothesized (expected)
 	// frequencies, collapse bins if less than three observations are expected
 	// for a bin. This transformation is applied to the observed frequencies
@@ -634,6 +636,7 @@ function chiSquaredGoodnessOfFit(data, distributionType)
 	// Tests", Biometrics,10, 417-450, 1954.
 	let cutoff = 3; // all experiments will have a large number of samples, thus...
 	let theLength = expected.length;
+	// combine from right to left
 	for (var k = theLength-1; k > 0; k--)
 		{
 		if (expected[k] < cutoff)
@@ -645,7 +648,7 @@ function chiSquaredGoodnessOfFit(data, distributionType)
 			observed.splice(k, 1);
 			};
 		};
-		
+	// combine from left to right
 	for (var k = 0; k < theLength-1; k++)
 		{
 		if (expected[k] < cutoff)

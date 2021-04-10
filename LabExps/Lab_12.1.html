@@ -31,9 +31,9 @@
 		<script type="text/javascript" src='../js/SSPconstants.js'></script>
 		<script type="text/javascript" src='../js/SSPfourier.js'></script>
 		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src='../js/SSPplotting.js'></script>
 		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
-		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src="../js/extra.js"></script>
 
 		<title>Laboratory Exercise 12.1</title>
@@ -64,7 +64,7 @@
 	<br>
 	<h5>Laboratory Exercise 12.1</h5>
 	
-	<div class="scrollBrd">
+	<div class="scrollBrd" id="scrollBrd" style="font-size:0.9rem;">
 		The purpose of this exercise is to review the methodology for computing the Fourier transform 
 		of a discrete-time signal based upon a given set of data <i>x</i>[<i>n</i>] with 
 		<i>n = 0, 1, ..., N–1</i>. This is frequently referred to as the DFT (Discrete Fourier 
@@ -75,7 +75,9 @@
 			<tr>
 				<td>(12.25)</td>
 				<td id="fig:Eqn_Lab_12.1">
-					<img width=80% src="../images/Eqn_Lab_12.1.gif" alt="Missing Lab_12.1 equation"/>
+					<img id="fixEqn-0" style="width:95%" 
+						src="../images/Eqn_Lab_12.1.gif" 
+						alt="Missing Lab_12.1 equation"/>
 				</td>
 			</tr>
 		</table>
@@ -101,8 +103,7 @@
 		To make the connection between <i>k</i> and continuous-time frequency, the horizontal axis is 
 		labeled in units of Hz (<i>f = &omega;</i>/2&pi;) instead of <i>&Omega;</i>, a concept used 
 		in previous chapters as well. At any time you can listen to a signal using the 
-		( <img src="../images/play_triangle1.png" class="inlineIcon">) 
-		button.
+		(<img src="../images/play_triangle1.png" class="inlineIcon">) button.
 		<br><br>
 		The signal is sampled at a rate of <output id="sampF">44.1</output> kHz and consists of 
 		<output id="totSamp1">3700</output> samples. From these samples, a window of <i>N</i> samples 
@@ -233,6 +234,8 @@
 
 		window.onload = function init()
 			{
+			fixEqn();
+
 			// global variables
 			theName0 = {fS: sampFreq, data: []} // global definition of raw 1D audio
 			theNames = [theName0]; // initial definition but global
@@ -244,7 +247,7 @@
 			nPlays = document.querySelectorAll('*[id^="playCapture-"]').length; // playbacks this exercise
 			acquired = Array(nPlays).fill(false); // data have not yet been acquired
 
-			plotList = []; // global list of arguments for Plotly.newPlot()
+			plotList = []; // global list of arguments for Plotly.react()
 
 			// two windows in 1 x 2 array
 			wA = 'Lab12.1T';

@@ -104,7 +104,7 @@ function executeLab_6_7a( )
 
 	rpg.y = rotateRight(binning(rpsd,binningFactor),binningFactor/2);
 	rpg.x = binning(xDataDT,binningFactor);
-	rpl.title = 'S<sub>gg</sub>(Ω)';
+	rpl.title = 'log<sub>10</sub> S<sub>gg</sub>(Ω)';
 	freqTicks[nLabels-1] = rpg.x[rpg.x.length-1];
 	rpl.xaxis4.tickvals = freqTicks;
 	rpl.xaxis4.ticktext = freqLabels;
@@ -113,7 +113,7 @@ function executeLab_6_7a( )
 
 	fpg.y = rotateRight(binning(origFilter,binningFactor),binningFactor/2);
 	fpg.x = rpg.x;
-	fpl.title = 'S<sub>FF</sub>(Ω)/S<sub>gg</sub>(Ω)';
+	fpl.title = 'log<sub>10</sub> S<sub>FF</sub>(Ω)/S<sub>gg</sub>(Ω)';
 	fpl.xaxis4.tickvals = rpl.xaxis4.tickvals;
 	fpl.xaxis4.ticktext = rpl.xaxis4.ticktext;
 	fpl.annotations[0].text = rpl.annotations[0].text;

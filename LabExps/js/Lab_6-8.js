@@ -115,7 +115,31 @@ var rsdl = cloneObj(layoutDT);
 var rcdl = cloneObj(rsdl);
 var fsdl = cloneObj(rsdl);
 var fcdl = cloneObj(rsdl);
+
 var hsdl1 = cloneObj(rsdl);
+	hsdl1.margin.t = 30;
+	hsdl1.margin.l = 40;
+	hsdl1.margin.b = 80;
+	hsdl1.margin.r = 70;
+
+	hsdl1.title = '';
+	hsdl1.width = Math.floor(1.4*graphWidth[fourImages]);
+	hsdl1.height = Math.floor(1.4*graphHeight[fourImages]);
+
+	hsdl1.annotations[0].x = 0;
+	hsdl1.annotations[0].xanchor = 'left';
+	hsdl1.annotations[0].y = 1.025;
+	hsdl1.annotations[0].yanchor = 'bottom';
+	hsdl1.annotations[0].text = 'h<sub>1</sub>[n]';
+	hsdl1.annotations[1].text = 'n';
+
+	hsdl2 = cloneObj(hsdl1);
+	hsdl3 = cloneObj(hsdl1);
+	hsdl4 = cloneObj(hsdl1);
+
+	hsdl2.annotations[0].text = 'h<sub>2</sub>[n]';
+	hsdl3.annotations[0].text = 'h<sub>3</sub>[n]';
+	hsdl4.annotations[0].text = 'h<sub>4</sub>[n]';
 
 var rhl = cloneObj(layoutH);
 	rhl.font.family = axisLabelFont;
@@ -532,29 +556,6 @@ function prepareLab_6_8( )
 	hsdg3.error_y.arrayminus = hsdg3.y;
 	hsdg4.error_y.arrayminus = hsdg4.y;
 	
-	hsdl1.title = '';
-	hsdl1.width = Math.floor(graphWidth[fourImages]);
-	hsdl1.height = Math.floor(graphHeight[fourImages]);
-	
-	hsdl1.annotations[1].x = 0.5;
-	hsdl1.annotations[1].y = 2*titleBelowAxis;
-	hsdl1.annotations[1].yanchor = 'auto';
-	hsdl1.annotations[1].text = 'n';
-
-	hsdl1.annotations[0].x = 0;
-	hsdl1.annotations[0].xanchor = 'left';
-	hsdl1.annotations[0].y = 1.025;
-	hsdl1.annotations[0].yanchor = 'bottom';
-	hsdl1.annotations[0].text = 'h<sub>1</sub>[n]';
-	
-	hsdl2 = cloneObj(hsdl1);
-	hsdl3 = cloneObj(hsdl1);
-	hsdl4 = cloneObj(hsdl1);
-
-	hsdl2.annotations[0].text = 'h<sub>2</sub>[n]';
-	hsdl3.annotations[0].text = 'h<sub>3</sub>[n]';
-	hsdl4.annotations[0].text = 'h<sub>4</sub>[n]';
-
 	fsdg.x = rsdg.x;
 	fsdg.y = yfData;
 	fsdg.error_y.array = rsdg.error_y.array;
@@ -652,10 +653,10 @@ function executeLab_6_8( )
 	fhl.annotations[0].text = 'signal amplitude';
 	
 	// this is where the first (empty) displays gets placed
-	Plotly.newPlot(wE, [hsdg4], hsdl1, noMode); // DT signal
-	Plotly.newPlot(wF, [hsdg2], hsdl2, noMode); // DT signal
-	Plotly.newPlot(wG, [hsdg1], hsdl3, noMode); // DT signal
-	Plotly.newPlot(wH, [hsdg3], hsdl4, noMode); // DT signal
+	Plotly.react(wE, [hsdg4], hsdl1, noMode); // DT signal
+	Plotly.react(wF, [hsdg2], hsdl2, noMode); // DT signal
+	Plotly.react(wG, [hsdg1], hsdl3, noMode); // DT signal
+	Plotly.react(wH, [hsdg3], hsdl4, noMode); // DT signal
 	myFunctionDisp(dispState,digiState,wA,wB,wC,wD);
 
 	// to be used below when switching dispState
@@ -680,7 +681,7 @@ function executeLab_6_8( )
 
 	rpg.y = rotateRight(binning(ggPSD,binningFactor),binningFactor >> 1);
 	rpg.x = binning(xDataDT,binningFactor);
-	rpl.title = 'S<sub>gg</sub>(2\u03C0f)';
+	rpl.title = 'log<sub>10</sub> S<sub>gg</sub>(2\u03C0f)';
 	freqTicks[nLabels-1] = rpg.x[rpg.x.length-1];
 	rpl.xaxis4.tickvals = freqTicks;
 	rpl.xaxis4.ticktext = freqLabels;
@@ -689,7 +690,7 @@ function executeLab_6_8( )
 
 	fpg.y = rotateRight(binning(xyPSD,binningFactor),binningFactor >> 1);
 	fpg.x = rpg.x;
-	fpl.title = '| S<sub>gF</sub>(2\u03C0f) |';
+	fpl.title = 'log<sub>10</sub> | S<sub>gF</sub>(2\u03C0f) |';
 	fpl.xaxis4.tickvals = rpl.xaxis4.tickvals;
 	fpl.xaxis4.ticktext = rpl.xaxis4.ticktext;
 	fpl.annotations[0].text = rpl.annotations[0].text;

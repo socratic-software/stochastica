@@ -24,9 +24,9 @@
 		<script type="text/javascript" src='../js/SSPconstants.js'></script>
 		<script type="text/javascript" src='../js/SSPfourier.js'></script>
 		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src='../js/SSPplotting.js'></script>
 		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
-		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src="../js/extra.js"></script>
 		<script src='js/Lab_6-3b.js'></script>
 		<title>Laboratory Exercise 6.3b</title>
@@ -56,7 +56,7 @@
 	<br>
 	<h5>Laboratory Exercise 6.3b (continued)</h5>
 
-	<div class="scrollBrd">
+	<div class="scrollBrd" id="scrollBrd" style="font-size:0.9rem;">
 	
 		We continue with a <output id="placeT">1.5</output> second sample of a Poisson-distributed 
 		random process whose probability <i>mass</i> function 
@@ -100,7 +100,7 @@
 		
 		<table class='radioTable'>
 			<tr>
-				<td style="font-size:2.05vw;">Choose lab variant:      </td>
+				<td style="font-size:0.9rem;">Choose lab variant:      </td>
 				<td>
 					<label class="container"><span class="buttonText">a</span>
 					<input type="radio" name="unique" id="A" 
@@ -129,7 +129,8 @@
 		<br>
 		<table class='table1x2Cols'>
 			<tr>
-				<td colspan="2" style='text-align: center; vertical-align:middle;'>
+				<td colspan="2" style='text-align: center; vertical-align:middle; 
+						font-size:0.8rem; color:maroon; font-weight:bold;'>
 					<button id="playCapture-0">               
 						<img id='play_0' class='buttonImg' src='../images/playback_transp.png'>
 					</button>  Play noise sample
@@ -142,7 +143,8 @@
 				</td>
 			</tr>
 			<tr>
-				<td>Zoom: <input style="width:80%; vertical-align:middle;"
+				<td style='font-size:0.8rem; color:maroon; font-weight:bold;'>Zoom: 
+					<input style="width:80%; vertical-align:middle;"
 						id="zoomG"
 						type='range'
 						oninput="myFunctionZoom(this.value)"
@@ -152,7 +154,7 @@
 						value='0'
 						id='zm'>
 				</td>
-				<td>
+				<td style='font-size:0.8rem; color:maroon; font-weight:bold;'>
 					<output id="placeN1">N = ----- samples</output>
 					<output id="placeN2">= ----- ms</output>
 				</td>

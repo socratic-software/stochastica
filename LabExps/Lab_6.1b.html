@@ -24,9 +24,9 @@
 		<script type="text/javascript" src='../js/SSPconstants.js'></script>
 		<script type="text/javascript" src='../js/SSPfourier.js'></script>
 		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src='../js/SSPplotting.js'></script>
 		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
-		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src="../js/extra.js"></script>
 		<script src='js/Lab_6-1b.js'></script>
 		<title>Laboratory Exercise 6.1b</title>
@@ -56,7 +56,7 @@
 	<br>
 	<h5>Laboratory Exercise 6.1b (continued)</h5>
 
-	<div class="scrollBrd">
+	<div class="scrollBrd" id="scrollBrd" style="font-size:0.9rem;">
 		Instead of Gaussian noise we will now use <output id="placeT">1.5</output> seconds of noise 
 		with a uniform probability distribution for the amplitude. In the top-left panel the uniform 
 		noise signal <i>u[n]</i> is displayed and in the top-right panel the amplitude histogram 
@@ -84,7 +84,7 @@
 		
 		<table class='radioTable'>
 			<tr>
-				<td style="font-size:0.8rem;">Choose lab variant:      </td>
+				<td style="font-size:0.9rem;">Choose lab variant:      </td>
 				<td>
 					<label class="container"><span class="buttonText">a</span>
 					<input type="radio" name="unique" id="A" 
@@ -112,7 +112,7 @@
 		</table>
 		<br>
 
-		<table class='table1x2Cols'>
+		<table class="table1x2ColsAlt" style="font-size:0.8rem;">
 			<tr>
 				<td colspan="2" style='text-align: center; vertical-align:middle;'>
 					<button id="playCapture-0">               
@@ -151,6 +151,9 @@
 					<font style="color:black; font-weight:normal">amplitude histogram h[u]</font>
 				</td>
 			</tr>
+		</table>
+
+		<table class='table1x2Cols'>
 			<tr>
 				<td><div id='Lab6.1bL1'></div></td>
 				<td><div id='Lab6.1bR1'></div></td>
@@ -161,8 +164,7 @@
 					&phi;<sub>uu </sub><output id="tauk">[k]</output></font>
 				</td>
 				<td>
-					<font style="color:black; font-weight:normal">normalized 
-					S<sub>uu</sub>(&Omega;)</font>
+					<font style="color:black; font-weight:normal">normalized  log<sub>10</sub><span class="smallSpace"> </span>S<sub>uu</sub>(&Omega;)</font>
 				</td>
 			<tr>
 				<td><div id='Lab6.1bL2'></div></td>

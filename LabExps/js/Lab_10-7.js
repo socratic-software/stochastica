@@ -137,7 +137,7 @@ function getNoiseAndFilter(val)
 		"Circular aperture with Area = " + thisArea + closing +
 			"SNR = "+thisSNR+":1, and K = "+thisK;
 			
-	Plotly.newPlot('Spectrum_2D', [plot3D], layout3D, noMode);
+	Plotly.react('Spectrum_2D', [plot3D], layout3D, noMode);
 
 	};
 
@@ -234,8 +234,7 @@ function prepareLab_10_7()
 	nn = [rows, cols]; // in the target image
 	ndim = nn.length;
 	
-	myWidth = Math.floor(0.875*window.innerWidth)>>1;
-	scaledCols = (cols > myWidth) ? myWidth : cols; // fine tuned scale factor
+	scaledCols = Math.floor(0.9*window.innerWidth)>>1;
 	scaledRows = Math.floor(rows*(scaledCols/cols));
 	xoffset = 0;
 	yoffset = 0;

@@ -10,8 +10,9 @@ var thisCanvas = document.createElement('canvas');
 var thisCtx = thisCanvas.getContext('2d');
 
 // front or back Camera
-const frontCamera = 1;
-const backCamera = 0;
+const frontCamera = 'front';
+const backCamera = 'back';
+var chosenCamera = null;
 
 var cameraDelay = 750; // milliseconds
 
@@ -22,7 +23,7 @@ var camData = {
 	dataR: [],
 	dataG: [],
 	dataB: []
-	};  // where the color image data gets stored in our own format
+	}; // where the color image data gets stored in our own format
 	
 const noDisplay = "display:none;";
 const yesDisplay = "";
@@ -39,6 +40,20 @@ var cameraStarted = false;
 var cameraHidden = false;
 var acqDone = false;
 
+var cameraCoordX0 = 0;
+var cameraCoordY0 = 0;
+var cameraCoordY0P = 260; // magic # for portrait mode (default)
+
+var previewCols = 0;
+var previewRows = 0;
+
+var deltaX0 = 0;
+var deltaY0 = 0;
+
+var rawImage = null;
+var rawPixels = null;
+var rawSize = null;
+
 // *****************************************************************
 // following associated with "cordova-plugin-camera-preview"
 
@@ -48,35 +63,45 @@ var previewApp =
 	{
 	init: function()
 		{
-		window.smallPreview = false;
-		previewCols = 3*(window.screen.height >> 3); // (3/8) of width
+		screenDimensions = realScreenHeightWidth();
+		sRows = screenDimensions.height;
+		sCols = screenDimensions.width;
+
+		windowDimensions = realWinHeightWidth();
+		wRows = windowDimensions.height;
+		wCols = windowDimensions.width;
+
+		// difference between screen (hardware) size and window (software) size
+		deltaX0 = Math.round((sCols - wCols)/2);
+		deltaY0 = Math.round((sRows - wRows)/2);
+
+		let previewSize = Math.round(4*(Math.min(wRows,wCols)/8));
+		previewCols = previewSize; // (4/8) of smaller size
 		previewRows = previewCols; // display square image
-		let tempPlatform = navigator.platform;
+		window.smallPreview = false;
 		if (windowOrientation() === 'Landscape')
 			{
-			x0 = 10 + (((window.screen.height >> 1) - previewCols) >> 1);
-			y0 = (window.screen.width - previewRows) >> 1;
-			document.getElementById('yOffsetL').style = 'margin-top:'+(y0-100)+'px;';
+			cameraCoordX0 = Math.round((wCols - (3*previewCols/2))/4);
+			cameraCoordY0 = Math.round((wRows - previewRows)/2);
 			}
 		else
 			{
-			x0 = (window.screen.width - previewCols) >> 1;
-			y0 = 200;// vertical space of "cancel" to image = 200px
-// 			y0 = (window.screen.height - previewRows) >> 1; // reserve for future
-			let topLoc = previewRows + 40; // vertical space of image to button = 40px
-			document.getElementById('yOffsetP').style = 'margin-top:'+topLoc+'px;';
+			cameraCoordX0 = Math.round((wCols - previewCols)/2);
+			// vertical space "cancel" hardwired to image = 141px
+			cameraCoordY0 = ((wRows-chooseRecordHeight) + 
+				(previewCancelHeight)- previewRows)/2 - 30;
 			};
 
 // diagnostics
-// 		console.log('sizes x - screen,image: ',window.screen.height,previewCols);
-// 		console.log('sizes y - screen,image: ',window.screen.width,previewRows);
+// 		console.log('sizes x - screen,image: ',wRows,previewCols);
+// 		console.log('sizes y - screen,image: ',wCols,previewRows);
 
 		myOptions = {
-			x: x0,
-			y: y0,
+			x: cameraCoordX0,
+			y: cameraCoordY0,
 			width: previewCols,
 			height: previewRows,
-			camera: CameraPreview.CAMERA_DIRECTION.FRONT,
+			camera: chosenCamera,
 			toBack: false,
 			tapPhoto: false,
 			tapFocus: false,
@@ -89,6 +114,7 @@ var previewApp =
 		myOptions.camera = CameraPreview.CAMERA_DIRECTION.FRONT;
 		backCameraChosen = false;
 		lastCameraChosen = frontCamera;
+		chosenCamera = myOptions.camera;
 		
 		CameraPreview.setFocusMode(CameraPreview.FOCUS_MODE.FIXED);
 		CameraPreview.setFlashMode(CameraPreview.FLASH_MODE.OFF);
@@ -114,6 +140,7 @@ var previewApp =
 			myOptions.camera = CameraPreview.CAMERA_DIRECTION.BACK
 		else
 			myOptions.camera = CameraPreview.CAMERA_DIRECTION.FRONT;
+		chosenCamera = myOptions.camera;
 		CameraPreview.startCamera(myOptions); // now you can restart
 		cameraStarted = true;
 		CameraPreview.show();
@@ -210,17 +237,16 @@ function changeToCameraHTML(localImageNum, cameraChoice)
 			{
 			setTimeout(function()
 				{
-				CameraPreview.show();
-				cameraHidden = false;
-				}, 100);
+				previewApp.switchCamera(chosenCamera);
+				}, 200);
 			};
 		};
 	};
 	
 // *****************************************************************
-function parseImage(dataUrl, localImageNum) {
-	camData.rows = standardRows;
-	camData.cols = standardCols;
+function parseImage(dataUrl, localImageNum)
+	{
+	'use strict';
 
 	var img = new Image();
 	img.onload = function () {
@@ -228,22 +254,21 @@ function parseImage(dataUrl, localImageNum) {
 		// source -> destination
 		// sx, sy, sWidth, sHeight -> dx, dy, dWidth, dHeight
 		// allows for cut and scale
-
 		// cut square with minimum dimension
-		sWidth = img.width;
-		sHeight = img.height;
+		let sWidth = img.width;
+		let sHeight = img.height;
 
 		// determine offset in source (cut)
-		sx = 0;
-		sy = 0;
+		let sx = 0;
+		let sy = 0;
 
 		// scale to square with correct number of pixels
-		dWidth = camData.cols;
-		dHeight = camData.rows;
+		let dWidth = camData.cols;
+		let dHeight = camData.rows;
 
 		// no offset in destination
-		dx = 0;
-		dy = 0;
+		let dx = 0;
+		let dy = 0;
 
 		// actual setting of dimension destination (canvas)
 		thisCanvas.width = dWidth;
@@ -260,28 +285,32 @@ function parseImage(dataUrl, localImageNum) {
 
 		// convert rawPixels to SSP image format
 		// only first three channels are used (RGB)
-		channels = 4;
-		var red = [];
-		var green = [];
-		var blue = [];
-		for (var i = 0; i < rawSize; i += channels) {
-			red.push(rawPixels[i + 0]);
-			green.push(rawPixels[i + 1]);
-			blue.push(rawPixels[i + 2]);
-		}
-		// finish building the data structure for SSP image
-		camData.dataR = red.slice();
-		camData.dataG = green.slice();
-		camData.dataB = blue.slice();
+		let channels = 4;
+		let red = camData.dataR;
+		let green = camData.dataG;
+		let blue = camData.dataB;
+		let ii = 0;
+		for (var i = 0; i < rawSize; i += channels)
+			{
+			ii = i >> 2;
+			red[ii] = rawPixels[i + 0];
+			green[ii] = rawPixels[i + 1];
+			blue[ii] = rawPixels[i + 2];
+			}
+		// clean up & proceed
+		red = [];
+		green = [];
+		blue = [];
+		rawPixels = null;
+		rawImage = null;
 		processImage(localImageNum);
 	};
-	img.onerror = function (err) {
-		cb(err);
-	};
+
+	img.onerror = function (err) { cb(err); };
 
 	// the following triggers img.onload above
 	img.src = dataUrl;
-}
+	}
 
 // *****************************************************************
 function imageMedia(val) {
@@ -297,8 +326,7 @@ function imageMedia(val) {
 		parseImage("data:image/jpeg;base64," + mediaFileName, localImageNum);
 		// following enables multiple camera shots semi-auto ( n > 1)
 		if (nImages == null) return; // don't always want semi-auto
-		if (localImageNum < nImages)
-			setTimeout(function() { getImage(localImageNum+1); }, cameraDelay);
+		if (localImageNum < nImages) getImage(localImageNum+1);
 		};
 
 	// captureImageError callback
@@ -312,7 +340,7 @@ function imageMedia(val) {
 	CameraPreview.takeSnapshot({width:standardCols, height:standardRows, 
 			quality:100}, captureImageSuccess,captureImageError);
 		
-// 	Don't use; image horizontally distorted
+// 	image horizontally distorted, don't use: 
 // 	CameraPreview.takePicture({width:standardCols, height:standardRows, quality:100},
 // 		captureImageSuccess,captureImageError);
 
@@ -374,7 +402,7 @@ var recordTimeDefault = 3000;
 
 // offset recording in ms
 var offsetTime = 150; // the first 150 ms are contaminated by "switch bounce"
-                        
+
 // sample rate for recording (in Hz)
 var sampleRate = sampFreq; // one-stop shopping for sampling frequency in SSPconstants.js
 
@@ -440,14 +468,16 @@ if (typeof acquired === 'undefined') {
 // *****************************************************************
 // button functions
 function buttonDisable(audioNum) {
-"use strict"; // OK
+	"use strict"; // OK
+
 	document.getElementById('startCapture-'+audioNum).disabled = true;
 	document.getElementById('stopCapture-'+audioNum).disabled = true;
 }
 
 // *****************************************************************
 function buttonAllDisable() {
-"use strict"; // OK
+	"use strict"; // OK
+
 	for (const num of listMics) {
 		buttonDisable(num);
 	}
@@ -459,7 +489,8 @@ function buttonAllDisable() {
 // *****************************************************************
 function buttonInit()
 	{
-"use strict"; // OK
+	"use strict"; // OK
+
 	var startButton = null;
 	var stopButton = null;
 	for (const num of listMics)
@@ -487,7 +518,8 @@ function buttonInit()
 
 // *****************************************************************
 function buttonStart(audioNum) {
-"use strict"; // OK
+	"use strict"; // OK
+
 	for (const num of listMics) {
 		if (num == audioNum)
 			{
@@ -507,7 +539,8 @@ function buttonStart(audioNum) {
 // *****************************************************************
 function buttonStop()
 	{
-"use strict"; // OK
+	"use strict"; // OK
+
 	for (const num of listMics)
 		{
 		document.getElementById('startCapture-'+num).disabled = false;
@@ -525,7 +558,8 @@ function buttonStop()
 // *****************************************************************
 // concatenate arrays needed for stitching buffers in onAudioInputCapture()
 function myConcatenate(targetArray, newData) {
-"use strict"; // OK
+	"use strict"; // OK
+
 	let targetLength = targetArray.length;
 	let newLength = newData.length;
 	let totalLength = targetLength + newLength;
@@ -567,7 +601,8 @@ function sound(src) {
 // Called continuously while AudioInput capture is running.
 function onAudioInputCapture(evt)
 	{
-"use strict"; // OK
+	"use strict"; // OK
+
 	try
 		{
 		if (evt && evt.data)
@@ -594,7 +629,8 @@ function onAudioInputError(error) {
 // Manufacture an audio blob from an array of 16-bit audio samples
 function createWavBlob(audioNum,audioSamples)
 	{
-"use strict"; // OK
+	"use strict"; // OK
+
 	// clear these for the next playbacks
 	if (encoder !== null) encoder = null;
 	
@@ -625,7 +661,8 @@ function createWavBlob(audioNum,audioSamples)
 // *****************************************************************
 // Start capturing audio.
 var startCapture = function (audioNum) {
-// "use strict";
+	"use strict"; // OK
+
 // getMicrophonePermission exception: Attempted to assign to readonly property
 	try
 		{
@@ -712,7 +749,8 @@ var stopCapture = function (audioNum) {
 // *****************************************************************
 // When cordova fires the deviceready event, we initialize everything needed for audio input.
 var onDeviceReady = function () {
-"use strict"; // OK
+	"use strict"; // OK
+
 	if (window.cordova && window.audioinput) {
 		// Subscribe to audioinput events 
 		//
@@ -720,7 +758,7 @@ var onDeviceReady = function () {
 		window.addEventListener('audioinputerror', onAudioInputError, false);
 		buttonInit();
 	} else {
-		console.log("onDeviceReady: cordova-plugin-audioinput not found! Phooey!");
+		console.log("onDeviceReady: cordova-plugin-audioinput not found!");
 		buttonAllDisable();
 	}
 };
@@ -730,10 +768,10 @@ var onDeviceReady = function () {
 
 if (!window.cordova) {
 	console.log("Running on desktop!");
-// 	onDeviceReady();
+	onDeviceReady();
 } else {
-	// For Cordova apps on browser version
-	// 	document.addEventListener('deviceready', onDeviceReady, false);
+	// For Cordova apps
+	document.addEventListener('deviceready', onDeviceReady, false);
 }
 
 // *****************************************************************

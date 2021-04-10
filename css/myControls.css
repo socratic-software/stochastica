@@ -262,7 +262,7 @@ input[type=radio]:not(old):checked + label > span > span
 .container {
 	display: block;
 	position: relative;
-	padding-top: 2px;
+	padding-top: 4px;
 	padding-left: 30px;
 	font-size: 0.8rem;
 	text-align: left;

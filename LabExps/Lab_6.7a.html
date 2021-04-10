@@ -24,9 +24,9 @@
 		<script type="text/javascript" src='../js/SSPconstants.js'></script>
 		<script type="text/javascript" src='../js/SSPfourier.js'></script>
 		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src='../js/SSPplotting.js'></script>
 		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
-		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src="../js/extra.js"></script>
 		<script src='js/Lab_6-7.js'></script>
 		<script src='js/Lab_6-7a.js'></script>
@@ -57,7 +57,7 @@
 	<br>
 	<h5>Laboratory Exercise 6.7a</h5>
 
-	<div class="scrollBrd">
+	<div class="scrollBrd" id="scrollBrd" style="font-size:0.9rem;">
 		In this exercise we consider a real, finite impulse-response (<i>FIR</i>) filter
 		<i>h[n]</i> that has been designed to meet the following specifications:
 		
@@ -65,7 +65,9 @@
 		<tr>
 			<td>(6.43)</td>
 			<td id="eq:bpf_1">
-				<img width=55% src="../images/Eqn_Lab_6.7a.1.gif" alt="Missing Filter specification"/>
+				<img id="fixEqn-0" style="width:95%" 
+					src="../images/Eqn_Lab_6.7a.1.gif" 
+					alt="Missing Filter specification"/>
 			</td>
 		</tr>
 	</table>
@@ -81,9 +83,9 @@
 		</ol>
 		
 		The input <i>x[n]</i> is <output id="placeT">--</output> seconds of a white noise signal with 
-		a Gaussian amplitude distribution <i>g[n]</i>. The output <i>y[n] = g<sub>F</sub>[n]</i> 
-		is the filtered version of <i>g[n]</i>, that is, <i>g<sub>F</sub>[n] = h[n]</i> &otimes; 
-		<i>g[n]</i>. The technique used to produce <i>g<sub>F</sub>[n]</i> is the literal, time-domain 
+		a Gaussian amplitude distribution <i>g[n]</i>. The output <i>y[n] = g<sub>F </sub>[n]</i> 
+		is the filtered version of <i>g[n]</i>, that is, <i>g<sub>F </sub>[n] = h[n]</i> &otimes; 
+		<i>g[n]</i>. The technique used to produce <i>g<sub>F </sub>[n]</i> is the literal, time-domain 
 		convolution of <i>h[n]</i> with <i>g[n]</i>.
 		<br>
 
@@ -92,7 +94,7 @@
 				correspond to the frequencies you expected?</li><br>
 			
 			<li>Why is the width of the probability distribution associated with the amplitudes 
-				of <i>g<sub>F</sub></i>[<i>n</i>] smaller than the width associated with 
+				of <i>g<sub>F </sub></i>[<i>n</i>] smaller than the width associated with 
 				<i>g</i>[<i>n</i>]?</li>
 		</ol>
 		
@@ -105,7 +107,7 @@
 		
 		<table class='radioTable'>
 			<tr>
-				<td style="font-size:0.8rem;">Choose lab variant:      </td>
+				<td style="font-size:0.9rem;">Choose lab variant:      </td>
 				<td>
 					<label class="container"><span class="buttonText">a</span>
 					<input type="radio" checked="checked" name="unique" id="A" 
@@ -143,7 +145,7 @@
 
 		<table class='radioTable'>
 			<tr>
-				<td style="font-size:0.8rem;">Choose display:         </td>
+				<td style="font-size:0.9rem;">Choose display:         </td>
 				<td> 
 					<label class="container">
 					<span style="font-family:Georgia,Palatino,Bodoni,serif;">
@@ -183,7 +185,7 @@
 						value='0'
 						id='zm'>
 				</td>
-				<td>
+				<td style="font-size:0.8rem">
 					<output id="placeN1">N = ----- samples</output><br>
 					<output id="placeN2">= ----- ms</output>
 				</td>
@@ -192,7 +194,8 @@
 		<br>
 		<table class='table1x1Cols'>
 			<tr>
-				<td>
+				<td style='text-align: center; vertical-align:middle; 
+						font-size:0.8rem; color:maroon; font-weight:bold;'>
 					<button id="playCapture-0">               
 						<img id='play_0' class='buttonImg' src='../images/playback_transp.png'>
 					</button>  Play signal g(t)
@@ -215,7 +218,8 @@
 		
 		<table class='table1x1Cols'>
 			<tr>
-				<td>
+				<td style='text-align: center; vertical-align:middle; 
+						font-size:0.8rem; color:maroon; font-weight:bold;'>
 					<button id="playCapture-1">               
 						<img id='play_1' class='buttonImg' src='../images/playback_transp.png'>
 					</button>  Play signal g<sub>F </sub>(t)
@@ -246,6 +250,8 @@
 		
 		window.onload = function init()
 			{
+			fixEqn();
+
 			theName0 = {fS: 0, data: []} // global definition of raw 1D audio
 			theName1 = {fS: 0, data: []} // global definition of raw 1D audio
 			theNames = [theName0,theName1]; // initial definition but global

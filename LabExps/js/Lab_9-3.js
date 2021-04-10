@@ -16,14 +16,41 @@ var digiState = 'ANALOG';
 var experiment = '9.3';
 var centerPos = [0,0];
 var template = [];
+
+var rows = null; // global
+var cols = null; // global
+var ndim = null;
 var nn = [];
 var nnn = [];
+var normedTemplate = null;
+var uNoisyData = null;
+var ctxDumC = null;
+var imgDataC = null;
+var ctxDumBW = null;
+var imgDataBW = null;
+var pixelsBW = null;
+var ctxBW = null;
+var imgBW = null;
+var ctxC = null;
+var imgC = null;
+
+var scaledCols = null;
+var scaledRows = null;
+var xoffset = null;
+var yoffset = null;
+var fRows = null; 
+var fCols = null; 
+var shiftR = null;
+var deltaR = null;
+var shiftC = null;
+var deltaC = null;
+var sjablonSpect = null;
+
 var crossCorr = [];
 var coordinates = [0,0,1024,512];
 var ndim = nn.length;
 var thisVal = 7; // starting SNR = 1000:1
 var padValue = [0,0];
-var innerW = 1;
 var dispFactor = 1;
 
 var snrValues = [1, 2, 4, 5, 10, 50, 100, 1000];
@@ -33,16 +60,15 @@ var snrValues = [1, 2, 4, 5, 10, 50, 100, 1000];
 
 function updateColorCanvas(imageName,xy)
 	{
+	'use strict';
+
 	var scaleCanvasX = scaledCols/cols; // fine tuned scale factor
 	var x0 = xy[1] - (fCols>>1); // convert center x to left edge
 	var y0 = xy[0] - (fRows>>1); // convert center y to top edge
-	// default orientation is Portrait
-	let xwidth = 10;
-	let yheight = 10;
-
-	dispFactor = 3*scaleCanvasX/2; // fudge factor to frame complete face
-	xwidth = xy[2]*dispFactor;
-	yheight = xy[3]*dispFactor;
+	
+	let scaleW = 1.5*(scaledCols/cols);
+	let xwidth = xy[2]*scaleW;
+	let yheight = xy[3]*scaleW;
 
 	// upper-left corner, horizontal
 	var xstart = Math.floor(scaleCanvasX*(x0-7));
@@ -58,13 +84,15 @@ function updateColorCanvas(imageName,xy)
 	ctxC.strokeRect(xstart,ystart,xwidth,yheight);
 	};
 
+// *****************************************************************
 function cosDistImagCorr(image,template)
 	{
 	// the cosine distance correlation is the angle between
 	// two vectors a and b:
 	//         cosDis(a,b) = (a•b)/(|a||b|) = (a/|a|)•(b/|b|)
-	
-	t0 = performance.now();
+	'use strict';
+
+	let t0 = performance.now();
 
 	let imageView = image[1].slice();
 	let normedImage = Array(imageView.length);
@@ -127,10 +155,13 @@ function cosDistImagCorr(image,template)
 	return [[nn,crossCorr],maxVal];
 	};
 
+// *****************************************************************
 function process_9_3(data,template)
 	{
 	// Find position of max correlation of filter with data
 	// Calculating cosine correlation in Fourier domain
+	'use strict';
+
 	var result = cosDistImagCorr(data,template);
 	var reCorr = result[0];
 	var maxPixel = result[1];
@@ -138,8 +169,11 @@ function process_9_3(data,template)
 	return coords[0];
 	};
 
+// *****************************************************************
 function getTemplate(target)
 	{
+	'use strict';
+
 	if (target === '1') // Langevin
 		{
 		nnn[0] = Langevin.rows; // rows
@@ -179,23 +213,29 @@ function getTemplate(target)
 	for (let i = 0; i < normedTemplate.length; i++) normedTemplate[i] = 
 		(scaleFactor == 0) ? 1 : normedTemplate[i]/scaleFactor;
 
-	paddedTemplate = imagePad([deltaR,deltaC], [nnn,normedTemplate], padValue);
+	let paddedTemplate = imagePad([deltaR,deltaC], [nnn,normedTemplate], padValue);
 	let dummy = dataRotate(paddedTemplate,shiftR,shiftC);
 	sjablonSpect = fft(dummy[1], nn, ndim, FORWARD);
 
 	getSNR(thisVal);
 	};
 
+// *****************************************************************
 // Choose SNR factor with slider
 function moveSnrSlider(val)
 	{
+	'use strict';
+
 	let thisSNR = snrValues[val];
 	document.querySelector('#placeSNR').value = "SNR = "+thisSNR+":1";
 	};
 
+// *****************************************************************
 // Choose SNR factor with slider
 function getSNR(val)
 	{
+	'use strict';
+
 	thisVal = +val;
 	let thisSNR = snrValues[thisVal];
 	document.querySelector('#placeSNR').value = "SNR = "+thisSNR+":1";
@@ -239,12 +279,12 @@ function getSNR(val)
 	ctxDumBW.putImageData(imgDataBW,xoffset,yoffset);
 	ctxBW.drawImage(imgBW,xoffset, yoffset, scaledCols, scaledRows);
 
-	nData = [nn,uNoisyData]; // to universal format
+	let nData = [nn,uNoisyData]; // to universal format
 	centerPos = process_9_3(nData,template);
-	x0 = centerPos[0]; // center position
-	y0 = centerPos[1]; // center position
-	dy = nnn[0]; // rows
-	dx = nnn[1]; // cols
+	let x0 = centerPos[0]; // center position
+	let y0 = centerPos[1]; // center position
+	let dy = nnn[0]; // rows
+	let dx = nnn[1]; // cols
 	coordinates = [x0,y0,dx,dy];
 	updateColorCanvas(wC,coordinates);
 	
@@ -259,27 +299,29 @@ function getSNR(val)
 
 function prepareLab_9_3( )
 	{
+	'use strict';
+
 	rows = SolvayColor.rows; // global
 	cols = SolvayColor.cols; // global
 	nn = [rows, cols]; // in the target image
 	ndim = nn.length;
-	urows = 2*rows; // universal rows = 2*rows
+	let urows = 2*rows; // universal rows = 2*rows
 	
 	// global template & image arrays
 	normedTemplate = Array(2*Langevin.data1.length);
 	// array for noisy Solvay
 	uNoisyData = Array(2*SolvayBW.data1.length);
-	SolvayRed = SolvayColor.data1[0];
-	SolvayGreen = SolvayColor.data1[1];
-	SolvayBlue = SolvayColor.data1[2];
+	let SolvayRed = SolvayColor.data1[0];
+	let SolvayGreen = SolvayColor.data1[1];
+	let SolvayBlue = SolvayColor.data1[2];
 
 	// set up dummy displays before going to getTemplate
-	canvasDumC = document.getElementById(wDummyC); // global
+	let canvasDumC = document.getElementById(wDummyC); // global
 	canvasDumC.hidden = true;
 	ctxDumC = canvasDumC.getContext('2d'); // global
 	imgDataC = ctxDumC.createImageData(cols, rows);
 	
-	canvasDumBW = document.getElementById(wDummyBW); // global
+	let canvasDumBW = document.getElementById(wDummyBW); // global
 	canvasDumBW.hidden = true;
 	ctxDumBW = canvasDumBW.getContext('2d'); // global
 	imgDataBW = ctxDumBW.createImageData(cols, rows);
@@ -287,8 +329,9 @@ function prepareLab_9_3( )
 	// Caveat Emptor: pixels are in a data format that is CLAMPED to
 	// the integer range 0 to 255. Do all processing with "float" and
 	// then rescale to this range before writing in pixels.
-	pixelsC  = imgDataC.data;
+	let pixelsC  = imgDataC.data;
 	pixelsBW  = imgDataBW.data;
+	let j = null;
 	for (let i = 0; i < pixelsC.length; i += 4)
 		{
 		j = i>>2;
@@ -302,7 +345,7 @@ function prepareLab_9_3( )
 		pixelsBW[i+2] = SolvayBW.data1[j];	// blue
 		pixelsBW[i+3] = 255; 				// alpha
 		};
-	innerW = window.innerWidth;
+	let innerW = window.innerWidth;
 	scaledCols = Math.floor(0.875*innerW); // fine tuned scale factor
 	scaledRows = Math.floor(rows*(scaledCols/cols));
 	xoffset = 0;
@@ -334,6 +377,5 @@ function prepareLab_9_3( )
 	getTemplate(firstTarget);
 	
 	// now wait for interaction
-	
 	};
 

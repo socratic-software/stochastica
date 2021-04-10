@@ -194,10 +194,6 @@ function prepareLab_9_1( )
 	dtLayout.margin.l = setLeftMargin(); // orientation & platform check;
 	dtLayout.yaxis2.range = [-1.05, +1.05];
 
-	dtLayout.annotations[1].x = 0.5;
-	dtLayout.annotations[1].xanchor = 'left';
-	dtLayout.annotations[1].y = 3*titleBelowAxis/3;
-	dtLayout.annotations[1].yanchor = 'auto';
 	dtLayout.annotations[1].text = 'n';
 
 	corrLayout = cloneObj(dtLayout);

@@ -24,9 +24,9 @@
 		<script type="text/javascript" src='../js/SSPconstants.js'></script>
 		<script type="text/javascript" src='../js/SSPfourier.js'></script>
 		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src='../js/SSPplotting.js'></script>
 		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
-		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src="../js/extra.js"></script>
 		<script src='js/Lab_6-6.js'></script>
 		<script src='js/Lab_6-6a.js'></script>
@@ -57,7 +57,7 @@
 	<br>
 	<h5>Laboratory Exercise 6.6a</h5>
 
-	<div class="scrollBrd">
+	<div class="scrollBrd" id="scrollBrd" style="font-size:0.9rem;">
 
 		Consider yet another real, stable, discrete-time, LTI system whose input/output relation 
 		is given by:
@@ -66,7 +66,9 @@
 				<tr>
 					<td>(6.40)</td>
 					<td id="eq:bpf_1">
-						<img width=65% src="../images/Eqn_Lab_6.6a.1.gif" alt="Missing Eqn_Lab_6.6a.1.gif"/>
+						<img id="fixEqn-0" style="width:95%" 
+							src="../images/Eqn_Lab_6.6a.1.gif" 
+							alt="Missing Eqn_Lab_6.6a.1.gif"/>
 					</td>
 				</tr>
 			</table>
@@ -76,8 +78,8 @@
 		<br><br>
 		The input to this system is <i>x[n] = g[n]</i>, a <output id="placeT">1.5</output> second 
 		white noise signal with a Gaussian amplitude distribution. The output is 
-		<i>y[n] = g<sub>F</sub>[n]</i> the filtered version of <i>g[n]</i>, that is, 
-		<i>g<sub>F</sub>[n] = h[n]</i> &otimes; <i>g[n]</i>.
+		<i>y[n] = g<sub>F </sub>[n]</i> the filtered version of <i>g[n]</i>, that is, 
+		<i>g<sub>F </sub>[n] = h[n]</i> &otimes; <i>g[n]</i>.
 
 		<ol type="i">
 			<li>What is the <i>z</i>-transform <i>H(z)</i> of the impulse response <i>h[n]</i>? What 
@@ -92,7 +94,7 @@
 			<li>When you <i>listen</i> to each of the signals, does this support your answer to 
 				the previous question?</li><br>
 			
-			<li>Both <i>g[n]</i> and <i>g<sub>F</sub>[n]</i> have been normalized after analysis but 
+			<li>Both <i>g[n]</i> and <i>g<sub>F </sub>[n]</i> have been normalized after analysis but 
 				before being converted to audio WAV files. Do they sound equally loud? If not, can 
 				you think of an explanation? (<i>Full disclosure: They do not sound equally loud 
 				to this author.</i>)</li><br>
@@ -115,7 +117,7 @@
 		
 		<table class='radioTable'>
 			<tr>
-				<td style="font-size:0.8rem;">Choose lab variant:      </td>
+				<td style="font-size:0.9rem;">Choose lab variant:      </td>
 				<td>
 					<label class="container"><span class="buttonText">a</span>
 					<input type="radio" checked="checked" name="unique" id="A" 
@@ -145,7 +147,7 @@
 
 		<table class='radioTable'>
 			<tr>
-				<td style="font-size:0.8rem;">Choose display:         </td>
+				<td style="font-size:0.9rem;">Choose display:         </td>
 				<td> 
 					<label class="container">
 					<span style="font-family:Georgia,Palatino,Bodoni,serif;">
@@ -186,7 +188,7 @@
 						value='0'
 						id='zm'>
 				</td>
-				<td>
+				<td style="font-size:0.8rem">
 					<output id="placeN1">N = ----- samples</output><br>
 					<output id="placeN2">= ----- ms</output>
 				</td>
@@ -195,7 +197,8 @@
 		<br>
 		<table class='table1x1Cols'>
 			<tr>
-				<td>
+				<td style='text-align: center; vertical-align:middle; 
+						font-size:0.8rem; color:maroon; font-weight:bold;'>
 					<button id="playCapture-0">               
 						<img id='play_0' class='buttonImg' src='../images/playback_transp.png'>
 					</button>  Play signal g(t)
@@ -218,7 +221,8 @@
 		
 		<table class='table1x1Cols'>
 			<tr>
-				<td>
+				<td style='text-align: center; vertical-align:middle; 
+						font-size:0.8rem; color:maroon; font-weight:bold;'>
 					<button id="playCapture-1">               
 						<img id='play_1' class='buttonImg' src='../images/playback_transp.png'>
 					</button>  Play signal g<sub>F </sub>(t)
@@ -249,6 +253,8 @@
 		
 		window.onload = function init()
 			{
+			fixEqn();
+
 			theName0 = {fS: 0, data: []} // global definition of raw 1D audio
 			theName1 = {fS: 0, data: []} // global definition of raw 1D audio
 			theNames = [theName0,theName1]; // initial definition but global

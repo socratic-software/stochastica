@@ -126,8 +126,6 @@ function displayData()
 			plotList[j][3] // no mode
 			);
 		};
-
-
 	};
 	
 // ***************************************************************** \\
@@ -140,7 +138,7 @@ function prepareLab_12_4( )
 	lengthMax = 2**(factor2-2); // defined in SSPmedia.js
 	thisDuration = 1000*lengthMax/sampFreq; // defined in SSPmedia.js
 	myDuration[audioNum] = thisDuration;
-	
+
 	// don't blink
 	for (var i = 0; i < nMics; i++)
 		{
@@ -149,7 +147,7 @@ function prepareLab_12_4( )
 		document.getElementById('animX'+i).style.backgroundColor = "white";
 		document.getElementById('mic_'+i).style = 'filter:hue-rotate(0deg);';
 		};
-		
+
 	freqUnit = 0;
 	document.querySelector('#placeN1').value = lengthMax;
 	document.querySelector('#placeN2').value = zoomLength;

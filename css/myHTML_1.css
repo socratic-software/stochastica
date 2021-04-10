@@ -38,7 +38,8 @@
 	Thursday, 21 February 2019
 	Saturday, 23 March 2019
 	Wednesday, 27 March 2019
-	Sunday, 22 September 2019 /* changed rem to vw to make fonts scalable with window size */
+	Sunday, 22 September 2019
+	Friday, 12 March 2021
 
 /* **************************************************************** */
 */
@@ -95,7 +96,7 @@ div {
 }
 
 div.scrollBrd {
-	width: 85vw;
+	width: 85%;
 	height: 20vh;
 	min-height: 120px;
 	font-family: Georgia, Palatino, Bodoni, serif;
@@ -111,7 +112,7 @@ div.scrollBrd {
 
 div.scrollNoBrd {
 	text-align: center;
-	width: 100vw;
+	width: 100%;
 	height: 70vh;
 	overflow-x: hidden;
 	overflow-y: auto;
@@ -121,9 +122,9 @@ div.scrollNoBrd {
 
 .div3D {
 	text-align: center;
-	display: block;
-	width: 350;
-	height: 350;
+	vertical-align: middle;
+	width: auto;
+	height: auto;
 	border: 0px solid maroon;
 }
 
@@ -134,16 +135,16 @@ p {
 	}
 
 .inlineIcon {
-	height: 1rem; /* ??? vw ??? */
+	height: 1rem;
 	font-size: 0.8rem; /* 2rem but scalable */
-	line-height: 1rem; /* ??? vw ??? */
-	vertical-align: -0.2rem; /* ??? vw ??? */
+	line-height: 1rem;
+	vertical-align: -0.2rem;
 	}
 
 .inlineEqn {
-	height: 2.56vw; /* ??? vw ??? */
-	font-size: 2.56vw; /* 2rem but scalable */
-	vertical-align: middle; /* ??? vw ??? */
+	height: 1rem;
+	font-size: 1rem;
+	vertical-align: middle;
 	}
 
 .p_footnote {
@@ -170,7 +171,7 @@ p_mono {
 
 h3	{
 	font-family: Helvetica, Arial, GillSans, san-serif;
-	font-size: 6.28vw; /* 4.9rem but scalable */
+	font-size: 4.9rem;
 	font-weight: bold;
 	font-variant: small-caps;
 	color: steelblue;
@@ -179,7 +180,7 @@ h3	{
 h4	{
 	padding: 0% 2.5%;
 	font-family: Helvetica, Arial, GillSans, san-serif;
-	font-size: 3.84vw; /* 3.0rem but scalable */
+	font-size: 3rem;
 	font-weight: bold;
 	font-variant: small-caps;
 	color: green;
@@ -189,7 +190,7 @@ h5	{
 	margin: 0px 0px 30px 0px; /* top-bot, left-right */
 	padding: 0% 2.5%;
 	font-family: Helvetica, Arial, GillSans, san-serif;
-	font-size: 2.82vw; /* 2.2rem but scalable */
+	font-size: 1.1rem;
 	font-weight: bold;
 	color: #666;
 	text-align: left;
@@ -246,7 +247,7 @@ button
 	left: 0;
 	top: 0;
 	font-weight: bold;
-	font-size: 1.79vw; /* 1.4rem but scalable */
+	font-size: 0.8rem; /* 1.4rem but scalable */
 	color: white;
 	background-color: #2c5272;
 	overflow: hidden;
@@ -268,7 +269,15 @@ button
 	}
 
 /* **************************************************************** */
-/* here is a button format  */
+
+.angleSym {
+	font-family: Georgia, Palatino, Bodoni, serif;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 1.6rem;
+	vertical-align: text-bottom;
+	padding-right: 0rem;
+	}
 
 .linLogBtn {
 	background-color: rgb(71, 133, 184);
@@ -278,7 +287,7 @@ button
 	font-weight: bold;
 	font-size: 0.7rem; /* 1.4rem but scalable */
 	display: inline-block;
-	line-height: 1.1rem; /* ??? vw ??? */
+	line-height: 1.1rem;
 	border-radius: 8px;
 	cursor:pointer;
 	}
@@ -292,7 +301,7 @@ button
 	font-size: 0.6rem; /* 1.1rem but scalable */
 	vertical-align:middle;
 	display: inline-block;
-	line-height: 1rem; /* ??? vw ??? */
+	line-height: 1rem;
 	border-radius: 4px;
 	}
 
@@ -348,12 +357,12 @@ button
 /* class definitions as in class='super' for superscript */
 .super{
 	vertical-align: super;
-	font-size: 2.31vw; /* 1.8rem but scalable */
+	font-size: 1.8rem;
 	}
 	
 .sub{
 	vertical-align: sub;
-	font-size: 2.31vw; /* 1.8rem but scalable */
+	font-size: 1.8rem;
 	}
 
 .box { /* used with class='box' to frame a graph or image in a "div" */
@@ -377,8 +386,8 @@ button
 	font-family: Georgia, Palatino, Bodoni, serif;
 	text-align:center;
 	font-style: italic;
-	margin: 0px auto; /* ??? vw ??? */
-	line-height: 5rem; /* ??? vw ??? */
+	margin: 1.5rem auto 1rem;
+	line-height: 1rem;
 	width:100%;
 	}
 
@@ -386,7 +395,7 @@ button
 	font-family:inherit;
 	text-align:inherit;
 	font-style: inherit;
-	margin: 0px auto;
+	vertical-align:middle;
 	border: 0px dashed blue;
 	}
 
@@ -401,38 +410,7 @@ button
 .centerEqTable td:nth-child(2) {
 	text-align: center;
 	vertical-align:middle;
-	padding-top: 15px;
-	padding-right: 10px;
-	width: 90%;
-	}
-
-.centerEq {
-	font-family: Georgia, Palatino, Bodoni, serif;
-	text-align:center;
-	font-style: italic;
-	margin: 0px auto; /* ??? vw ??? */
-	line-height: 5rem; /* ??? vw ??? */
-	width:100%;
-	}
-
-.centerEq tr, .centerEq td {
-	font-family:inherit;
-	text-align:inherit;
-	font-style: inherit;
-	margin: 0px auto; /* ??? vw ??? */
-	border: 0px dashed blue;
-	}
-
-.centerEq td:nth-child(1) {
-	text-align: left;
-	font-style: normal;
-	vertical-align:middle;
-	padding-right: 10px;
-	width: 10%;
-	}
-
-.centerEq td:nth-child(2) {
-	text-align: center;
+	padding-top: 10px;
 	padding-right: 10px;
 	width: 90%;
 	}
@@ -444,15 +422,17 @@ button
 .captionTableSans {
 	margin: 0px auto;
 	font-family: Helvetica, Arial, GillSans, san-serif;
-	font-size: 2.18vw; /* 1.7rem but scalable */
-	line-height: 4rem; /* ??? vw ??? */
+	font-weight: bold;
+	font-size: 1rem; /* 1.7rem but scalable */
+	line-height: 4rem;
 	}
 
 .captionTableSerif {
 	margin: 0px auto;
 	font-family: Georgia, Palatino, Bodoni, serif;
 	font-style: italic;
-	font-size: 1.92vw; /* 1.5rem but scalable */
+	font-weight: bold;
+	font-size: 1rem; /* 1.5rem but scalable */
 	vertical-align: middle;
 	}
 
@@ -502,17 +482,39 @@ button
 	color: Maroon;
 	line-height: 25px; /* of current font-size */
 	text-align: center;
-	width: 85vw;
+	width: 85%;
 	margin: 0px auto;
 	position: relative;
 	}
 
 .tableGen tr, .tableGen td {
-	padding-top: 0.8rem; /* ??? vw ??? */
-	padding-bottom: 0.8rem; /* ??? vw ??? */
+	padding-top: 0.8rem;
+	padding-bottom: 0.8rem;
 	border: 0px dashed blue;
 	vertical-align: middle;
 	font-weight: bold;
+	overflow-x: hidden;
+	position: relative;
+	}
+
+.tableGenAlt {
+	font-family: Georgia, Palatino, Bodoni, serif;
+	font-style: italic;
+	font-weight: normal;
+	font-size: 0.8rem; /* Base size for all fonts = 2.2rem */
+	color: black;
+	line-height: 25px;  /* of current font-size */
+	text-align: center;
+	width: 90%;
+	margin: 0px auto;
+	position: relative;
+	}
+
+.tableGenAlt tr, .tableGenAlt td {
+	padding-top: 0.8rem;
+	padding-bottom: 0.8rem;
+	border: 0px dashed darkgreen;
+	vertical-align: middle;
 	overflow-x: hidden;
 	position: relative;
 	}
@@ -525,14 +527,14 @@ button
 	color: black;
 	line-height: 25px; /* of current font-size */
 	text-align: center;
-	width: 95vw;
+	width: 95%;
 	margin: 0px auto;
 	position: relative;
 	}
 
 .table1x1Cols tr, .table1x1Cols td {
-	padding-top: 0.8rem; /* ??? vw ??? */
-	padding-bottom: 0.8rem; /* ??? vw ??? */
+	padding-top: 0.8rem;
+	padding-bottom: 0.8rem;
 	border: 0px dashed blue;
 	vertical-align: middle;
 	font-weight: normal;
@@ -553,8 +555,8 @@ button
 	}
 
 .table1x1ColsAlt tr, .table1x1ColsAlt td {
-	padding-top: 0.8rem; /* ??? vw ??? */
-	padding-bottom: 0.8rem; /* ??? vw ??? */
+	padding-top: 0.8rem;
+	padding-bottom: 0.8rem;
 	border: 0px dashed blue;
 	vertical-align: middle;
 	font-weight: bold;
@@ -577,14 +579,14 @@ button
 	color: black;
 	line-height: 25px; /* of current font-size */
 	text-align: center;
-	width: 95vw;
+	width: 95%;
 	margin: 0px auto;
 	position: relative;
 	}
 
 .table1x2Cols tr, .table1x2Cols td {
-	padding-top: 0.8rem; /* ??? vw ??? */
-	padding-bottom: 0.8rem; /* ??? vw ??? */
+	padding-top: 0.8rem;
+	padding-bottom: 0.8rem;
 	border: 0px dashed blue;
 	vertical-align: middle;
 	font-weight: normal;
@@ -596,18 +598,18 @@ button
 	font-family: Georgia, Palatino, Bodoni, serif;
 	font-style: italic;
 	font-weight: bold;
-	font-size: 0.8rem; /* Base size for all fonts = 2.2rem */
+	font-size: 0.75rem; /* Base size for all fonts = 2.2rem */
 	color: Maroon;
 	line-height: 25px; /* of current font-size */
 	text-align: center;
-	width: 95vw;
+	width: 95%;
 	margin: 0px auto;
 	position: relative;
 	}
 
 .table1x2ColsAlt tr, .table1x2ColsAlt td {
-	padding-top: 0.8rem; /* ??? vw ??? */
-	padding-bottom: 0.8rem; /* ??? vw ??? */
+	padding-top: 0.8rem;
+	padding-bottom: 0.8rem;
 	border: 0px dashed blue;
 	vertical-align: middle;
 	font-weight: bold;
@@ -619,7 +621,7 @@ button
 	font-family: Georgia, Palatino, Bodoni, serif;
 	font-style: italic;
 	font-weight: bold;
-	font-size: 0.8rem; /* 1.6rem but scalable */
+	font-size: 0.9rem; /* 1.6rem but scalable */
 	color: Maroon;
 	line-height: 25px; /* of current font-size */
 	text-align: center;
@@ -628,8 +630,8 @@ button
 	}
 
 .table1x3Cols tr, .table1x3Cols td {
-	padding-top: 0.8rem; /* ??? vw ??? */
-	padding-bottom: 0.8rem; /* ??? vw ??? */
+	padding-top: 0.8rem;
+	padding-bottom: 0.8rem;
 	border: 0px dashed blue;
 	vertical-align: middle;
 	font-weight: bold;
@@ -657,7 +659,7 @@ button
 	font-family: Georgia, Palatino, Bodoni, serif;
 	font-style: italic;
 	font-weight: bold;
-	font-size: 2.05vw; /* 1.6rem but scalable */
+	font-size: 0.9rem; /* 1.6rem but scalable */
 	color: Maroon;
 	text-align: center;
 	line-height: 25px; /* of current font-size */
@@ -684,48 +686,110 @@ button
 .table1x3ColsAlt td:nth-child(3) {
 	width: 8%;
 	line-height: 20px; /* of current font-size */
-	font-size: 1.54vw; /* 1.2rem but scalable */
+	font-size: 0.8rem;
 	}
 	
-.cameraBkgP {
-	padding: 0em;
+#cameraBkgPUpper {
+	position: absolute;
+	width: 100%;
+	left: 0;
+	top: 70px;
+	bottom: calc(176px + 70px);
+	padding: 0;
 	font-family: Helvetica, Arial, GillSans, san-serif;
 	font-weight: bold;
-	font-size: 2.05vw; /* 1.6rem but scalable */
+	font-size: 0.9rem;
 	background-color: #2c5272;
 	color: white;
 	text-align: center;
-	width: 100%;
 	margin: 0px auto;
 	}
 
-.cameraBkgP tr, .cameraBkgP td {
+#cameraBkgPUpper tr, #cameraBkgPUpper td {
 	text-align: center;
 	font-weight: bold;
 	border: 0px dashed yellow;
-	vertical-align: middle;
+	vertical-align: center;
 	overflow-x: hidden;
 	}
 
-.cameraBkgL {
-	padding: 0em;
+.cameraClassP {
+	height: 100%;
+	width: 100%;
+	border: 0px lightblue dashed;
+	position: absolute;
+	top: calc(176px);
+	}
+
+#cameraBkgPLower {
+	position: absolute;
+	width: 100%;
+	top: calc(100% - 124px - 70px);
+	left: 0;
+	padding: 0;
 	font-family: Helvetica, Arial, GillSans, san-serif;
 	font-weight: bold;
-	font-size: 1.92vw; /* 1.6rem but scalable */
+	font-size: 0.9rem; /* 1.6rem but scalable */
 	background-color: #2c5272;
 	color: white;
 	text-align: center;
-	width: 50%;
-	margin: 0px 10px 0px 0px;
-	float:right;
+	margin-top: 0px;
 	}
 
-.cameraBkgL tr, .cameraBkgL td {
+#cameraBkgPLower tr, #cameraBkgPLower td {
 	text-align: center;
 	font-weight: bold;
 	border: 0px dashed yellow;
 	vertical-align: middle;
 	overflow-x: hidden;
+	}
+
+#cameraBkgL {
+	position:absolute;
+	width:100%
+	top:0;
+	right:0;
+	padding: 0;
+	font-family: Helvetica, Arial, GillSans, san-serif;
+	font-weight: bold;
+	font-size: 1.6vw; /* intentional for special case */
+	background-color: #2c5272;
+	color: white;
+	text-align: center;
+	margin: 0;
+	float:right;
+	}
+
+#cameraBkgL tr, #cameraBkgL td {
+	text-align: center;
+	font-weight: bold;
+	background-color: #2c5272;
+	border: 0px dashed yellow;
+	vertical-align: middle;
+	overflow-x: hidden;
+	}
+
+.cameraClassLright {
+	height: 50%;
+	width: 45%;
+	border: 0px lightblue dashed;
+	position: absolute;
+	top: 20%;
+	padding: 0;
+	font-family: Helvetica, Arial, GillSans, san-serif;
+	font-weight: bold;
+	font-size: 0.9rem;
+	background-color: #2c5272;
+	color: white;
+	text-align: center;
+	margin: 0;
+	}
+
+.cameraClassLleft {
+	height: 100%;
+	width: 55%;
+	border: 0px lightblue dashed;
+	position: absolute;
 	}
 
 .tableImageLine {
@@ -754,7 +818,7 @@ button
 .tableImageLine td:nth-child(1) {
 	width: 20%;
 	text-align: right;
-	padding-bottom: 0.2rem; /* ??? vw ??? */
+	padding-bottom: 0.2rem;
 	}
 
 .tableImageLine td:nth-child(2) {
@@ -764,7 +828,7 @@ button
 .tableImageLine td:nth-child(3) {
 	width: 20%;
 	text-align: left;
-	padding-bottom: 0.2rem; /* ??? vw ??? */
+	padding-bottom: 0.2rem;
 	}
 
 .table1x4Cols {
@@ -775,14 +839,14 @@ button
 	color: black;
 	line-height: 25px; /* of current font-size */
 	text-align: center;
-	width: 97vw;
+	width: 97%;
 	margin: 0px auto;
 	position: relative;
 	}
 
 .table1x4Cols tr, .table1x4Cols td {
-	padding-top: 0.8rem; /* ??? vw ??? */
-	padding-bottom: 0.8rem; /* ??? vw ??? */
+	padding-top: 0.8rem;
+	padding-bottom: 0.8rem;
 	border: 0px dashed blue;
 	vertical-align: middle;
 	font-weight: normal;
@@ -795,7 +859,7 @@ button
 	font-family: Georgia, Palatino, Bodoni, serif;
 	font-style: italic;
 	font-weight: bold;
-	font-size: 0.8rem; /* 1.6rem but scalable */
+	font-size: 0.75rem; /* 1.6rem but scalable */
 	color: Maroon;
 	line-height: 25px; /* of current font-size */
 	text-align: center;
@@ -804,8 +868,8 @@ button
 	}
 
 .table1x4ColsAlt tr, .table1x4ColsAlt td {
-	padding-top: 0.6rem; /* ??? vw ??? */
-	padding-bottom: 0.6rem; /* ??? vw ??? */
+	padding-top: 0.6rem;
+	padding-bottom: 0.6rem;
 	border: 0px dashed green;
 	font-weight: bold;
 	vertical-align: middle;
@@ -830,17 +894,17 @@ button
 	font-family: Georgia, Palatino, Bodoni, serif;
 	font-style: italic;
 	font-weight: bold;
-	font-size: 2.05vw; /* 1.6rem but scalable */
+	font-size: 0.75rem; /* 1.6rem but scalable */
 	color: Maroon;
 	line-height: 25px; /* of current font-size */
 	text-align: center;
-	width: 99%;
+	width: auto;
 	margin: 0px auto;
 	}
 
 .table1x5ColsAlt tr, .table1x5ColsAlt td {
-	padding-top: 0.6rem; /* ??? vw ??? */
-	padding-bottom: 0.6rem; /* ??? vw ??? */
+	padding-top: 0.6rem;
+	padding-bottom: 0.6rem;
 	border: 0px dashed green;
 	font-weight: bold;
 	vertical-align: middle;
@@ -848,21 +912,21 @@ button
 	}
 
 .table1x5ColsAlt td:nth-child(1) {
-	text-align: center;
+	text-align: right;
 	width: auto;
 	vertical-align: middle;
 	background-color: white;
 	}
 
 .table1x5ColsAlt td:nth-child(2) {
-	text-align: right;
+	text-align: center;
 	padding-right: 10px;
 	padding-bottom: 10px;
 	width:auto;
 	}
 
 .table1x5ColsAlt td:nth-child(3) {
-	text-align: middle;
+	text-align: center;
 	width: 25%;
 	vertical-align: middle;
 	background-color: white;
@@ -887,7 +951,7 @@ button
 	font-family: Georgia, Palatino, Bodoni, serif;
 	font-style: italic;
 	font-weight: bold;
-	font-size: 0.8rem; /* 1.6rem but scalable */
+	font-size: 0.75rem; /* 1.6rem but scalable */
 	color: Maroon;
 	line-height: 25px; /* of current font-size */
 	text-align: center;
@@ -896,8 +960,8 @@ button
 	}
 
 .table1x8ColsAlt tr, .table1x8ColsAlt td {
-	padding-top: 0.6rem; /* ??? vw ??? */
-	padding-bottom: 0.6rem; /* ??? vw ??? */
+	padding-top: 0.6rem;
+	padding-bottom: 0.6rem;
 	border: 0px dashed green;
 	font-weight: bold;
 	vertical-align: middle;
@@ -940,25 +1004,35 @@ button
 
 .cameraRadioTable {
 	font-family: Helvetica, Arial, GillSans, san-serif;
-	font-size: 2.05vw; /* 1.8rem but scalable */
-	text-align: left;
+	font-size: 0.83rem; /* 1.8rem but scalable */
+	text-align: right;
 	vertical-align: middle;
 	width: auto;
 	margin: 0px auto;
 	}
 
 .cameraRadioTable tr, .cameraRadioTable td {
-	font-size: 2.05vw; /* 1.8rem but scalable */
-	text-align: left;
+	text-align: right;
 	vertical-align: middle;
-	padding-left: 0.8rem; /* ??? vw ??? */
-	padding-top: 0.8rem; /* ??? vw ??? */
-	padding-bottom: 0.8rem; /* ??? vw ??? */
+	padding-left: 0.8rem;
+	padding-top: 0.8rem;
+	padding-bottom: 0.8rem;
 	margin: auto;
 	width: auto;
 	border: 0px dashed maroon;
 	vertical-align: middle;
 	overflow-x: hidden;
+	}
+
+.cameraRadioTable td:nth-child(1) {
+	width: auto;
+	text-align: right;
+	}
+
+.cameraRadioTable td:nth-child(n+2) {
+	width: 18%;
+	text-align: left;
+	background-color:white;
 	}
 
 .radioTable {
@@ -972,13 +1046,12 @@ button
 .radioTable tr, .radioTable td {
 	font-size: 0.8rem; /* 1.8rem but scalable */
 	text-align: left;
-	padding-left: 0.8rem; /* ??? vw ??? */
-	padding-top: 0.8rem; /* ??? vw ??? */
-	padding-bottom: 0.8rem; /* ??? vw ??? */
+	padding-left: 0.8rem;
+	padding-top: 0.8rem;
+	padding-bottom: 0.8rem;
 	margin: auto;
 	vertical-align: middle;
 	border: 0px dashed maroon;
-	vertical-align: middle;
 	overflow-x: hidden;
 	}
 
@@ -1000,16 +1073,16 @@ button
 
 .windowTable {
 	font-family: Helvetica, Arial, GillSans, san-serif;
-	font-size: 2.31vw; /* 1.8rem but scalable */
+	font-size: 0.9rem;
 	text-align: left;
 	width: 75%;
 	margin: 0px auto;
 	}
 
 .windowTable tr, .windowTable td {
-	padding-left: 0.8rem; /* ??? vw ??? */
-	padding-top: 0.8rem; /* ??? vw ??? */
-	padding-bottom: 0.8rem; /* ??? vw ??? */
+	padding-left: 0.8rem;
+	padding-top: 0.8rem;
+	padding-bottom: 0.8rem;
 	border: 0px dashed maroon;
 	background-color: white;
 	vertical-align: middle;
@@ -1031,7 +1104,7 @@ button
 	}
 		
 .winTable tr, .winTable td {
-	padding: 1rem 2rem; /* ??? vw ??? */
+	padding: 1rem 2rem;
 	border: 0px dashed maroon;
 	width: auto;
 	vertical-align: middle;
@@ -1047,17 +1120,17 @@ button
 	font-family: Georgia, Palatino, Bodoni, serif;
 	font-style: italic;
 	font-weight: bold;
-	font-size: 0.8rem; /* 1.6rem but scalable */
+	font-size: 0.75rem;
 	color: Maroon;
-	line-height: 25px; /* of current font-size */
+	line-height: 25px;
 	text-align: right;
 	margin: 0px auto;
 	}
 
 .tableRecPlay tr, .tableRecPlay td {
-	padding-top: 0.8rem; /* ??? vw ??? */
-	padding-bottom: 0.8rem; /* ??? vw ??? */
-	text-align: right;
+	padding-top: 0.8rem;
+	padding-bottom: 0.8rem;
+	text-align: center;
 	border: 0px dashed Maroon;
 	width: auto;
 	font-weight: bold;
@@ -1067,7 +1140,7 @@ button
 
 .musicTable {
 	font-family: HelveticaNeue, Helvetica, Arial, GillSans, san-serif;
-	font-size: 2.05vw; /* 1.6rem but scalable */
+	font-size: 0.75rem;
 	text-align: left;
 	width: 90%;
 	margin: auto;
@@ -1129,20 +1202,10 @@ button
 	}
 	
 /* Graphs have a layout defined here */
-.singleGraphTable {
-	font-family: Helvetica, Arial, GillSans, san-serif;
-	font-size: 2.82vw; /* 2.2rem but scalable */
-	font-style: bold;
-	text-align: center;
-	width: auto;
-	margin: 0px auto;
-	border: 0px dashed blue;
-	}
-
 .twoGraphTable {
 	padding: 0em;
 	font-family: Helvetica, Arial, GillSans, san-serif;
-	font-size: 2.31vw;
+	font-size: 0.9rem;
 	text-align: center;
 	width: 96%;
 	margin: 0px auto;
@@ -1157,7 +1220,7 @@ button
 
 .threeGraphTableAlt {
 	font-family: Georgia, Palatino, Bodoni, serif;
-	font-size: 2.05vw; /* 1.6rem but scalable */
+	font-size: 0.8rem; /* 1.6rem but scalable */
 	color: Maroon;
 	text-align: center;
 	line-height: 25px; /* of current font-size */
@@ -1247,7 +1310,7 @@ table.waldo {
 .buttonText {
 	font-family: Georgia, Palatino, Bodoni, serif;
 	font-style: italic;
-	font-size: 0.8rem; /* 1.4rem but scalable */
+	font-size: 0.9rem; /* 1.4rem but scalable */
 	color: black;
 	text-align: left;
 	}
@@ -1303,33 +1366,33 @@ table.waldo {
 .bridgeTable {
 	font-family: Helvetica, Arial, GillSans, san-serif;
 	font-size: 0.9rem; /* 1.8rem but scalable */
-	width: auto;
-	margin: auto auto 10px auto;
+	width: 70%;
+	margin: 0px auto;
 	text-align: left;
-	line-height: 180%;
+	line-height: 120%;
 	}
 
 .bridgeTable td, .bridgeTable tr {
-	border: 0px solid Maroon;
+	border: 0px dashed Maroon;
 	vertical-align: middle;
 	overflow-x: hidden;
 	}
 
 .bridgeTable td:nth-child(1) {
 	text-align: left;
-	width: auto;
+	width: 55%;
 	margin: auto;
 	}
 
 .bridgeTable td:nth-child(2) {
 	text-align: left;
-	width: 25%;
+	width: 10%;
 	margin: auto;
 	}
 
 .bridgeTable td:nth-child(3) {
 	text-align: left;
-	width: auto;
+	width: 35%;
 	margin: auto;
 	}
 
@@ -1369,7 +1432,7 @@ table.waldo {
 	width:100%;
 	text-align:left;
 	background-color: steelblue;
-	font-size: 2.05vw;
+	font-size: 0.9rem;
 	line-height: 250%; /* of current font-size */
 	color: white;
 	cursor: pointer;

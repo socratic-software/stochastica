@@ -98,8 +98,8 @@ function prepareLab_4_1( )
 	Barlayout.width = Math.floor(0.95*graphWidth[twoImages]); // special case
 	Barlayout.font.size = DTlayout.font.size;
 	
-	Plotly.newPlot(wB, [plotDT], DTlayout, noMode);
-	Plotly.newPlot(wC, [plotBar], Barlayout, noMode);
+	Plotly.react(wB, [plotDT], DTlayout, noMode);
+	Plotly.react(wC, [plotBar], Barlayout, noMode);
 	
 	genCoins(flips,firstRun);
 	};
@@ -166,8 +166,8 @@ function flipCoins(val,target)
 	plotBar.y = barData;
 	plotBar.text = barData;
 		
-	Plotly.newPlot(wB, [plotDT], DTlayout, noMode);
-	Plotly.newPlot(wC, [plotBar], Barlayout, noMode);
+	Plotly.react(wB, [plotDT], DTlayout, noMode);
+	Plotly.react(wC, [plotBar], Barlayout, noMode);
 	
 	firstRun = false;
 	genCoins(flips,firstRun);

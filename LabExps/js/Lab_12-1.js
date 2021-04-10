@@ -185,6 +185,8 @@ function prepareLab_12_1( )
 	layoutPSD.xaxis2.tickmode = "array";
 	layoutPSD.xaxis2.tickvals = freqTicks;
 	layoutPSD.xaxis2.ticktext = freqLabels;
+	layoutPSD.xaxis2.tickangle = 45; // custom value
+	layoutPSD.xaxis2.tickfont.size = 11; // custom value
 	layoutPSD.font.family = CTlayout.font.family;
 	layoutPSD.font.size = CTlayout.font.size;
 	
@@ -202,7 +204,7 @@ function prepareLab_12_1( )
 	layoutPSD.annotations[0].yanchor = CTlayout.annotations[0].yanchor;
 	layoutPSD.annotations[0].text = '<i>Normalized S<sub>xx</sub>(2πf)</i>';
 
-	layoutPSD.annotations[1].y = CTlayout.annotations[1].y;
+	layoutPSD.annotations[1].y = 1.5*CTlayout.annotations[1].y;
 	layoutPSD.annotations[1].yanchor = CTlayout.annotations[1].yanchor;
 	layoutPSD.annotations[1].text = 'f  [Hz]';
 

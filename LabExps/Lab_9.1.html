@@ -31,10 +31,9 @@
 		<script type="text/javascript" src='../js/SSPconstants.js'></script>
 		<script type="text/javascript" src='../js/SSPfourier.js'></script>
 		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src='../js/SSPplotting.js'></script>
 		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
-
-		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src="../js/extra.js"></script>
 
 		<title>Laboratory Exercise 9.1</title>
@@ -65,7 +64,7 @@
 	<br>
 	<h5>Laboratory Exercise 9.1</h5>
 	
-	<div class="scrollBrd">
+	<div class="scrollBrd" id="scrollBrd" style="font-size:0.9rem;">
 
 		To appreciate how well a matched filter works in the presence of noise, let 
 		us examine the estimation of the delay of an exponentially-decaying signal 
@@ -75,11 +74,12 @@
 		<a href="../Chap_9.html#eq:match13"><font color="royalBlue">
 		Equation 9.13</font></a>. The filter is described by:
 		
-		<table class="centerEq" style="margin:10px auto 5px auto;">
+		<table class="centerEqTable">
 			<tr>
 				<td>(9.19)</td>
-				<td id="eq:matchedFilter1" style="padding-top:10px;">
-					<img width=65% src="../images/Eqn_Lab_9.1.1.png" 
+				<td id="eq:matchedFilter1">
+					<img id="fixEqn-0" style="width:95%" 
+						src="../images/Eqn_Lab_9.1.1.png" 
 						alt="Missing Eqn_Lab_9.1.1.png"/>
 				</td>
 			</tr>
@@ -199,6 +199,8 @@
 
 		window.onload = function init()
 			{
+			fixEqn();
+
 			// global variables
 			wA = 'Lab9.1R1L';
 			wB = 'Lab9.1R1R';

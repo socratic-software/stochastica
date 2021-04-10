@@ -24,9 +24,9 @@
 		<script type="text/javascript" src='../js/SSPconstants.js'></script>
 		<script type="text/javascript" src='../js/SSPfourier.js'></script>
 		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src='../js/SSPplotting.js'></script>
 		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
-		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src="../js/extra.js"></script>
 		<script src='js/Lab_6-7.js'></script>
 		<script src='js/Lab_6-7b.js'></script>
@@ -57,11 +57,11 @@
 	<br>
 	<h5>Laboratory Exercise 6.7b (continued)</h5>
 
-	<div class="scrollBrd">
+	<div class="scrollBrd" id="scrollBrd" style="font-size:0.9rem;">
 		Starting from Laboratory Exercise 6.7a, the <i>same</i> random signal of duration 
 		<output id="placeT">--</output> seconds and 
 		the same filter are used but this time the technique used to produce 
-		<i>g<sub>F</sub></i>[<i>n</i>] is through the <i>frequency domain</i>. First the 
+		<i>g<sub>F </sub></i>[<i>n</i>] is through the <i>frequency domain</i>. First the 
 		Discrete Fourier Transform (<i>DFT</i>) of the filter is computed yielding 
 		<i>H</i>(<i>&Omega;<sub>k</sub></i>). The FIR filter consists of 43 values so the 
 		<i>DFT</i> also has 43 complex values, that is, <i>k</i> = 1,2,3,...,43.
@@ -101,13 +101,13 @@
 		We multiply the two spectra, <i>G<sub>F</sub></i>(<i>&Omega;<sub>k</sub></i>)
 		 = <i>H</i>(<i>&Omega;<sub>k</sub></i>)<i>G</i>(<i>&Omega;<sub>k</sub></i>), and then 
 		 compute the Inverse Discrete Fourier Transform (<i>IDFT</i>) to produce 
-		 <i>g<sub>F</sub></i>[<i>n</i>]. In formula:
+		 <i>g<sub>F </sub></i>[<i>n</i>]. In formula:
 		 
-		<table class="centerEq">
+		<table class="centerEqTable">
 			<tr>
 				<td>(6.44)</td>
 				<td id="eq:gDef_1" class="specialSize">
-				g<sub>F</sub>[n] = <font class="cursive">F  <sup>-1</sup></font> {<font 
+				g<sub>F </sub>[n] = <font class="cursive">F  <sup>–1</sup></font> {<font 
 				class="cursive">F </font>{ h[n] } • <font class="cursive">F </font>{ g[n] }}
 				</td>
 				</tr>
@@ -115,7 +115,7 @@
 
 		where <font class="cursive">F </font>{•} is the Fourier transform operator. 
 		Examine and listen to <i>g</i>[<i>n</i>], the original signal, and 
-		<i>g<sub>F</sub></i>[<i>n</i>], the <i>frequency-domain filtered</i> result. 
+		<i>g<sub>F </sub></i>[<i>n</i>], the <i>frequency-domain filtered</i> result. 
 
 <br>
 
@@ -124,18 +124,17 @@
 				correspond to the frequencies you expected?</li><br>
 				
 			<li>Is the width of the probability distribution associated with the amplitudes of 
-				<i>g<sub>F</sub></i>[<i>n</i>] still smaller than the width associated with 
+				<i>g<sub>F </sub></i>[<i>n</i>] still smaller than the width associated with 
 				<i>g</i>[<i>n</i>]?</li><br>
 				
-			<li>Does the autocorrelation function <i><font 
-				face="Georgia">&phi;</font><sub>FF</sub></i>(<i>&tau;=kT</i>), shown below, resemble the autocorrelation 
-				function <i><font face="Georgia">&phi;</font><sub>FF</sub></i>(<i>&tau;=kT</i>) 
+			<li>Does the autocorrelation function <i><font face="Georgia">&phi;
+				</font><sub>FF </sub></i>(<i>&tau;=kT</i>), shown below, resemble the autocorrelation 
+				function <i><font face="Georgia">&phi;</font><sub>FF </sub></i>(<i>&tau;=kT</i>) 
 				shown in section 6.7a? Use the “Zoom” function to examine the results.</li><br>
 				
-			<li>Does the ratio 
-			<i>S<sub>FF</sub></i>(<i>&Omega;</i>)/<i>S<sub>gg</sub></i>(<i>&Omega;</i>) 
-				computed through the Fourier domain and shown below resemble the ratio 
-				<i>S<sub>FF</sub></i>(<i>&Omega;</i>)/<i>S<sub>gg</sub></i>(<i>&Omega;</i>) 
+			<li>Does the ratio <i>S<sub>FF </sub></i>(<i>&Omega;</i>)/<i>S<sub>gg</sub></i>
+				(<i>&Omega;</i>) computed through the Fourier domain and shown below resemble 
+				the ratio  <i>S<sub>FF </sub></i>(<i>&Omega;</i>)/<i>S<sub>gg </sub></i>(<i>&Omega;</i>) 
 				computed through convolution and shown on the previous page? Use the “Zoom” function 
 				to examine the results.</li>
 		</ol>
@@ -153,7 +152,7 @@
 		
 		<table class='radioTable'>
 			<tr>
-				<td style="font-size:0.8rem;">Choose lab variant:      </td>
+				<td style="font-size:0.9rem;">Choose lab variant:      </td>
 				<td>
 					<label class="container"><span class="buttonText">a</span>
 					<input type="radio" name="unique" id="A" 
@@ -191,7 +190,7 @@
 
 		<table class='radioTable'>
 			<tr>
-				<td style="font-size:0.8rem;">Choose display:         </td>
+				<td style="font-size:0.9rem;">Choose display:         </td>
 				<td> 
 					<label class="container">
 					<span style="font-family:Georgia,Palatino,Bodoni,serif;">
@@ -231,7 +230,7 @@
 						value='0'
 						id='zm'>
 				</td>
-				<td>
+				<td style="font-size:0.8rem">
 					<output id="placeN1">N = ----- samples</output><br>
 					<output id="placeN2">= ----- ms</output>
 				</td>
@@ -240,7 +239,8 @@
 		<br>
 		<table class='table1x1Cols'>
 			<tr>
-				<td>
+				<td style='text-align: center; vertical-align:middle; 
+						font-size:0.8rem; color:maroon; font-weight:bold;'>
 					<button id="playCapture-0">               
 						<img id='play_0' class='buttonImg' src='../images/playback_transp.png'>
 					</button>  Play signal g(t)
@@ -263,7 +263,8 @@
 		
 		<table class='table1x1Cols'>
 			<tr>
-				<td>
+				<td style='text-align: center; vertical-align:middle; 
+						font-size:0.8rem; color:maroon; font-weight:bold;'>
 					<button id="playCapture-1">               
 						<img id='play_1' class='buttonImg' src='../images/playback_transp.png'>
 					</button>  Play signal g<sub>F </sub>(t)

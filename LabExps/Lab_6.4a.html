@@ -24,9 +24,9 @@
 		<script type="text/javascript" src='../js/SSPconstants.js'></script>
 		<script type="text/javascript" src='../js/SSPfourier.js'></script>
 		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src='../js/SSPplotting.js'></script>
 		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
-		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src="../js/extra.js"></script>
 		<script src='js/Lab_6-4.js'></script>
 		<script src='js/Lab_6-4a.js'></script>
@@ -57,7 +57,7 @@
 	<br>
 	<h5>Laboratory Exercise 6.4a</h5>
 
-	<div class="scrollBrd">
+	<div class="scrollBrd" id="scrollBrd" style="font-size:0.9rem;">
 
 		Consider a real, discrete-time, LTI system whose impulse response is <i>h[n]</i>. The original 
 		input <i>x(t)</i> is considered to be an ergodic signal that has been sampled at 44.1 kHz to 
@@ -69,12 +69,12 @@
 		<font color="royalBlue">Equation 6.21</font></a>.
 		<br><br>
 		In this first section, <i>x[n] = g[n]</i> a white noise signal with a Gaussian amplitude 
-		distribution and <i>g<sub>F</sub>[n]</i> is the filtered version of <i>g[n]</i>, that is, 
-		<i>g<sub>F</sub>[n] = h[n]</i> &otimes; <i>g[n]</i>. Below you can view and listen to 
-		<output id="placeT">1.5</output> second samples of both <i>g[n]</i> and <i>g<sub>F</sub>[n]</i>.
+		distribution and <i>g<sub>F </sub>[n]</i> is the filtered version of <i>g[n]</i>, that is, 
+		<i>g<sub>F </sub>[n] = h[n]</i> &otimes; <i>g[n]</i>. Below you can view and listen to 
+		<output id="placeT">1.5</output> second samples of both <i>g[n]</i> and <i>g<sub>F </sub>[n]</i>.
 
 		<ol type="i">
-			<li>Is the stochastic signal <i>g<sub>F</sub>[n]</i> a “white” noise signal? Explain 
+			<li>Is the stochastic signal <i>g<sub>F </sub>[n]</i> a “white” noise signal? Explain 
 				your reasoning.</li><br>
 		
 			<li>Based upon the data presented, why is it reasonable to conclude that <i>h[n]</i> is 
@@ -90,7 +90,7 @@
 				 where <i>T</i> is the sampling interval.</li><br>
 			
 			<li>How do you explain the change in the estimates of the probability density 
-				function between <i>g[n]</i> and <i>g<sub>F</sub>[n]</i>?</li><br>
+				function between <i>g[n]</i> and <i>g<sub>F </sub>[n]</i>?</li><br>
 			
 			<li>Filters—particularly low pass filters—are frequently described as one-pole filters 
 				or two-pole filters or three-pole filters, and so forth. How many poles does the 
@@ -106,7 +106,7 @@
 		
 		<table class='radioTable'>
 			<tr>
-				<td style="font-size:0.8rem;">Choose lab variant:      </td>
+				<td style="font-size:0.9rem;">Choose lab variant:      </td>
 				<td>
 					<label class="container"><span class="buttonText">a</span>
 					<input type="radio" checked="checked" name="unique" id="A" 
@@ -136,7 +136,7 @@
 
 		<table class='radioTable'>
 			<tr>
-				<td style="font-size:0.8rem;">Choose display:         </td>
+				<td style="font-size:0.9rem;">Choose display:         </td>
 				<td> 
 					<label class="container">
 					<span style="font-family:Georgia,Palatino,Bodoni,serif;">
@@ -177,7 +177,7 @@
 						value='0'
 						id='zm'>
 				</td>
-				<td>
+				<td style="font-size:0.8rem">
 					<output id="placeN1">N = ----- samples</output><br>
 					<output id="placeN2">= ----- ms</output>
 				</td>
@@ -186,7 +186,8 @@
 		<br>
 		<table class='table1x1Cols'>
 			<tr>
-				<td>
+				<td style='text-align: center; vertical-align:middle; 
+						font-size:0.8rem; color:maroon; font-weight:bold;'>
 					<button id="playCapture-0">               
 						<img id='play_0' class='buttonImg' src='../images/playback_transp.png'>
 					</button>  Play signal g(t)
@@ -209,7 +210,8 @@
 		
 		<table class='table1x1Cols'>
 			<tr>
-				<td>
+				<td style='text-align: center; vertical-align:middle; 
+						font-size:0.8rem; color:maroon; font-weight:bold;'>
 					<button id="playCapture-1">               
 						<img id='play_1' class='buttonImg' src='../images/playback_transp.png'>
 					</button>  Play signal g<sub>F </sub>(t)

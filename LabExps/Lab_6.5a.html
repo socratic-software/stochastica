@@ -24,9 +24,9 @@
 		<script type="text/javascript" src='../js/SSPconstants.js'></script>
 		<script type="text/javascript" src='../js/SSPfourier.js'></script>
 		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src='../js/SSPplotting.js'></script>
 		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
-		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src="../js/extra.js"></script>
 		<script src='js/Lab_6-5.js'></script>
 		<script src='js/Lab_6-5a.js'></script>
@@ -57,13 +57,13 @@
 	<br>
 	<h5>Laboratory Exercise 6.5a</h5>
 
-	<div class="scrollBrd">
+	<div class="scrollBrd" id="scrollBrd" style="font-size:0.9rem;">
 
 		Consider a different real, discrete-time, LTI system whose impulse response is <i>h[n]</i> 
 		and whose Fourier transform is <i>H(&Omega;)</i>. The input to this system is <i>g[n]</i>, 
 		a <output id="placeT">1.5</output> second white noise signal with a Gaussian amplitude 
-		distribution. The output is <i>g<sub>F</sub>[n]</i> the filtered version of <i>g[n]</i>, 
-		that is, <i>g<sub>F</sub>[n] = h[n]</i> &otimes; <i>g[n]</i>.
+		distribution. The output is <i>g<sub>F </sub>[n]</i> the filtered version of <i>g[n]</i>, 
+		that is, <i>g<sub>F </sub>[n] = h[n]</i> &otimes; <i>g[n]</i>.
 
 		<ol type="i">
 			<li>Is the stochastic signal <i>g<sub>F </sub>[n]</i> a “white” noise signal? Explain 
@@ -75,7 +75,7 @@
 			<li>When you <i>listen</i> to each of the signals, does this support your answer to 
 				the previous question?</li><br>
 			
-			<li>Both <i>g[n]</i> and <i>g<sub>F</sub>[n]</i> have been normalized after analysis but 
+			<li>Both <i>g[n]</i> and <i>g<sub>F </sub>[n]</i> have been normalized after analysis but 
 				before being converted to audio WAV files. Do they sound equally loud? If not, can 
 				you think of an explanation? (<i>Full disclosure: They do not sound equally loud 
 				to this author.</i>)</li><br>
@@ -96,7 +96,7 @@
 		
 		<table class='radioTable'>
 			<tr>
-				<td style="font-size:0.8rem;">Choose lab variant:      </td>
+				<td style="font-size:0.9rem;">Choose lab variant:      </td>
 				<td>
 					<label class="container"><span class="buttonText">a</span>
 					<input type="radio" checked="checked" name="unique" id="A" 
@@ -126,7 +126,7 @@
 
 		<table class='radioTable'>
 			<tr>
-				<td style="font-size:0.8rem;">Choose display:         </td>
+				<td style="font-size:0.9rem;">Choose display:         </td>
 				<td> 
 					<label class="container">
 					<span style="font-family:Georgia,Palatino,Bodoni,serif;">
@@ -167,7 +167,7 @@
 						value='0'
 						id='zm'>
 				</td>
-				<td>
+				<td style="font-size:0.8rem">
 					<output id="placeN1">N = ----- samples</output><br>
 					<output id="placeN2">= ----- ms</output>
 				</td>
@@ -176,7 +176,8 @@
 		<br>
 		<table class='table1x1Cols'>
 			<tr>
-				<td>
+				<td style='text-align: center; vertical-align:middle; 
+						font-size:0.8rem; color:maroon; font-weight:bold;'>
 					<button id="playCapture-0">               
 						<img id='play_0' class='buttonImg' src='../images/playback_transp.png'>
 					</button>  Play signal g(t)
@@ -199,7 +200,8 @@
 		
 		<table class='table1x1Cols'>
 			<tr>
-				<td>
+				<td style='text-align: center; vertical-align:middle; 
+						font-size:0.8rem; color:maroon; font-weight:bold;'>
 					<button id="playCapture-1">               
 						<img id='play_1' class='buttonImg' src='../images/playback_transp.png'>
 					</button>  Play signal g<sub>F </sub>(t)

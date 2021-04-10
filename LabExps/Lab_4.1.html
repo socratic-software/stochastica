@@ -24,9 +24,9 @@
 		<script type="text/javascript" src='../js/SSPconstants.js'></script>
 		<script type="text/javascript" src='../js/SSPfourier.js'></script>
 		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src='../js/SSPplotting.js'></script>
 		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
-		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src="../js/extra.js"></script>
 		
 		<title>Laboratory Exercise 4.1</title>
@@ -57,7 +57,7 @@
 	<br>
 	<h5>Laboratory Exercise 4.1</h5>
 	
-	<div class="scrollBrd">
+	<div class="scrollBrd" id="scrollBrd" style="font-size:0.9rem;">
 	Two sliders allow you to choose both the number of “flips” <i>N</i> and the probability of 
 	Heads <i>p(H)</i>. Each time you repeat the experiment you will generate another signal from 
 	this random process.
@@ -83,7 +83,7 @@
 		<!-- The table for controls -->
 		<table class="tableImageLine">
 			<tr>
-				<td style="font-size:0.8rem;">p(H):</td>
+				<td>p(H):</td>
 				<td><input
 						type="range"
 						oninput="flipCoins(this.value, 'prob')"
@@ -96,7 +96,7 @@
 				<td></td>
 			</tr>
 			<tr>
-				<td style="font-size:0.8rem;">coin flips:</td>
+				<td>coin flips:</td>
 				<td><input
 						type="range"
 						oninput="flipCoins(this.value, 'N')"

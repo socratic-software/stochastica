@@ -36,7 +36,6 @@ var layoutHisto = cloneObj(layoutH); // template in SSPplotting.js
 	layoutHisto.annotations[0].y = 1.05;
 	layoutHisto.annotations[0].yanchor = 'bottom';
 	layoutHisto.annotations[0].text = '<i>n</i>(<i>x</i>)';
-	layoutHisto.annotations[1].y = titleBelowAxis;
 	layoutHisto.annotations[1].text = '<i>x</i>';
 
 var histCumulative = false;
@@ -126,6 +125,19 @@ function displayStatistics(results)
 	document.querySelector('#stat3A').value = d2round(results[4]);
 	};
 
+// *****************************************************************
+function displayStuff( )
+	{
+	displayStatistics(results);
+
+	plotImage.z = imageData;
+	imageHisto.x = flatten(imageData);
+
+	histos = [imageHisto, harmHisto, geomHisto, arithHisto];
+	Plotly.newPlot(wA, [plotImage], Imagelayout, noMode);
+	Plotly.react(wB, histos, layoutHisto, noMode);
+	};
+
 // ***************************************************************** \\
 function prepareHistos(results)
 	{
@@ -193,14 +205,7 @@ function distributionDisp(val)
 
 	results = getStatistics(imageData);
 	prepareHistos(results);
-	displayStatistics(results);
-		
-	plotImage.z = imageData;
-	imageHisto.x = flatten(imageData);
-
-	histos = [imageHisto, harmHisto, geomHisto, arithHisto];
-	Plotly.newPlot(wA, [plotImage], Imagelayout, noMode);
-	Plotly.newPlot(wB, histos, layoutHisto, noMode);
+	displayStuff( );
 	};
 
 // ***************************************************************** \\
@@ -221,14 +226,7 @@ function fillImage(target)
 
 	results = getStatistics(imageData);
 	prepareHistos(results);
-	displayStatistics(results);
-
-	plotImage.z = imageData;
-	imageHisto.x = flatten(imageData);
-
-	histos = [imageHisto, harmHisto, geomHisto, arithHisto];
-	Plotly.newPlot(wA, [plotImage], Imagelayout, noMode);
-	Plotly.newPlot(wB, histos, layoutHisto, noMode);
+	displayStuff( );
 	};
 
 // ***************************************************************** \\
@@ -263,27 +261,20 @@ function chooseProcess(process,average)
 
 function prepareLab_11_1( )
 	{
-	// get initial random image using uniform real distribution
-	for (var i = 0; i < rows; i++)
-		for (var j = 0; j < cols; j++)
-			imageData[i][j] = randomInteger(0,255);
-			
 	plotImage.visible = true;
-	plotImage.z = imageData;
-	
+
 	Imagelayout.title = '';
 	Imagelayout.font.size = 0.9*myTitleSize;
 	Imagelayout.xaxis7.showline = true;
 	Imagelayout.xaxis7.linewidth = 1;
 	Imagelayout.xaxis7.mirror = true;
 	Imagelayout.xaxis7.ticks = '';
-	
+
 	Imagelayout.yaxis7.showline = true;
 	Imagelayout.yaxis7.mirror = true;
 	Imagelayout.yaxis7.ticks = '';
 	Imagelayout.height = Math.floor(1.3*graphHeight[twoImages]); // special case
-	
-	imageHisto.x = flatten(imageData);
+
 	imageHisto.marker.line.color = '#66b3ff'; // light blue
 	imageHisto.marker.line.width = thinHistoBar; // normal width
 	imageHisto.histnorm = histnormStyle;
@@ -299,13 +290,14 @@ function prepareLab_11_1( )
 	arithHisto = cloneObj(harmHisto);
 	arithHisto.marker.line.color = '#990033'; // purple
 	
+	// get initial random image using uniform real distribution
+	for (var i = 0; i < rows; i++)
+		for (var j = 0; j < cols; j++)
+			imageData[i][j] = randomInteger(0,255);
+
 	results = getStatistics(imageData);
 	prepareHistos(results);
-	displayStatistics(results);
-	
-	histos = [imageHisto, harmHisto, geomHisto, arithHisto];
-	Plotly.newPlot(wA, [plotImage], Imagelayout, noMode);
-	Plotly.newPlot(wB, histos, layoutHisto, noMode);
+	displayStuff( );
 	};
 
 // ***************************************************************** \\

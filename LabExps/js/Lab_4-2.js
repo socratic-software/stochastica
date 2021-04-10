@@ -38,17 +38,23 @@ var histnormStyle = '';
 var randProcess = 1; // initialize
 
 // *****************************************************************
-// stochastic signal synthesized here.
+function displayStuff( )
+	{
+	plotImage.z = imageData;
+	imageHisto.histnorm = histnormStyle;
+	imageHisto.cumulative.enabled = histCumulative;
+	imageHisto.x = flatten(imageData);
 
+	Plotly.newPlot(wA, [plotImage], Imagelayout, noMode);
+	Plotly.react(wB, [imageHisto], layoutHisto, noMode);
+	};
+
+// *****************************************************************
+// stochastic signal synthesized here.
 function prepareLab_4_2( )
 	{
-	for (var i = 0; i < rows; i++)
-		for (var j = 0; j < cols; j++)
-			imageData[i][j] = randomInteger(0,255);
-
 	plotImage.visible = true;
-	plotImage.z = imageData;
-	
+
 	Imagelayout.title = '';
 	Imagelayout.font.size = 0.8*myTitleSize;
 	Imagelayout.xaxis7.showline = true;
@@ -67,8 +73,11 @@ function prepareLab_4_2( )
 	layoutHisto.annotations[0].text = '<i>n</i>(<i>x</i>)';
 	layoutHisto.annotations[1].text = '<i>x</i>';
 	
-	Plotly.newPlot(wA, [plotImage], Imagelayout, noMode);
-	Plotly.newPlot(wB, [imageHisto], layoutHisto, noMode);
+	for (var i = 0; i < rows; i++)
+		for (var j = 0; j < cols; j++)
+			imageData[i][j] = randomInteger(0,255);
+
+	displayStuff( );
 	};
 
 // ***************************************************************** \\
@@ -110,14 +119,7 @@ function distributionDisp(val,target)
 	else 
 		throw('Houston, we have a problem in distributionDisp.');
 
-	
-	plotImage.z = imageData;
-	imageHisto.histnorm = histnormStyle;
-	imageHisto.cumulative.enabled = histCumulative;
-	imageHisto.x = flatten(imageData);
-
-	Plotly.newPlot(wA, [plotImage], Imagelayout, noMode);
-	Plotly.newPlot(wB, [imageHisto], layoutHisto, noMode);
+	displayStuff( );
 	};
 
 // ***************************************************************** \\
@@ -128,58 +130,11 @@ function fillImage(target)
 	imageHisto.marker.line.width = thinHistoBar; // normal width
 	randProcess = +target; // convert string to number
 
-	if (target === '1') // normal (Gaussian) distribution
-		{
-		for (var i = 0; i < rows; i++)
-			for (var j = 0; j < cols; j++)
-				imageData[i][j] = chooseProcess(randProcess); 
-		}
-	else if (target === '2') // uniform distribution
-		{
-		for (var i = 0; i < rows; i++)
-			for (var j = 0; j < cols; j++)
-				imageData[i][j] = chooseProcess(randProcess); 
-		}
-	else if (target === '3') // binary distribution
-		{
-		imageHisto.marker.line.width = thickHistoBar; // wider for visibility
-		for (var i = 0; i < rows; i++)
-			for (var j = 0; j < cols; j++)
-				imageData[i][j] = chooseProcess(randProcess); 
-		}
-	else if (target === '4') // Rayleigh distribution
-		{
-		for (var i = 0; i < rows; i++)
-			for (var j = 0; j < cols; j++)
-				imageData[i][j] = chooseProcess(randProcess); 
-		}
-	else if (target === '5') // Laplace distribution
-		{
-		for (var i = 0; i < rows; i++)
-			for (var j = 0; j < cols; j++)
-				imageData[i][j] = chooseProcess(randProcess); 
-		}
-	else if (target === '6') // triangular distribution
-		{
-		for (var i = 0; i < rows; i++)
-			for (var j = 0; j < cols; j++)
-				imageData[i][j] = chooseProcess(randProcess); 
-		}
-	else if (target === '7') // Poisson distribution
-		{
-		for (var i = 0; i < rows; i++)
-			for (var j = 0; j < cols; j++)
-				imageData[i][j] = chooseProcess(randProcess); 
-		}
-	else throw('Houston, we have a problem in fillImage.');;
-	
-	plotImage.z = imageData;
-	imageHisto.histnorm = histnormStyle;
-	imageHisto.cumulative.enabled = histCumulative;
-	imageHisto.x = flatten(imageData);
+	for (var i = 0; i < rows; i++)
+		for (var j = 0; j < cols; j++)
+			imageData[i][j] = chooseProcess(randProcess); 
 
-	Plotly.newPlot(wA, [plotImage], Imagelayout, noMode);
-	Plotly.newPlot(wB, [imageHisto], layoutHisto, noMode);
+	displayStuff( );
 	};
 
 // ***************************************************************** \\

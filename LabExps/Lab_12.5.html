@@ -31,10 +31,9 @@
 		<script type="text/javascript" src='../js/SSPconstants.js'></script>
 		<script type="text/javascript" src='../js/SSPfourier.js'></script>
 		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src='../js/SSPplotting.js'></script>
 		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
-
-		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src="../js/extra.js"></script>
 
 <!-- 
@@ -72,7 +71,7 @@
  -->
 	<h5>Laboratory Exercise 12.4</h5>
 		
-	<div class="scrollBrd">
+	<div class="scrollBrd" id="scrollBrd" style="font-size:0.9rem;">
 		We return to the situation studied in <a href="Lab_12.4.html">
 		<font color='royalBlue'>Laboratory Exercise 12.3</font></a> and ask if the use of windows other 
 		than the Block window can help us estimate the spectral components in a signal. In the following,
@@ -158,7 +157,7 @@
 			</tr>
 		</table>
 		
-		<p style="font-size:0.8rem; margin-left:6.8vw; margin-bottom:1.54vw;">Choose a window w[n]:</p>
+		<p style="font-size:0.9rem; margin-left:6.8vw; margin-bottom:1.54vw;">Choose a window w[n]:</p>
 		<table class="windowTable">
 		<!-- Radio buttons to choose underlying window  -->
 			<tr>
@@ -330,7 +329,7 @@
 			nPlays = document.querySelectorAll('*[id^="playCapture-"]').length; // playbacks this exercise
 			acquired = Array(nPlays).fill(false); // data have not yet been acquired
 
-			plotList = []; // global list of arguments for Plotly.newPlot()
+			plotList = []; // global list of arguments for Plotly.react()
 			
 			// two windows in 1 x 2 array
 			wA = 'Lab12.5L';

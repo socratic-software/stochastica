@@ -167,18 +167,18 @@ function getData(target)
 		document.querySelector('#tn').value = '(t)';
 		document.querySelector('#tauk').value = '(\u03C4=0) = '+autoCorrZero.toFixed(0); // (tau)
 		document.querySelector('#pdsZero').value = psdZero.toExponential(2);
-		Plotly.newPlot(wA, rst[0], rst[1], noMode); // raw CT signal
-		Plotly.newPlot(wC, rct[0], rct[1], noMode); // CT correlation
-		Plotly.newPlot(wD, rp[0], rp[1], noMode); // power spectral density
+		Plotly.react(wA, rst[0], rst[1], noMode); // raw CT signal
+		Plotly.react(wC, rct[0], rct[1], noMode); // CT correlation
+		Plotly.react(wD, rp[0], rp[1], noMode); // power spectral density
 		}
 	else if (digiState === 'DIGITAL')
 		{
 		document.querySelector('#tn').value = '[n]';
 		document.querySelector('#tauk').value = '[k=0] = '+ autoCorrZero.toFixed(0);
 		document.querySelector('#pdsZero').value = psdZero.toExponential(2);
-		Plotly.newPlot(wA, rsd[0], rsd[1], noMode); // raw DT signal
-		Plotly.newPlot(wC, rcd[0], rcd[1], noMode); // DT correlation
-		Plotly.newPlot(wD, rp[0], rp[1], noMode); // power spectral density
+		Plotly.react(wA, rsd[0], rsd[1], noMode); // raw DT signal
+		Plotly.react(wC, rcd[0], rcd[1], noMode); // DT correlation
+		Plotly.react(wD, rp[0], rp[1], noMode); // power spectral density
 		};
 	};
 
@@ -309,18 +309,18 @@ function myFunctionZoom(val)
 		document.querySelector('#tn').value = '(t)';
 		document.querySelector('#tauk').value = '(\u03C4=0) = '+autoCorrZero.toFixed(0); // (tau)
 		document.querySelector('#pdsZero').value = psdZero.toExponential(2);
-		Plotly.newPlot(wA, rst[0], rst[1], noMode); // raw CT signal
-		Plotly.newPlot(wC, rct[0], rct[1], noMode); // CT correlation
-		Plotly.newPlot(wD, rp[0], rp[1], noMode); // power spectral density
+		Plotly.react(wA, rst[0], rst[1], noMode); // raw CT signal
+		Plotly.react(wC, rct[0], rct[1], noMode); // CT correlation
+		Plotly.react(wD, rp[0], rp[1], noMode); // power spectral density
 		}
 	else if (digiState === 'DIGITAL')
 		{
 		document.querySelector('#tn').value = '[n]';
 		document.querySelector('#tauk').value = '[k=0] = '+ autoCorrZero.toFixed(0);
 		document.querySelector('#pdsZero').value = psdZero.toExponential(2);
-		Plotly.newPlot(wA, rsd[0], rsd[1], noMode); // raw DT signal
-		Plotly.newPlot(wC, rcd[0], rcd[1], noMode); // DT correlation
-		Plotly.newPlot(wD, rp[0], rp[1], noMode); // power spectral density
+		Plotly.react(wA, rsd[0], rsd[1], noMode); // raw DT signal
+		Plotly.react(wC, rcd[0], rcd[1], noMode); // DT correlation
+		Plotly.react(wD, rp[0], rp[1], noMode); // power spectral density
 		};
 	};
 

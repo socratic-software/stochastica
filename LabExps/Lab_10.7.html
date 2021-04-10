@@ -29,9 +29,9 @@
 		<script type="text/javascript" src='../js/SSPconstants.js'></script>
 		<script type="text/javascript" src='../js/SSPfourier.js'></script>
 		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src='../js/SSPplotting.js'></script>
 		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
-		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src="../js/extra.js"></script>
 		<script src='../images/truiImageLibrary.js'></script>
 		<script src='js/Lab_10-7.js'></script>
@@ -58,6 +58,8 @@
 		
 		window.onload = function init()
 			{
+			fixEqn();
+
 			window.addEventListener("resize", resizeWindow);
 			console.log('Starting experiment ' + experiment)
 			prepareLab_10_7();
@@ -88,7 +90,7 @@
  -->
 		<h5>Laboratory Exercise 10.5</h5>
 	
-		<div class="scrollBrd">
+		<div class="scrollBrd" id="scrollBrd" style="font-size:0.9rem;">
 		The application of <a href="../Chap_10.html#eq:Weq29"><font 
 		color="royalBlue">Equation 10.29</font></a>&mdash;repeated below&mdash;
 		requires a lot of prior knowledge.
@@ -97,7 +99,9 @@
 			<tr>
 				<td>(10.36)</td>
 				<td id="fig:fig_Wiener36">
-					<img width=55% src="../images/Eqn_Lab_10.9.1.gif" alt="Missing DFT equation"/>
+					<img id="fixEqn-0" style="width:95%" 
+						src="../images/Eqn_Lab_10.9.1.gif" 
+						alt="Missing DFT equation"/>
 				</td>
 			</tr>
 		</table>
@@ -115,7 +119,9 @@
 			<tr>
 				<td>(10.37)</td>
 				<td id="fig:fig_Wiener37">
-					<img width=45% src="../images/Eqn_Lab_10.9.2.gif" alt="Missing DFT equation"/>
+					<img id="fixEqn-1" style="width:95%" 
+						src="../images/Eqn_Lab_10.9.2.gif" 
+						alt="Missing DFT equation"/>
 				</td>
 			</tr>
 		</table>
@@ -141,7 +147,9 @@
 			<tr>
 				<td>(10.38)</td>
 				<td id="fig:fig_Wiener38">
-					<img width=70% src="../images/Eqn_Lab_10.9.3.gif" alt="Missing DFT equation"/>
+					<img id="fixEqn-2" style="width:95%" 
+						src="../images/Eqn_Lab_10.9.3.gif" 
+						alt="Missing DFT equation"/>
 				</td>
 			</tr>
 		</table>
@@ -269,8 +277,8 @@
 			<tr><td>&nbsp;</td><td>&nbsp;</td></tr>
 			<tr>
 				<td colspan="2" class="tableImageLine">
-				<b><output id='placeSNR1'>Circular aperture with Area = 1 
-				pixel), SNR = ∞:1, and K = 0</output></b><br><br>
+				<output id='placeSNR1'>Circular aperture with Area = 1 
+				pixel), SNR = ∞:1, and K = 0</output><br><br>
 				</td>
 			</tr>
 			<tr>

@@ -24,9 +24,9 @@
 		<script type="text/javascript" src='../js/SSPconstants.js'></script>
 		<script type="text/javascript" src='../js/SSPfourier.js'></script>
 		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src='../js/SSPplotting.js'></script>
 		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
-		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src="../js/extra.js"></script>
 		<title>Laboratory Exercise 11.3</title>
 		<br>
@@ -56,7 +56,7 @@
 	<br>
 	<h5>Laboratory Exercise 11.3</h5>
 		
-	<div class="scrollBrd">
+	<div class="scrollBrd" id="scrollBrd" style="font-size:0.9rem;">
 		Dave drove a 1959 Volkswagen Beetle to and from MIT. In that model the 
 		odometer (distance meter) indicated the distance in miles not tenths of miles.
 		<br>
@@ -65,7 +65,7 @@
 			odometer from a Volkswagen Beetle from the late 1950s. The maximum indicated speed 
 			is 80 mph and the odometer distance is to the nearest mile." id="fig:fig_Est6" 
 			 class="fullsize">
-			<figcaption style="font-size:0.8rem">Figure 11.6: Speedometer and odometer 
+			<figcaption style="font-size:0.75rem">Figure 11.6: Speedometer and odometer 
 			from a Volkswagen Beetle from the late 1950s. The maximum indicated speed is 
 			80 mph and the odometer distance is to the nearest mile.</figcaption>
 		</figure>
@@ -84,11 +84,11 @@
 		The length of the bridge was (and still is) less than 1 mile. For the purposes 
 		of this problem we will consider the length to be measured from water’s edge to 
 		water’s edge. (This is slightly different from the accepted definition which 
-		is measured in smoots.)
+		is measured in <a href="https://en.wikipedia.org/wiki/Smoot"><font color="royalBlue">Smoots</font></a>.)
 		<br><br>
 		The length of the fixed route is 3 miles from the end of the bridge (Boston) back 
-		to the beginning of the bridge (Cambridge). The two odometer readings in the 
-		window represent the value seen when starting to cross the bridge on the MIT 
+		to the beginning of the bridge (Cambridge). The two odometer readings below 
+		represent the values seen when starting to cross the bridge on the MIT 
 		side and when reaching the end of the bridge on the Boston side.
 		<br><br>
 		Choose the route that you are driving (fixed or random). Then drive to the 
@@ -99,11 +99,11 @@
 		
 		<ol type="i">
 			<li>Drive 10 times across the bridge using the <em>fixed</em> route. 
-				What information do the two odometer readings give you about the length 
+				What information does the set of odometer readings <span style="font-size:smaller;">{(<i>start<sub>i</sub></i> , <i>finish<sub>i</sub></i>) | <i>i</i> = 1,…,10}</span> give you about the length 
 				of the bridge?</li><br>
 			
 			<li>Drive 10 times across the bridge using the <em>random</em> route. What 
-				information do the two odometer readings give you about the length of the 
+				information does <i>this</i> set of odometer readings <span style="font-size:smaller;">{(<i>start<sub>i</sub></i> , <i>finish<sub>i</sub></i>) | <i>i</i> = 1,…,10}</span> give you about the length of the 
 				bridge?</li><br>
 			
 			<li>Using the <i>fixed</i> route, how many trips across the bridge would you 
@@ -112,17 +112,17 @@
 			<li>Using the <i>random</i> route, how many trips across the bridge would you 
 				have to make to estimate the length of the bridge to within 10%?</li><br>
 			
-			<li>Using a modern Volkswagen Beetle with a modern odometer as shown in Figure 11.7 (below), 
-			how many trips across the bridge would you have to make to estimate the length of the 
-			bridge to within 10%?</li>
+			<li>Using a modern odometer as shown in Figure 11.7 (below), how many 
+				trips across the bridge would you have to make to estimate the 
+				length of the bridge to within 10%?</li>
 		</ol>
 		<figure>
 			<img width="100%" src="../images/Fig_11_7.gif" alt="Figure 11.7: Meters from a 
 				modern Volkswagen Beetle. The maximum indicated speed is 160 mph and the total 
 				odometer distance traveled is 6319 miles." id="fig:fig_Est7" class="fullsize">
-			<figcaption style="font-size:0.8rem">Figure 11.7: Meters from a modern 
-				Volkswagen Beetle. The maximum indicated speed is 160 mph and the total 
-				odometer distance traveled is 6319 miles.
+			<figcaption style="font-size:0.75rem">Figure 11.7: A modern meter: The 
+				maximum indicated speed is 160 mph and the total odometer distance 
+				traveled is 6319 miles.
 			</figcaption>
 		</figure>
 	</div>
@@ -135,22 +135,25 @@
 				<td>&nbsp;</td>
 				<td>&nbsp;&nbsp;<font class='bridgeHeader'>Next destination:</font></td>
 			</tr>
+		</table>
+		<br>
+		<table class="bridgeTable">
 			<tr>
 				<td> 
-					<label class="container" style="text-align:left">
+					<label class="container" style="text-align:left;">
 						&nbsp;Fixed route: Boston to MIT
 					<input type="radio" checked="checked"
 						onclick="chooseRoute('fixed');" name="distr">
 					<span class="checkmark"></span>
-					</label>
+					</label><br>
 				</td>
-				<td>&nbsp;</td>
-				<td rowspan="2"> 
+				<td></td>
+				<td rowspan="2">
 					<button class='button' onclick="travel()">
 					<img class='beetleImg' src='../images/BeetleIcon.png'
 						style="padding:2px; border:2px solid steelBlue; border-radius:11px;">
 					</button>
-					<output id='destinationLabel' style="font-size:0.9rem;">to MIT</output>
+					<output id='destinationLabel' style="font-size:0.8rem;">to MIT</output>
 				</td>
 			</tr>
 			<tr>
@@ -162,13 +165,13 @@
 					<span class="checkmark"></span>
 					</label>
 				</td>
-				<td>&nbsp;</td>
+				<td></td>
 			</tr>
 		</table>
 		
-		<br>
+		<br><br>
 		
-		<table class="standardTable">
+		<table class="standardTable" style="font-size:0.9rem;">
 			<tr>
 				<td>Odometer start = <output id='odometerStart' style='font-weight:bold'>
 					82756</output> miles&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

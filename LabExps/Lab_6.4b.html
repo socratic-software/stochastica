@@ -24,9 +24,9 @@
 		<script type="text/javascript" src='../js/SSPconstants.js'></script>
 		<script type="text/javascript" src='../js/SSPfourier.js'></script>
 		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src='../js/SSPplotting.js'></script>
 		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
-		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src="../js/extra.js"></script>
 		<script src='js/Lab_6-4.js'></script>
 		<script src='js/Lab_6-4b.js'></script>
@@ -57,14 +57,14 @@
 	<br>
 	<h5>Laboratory Exercise 6.4b (continued)</h5>
 
-	<div class="scrollBrd">
+	<div class="scrollBrd" id="scrollBrd" style="font-size:0.9rem;">
 
 		In this section <i>x[n] = u[n]</i> a <output id="placeT">1.5</output> second, white noise signal 
-		with a uniformly-distributed amplitude is considered. <i>u<sub>F</sub>[n]</i> is the filtered 
-		version of <i>u[n]</i>, that is, <i>u<sub>F</sub>[n] = h[n]</i> &otimes; <i>u[n]</i>.
+		with a uniformly-distributed amplitude is considered. <i>u<sub>F </sub>[n]</i> is the filtered 
+		version of <i>u[n]</i>, that is, <i>u<sub>F </sub>[n] = h[n]</i> &otimes; <i>u[n]</i>.
 		
 		<ol type="i">
-			<li>Is the stochastic signal <i>u<sub>F</sub>[n]</i> a “white” noise signal? Explain your 
+			<li>Is the stochastic signal <i>u<sub>F </sub>[n]</i> a “white” noise signal? Explain your 
 				reasoning.</li><br>
 	
 			<li>When you <i>listen</i> to each of the signals, do you hear the result of the filtering? 
@@ -78,7 +78,7 @@
 				 to the results for filtered and unfiltered Gaussian noise?</li><br>
 			
 			<li>How do you explain the change in the estimates of the probability density 
-				function between <i>u[n]</i> and <i>u<sub>F</sub>[n]</i>?</li>
+				function between <i>u[n]</i> and <i>u<sub>F </sub>[n]</i>?</li>
 		</ol>
 		
 		Proceeed to another part of this exercise by choosing the variant below.
@@ -90,7 +90,7 @@
 		
 		<table class='radioTable'>
 			<tr>
-				<td style="font-size:0.8rem;">Choose lab variant:      </td>
+				<td style="font-size:0.9rem;">Choose lab variant:      </td>
 				<td>
 					<label class="container"><span class="buttonText">a</span>
 					<input type="radio" name="unique" id="A" 
@@ -120,7 +120,7 @@
 
 		<table class='radioTable'>
 			<tr>
-				<td style="font-size:0.8rem;">Choose display:         </td>
+				<td style="font-size:0.9rem;">Choose display:         </td>
 				<td> 
 					<label class="container">
 					<span style="font-family:Georgia,Palatino,Bodoni,serif;">
@@ -161,7 +161,7 @@
 						value='0'
 						id='zm'>
 				</td>
-				<td>
+				<td style="font-size:0.8rem">
 					<output id="placeN1">N = ----- samples</output><br>
 					<output id="placeN2">= ----- ms</output>
 				</td>
@@ -170,7 +170,8 @@
 		<br>
 		<table class='table1x1Cols'>
 			<tr>
-				<td>
+				<td style='text-align: center; vertical-align:middle; 
+						font-size:0.8rem; color:maroon; font-weight:bold;'>
 					<button id="playCapture-0">               
 						<img id='play_0' class='buttonImg' src='../images/playback_transp.png'>
 					</button>  Play signal u(t)
@@ -193,10 +194,11 @@
 		
 		<table class='table1x1Cols'>
 			<tr>
-				<td>
+				<td style='text-align: center; vertical-align:middle; 
+						font-size:0.8rem; color:maroon; font-weight:bold;'>
 					<button id="playCapture-1">               
 						<img id='play_1' class='buttonImg' src='../images/playback_transp.png'>
-					</button>  Play signal u<sub>F </sub>(t)
+					</button>  Play signal u<sub>F </sub>(t)
 					<button id="startCapture-1" style="display:none;">
 						<div id='animX1' class='anime'>
 							<img id='mic_1' class='buttonImg' src='../images/microphone_transp_1.png' >

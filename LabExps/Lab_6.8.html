@@ -24,9 +24,9 @@
 		<script type="text/javascript" src='../js/SSPconstants.js'></script>
 		<script type="text/javascript" src='../js/SSPfourier.js'></script>
 		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src='../js/SSPplotting.js'></script>
 		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
-		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src="../js/extra.js"></script>
 		<script src='js/Lab_6-8.js'></script>
 		<script src='js/Lab_6-8.js'></script>
@@ -57,7 +57,7 @@
 	<br>
 	<h5>Laboratory Exercise 6.8</h5>
 
-	<div class="scrollBrd">
+	<div class="scrollBrd" id="scrollBrd" style="font-size:0.9rem;">
 		We now return to the real, FIR filter used in <a href="Lab_6.7a.html"><font 
 		color="royalBlue">Laboratory Exercise 6.7a</font></a> and <a href="Lab_6.7b.html">
 		<font color="royalBlue">Laboratory Exercise 6.7b</font></a> and described as: 
@@ -66,23 +66,25 @@
 			<tr>
 				<td>(6.48)</td>
 				<td id="eq:bpf_1">
-					<img width=55% src="../images/Eqn_Lab_6.7a.1.gif" alt="Missing Filter specification"/>
+					<img id="fixEqn-0" style="width:95%" 
+						src="../images/Eqn_Lab_6.7a.1.gif" 
+						alt="Missing Filter specification"/>
 				</td>
 			</tr>
 		</table>
 		
 		The sampling frequency remains 44.1 kHz. The input <i>x[n]</i> is <output id="placeT">--</output> 
 		seconds of a white noise signal with a Gaussian amplitude distribution <i>g[n]</i>. The output 
-		<i>y[n] = g<sub>F</sub>[n]</i> is the filtered version of <i>g[n]</i>, that is, 
-		<i>g<sub>F</sub>[n] = h[n]</i> &otimes; <i>g[n]</i>. As in <a href="Lab_6.7b.html">
+		<i>y[n] = g<sub>F </sub>[n]</i> is the filtered version of <i>g[n]</i>, that is, 
+		<i>g<sub>F </sub>[n] = h[n]</i> &otimes; <i>g[n]</i>. As in <a href="Lab_6.7b.html">
 		<font color="royalBlue">Laboratory Exercise 6.7b</font></a>, the frequency-domain technique is 
-		used to produce <i>g<sub>F</sub>[n]</i> that is: 
+		used to produce <i>g<sub>F </sub>[n]</i> that is: 
 		
-		<table class="centerEq">
+		<table class="centerEqTable">
 			<tr>
 				<td>(6.49)</td>
 				<td id="eq:bpf_1" class="specialSize">
-				g<sub>F</sub>[n] = <font class="cursive">F  <sup>-1</sup></font> {<font 
+				g<sub>F </sub>[n] = <font class="cursive">F  <sup>–1</sup></font> {<font 
 				class="cursive">F </font>{ h[n] } • <font class="cursive">F </font>{ g[n] }}
 				</td>
 			</tr>
@@ -131,7 +133,7 @@
 		
 		<table class='radioTable'>
 			<tr>
-				<td style="font-size:0.8rem;">Choose display:         </td>
+				<td style="font-size:0.9rem;">Choose display:         </td>
 				<td> 
 					<label class="container">
 					<span style="font-family:Georgia,Palatino,Bodoni,serif;">
@@ -171,7 +173,7 @@
 						value='0'
 						id='zm'>
 				</td>
-				<td>
+				<td style="font-size:0.8rem">
 					<output id="placeN1">N = ----- samples</output><br>
 					<output id="placeN2">= ----- ms</output>
 				</td>
@@ -180,7 +182,8 @@
 		<br>
 		<table class='table1x1Cols'>
 			<tr>
-				<td>
+				<td style='text-align: center; vertical-align:middle; 
+						font-size:0.8rem; color:maroon; font-weight:bold;'>
 					<button id="playCapture-0">               
 						<img id='play_0' class='buttonImg' src='../images/playback_transp.png'>
 					</button>  Play signal g(t)
@@ -203,7 +206,8 @@
 		
 		<table class='table1x1Cols'>
 			<tr>
-				<td>
+				<td style='text-align: center; vertical-align:middle; 
+						font-size:0.8rem; color:maroon; font-weight:bold;'>
 					<button id="playCapture-1">               
 						<img id='play_1' class='buttonImg' src='../images/playback_transp.png'>
 					</button>  Play signal g<sub>F </sub>(t)
@@ -244,6 +248,8 @@
 		
 		window.onload = function init()
 			{
+			fixEqn();
+
 			theName0 = {fS: 0, data: []} // global definition of raw 1D audio
 			theName1 = {fS: 0, data: []} // global definition of raw 1D audio
 			theNames = [theName0,theName1]; // initial definition but global

@@ -31,9 +31,9 @@
 		<script type="text/javascript" src='../js/SSPconstants.js'></script>
 		<script type="text/javascript" src='../js/SSPfourier.js'></script>
 		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src='../js/SSPplotting.js'></script>
 		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
-		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src="../js/extra.js"></script>
 		<title>Laboratory Exercise 11.1</title>
 		<br>
@@ -63,7 +63,7 @@
 	<br>
 	<h5>Laboratory Exercise 11.1</h5>
 
-	<div class="scrollBrd">
+	<div class="scrollBrd" id="scrollBrd" style="font-size:0.9rem;">
 		In the introduction to this chapter we describe three ways of estimating
 		the mean of a process: the arithmetic mean <i>&mu;<sub>A</sub>,</i> the
 		geometric mean <i>&mu;<sub>G</sub>,</i> and the harmonic mean
@@ -135,7 +135,7 @@
 			</tr>
 		</table>
 
-		<p style="font-size:0.8rem;  margin-left:6.8vw; margin-bottom:1.54vw;">Choose a distribution:</p>
+		<p style="font-size:0.9rem;  margin-left:6.8vw; margin-bottom:1.54vw;">Choose a distribution:</p>
 
 		<table class="radioTable">
 		<!-- Row 2 = Radio buttons to choose underlying distribution  -->
@@ -186,7 +186,7 @@
 			</tr>
 		</table>
 		
-		<table class="centerTable" style="text-align:center; line-height:1.25rem;">
+		<table class="centerTable" style="text-align:center;">
 			<tr>
 				<td>
 				<output id='statistics1' style="font-size:0.9rem;">

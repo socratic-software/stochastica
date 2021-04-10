@@ -31,10 +31,9 @@
 		<script type="text/javascript" src='../js/SSPconstants.js'></script>
 		<script type="text/javascript" src='../js/SSPfourier.js'></script>
 		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src='../js/SSPplotting.js'></script>
 		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
-
-		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src="../js/extra.js"></script>
 
 		<title>Laboratory Exercise 9.3</title>
@@ -66,7 +65,7 @@
 	<br>
 	<h5>Laboratory Exercise 9.3</h5>
 
-	<div class="scrollBrd">
+	<div class="scrollBrd" id="scrollBrd" style="font-size:0.9rem;">
 	
 		Using the Fourier transform (or Fourier series), signals can be decomposed 
 		into weighted sums of sines and cosines. If we examine the defining equations
@@ -77,9 +76,8 @@
 				<li>A synthetic audio signal <i><b>s</b></i> has been generated and 
 					is displayed below.<a href="#fn1" class="footnote-ref" 
 					id="fnref1"><sup>1</sup></a> You can listen to it by pressing the 
-					<b><i>s</i></b> control (<img src="../images/play_triangle1.png" 
-					class="inlineIcon">). This might involve the 
-					adjustment of the volume of your device.</li>
+					<b><i>s</i></b> control (<img src="../images/play_triangle1.png" class="inlineIcon">). This might involve the adjustment of the 
+					volume of your device.</li>
 			</ol>
 
 		In the top panel we show the sinusoidal matched-filter <font color="hotPink" 
@@ -142,20 +140,13 @@
 	</div>
 	
 	<div id="scrollNoBrd">
-		<br><br>
+		<br>
 
 		<!-- tables for matched filter & dirty data -->
-		<table class="tableGen" 
-			style="font-size:0.8rem; line-height: 0px;">
-			<tr>
-				<td>          <output id="placeDur">1</output> ms</td>
-				<td>          <output id="placeSNR">1000</output>:1</td>
-			</tr>
-		</table>
-		<table class="tableGen" style="font-size:0.8rem; margin-top:-0.4rem;">
+		<table class="tableGen" style="width: 95%; font-size:0.75rem;">
 			<tr>
 				<td style="width:50%; text-align:left;">Width: 
-					<input style="width:70%; vertical-align:middle;"
+					<input style="width:55%; vertical-align:middle;"
 						id="wind"
 						type="range"
 						oninput="showWindowWidth(this.value)"
@@ -163,10 +154,10 @@
 						min="0"
 						max="11"
 						step="1"
-						value="0">
+						value="0"> <output id="placeDur">1</output> ms
 				</td>
-				<td style="text-align:left;">       SNR: 
-					<input style="width:70%; vertical-align:middle;"
+				<td style="text-align:left;">   SNR: 
+					<input style="width:55%; vertical-align:middle;"
 						type='range'
 						oninput="showSNR(this.value)"
 						onchange="chooseSNR(this.value)"
@@ -175,14 +166,15 @@
 						step='1'
 						value='10'
 						id='rangeSNR'>
+						<output id="placeSNR">1000</output>:1
 				</td>
 			</tr>
 		</table>
-		<table class="tableGen" style="width:80%;">
+		<table class="tableGen" style="width:95%;">
 			<tr>
 				<td class="fineCoarse" style="width:25%;"></td>
 				<td class="fineCoarse" style="width:7.5%;">fine</td>
-				<td class="fineCoarse">coarse                </td>
+				<td class="fineCoarse" style="width:55%;">coarse                </td>
 				<td class="fineCoarse" style="width:7.5%;">fine</td>
 			</tr>
 			<tr>
@@ -213,7 +205,7 @@
 			</tr>
 		</table>
 		<br>
-		<table class="tableGen">
+		<table class="tableGen" style="width:95%; text-align:center;">
 			<tr>
 				<td style="width:25%; text-align:center;">h:    
 					<button id="stopCapture-1" style="display:none;"></button>
@@ -290,8 +282,7 @@
 			</tr>
 		</table>
 		<br>
-<!-- 		<table class='singleGraphTable' style="font-size:2.3vw;"> -->
-		<table class='singleGraphTable' style="font-size:1rem;">
+		<table class='table1x1Cols'>
 			<tr>
 				<td>
 					<div id="LabR1Ctitle" class="textBlankPageTitleAlt">
@@ -356,7 +347,7 @@
 			</tr>
 		</table>
 		<br>
-		<table class='singleGraphTable' style="font-size:2.3vw;">
+		<table class='table1x1Cols'>
 			<tr>
 				<td>
 					<div id="LabR1Ctitle" class="textBlankPageTitleAlt">

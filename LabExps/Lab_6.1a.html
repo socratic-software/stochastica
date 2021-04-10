@@ -24,9 +24,9 @@
 		<script type="text/javascript" src='../js/SSPconstants.js'></script>
 		<script type="text/javascript" src='../js/SSPfourier.js'></script>
 		<script type="text/javascript" src='../js/SSPmath.js'></script>
+		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src='../js/SSPplotting.js'></script>
 		<script type="text/javascript" src='../js/SSPstochastics.js'></script>
-		<script type="text/javascript" src="../js/SSPextra.js"></script>
 		<script type="text/javascript" src="../js/extra.js"></script>
 		<script src='js/Lab_6-1a.js'></script>
 		<title>Laboratory Exercise 6.1a</title>
@@ -56,7 +56,7 @@
 	<br>
 	<h5>Laboratory Exercise 6.1a</h5>
 
-	<div class="scrollBrd">
+	<div class="scrollBrd" id="scrollBrd" style="font-size:0.9rem;">
 		In this and other laboratory exercises we will sometimes use the “digital” frequency <i>&Omega;</i> 
 		and sometimes use the “analog” frequency <i>&omega; = 2&pi;f</i>. Although the free use of both 
 		concepts in one exercise may be a bit unorthodox, the sampling frequency is 44.1 kHz so there 
@@ -126,8 +126,7 @@
 		
 		<table class='radioTable'>
 			<tr>
-<!-- 				<td style="font-size:2.05vw;">Choose lab variant:      </td> -->
-				<td style="font-size:0.8rem;">Choose lab variant:      </td>
+				<td style="font-size:0.9rem;">Choose lab variant:      </td>
 				<td>
 					<label class="container"><span class="buttonText">a</span>
 					<input type="radio" checked="checked" name="unique" id="A" 
@@ -155,7 +154,7 @@
 		</table>
 		<br>
 
-		<table class='table1x2Cols'>
+		<table class="table1x2ColsAlt" style="font-size:0.8rem;">
 			<tr>
 				<td colspan="2" style='text-align: center; vertical-align:middle;'>
 					<button id="playCapture-0">               
@@ -207,8 +206,8 @@
 					&phi;<sub>gg </sub><output id="tauk">[k]</output></font>
 				</td>
 				<td>
-					<font style="color:black; font-weight:normal">normalized 
-					S<sub>gg</sub>(&Omega;)</font>
+					<font style="color:black; font-weight:normal">normalized  log<sub>10</sub><span 
+					class="smallSpace"> </span>S<sub>gg</sub>(&Omega;)</font>
 				</td>
 			<tr>
 				<td><div id='Lab6.1aL2'></div></td>
@@ -234,7 +233,7 @@
 			myDuration = Array(nMics).fill(1000*lengthMax/sampFreq); // time in milliseconds
 			nPlays = document.querySelectorAll('*[id^="playCapture-"]').length; // playbacks this exercise
 			acquired = Array(nPlays).fill(false); // data have not yet been acquired
-		
+
 			// four windows in 2 x 2 array
 			wA = 'Lab6.1aL1'; // signal
 			wB = 'Lab6.1aR1'; // histogram
