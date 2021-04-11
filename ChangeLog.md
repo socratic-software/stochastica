@@ -1,6 +1,12 @@
 # Changelog
 
-All notable changes to **StochasticA** will be documented in this file.
+All notable changes to **<font color="steelblue">StochasticA</font>** will be documented in this file.
+
+## [2.3.1] - 2021-04-11
+
+### Changed
+
+- Formatting of "radio buttons" to be compatible with varying browser window formats and platforms.
 
 ## [2.3.0] - 2021-04-10
 

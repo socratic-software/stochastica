@@ -210,15 +210,15 @@ input[type=radio]:not(old)
 	background : transparent;
 	font-family: inherit;
 	font-size: 2rem;
-	cursor:	pointer;
+	cursor: pointer;
 	opacity : 0;
 	}
 
 input[type=radio]:not(old) + label
 	{
-	display :		inline-block;
-	margin-left :	-4rem;  /* move outer circle towards left edge of container */
-	line-height :	6rem;  /* vertical distance between buttons */
+	display : inline-block;
+	margin-left : -4rem;  /* move outer circle towards left edge of container */
+	line-height : 6rem;  /* vertical distance between buttons */
 	}
 
 input[type=radio]:not(old) + label > span
@@ -241,18 +241,18 @@ input[type=radio]:not(old) + label > span
 
 input[type=radio]:not(old):checked + label > span
 	{  /* outer circle color after checked */
-	background :		rgb(50, 93, 129);
+	background : rgb(50, 93, 129);
 	}
 
 input[type=radio]:not(old):checked + label > span > span
 	{
-	display :		block;
-	width :			1rem;  /* width of inner circle */
-	height :		1rem;  /* height of inner circle */
+	display : block;
+	width : 1rem;  /* width of inner circle */
+	height : 1rem;  /* height of inner circle */
 	border-radius : 0.5rem;  /* half of height/width to get circle */
-	border :		0.125rem solid black;
-	margin :		0.6rem;  /* fiddle to get centered */
-	background :	#ffaeff;
+	border : 0.125rem solid black;
+	margin : 0.6rem;  /* fiddle to get centered */
+	background :#ffaeff;
 	}
 
 /* customize radio buttons style */
@@ -279,6 +279,8 @@ input[type=radio]:not(old):checked + label > span > span
 	position: absolute;
 	opacity: 0;
 	cursor: pointer;
+	height: 0;
+	width: 0;
 	}
 
 /* Create a custom radio button */
