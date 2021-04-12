@@ -94,7 +94,8 @@ const secondOverlayFinish = ')';
 const myiPadWidth = 768; // in pixels
 const myiPadFontSize = 22; // standard Plotly font size specification
 const myiPadLabFontSize = 0.9; // standard Plotly font size specification
-var androidFontSize = '0.70rem';
+const androidFontSize = '0.70rem';
+const androidLineHeight = '150%';
 
 var margins = {top:0, bottom:0};
 

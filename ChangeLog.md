@@ -2,6 +2,12 @@
 
 All notable changes to **<font color="steelblue">StochasticA</font>** will be documented in this file.
 
+## [2.3.3] - 2021-04-12
+
+### Changed
+
+- Line spacing in Laboratory Exercise descriptions to adjust for user platform.
+
 ## [2.3.2] - 2021-04-12
 
 ### Changed
