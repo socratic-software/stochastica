@@ -269,6 +269,11 @@
 			wD = 'Lab6.3cR2'; // power density spectrum
 	
 			window.addEventListener("resize", resizeWindow);
+			if ( getMobileOperatingSystem() === 'Android')
+				{
+				document.getElementById('scrollBrd').style.fontSize = 
+					androidFontSize;
+				};
 			prepareLab_6_3c('Exponential');
 			console.log('Starting experiment ' + experiment);
 			};

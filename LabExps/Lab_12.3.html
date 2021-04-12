@@ -206,6 +206,11 @@
 			wB = 'Lab12.3R';
 			
 			window.addEventListener("resize", resizeWindow);
+			if ( getMobileOperatingSystem() === 'Android')
+				{
+				document.getElementById('scrollBrd').style.fontSize = 
+					androidFontSize;
+				};
 			prepareLab_12_3();
 			console.log('Starting experiment ' + experiment);
 			};

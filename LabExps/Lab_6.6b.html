@@ -263,6 +263,11 @@
 			wD = 'Lab6.6bR2';
 	
 			window.addEventListener("resize", resizeWindow);
+			if ( getMobileOperatingSystem() === 'Android')
+				{
+				document.getElementById('scrollBrd').style.fontSize = 
+					androidFontSize;
+				};
 			prepareLab_6_6();
 			executeLab_6_6b( );
 			console.log('Starting experiment ' + experiment);

@@ -241,6 +241,11 @@
 			wD = 'Lab6.1aR2'; // power density spectrum
 	
 			window.addEventListener("resize", resizeWindow);
+			if ( getMobileOperatingSystem() === 'Android')
+				{
+				document.getElementById('scrollBrd').style.fontSize = 
+					androidFontSize;
+				};
 			prepareLab_6_1();
 			console.log('Starting experiment ' + experiment);
 			};

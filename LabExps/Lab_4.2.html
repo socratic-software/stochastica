@@ -215,6 +215,11 @@
 		window.onload = function init()
 			{
 			window.addEventListener("resize", resizeWindow);
+			if ( getMobileOperatingSystem() === 'Android')
+				{
+				document.getElementById('scrollBrd').style.fontSize = 
+					androidFontSize;
+				};
 			prepareLab_4_2();
 			console.log('Starting experiment ' + experiment);
 		};

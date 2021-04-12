@@ -273,6 +273,11 @@
 			wH = 'Lab6.8.3d';
 
 			window.addEventListener("resize", resizeWindow);
+			if ( getMobileOperatingSystem() === 'Android')
+				{
+				document.getElementById('scrollBrd').style.fontSize = 
+					androidFontSize;
+				};
 			prepareLab_6_8();
 			console.log('Starting experiment ' + experiment);
 			};

@@ -152,6 +152,11 @@
 			wD = 'Lab4.1R2';
 
 			window.addEventListener("resize", resizeWindow);
+			if ( getMobileOperatingSystem() === 'Android')
+				{
+				document.getElementById('scrollBrd').style.fontSize = 
+					androidFontSize;
+				};
 			prepareLab_4_1();
 			console.log('Starting experiment ' + experiment);
 			document.getElementById("scrollNoBrd").scrollTop = 0;

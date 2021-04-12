@@ -207,6 +207,11 @@
 				Math.floor(odometerInit);
 
 			window.addEventListener("resize", resizeWindow);
+			if ( getMobileOperatingSystem() === 'Android')
+				{
+				document.getElementById('scrollBrd').style.fontSize = 
+					androidFontSize;
+				};
 			goHome();
 			console.log('Starting experiment ' + experiment);
 			document.getElementById("scrollNoBrd").scrollTop = 0;

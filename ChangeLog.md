@@ -2,6 +2,12 @@
 
 All notable changes to **<font color="steelblue">StochasticA</font>** will be documented in this file.
 
+## [2.3.2] - 2021-04-12
+
+### Changed
+
+- Font sizes in Laboratory Exercise descriptions to adjust for user platform.
+
 ## [2.3.1] - 2021-04-11
 
 ### Changed

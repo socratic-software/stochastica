@@ -202,6 +202,11 @@
 	
 			window.addEventListener("resize", resizeWindow);
 			console.log('Starting experiment ' + experiment)
+			if ( getMobileOperatingSystem() === 'Android')
+				{
+				document.getElementById('scrollBrd').style.fontSize = 
+					androidFontSize;
+				};
 			prepareLab_6_1();
 			};
 		</script>
