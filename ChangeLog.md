@@ -2,6 +2,17 @@
 
 All notable changes to **<font color="steelblue">StochasticA</font>** will be documented in this file.
 
+## [2.3.4] - 2021-04-19
+
+### Improved
+
+- Speed in Laboratory Exercises 4.2 and 11.1.
+- Formatting in Laboratory Exercises to adjust for user platform and graphical interaction.
+
+### Fixed
+
+- Bug in Laboratory Exercise 6.6.
+
 ## [2.3.3] - 2021-04-12
 
 ### Changed

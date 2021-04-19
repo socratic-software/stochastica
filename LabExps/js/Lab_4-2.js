@@ -123,21 +123,6 @@ function distributionDisp(val,target)
 	};
 
 // ***************************************************************** \\
-// fill image with chosen random process
-
-function fillImage(target)
-	{
-	imageHisto.marker.line.width = thinHistoBar; // normal width
-	randProcess = +target; // convert string to number
-
-	for (var i = 0; i < rows; i++)
-		for (var j = 0; j < cols; j++)
-			imageData[i][j] = chooseProcess(randProcess); 
-
-	displayStuff( );
-	};
-
-// ***************************************************************** \\
 // choose which random process will be used
 
 function chooseProcess(process)
@@ -169,3 +154,19 @@ function chooseProcess(process)
 			break;
 		};
 	};
+
+// ***************************************************************** \\
+// fill image with chosen random process
+
+function fillImage(target)
+	{
+	imageHisto.marker.line.width = thinHistoBar; // normal width
+	randProcess = +target; // convert string to number
+
+	for (var i = 0; i < rows; i++)
+		for (var j = 0; j < cols; j++)
+			imageData[i][j] = chooseProcess(randProcess); 
+
+	displayStuff( );
+	};
+

@@ -276,7 +276,7 @@ var baseSizeH1 = 0.75*baseSizeW1; // one item per row
 var baseSizeH2 = baseSizeH1/2; // two items per row
 var baseSizeH3 = baseSizeH1/3; // three items per row
 var baseSizeH4 = baseSizeH1/4; // four items per row
-var graphHeight = [baseSizeH1, baseSizeH2, baseSizeH3, baseSizeH4]; // graphs or images
+var graphHeight = [0.75*baseSizeH1, baseSizeH2, baseSizeH3, baseSizeH4]; // graphs & images
 
 var verticalScale = 1.2; // expand graphHeight in certain displays
 

@@ -412,7 +412,7 @@ function prepareLab_6_6()
 	document.querySelector('#placeT').value = d1round(newSamples/sampFreq);
 	
 	let cutoff = 2*Math.PI*4135;
-	let radius = 0.98;
+	let r = 0.98; // radius
 	let beta = cutoff/sampFreq;
 	if(experiment === '6.6a')
 		{

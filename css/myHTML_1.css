@@ -474,6 +474,13 @@ button
 	vertical-align: middle
 	}
 
+.annotTxtStyl {
+	font-family: Georgia, Palatino, Bodoni, serif;
+	font-weight: normal;
+	font-style: italic;
+	text-align: center;
+	}
+
 .tableGen {
 	font-family: Georgia, Palatino, Bodoni, serif;
 	font-style: italic;
@@ -630,8 +637,8 @@ button
 	}
 
 .table1x3Cols tr, .table1x3Cols td {
-	padding-top: 0.8rem;
-	padding-bottom: 0.8rem;
+	padding-top: 0.5rem;
+	padding-bottom: 0.25rem;
 	border: 0px dashed blue;
 	vertical-align: middle;
 	font-weight: bold;
@@ -807,6 +814,8 @@ button
 	}
 
 .tableImageLine tr, .tableImageLine td {
+	padding-top: 0.5rem;
+	padding-bottom: 0.25rem;
 	text-align: center;
 	border: 0px dashed red;
 	width: auto;
@@ -1174,33 +1183,7 @@ button
 .musicTable td:nth-child(5) {
 	width: 25%;
 	}
-	
-.musicTableAlt {
-	font-family: HelveticaNeue, Helvetica, Arial, GillSans, san-serif;
-	font-size: 0.8rem; /* 1.6rem but scalable */
-	text-align: left;
-	width: 100%;
-	margin: auto;
-	}
 
-.musicTableAlt tr, .musicTableAlt td  {
-	border: 0px dashed maroon;
-	vertical-align: middle;
-	overflow-x: hidden;
-	}
-
-.musicTableAlt td:nth-child(odd) {
-	text-align: right;
-	width: 12%;
-	margin: auto;
-	}
-	
-.musicTableAlt td:nth-child(even) {
-	text-align: left;
-	width: 20%;
-	margin: auto;
-	}
-	
 /* Graphs have a layout defined here */
 .twoGraphTable {
 	padding: 0em;
