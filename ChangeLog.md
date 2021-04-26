@@ -2,7 +2,7 @@
 
 All notable changes to **<font color="steelblue">StochasticA</font>** will be documented in this file.
 
-## [2.3.5] - 2021-04-dd
+## [2.3.5] - 2021-04-26
 
 ### Removed
 
