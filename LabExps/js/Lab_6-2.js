@@ -21,7 +21,7 @@ var nbins = 1;
 var lengthMax = 2**Math.floor(Math.log2(100000/binningFactor))*binningFactor;
 var startSample = 0;
 var stopSample = lengthMax;
-var middleSample = (stopSample+startSample)/2;
+var middleSample = (stopSample+startSample) >> 1;
 
 var newSamples = lengthMax;
 var sentence = '';
@@ -194,7 +194,7 @@ function myFunctionZoom(val)
 	document.querySelector('#placeN1').value = "N = "+newSamples+" samples";
 	sentence2 = "= "+d1round(1000*newSamples/sampFreq)+" ms";
 	document.querySelector('#placeN2').value = sentence2;
-	deltaN = newSamples/2;
+	deltaN = newSamples >> 1;
 
 	startSample = middleSample - deltaN;
 	stopSample = middleSample + deltaN;
@@ -340,7 +340,7 @@ function prepareLab_6_2( )
 	newSamples = lengthMax;
 	startSample = 0;
 	stopSample = lengthMax;
-	middleSample = (stopSample+startSample)/2;
+	middleSample = (stopSample+startSample) >> 1;
 
 	audioNum = 0;
 	thisDuration = 1000*lengthMax/sampFreq; // defined in SSPmedia.js
@@ -435,9 +435,6 @@ function prepareLab_6_2( )
 	rcdg.y = autoCorrData;
 	rcdl.title = '';
 	rcdl.annotations[0].text = 'k';
-
-	deltaN = 0; // change in number of samples (zoom)
-	power = 0;
 
 	dispState = 'SH';
 	digiState = 'ANALOG';

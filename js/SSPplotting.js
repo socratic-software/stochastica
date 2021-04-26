@@ -452,7 +452,7 @@ function graphMargins()
 	else 
 		{
 		margins.top = 40; margins.bottom = 110;
-		alert("Not an expected device: "+tempPlatform);
+		console.log("Not an expected device: "+tempPlatform);
 		};
 	return;
 	};

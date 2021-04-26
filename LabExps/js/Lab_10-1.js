@@ -271,6 +271,6 @@ function prepareLab_10_1( )
 	Plotly.react(wC, [wpg], wpl, noMode);
 	Plotly.react(wD, [fstg], fstl, noMode);
 
-// Await interaction
+	// Await interaction
 	};
 	

@@ -131,8 +131,8 @@ function executeLab_6_6b( )
 	fcdl.title = 'Normalized 𝜑<sub>FF</sub>[k]';
 	fcdl.annotations[0].text = rcdl.annotations[0].text;
 
-	var deltaN = 0; // change in number of samples (zoom)
-	var power = 0;
+	deltaN = 0; // change in number of samples (zoom)
+	power = 0;
 
-// Await interaction
+	// Await interaction
 	};

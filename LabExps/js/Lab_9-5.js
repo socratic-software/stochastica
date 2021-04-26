@@ -726,7 +726,7 @@ function prepareLab_9_5( )
 	else 
 		{
 		targetLength = binningFactor;
-		alert("Not an expected device: "+tempPlatform);
+		console.log("Not an expected device: "+tempPlatform);
 		};
 	
 	// First, we set up layouts
@@ -753,9 +753,9 @@ function prepareLab_9_5( )
 	sigsDTLayout.width =  sigsCTLayout.width;
 	sigsDTLayout.height =  sigsCTLayout.height;
 
-// 	sigsDTLayout.annotations[1].x = sigsCTLayout.annotations[1].x;
-// 	sigsDTLayout.annotations[1].y = sigsCTLayout.annotations[1].y;
-// 	sigsDTLayout.annotations[1].yanchor = sigsCTLayout.annotations[1].yanchor;
+	sigsDTLayout.annotations[1].x = sigsCTLayout.annotations[1].x;
+	sigsDTLayout.annotations[1].y = sigsCTLayout.annotations[1].y;
+	sigsDTLayout.annotations[1].yanchor = sigsCTLayout.annotations[1].yanchor;
 	sigsDTLayout.annotations[1].text = 'n';
 
 	figsDTLayout = cloneObj(sigsDTLayout); // defined in SSPplotting.js

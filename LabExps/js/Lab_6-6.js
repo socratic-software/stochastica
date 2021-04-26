@@ -24,7 +24,7 @@ var nbins = 1;
 lengthMax = 2**Math.floor(Math.log2(100000/binningFactor))*binningFactor;
 var startSample = 0;
 var stopSample = lengthMax;
-var middleSample = (stopSample+startSample)/2;
+var middleSample = (stopSample+startSample) >> 1;
 
 var newSamples = lengthMax;
 var sentence = '';

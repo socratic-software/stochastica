@@ -24,7 +24,7 @@ var newSamples = 1;
 lengthMax = 2**Math.floor(Math.log2(100000/binningFactor))*binningFactor;
 var startSample = 0;
 var stopSample = lengthMax;
-var middleSample = (stopSample+startSample)/2;
+var middleSample = (stopSample+startSample) >> 1;
 
 var newSamples = lengthMax;
 var sentence = '';
@@ -225,7 +225,7 @@ function myFunctionZoom(val)
 	document.querySelector('#placeN1').value = "N = "+newSamples+" samples";
 	sentence2 = "= "+d1round(1000*newSamples/sampFreq)+" ms";
 	document.querySelector('#placeN2').value = sentence2;
-	deltaN = newSamples/2;
+	deltaN = newSamples >> 1;
 
 	startSample = middleSample - deltaN;
 	stopSample = middleSample + deltaN;
@@ -405,6 +405,12 @@ function myFunctionZoom(val)
 //
 function prepareLab_6_7( )
 	{
+	startSample = 0;
+	stopSample = lengthMax;
+	middleSample = (stopSample+startSample) >> 1;
+	deltaN = 0; // change in number of samples (zoom)
+	power = 0;
+
 	audioNum = 0;
 	thisDuration = 1000*lengthMax/sampFreq; // defined in SSPmedia.js
 
@@ -544,9 +550,6 @@ function prepareLab_6_7( )
 	fcdg.y = autoFiltCorrData;
 	rcdl.title = '<i>Normalized 𝜑<sub>FF</sub>[k]</i>';
 	fcdl.annotations[0].text = rcdl.annotations[0].text;
-
-	deltaN = 0; // change in number of samples (zoom)
-	power = 0;
 
 	createWavBlob(0, theNames[0].data);
 	document.getElementById('playCapture-'+0).disabled = false;

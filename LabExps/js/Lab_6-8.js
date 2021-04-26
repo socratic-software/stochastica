@@ -409,6 +409,12 @@ function myFunctionZoom(val)
 //
 function prepareLab_6_8( )
 	{
+	startSample = 0;
+	stopSample = lengthMax;
+	middleSample = (stopSample+startSample) >> 1;
+	deltaN = 0; // change in number of samples (zoom)
+	power = 0;
+
 	audioNum = 0;
 	thisDuration = 1000*lengthMax/sampFreq; // defined in SSPmedia.js
 
@@ -573,9 +579,6 @@ function prepareLab_6_8( )
 	rcdl.title = '';
 	fcdl.annotations[0].text = rcdl.annotations[0].text;
 
-	deltaN = 0; // change in number of samples (zoom)
-	power = 0;
-
 	createWavBlob(0, theNames[0].data);
 	document.getElementById('playCapture-'+0).disabled = false;
 	document.getElementById('play_'+0).style = 'filter:opacity(100%);';
@@ -720,8 +723,8 @@ function executeLab_6_8( )
 	fcdl.title = 'Normalized 𝜑<sub>gF</sub>[k]';
 	fcdl.annotations[0].text = rcdl.annotations[0].text;
 
-	var deltaN = 0; // change in number of samples (zoom)
-	var power = 0;
+	deltaN = 0; // change in number of samples (zoom)
+	power = 0;
 
-// Await interaction
+	// Await interaction
 	};

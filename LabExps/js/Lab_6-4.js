@@ -12,8 +12,6 @@
 var dispState = 'SH';
 var digiState = 'ANALOG';
 var experiment = '6.4a';
-var deltaN = 0; // change in number of samples (zoom)
-var power = 0;
 var autoCorrData = [];
 var autoFiltCorrData = [];
 var rpsd = [];
@@ -24,7 +22,9 @@ var newSamples = 1;
 lengthMax = 2**Math.floor(Math.log2(100000/binningFactor))*binningFactor;
 var startSample = 0;
 var stopSample = lengthMax;
-var middleSample = (stopSample+startSample)/2;
+var middleSample = (stopSample+startSample) >> 1;
+var deltaN = 0; // change in number of samples (zoom)
+var power = 0;
 
 var newSamples = lengthMax;
 var sentence = '';
@@ -206,7 +206,7 @@ function myFunctionZoom(val)
 	document.querySelector('#placeN1').value = "N = "+newSamples+" samples";
 	sentence2 = "= "+d1round(1000*newSamples/sampFreq)+" ms";
 	document.querySelector('#placeN2').value = sentence2;
-	deltaN = newSamples/2;
+	deltaN = newSamples >> 1;
 
 	startSample = middleSample - deltaN;
 	stopSample = middleSample + deltaN;
@@ -359,6 +359,12 @@ function myFunctionZoom(val)
 //
 function prepareLab_6_4()
 	{
+	startSample = 0;
+	stopSample = lengthMax;
+	middleSample = (stopSample+startSample) >> 1;
+	deltaN = 0; // change in number of samples (zoom)
+	power = 0;
+
 	audioNum = 0;
 	thisDuration = 1000*lengthMax/sampFreq; // defined in SSPmedia.js
 
@@ -438,11 +444,9 @@ function prepareLab_6_4()
 // now start displays
 //
 	// raw data: signal & amplitude histogram
-	
 	rstg.x = binning(xDataCT,binningFactor);
 	rstg.y = binning(yData,binningFactor);
 	rstl.annotations[0].text = 't [ms]';
-	
 
 	rhg.x = yData;
 	let dynRange = getDynRange(rhg.x)[0]; // get dynamic range
@@ -465,7 +469,6 @@ function prepareLab_6_4()
 	fhl.annotations[0].text = 'signal amplitude';
 	
 	// raw & filtered data, corr. function, power spectral densities & filter
-	
 	var rotSamples = Math.floor(autoCorrData.length/2);
 
 	// these "symmetrics" require binning because they are ANALOG
@@ -524,9 +527,6 @@ function prepareLab_6_4()
 	rcdl.title = '<i>Normalized 𝜑<sub>FF</sub>[k]</i>';
 	fcdl.annotations[0].text = rcdl.annotations[0].text;
 
-	deltaN = 0; // change in number of samples (zoom)
-	power = 0;
-
 	createWavBlob(0, theNames[0].data);
 	document.getElementById('playCapture-'+0).disabled = false;
 	document.getElementById('play_'+0).style = 'filter:opacity(100%);';
@@ -536,5 +536,4 @@ function prepareLab_6_4()
 	document.getElementById('play_'+1).style = 'filter:opacity(100%);';
 
 	// Await interaction
-
 	};

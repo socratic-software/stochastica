@@ -2,6 +2,16 @@
 
 All notable changes to **<font color="steelblue">StochasticA</font>** will be documented in this file.
 
+## [2.3.5] - 2021-04-dd
+
+### Removed
+
+- Extraneous alerts in various Laboratory Exercises.
+
+### Fixed
+
+- Potential bugs and spelling errors in Laboratory Exercises in Chapter 6.
+
 ## [2.3.4] - 2021-04-19
 
 ### Improved
