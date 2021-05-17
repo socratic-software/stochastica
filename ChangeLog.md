@@ -2,6 +2,16 @@
 
 All notable changes to **<font color="steelblue">StochasticA</font>** will be documented in this file.
 
+## [2.3.6] - 2021-05-17
+
+### Added
+
+- Timing of computation to Laboratory Exercise 6.2.
+
+### Updated
+
+- README file.
+
 ## [2.3.5] - 2021-04-26
 
 ### Removed

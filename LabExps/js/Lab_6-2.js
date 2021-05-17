@@ -62,6 +62,9 @@ var p = choices[0];
 var autoCorrZero = 0;
 var psdZero = 0;
 
+var t0 = 0;
+var t1 = 0;
+
 // templates in SSPplotting.js
 // r=raw, f=filtered, s=signal, h=histogram, c=correlation, p=psd
 // t=continuous time, d = discrete time
@@ -115,14 +118,17 @@ function process_6_2()
 	{
 	// Note use of global definitions for thisAlg, rdata, etc.
 	// compute autocorrelation gg through Fourier domain
+
+	t0 = performance.now();
 	var rpsdTemp = abssq(fft(rData, nn, ndim, FORWARD)); // power spectral density
+	t1 = performance.now();
 	
 	rpsd = uRs(rpsdTemp);
 	psdZero = rpsd[0];
 	
 	autoCorrData = uRs(fft(rpsdTemp, nn, ndim, BACKWARD));
 	autoCorrZero = autoCorrData[0];
-	
+
 	// the following are for internal checks
 	let n0 = lengthMax;
 	let p0 = autoCorrZero/n0; // estimate #1
@@ -161,7 +167,7 @@ function getData(target)
 		}
 	else
 		throw('Houston, we have a problem in getData.');
-		
+
 	if (digiState === 'ANALOG')
 		{
 		document.querySelector('#tn').value = '(t)';
@@ -393,6 +399,10 @@ function prepareLab_6_2( )
 	process_6_2();
 	getData('acquire');
 		
+	sentence1 = "With N = "+yData.length+" samples, "; 
+	sentence2 = "computation time = "+Math.ceil(t1-t0)+" ms"; 
+	document.querySelector('#placeTime').value = sentence1 + sentence2;
+	console.log(sentence1 + sentence2);
 
 // signal processing initiating ends here
 // *****************************************************************

@@ -25,7 +25,7 @@ Speech, music, seismic vibrations, oil prices, and climate measurements are all 
 <br><br>
 This textbook, as an interactive textbook (*iBook*), makes use of your device's ability to display dynamic information through films and animations and to hear the results of the techniques applied to music. At the end of every chapter there are homework problems ranging from easy to "olympic".
 <br><br>
-A new and exciting aspect is that we make use of your device's interactive capabilities to offer 26 laboratory experiments in signal processing. For the web-based implementation in this repository, the experiments use the speakers, display, and the graphical user interface (GUI). For a tablet and smartphone implementation that can be found [here](https://apps.apple.com/us/app/stochastic-signal-processing/id1450268179?ls=1), this is extended to use the camera and the microphone providing a total of 58 laboratory experiments.
+A new and exciting aspect is that we make use of your device's interactive capabilities to offer 26 laboratory experiments in signal processing. For the web-based implementation in this repository, the experiments use the speakers, display, and the graphical user interface (GUI). For a tablet and smartphone implementation that can be found [here](https://apps.apple.com/us/app/stochastic-signal-processing/id1450268179?ls=1), this is extended to use the camera and the microphone providing a total of 59 laboratory experiments.
 <br><br>
 These experiments are not simulations; they are examples of real digital processing of signals in your device. In this time of at-home and online learning, this is the way to learn signal processing through study and experimentation.
 
