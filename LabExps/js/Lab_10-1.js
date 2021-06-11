@@ -15,7 +15,7 @@ var SIMULATION = false;
 
 var dispState = 'SH';
 var digiState = 'ANALOG';
-var lengthMax = 2**Math.floor(Math.log2(100000/binningFactor))*binningFactor;
+var lengthMax = 2**(factor2-1);
 var experiment = '10.1';
 var snrValues = [0.1, 0.5, 1, 5, 12.5, 25, 50, 100, 500, 1000]
 var thisSNR = snrValues[snrValues.length-1];
@@ -23,8 +23,6 @@ var thisSNR = snrValues[snrValues.length-1];
 // for normal (Gaussian) distribution
 var myMean = 0;
 var sigma = 1/thisSNR;
-
-var audioNum = 0;
 
 var startSample = 0;
 var stopSample = lengthMax;
@@ -168,18 +166,18 @@ function getSNR(val)
 
 	process_10_1();
 
-	rstg.y = binning(yrData,binningFactor);
-	nstg.y = binning(nrData,binningFactor);
+	rstg.y = binning(yrData,altBinningFactor);
+	nstg.y = binning(nrData,altBinningFactor);
 	
 	// restored signal
-	fstg.y = ampNormalizeReal(binning(yresData,binningFactor));
+	fstg.y = ampNormalizeReal(binning(yresData,altBinningFactor));
 	document.querySelector('#snr1').value = thisSNR;
 	
 	// raw & filtered data, corr. function, power spectral densities & filter
 	
-	rpg.y = binning(takeAtoB(rpsd, 0, rpsd.length>>1),binningFactor);
-	npg.y = binning(takeAtoB(npsd, 0, npsd.length>>1),binningFactor);
-	wpg.y = binning(takeAtoB(wSpect, 0, wSpect.length>>1),binningFactor);
+	rpg.y = binning(takeAtoB(rpsd, 0, rpsd.length>>1),altBinningFactor);
+	npg.y = binning(takeAtoB(npsd, 0, npsd.length>>1),altBinningFactor);
+	wpg.y = binning(takeAtoB(wSpect, 0, wSpect.length>>1),altBinningFactor);
 	
 	Plotly.react(wA, [rstg, nstg], rstl, noMode);
 	Plotly.react(wB, [npg, rpg], rpl, noMode);
@@ -236,31 +234,31 @@ function prepareLab_10_1( )
 // now start displays
 //
 	// signal & noise data
-	rstg.x = binning(xDataCT,binningFactor);
-	rstg.y = binning(yrData,binningFactor);
+	rstg.x = binning(xDataCT,altBinningFactor);
+	rstg.y = binning(yrData,altBinningFactor);
 	nstg.x = rstg.x;
-	nstg.y = binning(nrData,binningFactor);
+	nstg.y = binning(nrData,altBinningFactor);
 	rstl.annotations[2].text = '';
 
 	
 	// restored signal
 	fstg.x = rstg.x;
-	fstg.y = ampNormalizeReal(binning(yresData,binningFactor));
+	fstg.y = ampNormalizeReal(binning(yresData,altBinningFactor));
 	document.querySelector('#snr1').value = thisSNR;
 
 	// raw & filtered data, corr. function, power spectral densities & filter
-	rpg.x = binning(xDataF,binningFactor);
-	rpg.y = binning(takeAtoB(rpsd, 0, rpsd.length>>1),binningFactor);
+	rpg.x = binning(xDataF,altBinningFactor);
+	rpg.y = binning(takeAtoB(rpsd, 0, rpsd.length>>1),altBinningFactor);
 	
 	npg.x = rpg.x;
-	npg.y = binning(takeAtoB(npsd, 0, npsd.length>>1),binningFactor);
+	npg.y = binning(takeAtoB(npsd, 0, npsd.length>>1),altBinningFactor);
 	
 	freqTicks[nLabels-1] = rpg.x[rpg.x.length-1];
 	rpl.xaxis4.tickvals = freqTicks;
 	rpl.xaxis4.ticktext = freqLabels;
 	rpl.annotations[2].text = '';
 
-	wpg.y = binning(takeAtoB(wSpect, 0, wSpect.length>>1),binningFactor);
+	wpg.y = binning(takeAtoB(wSpect, 0, wSpect.length>>1),altBinningFactor);
 	wpg.x = rpg.x;
 	wpl.xaxis4.tickvals = rpl.xaxis4.tickvals;
 	wpl.xaxis4.ticktext = rpl.xaxis4.ticktext;

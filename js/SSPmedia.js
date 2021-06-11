@@ -13,7 +13,7 @@ var thisCtx = thisCanvas.getContext('2d');
 const frontCamera = 'front';
 const backCamera = 'back';
 var chosenCamera = null;
-
+var audioNum = null;
 var cameraDelay = 750; // milliseconds
 
 var camData = {
@@ -238,7 +238,7 @@ function changeToCameraHTML(localImageNum, cameraChoice)
 			setTimeout(function()
 				{
 				previewApp.switchCamera(chosenCamera);
-				}, 200);
+				}, 400);
 			};
 		};
 	};
@@ -464,7 +464,6 @@ if (typeof acquired === 'undefined') {
 	acquired = [];
 }
 
-
 // *****************************************************************
 // button functions
 function buttonDisable(audioNum) {
@@ -485,36 +484,6 @@ function buttonAllDisable() {
 		document.getElementById('playCapture-'+num).disabled = true;
 	}
 }
-
-// *****************************************************************
-function buttonInit()
-	{
-	"use strict"; // OK
-
-	var startButton = null;
-	var stopButton = null;
-	for (const num of listMics)
-		{
-		startButton = document.getElementById('startCapture-'+num);
-		startButton.disabled = false;
-		startButton.addEventListener("click", function() {startCapture(num);});
-		stopButton = document.getElementById('stopCapture-'+num);
-		stopButton.disabled = true;
-		stopButton.addEventListener("click", function() {stopCapture(num);});
-		};
-	for (const num of listPlayBacks) {
-		if(!acquired[num])
-			{
-			document.getElementById('playCapture-'+num).disabled = true;
-			document.getElementById('play_'+num).style = 'filter:opacity(50%) blur(3px);';
-			}
-		else
-			{
-			document.getElementById('playCapture-'+num).disabled = false;
-			document.getElementById('play_'+num).style = 'filter:opacity(100%);';
-			};
-		}
-	}
 
 // *****************************************************************
 function buttonStart(audioNum) {
@@ -595,34 +564,6 @@ function sound(src) {
 	this.stop = function(){
 		this.sound.pause();
 		};
-}
-
-// *****************************************************************
-// Called continuously while AudioInput capture is running.
-function onAudioInputCapture(evt)
-	{
-	"use strict"; // OK
-
-	try
-		{
-		if (evt && evt.data)
-			{
-			// Add the chunk to the buffer
-			audioDataBuffer = myConcatenate(audioDataBuffer, evt.data);
-			evt.data = [];
-			if (audioDataBuffer.length > recordSize)
-				stopCapture(currentAudioNum);
-			}
-		else
-			{ alert("Unknown audioinput event: " + JSON.stringify(evt)); }
-		}
-	catch (ex) { alert("onAudioInputCapture ex: " + ex); }
-}
-
-// *****************************************************************
-// Called when a plugin error happens.
-function onAudioInputError(error) {
-	alert("onAudioInputError event received: " + JSON.stringify(error));
 }
 
 // *****************************************************************
@@ -726,8 +667,14 @@ var stopCapture = function (audioNum) {
 				
 				// change typeArray to regular array; use this opportunity to scale
 				let scaler = (2**15)-1;
-				for (var i = 0; i < audioDataBuffer.length; i++) audioDataBuffer[i] /= scaler;
+				for (var i = 0; i < audioDataBuffer.length; i++)
+					audioDataBuffer[i] /= scaler;
+				// remove the bounce artefact at the beginning
 				var audioDataSliced = Array.from(audioDataBuffer.slice(offsetData));
+
+				// trim the result length to 2**(integer)
+				let trim = 2**(Math.floor(Math.log2(audioDataSliced.length)));
+				audioDataSliced = audioDataSliced.slice(-trim);
 
 				// Store audio in global variables
 				acquired[audioNum] = true;
@@ -745,6 +692,65 @@ var stopCapture = function (audioNum) {
 		}
 	catch (e) { alert("stopCapture exception: " + e); }
 };
+
+// *****************************************************************
+function buttonInit()
+	{
+	"use strict"; // OK
+
+	thisMediaType = 'audio';
+	var startButton = null;
+	var stopButton = null;
+	for (const num of listMics)
+		{
+		startButton = document.getElementById('startCapture-'+num);
+		startButton.disabled = false;
+		startButton.addEventListener("click", function() {startCapture(num);});
+		stopButton = document.getElementById('stopCapture-'+num);
+		stopButton.disabled = true;
+		stopButton.addEventListener("click", function() {stopCapture(num);});
+		};
+	for (const num of listPlayBacks) {
+		if(!acquired[num])
+			{
+			document.getElementById('playCapture-'+num).disabled = true;
+			document.getElementById('play_'+num).style = 'filter:opacity(50%) blur(3px);';
+			}
+		else
+			{
+			document.getElementById('playCapture-'+num).disabled = false;
+			document.getElementById('play_'+num).style = 'filter:opacity(100%);';
+			};
+		}
+	}
+
+// *****************************************************************
+// Called continuously while AudioInput capture is running.
+function onAudioInputCapture(evt)
+	{
+	"use strict"; // OK
+
+	try
+		{
+		if (evt && evt.data)
+			{
+			// Add the chunk to the buffer
+			audioDataBuffer = myConcatenate(audioDataBuffer, evt.data);
+			evt.data = [];
+			if (audioDataBuffer.length > recordSize)
+				stopCapture(currentAudioNum);
+			}
+		else
+			{ alert("Unknown audioinput event: " + JSON.stringify(evt)); }
+		}
+	catch (ex) { alert("onAudioInputCapture ex: " + ex); }
+}
+
+// *****************************************************************
+// Called when a plugin error happens.
+function onAudioInputError(error) {
+	alert("onAudioInputError event received: " + JSON.stringify(error));
+}
 
 // *****************************************************************
 // When cordova fires the deviceready event, we initialize everything needed for audio input.

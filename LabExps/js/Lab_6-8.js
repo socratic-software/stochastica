@@ -21,7 +21,7 @@ var xyPSD = [];
 var nbins = 1;
 var newSamples = 1;
 
-lengthMax = 2**Math.floor(Math.log2(100000/binningFactor))*binningFactor;
+lengthMax = 2**(factor2-1);
 var startSample = 0;
 var stopSample = lengthMax;
 var middleSample = (stopSample+startSample) >> 1;
@@ -234,8 +234,8 @@ function rotateSymmetrics()
 function myFunctionZoom(val)
 	{
 	thisZoom = val;
-	power = Math.pow(2,thisZoom);
-	newSamples = Math.floor(lengthMax/power);
+	power = 2**thisZoom;
+	newSamples = lengthMax >> thisZoom;
 	if (oddQ(newSamples)) newSamples--; // make it even
 	sentence1 =  "N = "+newSamples+" samples";
 	document.querySelector('#placeN1').value = "N = "+newSamples+" samples";
@@ -280,10 +280,10 @@ function myFunctionZoom(val)
 		tauDTnew[i] = tauDT[i+startSample];
 		};
 
-	rstg.x = binning(xCDataNew,binningFactor);
+	rstg.x = binning(xCDataNew,altBinningFactor);
 	fstg.x = rstg.x;
-	rstg.y = binning(yDataNew,binningFactor);
-	fstg.y = binning(zFdN,binningFactor);
+	rstg.y = binning(yDataNew,altBinningFactor);
+	fstg.y = binning(zFdN,altBinningFactor);
 
 	rsdg.x = xDDataNew;
 	fsdg.x = rsdg.x;
@@ -295,10 +295,10 @@ function myFunctionZoom(val)
 	rsdg.error_y.arrayminus = yDataNew;
 	fsdg.error_y.arrayminus = zFdN;
 	
-	rctg.x = binning(tauCTnew,binningFactor);
+	rctg.x = binning(tauCTnew,altBinningFactor);
 	fctg.x = rctg.x;
-	rctg.y = binning(zAuCoDN,binningFactor);
-	fctg.y = binning(zAuFiCoDN,binningFactor);
+	rctg.y = binning(zAuCoDN,altBinningFactor);
+	fctg.y = binning(zAuFiCoDN,altBinningFactor);
 
 	rcdg.x = tauDTnew;
 	fcdg.x = rcdg.x;
@@ -366,7 +366,7 @@ function myFunctionZoom(val)
 
 	// adjust freqTicks & freqLabels
 	scaleLabel = power;
-	rpg.x = binning(xDDataNew,binningFactor);
+	rpg.x = binning(xDDataNew,altBinningFactor);
 	let rpgLength = rpg.x.length;
 	
 	for (var i = 0; i < nLabels; i++)
@@ -375,17 +375,17 @@ function myFunctionZoom(val)
 		freqTicksNew[i] = rpg.x[Math.floor(i*rpgLength/(nLabels-1))];
 		if (i == (nLabels-1)) freqTicksNew[i] = rpg.x[rpgLength-1];
 		if (thisZoom >= document.querySelector('#zm').max-1)
-			freqLabels[i] = d3round((sampFreq/scaleLabel)*(i - ((nLabels-1)/2))/4000)
+			freqLabels[i] = d3round((sampFreq/scaleLabel)*(i - ((nLabels-1)>>1))/4000)
 		else
-			freqLabels[i] = d2round((sampFreq/scaleLabel)*(i - ((nLabels-1)/2))/4000);
+			freqLabels[i] = d2round((sampFreq/scaleLabel)*(i - ((nLabels-1)>>1))/4000);
 		};
 	
-	rpg.y = binning(zRpsdN,binningFactor);
+	rpg.y = binning(zRpsdN,altBinningFactor);
 	rpl.xaxis4.tickvals = freqTicksNew;
 	rpl.xaxis4.ticktext = freqLabels;
 
 	fpg.x = rpg.x;
-	fpg.y = binning(zfilter,binningFactor); // no normalization
+	fpg.y = binning(zfilter,altBinningFactor); // no normalization
 	fpl.xaxis4.tickvals = freqTicksNew;
 	fpl.xaxis4.ticktext = freqLabels;
 	
@@ -450,7 +450,7 @@ function prepareLab_6_8( )
 		{
 		freqTicks[i] = Math.floor(i*newSamples/(nLabels-1));
 		if (i == (nLabels-1)) freqTicks[i] = newSamples-1;
-		freqLabels[i] = d2round(sampFreq*(i - ((nLabels-1)/2))/4000);
+		freqLabels[i] = d2round(sampFreq*(i - ((nLabels-1)>>1))/4000);
 		};
 		
 	process_6_8();
@@ -462,8 +462,8 @@ function prepareLab_6_8( )
 //
 	// raw data: signal & amplitude histogram
 	
-	rstg.x = binning(xDataCT,binningFactor);
-	rstg.y = binning(yData,binningFactor);
+	rstg.x = binning(xDataCT,altBinningFactor);
+	rstg.y = binning(yData,altBinningFactor);
 	rstl.annotations[0].text = 't [ms]';
 	
 
@@ -476,7 +476,7 @@ function prepareLab_6_8( )
 
 	// filtered data: signal & amplitude histogram
 	fstg.x = rstg.x;
-	fstg.y = binning(yfData,binningFactor);
+	fstg.y = binning(yfData,altBinningFactor);
 	fstl.title = '';
 	fstl.annotations[0].text = 't [ms]';
 
@@ -493,20 +493,20 @@ function prepareLab_6_8( )
 	var rotSamples = autoCorrData.length >> 1;
 
 	// these "symmetrics" require binning because they are ANALOG
-	rctg.y = rotateRight(binning(autoCorrData,binningFactor),binningFactor >> 1);
-	rctg.x = binning(tauCT,binningFactor);
+	rctg.y = rotateRight(binning(autoCorrData,altBinningFactor),altBinningFactor >> 1);
+	rctg.x = binning(tauCT,altBinningFactor);
 	rctl.title = '';
 	rctl.annotations[0].text = tau+' [ms]';
 	autoCorrData = rotateRight(autoCorrData,rotSamples);
 
-	fctg.y = rotateRight(binning(crossCorrData,binningFactor),binningFactor >> 1);
+	fctg.y = rotateRight(binning(crossCorrData,altBinningFactor),altBinningFactor >> 1);
 	fctg.x = rctg.x;
 	fctl.title = '';
 	fctl.annotations[0].text = rctl.annotations[0].text;
 	crossCorrData = rotateRight(crossCorrData,rotSamples);
 
-	rpg.y = rotateRight(binning(ggPSD,binningFactor),binningFactor >> 1);
-	rpg.x = binning(xDataDT,binningFactor);
+	rpg.y = rotateRight(binning(ggPSD,altBinningFactor),altBinningFactor >> 1);
+	rpg.x = binning(xDataDT,altBinningFactor);
 	rpl.title = '';
 	freqTicks[nLabels-1] = rpg.x[rpg.x.length-1];
 	rpl.xaxis4.tickvals = freqTicks;
@@ -515,7 +515,7 @@ function prepareLab_6_8( )
 	rpl.annotations[0].text = 'f  [kHz]';
 	ggPSD = rotateRight(ggPSD,rotSamples);
 
-	fpg.y = rotateRight(binning(xyPSD,binningFactor),binningFactor >> 1);
+	fpg.y = rotateRight(binning(xyPSD,altBinningFactor),altBinningFactor >> 1);
 	fpg.x = rpg.x;
 	fpl.title = '';
 	fpl.xaxis4.tickvals = rpl.xaxis4.tickvals;
@@ -623,13 +623,13 @@ function executeLab_6_8( )
 		{
 		freqTicks[i] = Math.floor(i*newSamples/(nLabels-1));
 		if (i == (nLabels-1)) freqTicks[i] = newSamples-1;
-		freqLabels[i] = d2round(sampFreq*(i - ((nLabels-1)/2))/4000);
+		freqLabels[i] = d2round(sampFreq*(i - ((nLabels-1)>>1))/4000);
 		};
 		
 	// raw data: signal & amplitude histogram
 	
-	rstg.x = binning(xDataCT,binningFactor);
-	rstg.y = binning(yData,binningFactor);
+	rstg.x = binning(xDataCT,altBinningFactor);
+	rstg.y = binning(yData,altBinningFactor);
 	
 	rstl.title = 'Gaussian noise';
 	rstl.annotations[0].text = 't [ms]';
@@ -643,7 +643,7 @@ function executeLab_6_8( )
 
 	// filtered data: signal & amplitude histogram
 	fstg.x = rstg.x;
-	fstg.y = binning(yfData,binningFactor);
+	fstg.y = binning(yfData,altBinningFactor);
 
 	fstl.title = 'Filtered Gaussian noise';
 	fstl.annotations[0].text = 't [ms]';
@@ -668,22 +668,22 @@ function executeLab_6_8( )
 	var rotSamples = autoCorrData.length >> 1;
 
 	// these "symmetrics" require binning because they are ANALOG
-	rctg.y = rotateRight(binning(autoCorrData,binningFactor),binningFactor >> 1);
-	rctg.x = binning(tauCT,binningFactor);
+	rctg.y = rotateRight(binning(autoCorrData,altBinningFactor),altBinningFactor >> 1);
+	rctg.x = binning(tauCT,altBinningFactor);
 	
 	rctl.title = 'Normalized 𝜑<sub>gg</sub>(\u03C4 = kT)';
 	rctl.annotations[0].text = tau+' [ms]';
 	autoCorrData = rotateRight(autoCorrData,rotSamples);
 
-	fctg.y = rotateRight(binning(crossCorrData,binningFactor),binningFactor >> 1);
+	fctg.y = rotateRight(binning(crossCorrData,altBinningFactor),altBinningFactor >> 1);
 	fctg.x = rctg.x;
 	
 	fctl.title = 'Normalized 𝜑<sub>gF</sub>(\u03C4 = kT)';
 	fctl.annotations[0].text = rctl.annotations[0].text;
 	crossCorrData = rotateRight(crossCorrData,rotSamples);
 
-	rpg.y = rotateRight(binning(ggPSD,binningFactor),binningFactor >> 1);
-	rpg.x = binning(xDataDT,binningFactor);
+	rpg.y = rotateRight(binning(ggPSD,altBinningFactor),altBinningFactor >> 1);
+	rpg.x = binning(xDataDT,altBinningFactor);
 	rpl.title = 'log<sub>10</sub> S<sub>gg</sub>(2\u03C0f)';
 	freqTicks[nLabels-1] = rpg.x[rpg.x.length-1];
 	rpl.xaxis4.tickvals = freqTicks;
@@ -691,7 +691,7 @@ function executeLab_6_8( )
 	rpl.annotations[0].text = 'f  [kHz]';
 	ggPSD = rotateRight(ggPSD,rotSamples);
 
-	fpg.y = rotateRight(binning(xyPSD,binningFactor),binningFactor >> 1);
+	fpg.y = rotateRight(binning(xyPSD,altBinningFactor),altBinningFactor >> 1);
 	fpg.x = rpg.x;
 	fpl.title = 'log<sub>10</sub> | S<sub>gF</sub>(2\u03C0f) |';
 	fpl.xaxis4.tickvals = rpl.xaxis4.tickvals;

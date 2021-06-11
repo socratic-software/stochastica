@@ -1164,7 +1164,7 @@ button
 .musicTable td:nth-child(1) {
 	text-align: right;
 	vertical-align: middle;
-	width: 25%;
+	width: 20%;
 	margin: auto;
 	}
 	
@@ -1181,7 +1181,7 @@ button
 	}
 	
 .musicTable td:nth-child(5) {
-	width: 25%;
+	width: 23%;
 	}
 
 /* Graphs have a layout defined here */

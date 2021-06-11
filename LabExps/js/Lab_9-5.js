@@ -61,7 +61,6 @@ var figsDTLayout = null;
 var layoutSigT = null;
 var layoutSigC = null;
 
-var audioNum = 0;
 var lengthMax = 2**factor2; // defined in SSPmedia.js
 
 var sentence = '';
@@ -570,19 +569,6 @@ function signalProcessing()
 
 // ***************************************************************** \\
 //
-function processAudio(localAudioNum)
-	{
-	'use strict';
-
-	audioNum = localAudioNum;
-	document.querySelector('#rangeSNR').max = snrValues.length - 1;
-	thisSNR = snrValues[snrValues.length - 1]
-	document.querySelector('#rangeSNR').value = thisSNR;
-	document.querySelector('#placeSNR').value = thisSNR;
-	
-	processAudioNext();
-	};
-
 function processAudioNext()
 	{
 	'use strict';
@@ -612,6 +598,19 @@ function processAudioNext()
 	document.querySelector('#placeFreq').value = freq0;
 
 	resetWindowsControls();
+	};
+
+function processAudio(localAudioNum)
+	{
+	'use strict';
+
+	audioNum = localAudioNum;
+	document.querySelector('#rangeSNR').max = snrValues.length - 1;
+	thisSNR = snrValues[snrValues.length - 1]
+	document.querySelector('#rangeSNR').value = thisSNR;
+	document.querySelector('#placeSNR').value = thisSNR;
+	
+	processAudioNext();
 	};
 
 // *****************************************************************
@@ -700,6 +699,7 @@ function prepareLab_9_5( )
 	{
 	'use strict';
 
+	audioNum = 0;
 	// ************ set up environment ************ 
 	document.querySelector('#rangeSNR').max = snrValues.length - 1;
 	document.querySelector('#rangeSNR').value = thisSNR;
@@ -791,9 +791,6 @@ function prepareLab_9_5( )
 	fDTPlot.marker.color = 'rgba(255,105,180,0.85)'; // pink
 	
 	// ************ now start signal processing ************ 
-
-	audioNum = 0;
-
 	lengthMax = 2**factor2; // defined in SSPmedia.js
 
 	for (var i = 0; i < nDisRec; i++)

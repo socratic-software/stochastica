@@ -24,7 +24,6 @@ lengthMax = 2**(factor2-2); // defined in SSPmedia.js
 var nn = [lengthMax] // number of complex values
 var ndim = nn.length; // 1-D signal
 
-var localBinningFactor = 2**12;
 var startIndexT = 0;
 var stopIndexT = lengthMax;
 var middleSampleT = lengthMax >> 1;
@@ -62,11 +61,11 @@ function synthesizeData()
 
 function displayData()
 	{
-	sinPlot.x = binning(takeAtoB(xDataCT,startIndexT,stopIndexT),localBinningFactor);
-	sinPlot.y = binning(takeAtoB(sinData,startIndexT,stopIndexT),localBinningFactor);
+	sinPlot.x = binning(takeAtoB(xDataCT,startIndexT,stopIndexT),altBinningFactor);
+	sinPlot.y = binning(takeAtoB(sinData,startIndexT,stopIndexT),altBinningFactor);
 	
-	windowedPlot.x = binning(takeAtoB(xDataCT,startIndexT,stopIndexT),localBinningFactor);
-	windowedPlot.y = binning(takeAtoB(yData,startIndexT,stopIndexT),localBinningFactor);
+	windowedPlot.x = binning(takeAtoB(xDataCT,startIndexT,stopIndexT),altBinningFactor);
+	windowedPlot.y = binning(takeAtoB(yData,startIndexT,stopIndexT),altBinningFactor);
 	
 	origPSDPlot.x = takeAtoB(xDataDT,startIndexF,stopIndexF);
 	origPSDPlot.y = takeAtoB(origPSD,startIndexF,stopIndexF);
@@ -206,12 +205,12 @@ function prepareLab_12_3( )
 	origPSD = takeAtoB(uRs(ampNormalize(abssq(origSpect))),
 			0,sinData.length >> 1); // global, normalized, graphics format
 			
-	sinPlot.x = binning(takeAtoB(xDataCT,startIndexT,stopIndexT),localBinningFactor);
-	sinPlot.y = binning(takeAtoB(sinData,startIndexT,stopIndexT),localBinningFactor);
+	sinPlot.x = binning(takeAtoB(xDataCT,startIndexT,stopIndexT),altBinningFactor);
+	sinPlot.y = binning(takeAtoB(sinData,startIndexT,stopIndexT),altBinningFactor);
 	windowedPlot = cloneObj(sinPlot); // defined in SSPplotting.js
 	windowedPlot.marker.color = overlayStart+alphaMin+overlayFinish;
 	windowedPlot.x = sinPlot.x;
-	windowedPlot.y = binning(takeAtoB(yData,startIndexT,stopIndexT),localBinningFactor);
+	windowedPlot.y = binning(takeAtoB(yData,startIndexT,stopIndexT),altBinningFactor);
 
 	origPSDPlot.x = takeAtoB(xDataDT,startIndexF,stopIndexF);
 	origPSDPlot.y = takeAtoB(origPSD,startIndexF,stopIndexF);

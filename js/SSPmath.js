@@ -1714,18 +1714,14 @@ function recurrenceFilter(coefficients, data)
 
 
 // ****************************************************************
-// Following is based upon Mathematica's procedure GaussianMatrix.
-// a matrix is produced of dimensions (2n+1) x (2n+1) with the center
-// at (n+1, n+1). values are the bivariate Gaussian with a standard
-// deviation of s. Normally, s = n. The values are chosen so that the
-// area under the bivariate Gaussian is 1.
+// Following are probability density functions used in a number of places.
 
-// Normalized Gaussians and derivatives
-// checked Thursday, 22 December 2016
-// fixed Tuesday, 23 January 2018
-// added normLaplace to be used in statistical modeling Friday, 31 May 2019
-
-
+function normSkellam(k,m1,m2)
+	{
+	let b = bessI(Math.abs(k),2*Math.sqrt(m1*m2));
+	return Math.exp(-(m1+m2))*((m1/m2)**(k/2))*b;
+	};
+	
 function normLaplace(t,sigma)
 	{
 	return Math.exp(-Math.abs(t)/(sigma/Math.SQRT2))/(sigma*Math.SQRT2);
@@ -1756,6 +1752,18 @@ function dXYGauss(x,sigmaX, y,sigmaY) // derivative in x and y directions
 	return x*y*bivariateGauss(x,sigmaX, y,sigmaY)/(sigmaX*sigmaX*sigmaY*sigmaY);
 	};
 	
+// ****************************************************************
+// Following is based upon Mathematica's procedure GaussianMatrix.
+// a matrix is produced of dimensions (2n+1) x (2n+1) with the center
+// at (n+1, n+1). values are the bivariate Gaussian with a standard
+// deviation of s. Normally, s = n. The values are chosen so that the
+// area under the bivariate Gaussian is 1.
+
+// Normalized Gaussians and derivatives
+// checked Thursday, 22 December 2016
+// fixed Tuesday, 23 January 2018
+// added normLaplace to be used in statistical modeling Friday, 31 May 2019
+
 function gaussianMatrix(rows , cols, s, derivatives)
 	{
 	if (evenQ(rows) || evenQ(cols)) throw("gaussianMatrix: ROWS and COLS must both be odd.");
@@ -2639,6 +2647,105 @@ CSPL.evalSpline = function(x, xs, ys, ks)
 	return [q, derivQ];
 	}
 
+
+// ****************************************************************
+// Modified Bessel function of the first kind I_n(x)
+// Taken from "Numerical Recipes in C: Section 6.6:
+// Test with https://keisan.casio.com/exec/system/1180573475
+//
+// Usage: bessI(n,x) with n an integer ≥ 0 and x real
+// ity
+// Friday, 30 April 2021
+//
+
+function bessI0(x)
+	{
+	let ax,ans,y;
+
+	ax = Math.abs(x)
+	if (ax < 3.75)
+		{
+		y = x/3.75;
+		y *= y;
+		ans = 1.0+y*(3.5156229+y*(3.0899424+y*(1.2067492 +
+			y*(0.2659732+y*(0.360768e-1+y*0.45813e-2)))));
+		}
+	else
+		{
+		y = 3.75/ax;
+		ans = (Math.exp(ax)/Math.sqrt(ax))*(0.39894228+y*(0.1328592e-1 +
+			y*(0.225319e-2+y*(-0.157565e-2+y*(0.916281e-2 +
+			y*(-0.2057706e-1+y*(0.2635537e-1+y*(-0.1647633e-1 +
+			y*0.392377e-2))))))));
+		}
+	return ans;
+	}
+
+function bessI1(x)
+	{
+	let ax,ans,y;
+
+	ax = Math.abs(x)
+	if (ax < 3.75)
+		{
+		y = x/3.75;
+		y *= y;
+		ans = ax*(0.5+y*(0.87890594+y*(0.51498869+y*(0.15084934 +
+			y*(0.2658733e-1+y*(0.301532e-2+y*0.32411e-3))))));
+		}
+	else
+		{
+		y=3.75/ax;
+		ans = 0.2282967e-1+y*(-0.2895312e-1+y*(0.1787654e-1 -
+			y*0.420059e-2));
+		ans = 0.39894228+y*(-0.3988024e-1+y*(-0.362018e-2 +
+			y*(0.163801e-2+y*(-0.1031555e-1+y*ans))));
+		ans *= (Math.exp(ax)/Math.sqrt(ax));
+		}
+	return (x < 0.0 ? -ans : ans);
+}
+
+function bessI(n, x)
+	{
+	let ACC = 40.0;
+	let BIGNO = 1.0e10;
+	let BIGNI = 1.0e-10;
+
+	let j, bi,bim,bip,tox,ans,index;
+
+	if (n < 0) alert("Index n = "+n+" in bessI")
+	else if (n == 0)
+		return bessI0(x)
+	else if (n == 1)
+		return bessI1(x)
+	else
+		{
+		if (x == 0.0)
+			return 0.0
+		else
+			{
+			tox=2.0/Math.abs(x);
+			bip=0.0; ans=0.0;
+			bi=1.0;
+			index = 2*(n + Math.floor(Math.sqrt(ACC*n)));
+			for (j=index; j>0; j--)
+				{
+				bim=bip+j*tox*bi;
+				bip=bi;
+				bi=bim;
+				if (Math.abs(bi) > BIGNO)
+					{
+					ans *= BIGNI;
+					bi *= BIGNI;
+					bip *= BIGNI;
+					};
+				if (j == n) ans=bip;
+				}
+			ans *= bessI0(x)/bi;
+			return ((x < 0.0 && (n & 1)) ? -ans : ans);
+			}
+		}
+	};
 
 // ****************************************************************
 // Root finding algorithm using Brent Method as described in Section 9.3 of

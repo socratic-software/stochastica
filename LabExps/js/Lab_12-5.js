@@ -23,9 +23,6 @@ lengthMax = 2**(factor2-2); // defined in SSPmedia.js
 var nn = [lengthMax] // number of complex values
 var ndim = nn.length; // 1-D signal
 
-var localBinningFactor = 2**12;
-// var startSample = 0;
-// var stopSample = lengthMax;
 var startIndexT = 0;
 var stopIndexT = lengthMax;
 var middleSampleT = lengthMax >> 1;
@@ -96,10 +93,10 @@ function synthesizeData()
 
 function displayData()
 	{
-	ContTPlot.x = binning(takeAtoB(xDataCT,startIndexT,stopIndexT),localBinningFactor);
+	ContTPlot.x = binning(takeAtoB(xDataCT,startIndexT,stopIndexT),altBinningFactor);
 	DirtyTPlot.x = ContTPlot.x;
-	ContTPlot.y = binning(takeAtoB(sinData,startIndexT,stopIndexT),localBinningFactor);
-	DirtyTPlot.y = binning(takeAtoB(yData,startIndexT,stopIndexT),localBinningFactor);
+	ContTPlot.y = binning(takeAtoB(sinData,startIndexT,stopIndexT),altBinningFactor);
+	DirtyTPlot.y = binning(takeAtoB(yData,startIndexT,stopIndexT),altBinningFactor);
 
 	origPSDPlot.x = takeAtoB(xDataDT,startIndexF,stopIndexF);
 	origPSDPlot.y = takeAtoB(origPSD,startIndexF,stopIndexF);
@@ -240,12 +237,12 @@ function prepareLab_12_5( )
 	origPSDPlot.x = takeAtoB(xDataDT,startIndexF,stopIndexF);
 	origPSDPlot.y = takeAtoB(origPSD,startIndexF,stopIndexF);
 
-	ContTPlot.x = binning(takeAtoB(xDataCT,startIndexT,stopIndexT),localBinningFactor);
-	ContTPlot.y = binning(takeAtoB(sinData,startIndexT,stopIndexT),localBinningFactor);
+	ContTPlot.x = binning(takeAtoB(xDataCT,startIndexT,stopIndexT),altBinningFactor);
+	ContTPlot.y = binning(takeAtoB(sinData,startIndexT,stopIndexT),altBinningFactor);
 	DirtyTPlot = cloneObj(ContTPlot); // defined in SSPplotting.js
 	DirtyTPlot.marker.color = overlayStart+alphaMin+overlayFinish;
 	DirtyTPlot.x = ContTPlot.x;
-	DirtyTPlot.y = binning(takeAtoB(yData,startIndexT,stopIndexT),localBinningFactor);
+	DirtyTPlot.y = binning(takeAtoB(yData,startIndexT,stopIndexT),altBinningFactor);
 
 	chooseWindow(choice);
 	synthesizeData();

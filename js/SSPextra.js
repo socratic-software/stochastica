@@ -12,8 +12,9 @@
 // The following are used to support localStorage
 // ity Thursday, 14 January 2021
 
-	const byteSize = str => new Blob([str]).size;
-	const quote = "'"; // quote+6+quote = '6'
+const byteSize = str => new Blob([str]).size;
+const quote = "'"; // quote+6+quote = '6'
+var thisMediaType = null;
 
 // ********************************************************** \\
 // The uses resizes the window. If change is in either direction

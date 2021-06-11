@@ -233,7 +233,7 @@
 			nDisRec = theNames.length; // number of places to be reserved
 			
 			nMics = document.querySelectorAll('*[id^="startCapture-"]').length; // microphones this exercise
-			lengthMax = 2**Math.floor(Math.log2(100000/binningFactor))*binningFactor;
+			lengthMax = 2**(factor2-1);
 			myDuration = Array(nMics).fill(1000*lengthMax/sampFreq); // time in milliseconds
 			nPlays = document.querySelectorAll('*[id^="playCapture-"]').length; // playbacks this exercise
 			acquired = Array(nPlays).fill(true); // data have been synthesized

@@ -348,26 +348,42 @@ function histogramList(thisData)
 	var range = extrema[0];
 	var minval = extrema[1];
 	var maxval = extrema[2];
-	var dBins = Math.floor(Math.sqrt(totalN));
-	var dlBins = dBins+1;
-	var hBins = dBins+1;
-	var binWidth = range / dBins; // automatically computed bin width;
-	var frac = 0;
-	var index = 0;
-	
+
+	let dBins = 0;
+	let dlBins = 0;
+	let hBins = 0;
+	let binWidth = 0; // automatically computed bin width;
+	let delimitersList = null;
+
+	if (thisMediaType === 'image') // integer intensity values
+		{
+		dBins = maxval - minval + 1;
+		dlBins = dBins+1;
+		hBins = dBins+1;
+		binWidth = 1; // integer image bin width;
+		}
+	else if (thisMediaType === 'audio') // float audio values
+		{
+		dBins = Math.floor(Math.sqrt(totalN));
+		dlBins = dBins+1;
+		hBins = dBins+1;
+		binWidth = range / dBins; // automatically computed bin width;
+		}
+	else throw('histogramList: Undefined media type');
+
 	// Create list of bin delimiters
-	var delimitersList = Array(dlBins).fill(0);
+	delimitersList = Array(dlBins).fill(0);
 	delimitersList[0] = minval - (binWidth/2)
 	for (var i = 1; i <= dlBins; i++)
 		delimitersList[i] = delimitersList[i-1] + binWidth;
-		
+
 	// Initialize histogram array
 	var myHistogramList = Array(hBins).fill(0);
 	for (var i = 0; i < totalN; i++)
 		{
-		frac = (myData[i] - minval)/range; // 0 ≤ frac ≤ 1
-		index = Math.round(dBins*frac);
-		myHistogramList[index] += 1;
+		for (var j = 0; j < dlBins; j++)
+			if ((delimitersList[j]<=myData[i]) && (myData[i]<delimitersList[j+1]))
+				myHistogramList[j] += 1;
 		};
 	return [delimitersList, myHistogramList];
 	}
@@ -386,38 +402,29 @@ function histogramList(thisData)
 //
 // Checked Friday, 27 January 2017
 
-function gammp(a, x) 
+function gammln(xx)
 	{ // Note: no checking of variables
-	var result = [];
-	if (x < a+1) // use series approximation
+	'use strict';
+
+	var cof = [76.18009172947146, -86.50532032941677, 24.01409824083091,
+		-1.231739572450155, 0.1208650973866179e-2,-0.5395239384953e-5];
+	var x = xx;
+	var y = x;
+	var tmp = x+5.5;
+	tmp = tmp - (x+0.5)*Math.log(tmp);
+	var ser = 1.000000000190015;
+	for (var j = 0; j < cof.length; j++)
 		{
-		result = gser(a, x);
-		return result[0];
-		}
-	else // use continued fraction representation
-		{
-		result = gcf(a, x);
-		return 1-result[0]; // and take complement
+		++y;
+		ser += (cof[j]/y);
 		};
+	return -tmp+Math.log(2.506628274631005*ser/x);
 	};
-	
-function gammq(a, x) 
-	{ // Note: no checking of variables
-	var result = [];
-	if (x < a+1) // use series approximation
-		{
-		result = gser(a, x);
-		return 1-result[0];
-		}
-	else // use continued fraction representation
-		{
-		result = gcf(a, x);
-		return result[0]; // and take complement
-		};
-	};
-	
+
 function gser(a,x)
 	{ // Note: no checking of variables
+	'use strict';
+
 	var gamser = 0;
 	var gln = gammln(a);
 	var ap = a;
@@ -439,6 +446,8 @@ function gser(a,x)
 
 function gcf(a,x)
 	{ // Note: no checking of variables
+	'use strict';
+
 	var gln = gammln(a);
 	var b = x+1-a;
 	var c = 1/fPMIN;
@@ -465,23 +474,40 @@ function gcf(a,x)
 	
 	};
 
-function gammln(xx)
+function gammp(a, x) 
 	{ // Note: no checking of variables
-	var cof = [76.18009172947146, -86.50532032941677, 24.01409824083091,
-		-1.231739572450155, 0.1208650973866179e-2,-0.5395239384953e-5];
-	var x = xx;
-	var y = x;
-	var tmp = x+5.5;
-	tmp = tmp - (x+0.5)*Math.log(tmp);
-	var ser = 1.000000000190015;
-	for (var j = 0; j < cof.length; j++)
+	'use strict';
+
+	var result = [];
+	if (x < a+1) // use series approximation
 		{
-		++y;
-		ser += (cof[j]/y);
+		result = gser(a, x);
+		return result[0];
+		}
+	else // use continued fraction representation
+		{
+		result = gcf(a, x);
+		return 1-result[0]; // and take complement
 		};
-	return -tmp+Math.log(2.506628274631005*ser/x);
 	};
-	
+
+function gammq(a, x) 
+	{ // Note: no checking of variables
+	'use strict';
+
+	var result = [];
+	if (x < a+1) // use series approximation
+		{
+		result = gser(a, x);
+		return 1-result[0];
+		}
+	else // use continued fraction representation
+		{
+		result = gcf(a, x);
+		return result[0]; // and take complement
+		};
+	};
+
 // ****************************************************************
 // Here begin the various density functions currently supported in this test
 function gaussDensity(mu,sigma,totalN,delimiters)
@@ -550,6 +576,37 @@ function laplaceDensity(mid,b,totalN,delimiters)
 	return cells;
 	};
 
+function laplaceDensityDiff(mid,stdL,totalN,delimiters)
+	{
+	'use strict';
+
+	// the expected histogram cells to be returned
+	var bins = delimiters.length - 1;
+	var cells = Array(bins).fill(0);
+	
+	let beta = stdL/2;
+	let prob = 0;
+	let normalize = 0;
+	for (var i = 0; i < bins; i++)
+		{
+		// probability of each bin
+		prob = cdfLaplaceDiff(delimiters[i+1],mid,beta) - 
+			cdfLaplaceDiff(delimiters[i],mid,beta);
+		normalize += prob;
+		cells[i] = prob;
+		};
+		
+	// correct for the use of a limited number of bins
+	var bconst = totalN / normalize;
+	let tTotal = 0;
+	for (var i = 0; i < bins; i++)
+		{
+		cells[i] *= bconst;
+		tTotal += cells[i];
+		};
+	return cells;
+	};
+
 function uniformDensity(left,right,totalN,delimiters)
 	{
 	'use strict';
@@ -562,6 +619,44 @@ function uniformDensity(left,right,totalN,delimiters)
 	for (var i = 0; i < bins; i++)
 		{
 		cells[i] = expect;
+		};
+	return cells;
+	};
+
+function skellamDensity(m1,m2,totalN,delimiters)
+	{
+	'use strict';
+
+	// See https://en.wikipedia.org/wiki/Skellam_distribution
+	// Skellam does not need these:
+	// 	delimiters[0] = -Infinity;
+	// 	delimiters[delimiters.length - 1] = Infinity;
+
+	// the expected histogram cells to be returned
+	var bins = delimiters.length - 1;
+	var cells = Array(bins).fill(0);
+	
+	var prob = 0;
+	var normalize = 0;
+	let k = 0;
+	let b = 0;
+	for (var i = 0; i < bins; i++)
+		{
+		// probability of each bin
+		k = Math.round((delimiters[i+1]+delimiters[i])/2);
+		b = bessI(Math.abs(k),2*Math.sqrt(m1*m2));
+		prob = Math.exp(-(m1+m2))*((m1/m2)**(k/2))*b;
+		normalize += prob;
+		cells[i] = prob;
+		};
+		
+	// correct for the use of a limited number of bins
+	var bconst = totalN / normalize;
+	let tTotal = 0;
+	for (var i = 0; i < bins; i++)
+		{
+		cells[i] *= bconst;
+		tTotal += cells[i];
 		};
 	return cells;
 	};
@@ -609,8 +704,10 @@ function chiSquaredGoodnessOfFit(data, distributionType)
 	// See <https://en.wikipedia.org/wiki/Laplace_distribution#Parameter_estimation>
 		case "Laplace":
 			{
-			hypothesizedN = laplaceDensity(middle,inputWidth,totalN,delimiters);
-			nParams = 2; // middle & width
+// 			hypothesizedN = laplaceDensity(middle,inputWidth,totalN,delimiters);
+// 			nParams = 2; // middle & width
+			hypothesizedN = laplaceDensityDiff(mu1-mu2,std,totalN,delimiters);
+			nParams = 2; // standard deviation
 			break;
 			}
 	
@@ -621,12 +718,19 @@ function chiSquaredGoodnessOfFit(data, distributionType)
 			break;
 			}
 	
-		default: throw("Non-existent probability choice");
+		case "Skellam":
+			{
+			hypothesizedN = skellamDensity(mu1,mu2,totalN,delimiters);
+			nParams = 2; // mu1 & mu2
+			break;
+			}
+	
+		default: throw("chiSquaredGoodnessOfFit: Non-existent probability choice");
 		};
 
 	var observed = histoResults[1].slice(); // binned histogram
 	var expected = hypothesizedN.slice(); // same length as observed
-	
+
 	// Working backward and forwards through the hypothesized (expected)
 	// frequencies, collapse bins if less than three observations are expected
 	// for a bin. This transformation is applied to the observed frequencies
@@ -676,7 +780,7 @@ function chiSquaredGoodnessOfFit(data, distributionType)
 		o = observed[i];
 		e = expected[i];
 		q = o-e;
-		chiSquared += (q*q)/e;
+		chiSquared += ((q*q)/e);
 		sumO += o;
 		sumE += e;
 		};
@@ -699,24 +803,10 @@ function chiSquaredGoodnessOfFit(data, distributionType)
 //
 // Checked Tuesday, 28 February 2017
 
-function betai(a, b, x) 
-	{
-	if ( (x < 0.0) || (x > 1) ) throw("routine betai: bad x");
-	var bt = 0.0;
-	if ( (x == 0.0) || (x == 1.0) )
-		bt = 0.0;
-	else
-		bt = Math.exp(gammln(a+b) - gammln(a) - gammln(b) +
-		 a*Math.log(x) + b*Math.log(1-x));
-	if ( x < (a+1)/(a+b+2) )
-		return bt*betacf(a,b,x)/a; // direct use of continued fraction exp.
-	else
-		return 1-bt*betacf(b,a,1-x)/b; // symmetry xform then continued fraction exp.
-	};
-	
-	
 function betacf(a, b, x)
 	{ // Note: no checking of variables
+	'use strict';
+
 	var qab = a+b;
 	var qap = a+1;
 	var qam = a-1;
@@ -754,11 +844,28 @@ function betacf(a, b, x)
 	return h;
 	};
 
+function betai(a, b, x) 
+	{
+	'use strict';
+
+	if ( (x < 0.0) || (x > 1) ) throw("routine betai: bad x");
+	var bt = 0.0;
+	if ( (x == 0.0) || (x == 1.0) )
+		bt = 0.0;
+	else
+		bt = Math.exp(gammln(a+b) - gammln(a) - gammln(b) +
+		 a*Math.log(x) + b*Math.log(1-x));
+	if ( x < (a+1)/(a+b+2) )
+		return bt*betacf(a,b,x)/a; // direct use of continued fraction exp.
+	else
+		return 1-bt*betacf(b,a,1-x)/b; // symmetry xform then continued fraction exp.
+	};
 
 // ****************************************************************
 function tTest(data, mu)
 	{
 	'use strict';
+
 	// Estimate mean & standard deviation from the sample data
 	var avg = mean(data)[0]; // ML estimate of average
 	var std = stdev(data)[0]; // ML estimate of standard deviation
@@ -791,6 +898,7 @@ function tTest(data, mu)
 function signTest(data, med)
 	{
 	'use strict';
+
 	// Estimate mean & standard deviation from the sample data
 	var middle = median(data)[0]; // ML estimate of average
 	var n = data.length/2; // number of samples
@@ -830,11 +938,15 @@ function signTest(data, med)
 
 function cdfGauss(x, mean, std)
 	{
+	'use strict';
+
 	return 0.5 * (1 + erf((x - mean) / (std*Math.SQRT2)));
 	};
 
 function erf(x)
 	{
+	'use strict';
+
 	// save the sign of x
 	var sign = (x >= 0) ? 1 : -1;
 	x = Math.abs(x);
@@ -855,6 +967,8 @@ function erf(x)
 	
 function cdfLaplace(x, m, b)
 	{
+	'use strict';
+
 	if (x == m)
 		y = 1/2;
 	else if (x < m)
@@ -864,16 +978,34 @@ function cdfLaplace(x, m, b)
 	return y;
 	};
 
+function cdfLaplaceDiff(x, mid, b)
+	{
+	'use strict';
+
+	// mid is NOT used because under the null hypothesis mid = 0
+	// see my Mathematica computation LaplaceVariates.nb and result Integrate[Y2]
+	let ans = null;
+	if (x <= 0)
+		ans = -(x - 2*b)*Math.exp(x/b)/(4*b)
+	else
+		ans = 1 - (x + 2*b)*Math.exp(-x/b)/(4*b);
+	return ans;
+	};
+
 function cdfUniform(x, lower, upper)
 	{
+	'use strict';
+
 	return (x-lower)/(upper - lower);
 	};
 
 // ****************************************************************
 function probks(alam)
 	{
-	var ePS1 = 0.001;
-	var ePS2 = 1e-8;
+	'use strict';
+
+	const ePS1 = 0.001;
+	const ePS2 = 1e-8;
 	var iter = 100;
 	
 	var fac = 2.0;
@@ -907,6 +1039,8 @@ function probks(alam)
 
 function ksone(data, distributionType)
 	{
+	'use strict';
+
 	var fo = 0.0;
 	var ff = 0.0;
 	var fn = 0.0;
@@ -959,6 +1093,8 @@ function ksone(data, distributionType)
 // ****************************************************************
 function ks2GoodnessOfFit(data1, distributionType)
 	{
+	'use strict';
+
 	var fo = 0.0;
 	var ff = 0.0;
 	var fn = 0.0;

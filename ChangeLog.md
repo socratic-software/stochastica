@@ -2,6 +2,17 @@
 
 All notable changes to **<font color="steelblue">StochasticA</font>** will be documented in this file.
 
+## [2.4.0] - 2021-06-11
+
+### Changed
+
+- Where appropriate, length of audio signals changed to 2^N (e.g. N=16 or 17) so that processing speed is improved. This is important for slower platforms.
+
+### Updated
+
+- Maintenance, formatting, and cosmetic improvements.
+- README file.
+
 ## [2.3.6] - 2021-05-17
 
 ### Added

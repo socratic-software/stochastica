@@ -44,9 +44,9 @@ function executeLab_6_7c( )
 		freqTicks[i] = Math.floor(i*newSamples/(nLabels-1));
 		if (i == (nLabels-1)) freqTicks[i] = newSamples-1;
 		
-		if (i < (nLabels-1)/2)
+		if (i < (nLabels-1)>>1)
 			freqLabels[i] = evenQ(i) ? negPiSymbol : negPiSymbol+'/'+(2*scaleLabel)
-		else if (i == (nLabels-1)/2)
+		else if (i == (nLabels-1)>>1)
 			freqLabels[i] = 0
 		else
 			freqLabels[i] = evenQ(i) ? posPiSymbol : posPiSymbol+'/'+(2*scaleLabel)
@@ -54,8 +54,8 @@ function executeLab_6_7c( )
 		
 	// raw data: signal & amplitude histogram
 	
-	rstg.x = binning(xDataCT,binningFactor);
-	rstg.y = binning(yData,binningFactor);
+	rstg.x = binning(xDataCT,altBinningFactor);
+	rstg.y = binning(yData,altBinningFactor);
 	
 	rstl.title = 'Uniform noise';
 	rstl.annotations[0].text = 't [ms]';
@@ -71,7 +71,7 @@ function executeLab_6_7c( )
 
 	// filtered data: signal & amplitude histogram
 	fstg.x = rstg.x;
-	fstg.y = binning(yfData,binningFactor);
+	fstg.y = binning(yfData,altBinningFactor);
 
 	fstl.title = 'Filtered uniform noise';
 	fstl.annotations[0].text = 't [ms]';
@@ -90,25 +90,25 @@ function executeLab_6_7c( )
 	// to be used below when switching dispState
 	// raw & filtered data, corr. function, power spectral densities & filter
 	
-	var rotSamples = Math.floor(autoCorrData.length/2);
+	var rotSamples = autoCorrData.length >> 1;
 
 	// these "symmetrics" require binning because they are ANALOG
-	rctg.y = rotateRight(binning(autoCorrData,binningFactor),binningFactor/2);
-	rctg.x = binning(tauCT,binningFactor);
+	rctg.y = rotateRight(binning(autoCorrData,altBinningFactor),altBinningFactor>>1);
+	rctg.x = binning(tauCT,altBinningFactor);
 	
 	rctl.title = 'Normalized 𝜑<sub>uu</sub>(\u03C4 = kT)';
 	rctl.annotations[0].text = tau+' [ms]';
 	autoCorrData = rotateRight(autoCorrData,rotSamples);
 
-	fctg.y = rotateRight(binning(autoFiltCorrData,binningFactor),binningFactor/2);
+	fctg.y = rotateRight(binning(autoFiltCorrData,altBinningFactor),altBinningFactor>>1);
 	fctg.x = rctg.x;
 	
 	fctl.title = 'Normalized 𝜑<sub>FF</sub>(\u03C4 = kT)';
 	fctl.annotations[0].text = rctl.annotations[0].text;
 	autoFiltCorrData = rotateRight(autoFiltCorrData,rotSamples);
 
-	rpg.y = rotateRight(binning(rpsd,binningFactor),binningFactor/2);
-	rpg.x = binning(xDataDT,binningFactor);
+	rpg.y = rotateRight(binning(rpsd,altBinningFactor),altBinningFactor>>1);
+	rpg.x = binning(xDataDT,altBinningFactor);
 	rpl.title = 'log<sub>10</sub> S<sub>uu</sub>(Ω)';
 	freqTicks[nLabels-1] = rpg.x[rpg.x.length-1];
 	rpl.xaxis4.tickvals = freqTicks;
@@ -116,7 +116,7 @@ function executeLab_6_7c( )
 	rpl.annotations[0].text = Omega;
 	rpsd = rotateRight(rpsd,rotSamples);
 
-	fpg.y = rotateRight(binning(origFilter,binningFactor),binningFactor/2);
+	fpg.y = rotateRight(binning(origFilter,altBinningFactor),altBinningFactor>>1);
 	fpg.x = rpg.x;
 	fpl.title = 'log<sub>10</sub> S<sub>FF</sub>(Ω)/S<sub>uu</sub>(Ω)';
 	fpl.xaxis4.tickvals = rpl.xaxis4.tickvals;

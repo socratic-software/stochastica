@@ -265,12 +265,11 @@ const standardBlackBorder = "1px solid black";
 const imgBorder = "1px solid maroon";
 
 // plotly
-var r = 1; // rescale with a little more empty space
-var baseSizeW1 = r*availableWidth; // one item per row
-var baseSizeW2 = r*availableWidth/2; // two items per row
-var baseSizeW3 = r*availableWidth/3; // three items per row
-var baseSizeW4 = r*availableWidth/4; // four items per row
-var graphWidth = [baseSizeW1, baseSizeW2, baseSizeW3, baseSizeW4]; // graphs or images
+var baseSizeW1 = availableWidth; // one item per row
+var baseSizeW2 = availableWidth/2; // two items per row
+var baseSizeW3 = availableWidth/3; // three items per row
+var baseSizeW4 = availableWidth/4; // four items per row
+var graphWidth = [baseSizeW1, baseSizeW2, baseSizeW3, baseSizeW4];
 
 var baseSizeH1 = 0.75*baseSizeW1; // one item per row
 var baseSizeH2 = baseSizeH1/2; // two items per row
@@ -331,7 +330,7 @@ var zeroline = 1;
 var zeroLineThick = 1;
 var scatterMarkerSize = 7;
 var signalLineColor = bottomCurve;
-var histoColor = 'rgb(0, 153, 153, 1)';
+var histoColor = 'rgba(0, 153, 153, 1)';
 var thinHistoBar = 1;
 var thickHistoBar = 4;
 var spectLineColor = 'DarkGreen';
@@ -503,6 +502,7 @@ function flipImage(array, direction)
 //
 var annotateTemplate =
 	{
+		visible: true,
 		xref: 'paper',
 		yref: 'paper',
 		x: 0.5,
@@ -1172,7 +1172,7 @@ var ImagePlot =
 	marker: {
 		symbol: 'circle',
 		size: 9*DTmarkerSize,
-		color: 'rgba(70, 130, 180,0.75)'
+		color: 'rgba(70, 130, 180, 0.75)'
 		},
 	xaxis: 'x7',
 	yaxis: 'y7',
@@ -1617,13 +1617,14 @@ var layoutData =
 
 var overkill = 2**3; // power of two ≥ 4
 var binningFactor = overkill*layoutCT.width;
+var altBinningFactor = 2**12;
 
 function binning(data,targetLength)
 	{
 	let step = Math.floor(data.length/targetLength);
 	if (step > 1)
 		{
-		let result = createArray(targetLength);
+		let result = Array(targetLength).fill(0);
 		for (var i = 0; i < targetLength; i++ )
 			result[i] = data[step*i]; // sampling step
 		return result;

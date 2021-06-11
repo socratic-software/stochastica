@@ -34,13 +34,13 @@ function executeLab_6_4c( )
 		{
 		freqTicks[i] = Math.floor(i*newSamples/(nLabels-1));
 		if (i == (nLabels-1)) freqTicks[i] = newSamples-1;
-		freqLabels[i] = d1round(sampFreq*(i - ((nLabels-1)/2))/4000);
+		freqLabels[i] = d1round(sampFreq*(i - ((nLabels-1)>>1))/4000);
 		};
 		
 	// raw data: signal & amplitude histogram
 	
-	rstg.x = binning(xDataCT,binningFactor);
-	rstg.y = binning(yData,binningFactor);
+	rstg.x = binning(xDataCT,altBinningFactor);
+	rstg.y = binning(yData,altBinningFactor);
 	
 	rstl.title = 'Exponential noise';
 	rstl.annotations[0].text = 't [ms]';
@@ -56,7 +56,7 @@ function executeLab_6_4c( )
 
 	// filtered data: signal & amplitude histogram
 	fstg.x = rstg.x;
-	fstg.y = binning(yfData,binningFactor);
+	fstg.y = binning(yfData,altBinningFactor);
 
 	fstl.title = 'Filtered exponential noise';
 	fstl.annotations[0].text = 't [ms]';
@@ -75,25 +75,25 @@ function executeLab_6_4c( )
 	// to be used below when switching dispState
 	// raw & filtered data, corr. function, power spectral densities & filter
 	
-	var rotSamples = Math.floor(autoCorrData.length/2);
+	var rotSamples = autoCorrData.length >> 1;
 
 	// these "symmetrics" require binning because they are ANALOG
-	rctg.y = rotateRight(binning(autoCorrData,binningFactor),binningFactor/2);
-	rctg.x = binning(tauCT,binningFactor);
+	rctg.y = rotateRight(binning(autoCorrData,altBinningFactor),altBinningFactor>>1);
+	rctg.x = binning(tauCT,altBinningFactor);
 	
 	rctl.title = 'Normalized 𝜑<sub>ee</sub>(\u03C4 = kT)';
 	rctl.annotations[0].text = tau+' [ms]';
 	autoCorrData = rotateRight(autoCorrData,rotSamples);
 
-	fctg.y = rotateRight(binning(autoFiltCorrData,binningFactor),binningFactor/2);
+	fctg.y = rotateRight(binning(autoFiltCorrData,altBinningFactor),altBinningFactor>>1);
 	fctg.x = rctg.x;
 	
 	fctl.title = 'Normalized 𝜑<sub>FF</sub>(\u03C4 = kT)';
 	fctl.annotations[0].text = rctl.annotations[0].text;
 	autoFiltCorrData = rotateRight(autoFiltCorrData,rotSamples);
 
-	rpg.y = rotateRight(binning(rpsd,binningFactor),binningFactor/2);
-	rpg.x = binning(xDataDT,binningFactor);
+	rpg.y = rotateRight(binning(rpsd,altBinningFactor),altBinningFactor>>1);
+	rpg.x = binning(xDataDT,altBinningFactor);
 	rpl.title = 'log<sub>10</sub> S<sub>ee</sub>(2\u03C0f)';
 	freqTicks[nLabels-1] = rpg.x[rpg.x.length-1];
 	rpl.xaxis4.tickvals = freqTicks;
@@ -101,7 +101,7 @@ function executeLab_6_4c( )
 	rpl.annotations[0].text = 'f  [kHz]';
 	rpsd = rotateRight(rpsd,rotSamples);
 
-	fpg.y = rotateRight(binning(fpsd,binningFactor),binningFactor/2);
+	fpg.y = rotateRight(binning(fpsd,altBinningFactor),altBinningFactor>>1);
 	fpg.x = rpg.x;
 	fpl.title = 'log<sub>10</sub> S<sub>FF</sub>(2\u03C0f)';
 	fpl.xaxis4.tickvals = rpl.xaxis4.tickvals;

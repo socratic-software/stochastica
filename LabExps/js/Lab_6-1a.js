@@ -18,7 +18,7 @@ var autoCorrData = [];
 var rpsd = [];
 var nbins = 1;
 
-var lengthMax = 2**Math.floor(Math.log2(100000/binningFactor))*binningFactor;
+var lengthMax = 2**(factor2-1);
 var startSample = 0;
 var stopSample = lengthMax;
 var middleSample = (stopSample+startSample) >> 1;
@@ -191,8 +191,8 @@ function getData(target)
 function myFunctionZoom(val)
 	{
 	thisZoom = val;
-	power = Math.pow(2,thisZoom);
-	newSamples = Math.floor(lengthMax/power);
+	power = 2**thisZoom;
+	newSamples = lengthMax >> thisZoom;
 	if (oddQ(newSamples)) newSamples--; // make it even
 	sentence1 = "N = "+newSamples+" samples";
 	document.querySelector('#placeN1').value = "N = "+newSamples+" samples";
@@ -231,8 +231,8 @@ function myFunctionZoom(val)
 		tauDTnew[i] = tauDT[i+startSample];
 		};
 
-	rstg.x = binning(xCDataNew,binningFactor);
-	rstg.y = binning(yDataNew,binningFactor);
+	rstg.x = binning(xCDataNew,altBinningFactor);
+	rstg.y = binning(yDataNew,altBinningFactor);
 
 	rsdg.x = xDDataNew;
 	rsdg.y = yDataNew;
@@ -240,8 +240,8 @@ function myFunctionZoom(val)
 	rsdg.error_y.array = zeroesNew;
 	rsdg.error_y.arrayminus = yDataNew;
 	
-	rctg.x = binning(tauCTnew,binningFactor);
-	rctg.y = binning(zAuCoDN,binningFactor);
+	rctg.x = binning(tauCTnew,altBinningFactor);
+	rctg.y = binning(zAuCoDN,altBinningFactor);
 
 	rcdg.x = tauDTnew;
 	rcdg.y = zAuCoDN;
@@ -281,7 +281,7 @@ function myFunctionZoom(val)
 
 	// adjust freqTicks & freqLabels
 	scaleLabel = power;
-	rpg.x = binning(xDDataNew,binningFactor);
+	rpg.x = binning(xDDataNew,altBinningFactor);
 	let rpgLength = rpg.x.length;
 	
 	for (var i = 0; i < nLabels; i++)
@@ -290,12 +290,12 @@ function myFunctionZoom(val)
 		freqTicksNew[i] = rpg.x[Math.floor(i*rpgLength/(nLabels-1))];
 		if (i == (nLabels-1)) freqTicksNew[i] = rpg.x[rpgLength-1];
 
-		if (i < (nLabels-1)/2)
+		if (i < (nLabels-1)>>1)
 			{
 			freqLabels[i] = negPiSymbol + '/'+(scaleLabel)
 			if (oddQ(i)) freqLabels[i] = negPiSymbol + '/'+(2*scaleLabel)
 			}
-		else if (i == (nLabels-1)/2)
+		else if (i == (nLabels-1)>>1)
 			freqLabels[i] = 0
 		else
 			{
@@ -309,7 +309,7 @@ function myFunctionZoom(val)
 		freqLabels[nLabels-1] = posPiSymbol;
 		};
 
-	rpg.y = ampNormalizeReal(binning(zRpsdN,binningFactor));
+	rpg.y = ampNormalizeReal(binning(zRpsdN,altBinningFactor));
 	rpl.xaxis4.tickvals = freqTicksNew;
 	rpl.xaxis4.ticktext = freqLabels;
 
@@ -339,11 +339,17 @@ function myFunctionZoom(val)
 //
 function prepareLab_6_1( )
 	{
+	deltaN = 0; // change in number of samples (zoom)
+	power = 0;
+	autoCorrData = [];
+	rpsd = [];
+	nbins = 1;
+
+	lengthMax = 2**(factor2-1);
+	newSamples = lengthMax;
 	startSample = 0;
 	stopSample = lengthMax;
 	middleSample = (stopSample+startSample) >> 1;
-	deltaN = 0; // change in number of samples (zoom)
-	power = 0;
 
 	audioNum = 0;
 	thisDuration = 1000*lengthMax/sampFreq; // defined in SSPmedia.js
@@ -382,9 +388,9 @@ function prepareLab_6_1( )
 		freqTicks[i] = Math.floor(i*newSamples/(nLabels-1));
 		if (i == (nLabels-1)) freqTicks[i] = newSamples-1;
 		
-		if (i < (nLabels-1)/2)
+		if (i < (nLabels-1)>>1)
 			freqLabels[i] = evenQ(i) ? negPiSymbol : negPiSymbol+'/'+scaleLabel
-		else if (i == (nLabels-1)/2)
+		else if (i == (nLabels-1)>>1)
 			freqLabels[i] = 0
 		else
 			freqLabels[i] = evenQ(i) ? posPiSymbol : posPiSymbol+'/'+scaleLabel
@@ -400,8 +406,8 @@ function prepareLab_6_1( )
 //
 	// raw data: signal & amplitude histogram
 	
-	rstg.x = binning(xDataCT,binningFactor);
-	rstg.y = binning(yData,binningFactor);
+	rstg.x = binning(xDataCT,altBinningFactor);
+	rstg.y = binning(yData,altBinningFactor);
 	rstl.annotations[0].text = 't [ms]';
 
 	rhg.x = yData;
@@ -412,17 +418,17 @@ function prepareLab_6_1( )
 	
 	// raw & filtered data, corr. function, power spectral densities & filter
 	
-	var rotSamples = Math.floor(autoCorrData.length/2);
+	var rotSamples = autoCorrData.length >> 1;
 
 	// these "symmetrics" require binning because they are ANALOG
-	rctg.y = rotateRight(binning(autoCorrData,binningFactor),binningFactor/2);
-	rctg.x = binning(tauCT,binningFactor);
+	rctg.y = rotateRight(binning(autoCorrData,altBinningFactor),altBinningFactor >> 1);
+	rctg.x = binning(tauCT,altBinningFactor);
 	rctl.title = '';
 	rctl.annotations[0].text = tau+' [ms]';
 	autoCorrData = rotateRight(autoCorrData,rotSamples);
 
-	rpg.y = rotateRight(binning(rpsd,binningFactor),binningFactor/2);
-	rpg.x = binning(xDataDT,binningFactor);
+	rpg.y = rotateRight(binning(rpsd,altBinningFactor),altBinningFactor>>1);
+	rpg.x = binning(xDataDT,altBinningFactor);
 	rpl.title = '';
 	freqTicks[nLabels-1] = rpg.x[rpg.x.length-1];
 	rpl.xaxis4.tickvals = freqTicks;
