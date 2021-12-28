@@ -12,7 +12,14 @@
 		<a href="https://apps.apple.com/us/app/stochastic-signal-processing/id1450268179">
 		<img src="images/StochasticS.png" height="30%" style="margin-bottom:15px;">
 		<br><span style="font-family:Arial, Helvetica, sans-serif; font-size:80%;">
-		StochasticS<br>58 Laboratory Experiments</span></a></td>
+		StochasticS (iOS)<br>59 Laboratory Experiments</span></a></td>
+		<td>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+		<td style="text-align:center; padding:10px 20px;
+			border:2px steelblue solid; border-radius:25px;">
+		<a href="https://play.google.com/store/apps/details?id=org.SocraticSoftware.iSSP">
+		<img src="images/StochasticS.png" height="30%" style="margin-bottom:15px;">
+		<br><span style="font-family:Arial, Helvetica, sans-serif; font-size:80%;">
+		StochasticS (Android)<br>59 Laboratory Experiments</span></a></td>
 	</tr>
 </table>
 
@@ -53,4 +60,4 @@ Our *Privacy Policy* can be found [here](https://sites.google.com/socraticsoftwa
 1. Information
 
 
-*Last revision this document: 11 June 2021*
+*Last revision this document: 28 December 2021*

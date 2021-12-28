@@ -1,7 +1,7 @@
 "use strict"
 
 // ****************************************************************
-// Copyright I.T. Young & R. Ligteringen, 1984, 2010–2020
+// Copyright I.T. Young & R. Ligteringen, 1984, 2010–2022
 // Licensed under the MIT license.
 // ****************************************************************
 // These procedures / subroutines / functions are used by the iSSP textbook

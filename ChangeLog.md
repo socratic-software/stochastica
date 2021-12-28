@@ -2,6 +2,21 @@
 
 All notable changes to **<font color="steelblue">StochasticA</font>** will be documented in this file.
 
+## [2.4.1] - 2021-12-28
+
+### Added
+
+- Alerts in various Laboratory Exercises when computational overflows or underflows occur.
+
+### Updated
+
+- Maintenance, formatting, and cosmetic improvements.
+- README file.
+
+### Fixed
+
+- A small bug in 1-D Fourier calculations when data length is not a power of two..
+
 ## [2.4.0] - 2021-06-11
 
 ### Changed

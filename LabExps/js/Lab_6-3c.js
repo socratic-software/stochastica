@@ -1,5 +1,5 @@
 // ****************************************************************
-// Copyright I.T. Young & R. Ligteringen, 1984, 2010–2020
+// Copyright I.T. Young & R. Ligteringen, 1984, 2010–2022
 // Licensed under the MIT license.
 // Laboratory experiment 6.3c
 // i.t. young
@@ -96,8 +96,8 @@ var rsdl = cloneObj(layoutDT);
 	rsdl.font.size = rstl.font.size;
 	rsdl.margin.t = rstl.margin.t;
 	rsdl.margin.l = rstl.margin.l;
-	rsdl.title = '';
 	rsdl.margin.r = rstl.margin.r;
+	rsdl.title = '';
 var rcdl = cloneObj(rsdl);
 	rsdl.yaxis2.ticks = false;
 	rsdl.yaxis2.showticklabels = false;
@@ -545,13 +545,13 @@ function prepareLab_6_3c(choice)
 	var rotSamples = autoCorrData.length >> 1;
 
 	// these "symmetrics" require binning because they are ANALOG
-	rctg.y = rotateRight(binning(autoCorrData,altBinningFactor),altBinningFactor>>1);
+	rctg.y = rotateRight(binning(autoCorrData,altBinningFactor),altBinningFactor >> 1);
 	rctg.x = binning(tauCT,altBinningFactor);
 	rctl.title = '';
 	rctl.annotations[0].text = tau+' [ms]';
 	autoCorrData = rotateRight(autoCorrData,rotSamples);
 
-	rpg.y = rotateRight(binning(rpsd,altBinningFactor),altBinningFactor>>1);
+	rpg.y = rotateRight(binning(rpsd,altBinningFactor),altBinningFactor >> 1);
 	rpg.x = binning(xDataDT,altBinningFactor);
 	rpl.title = '';
 	freqTicks[nLabels-1] = rpg.x[rpg.x.length-1];

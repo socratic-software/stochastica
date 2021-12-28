@@ -1,5 +1,5 @@
 // ****************************************************************
-// Copyright I.T. Young & R. Ligteringen, 1984, 2010–2020
+// Copyright I.T. Young & R. Ligteringen, 1984, 2010–2022
 // Licensed under the MIT license.
 // ****************************************************************
 // This look-up table (CLUT) is based on the Mathematica look-up

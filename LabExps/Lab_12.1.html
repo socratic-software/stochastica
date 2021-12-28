@@ -20,7 +20,7 @@
 			 maximum-scale=1,
 			 minimum-scale=1,
 			 width=device-width">
-		<meta name="copyright" content="I.T. Young & R. Ligteringen, 1984, 2010–2020">
+		<meta name="copyright" content="I.T. Young & R. Ligteringen, 1984, 2010–2022">
 		
 		<link rel="stylesheet" type="text/css" href="../css/myHTML_1.css" media="screen" />
 		<link rel='stylesheet' type='text/css' href='../css/myControls.css' media='screen' />
@@ -155,8 +155,8 @@
 			<tr>
 				<td style="text-align:right;">Zoom:</td>
 				<td><input
-						type='range'
-						oninput="sliderChoices(this.value, 'Z')"
+						type="range"
+						onchange="sliderChoices(this.value, 'Z')"
 						min='0'
 						max='4'
 						step='1'
@@ -165,8 +165,8 @@
 				</td>
 				<td style="text-align:right;">f<sub>0</sub>:</td>
 				<td><input
-						type='range'
-						oninput="sliderChoices(this.value, 'F')"
+						type="range"
+						onchange="sliderChoices(this.value, 'F')"
 						min='0'
 						max='21'
 						value='0'
@@ -183,8 +183,8 @@
 			<tr>
 				<td style="text-align:right;">Pan:</td>
 				<td><input
-						type='range'
-						oninput="sliderChoices(this.value, 'Pa')"
+						type="range"
+						onchange="sliderChoices(this.value, 'Pa')"
 						min='0'
 						max='900'
 						step='30'
@@ -193,8 +193,8 @@
 				</td>
 				<td style="text-align:right;">&phi;:</td>
 				<td><input
-						type='range'
-						oninput="sliderChoices(this.value, 'Ph')"
+						type="range"
+						onchange="sliderChoices(this.value, 'Ph')"
 						min='0'
 						max='355'
 						step='5'

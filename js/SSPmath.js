@@ -1,5 +1,5 @@
 // ****************************************************************
-// Copyright I.T. Young & R. Ligteringen, 1984, 2010–2020
+// Copyright I.T. Young & R. Ligteringen, 1984, 2010–2022
 // Licensed under the MIT license.
 // ****************************************************************
 // Math, array, and signal processing procedures to be used in the SSP package

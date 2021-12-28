@@ -1,6 +1,6 @@
 // ****************************************************************
 // Copyright(c) 2013 Tom Alexander
-// Modifications Copyright I.T. Young & R. Ligteringen, 2020
+// Modifications Copyright I.T. Young & R. Ligteringen, 2020-2022
 // Licensed under the MIT license.
 // ****************************************************************
 // @license*

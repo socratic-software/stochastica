@@ -13,7 +13,7 @@
 
 		<meta charset='UTF-8'>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="copyright" content="I.T. Young & R. Ligteringen, 1984, 2010–2020">
+		<meta name="copyright" content="I.T. Young & R. Ligteringen, 1984, 2010–2022">
 		
 		<link rel="stylesheet" type="text/css" href="../css/myHTML_1.css" media="screen" />
 		<link rel='stylesheet' type='text/css' href='../css/myControls.css' media='screen' />
@@ -86,7 +86,7 @@
 				<td>p(H):</td>
 				<td><input
 						type="range"
-						oninput="flipCoins(this.value, 'prob')"
+						onchange="flipCoins(this.value, 'prob')"
 						min="0.0"
 						max="1.0"
 						step="0.05"
@@ -99,7 +99,7 @@
 				<td>coin flips:</td>
 				<td><input
 						type="range"
-						oninput="flipCoins(this.value, 'N')"
+						onchange="flipCoins(this.value, 'N')"
 						min="1"
 						max="81"
 						step="1"

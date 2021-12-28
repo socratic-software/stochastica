@@ -1,5 +1,5 @@
 // ****************************************************************
-// Copyright I.T. Young & R. Ligteringen, 1984, 2010–2020
+// Copyright I.T. Young & R. Ligteringen, 1984, 2010–2022
 // Licensed under the MIT license.
 // ****************************************************************
 // Fourier processing procedures to be used in the SSP package
@@ -99,11 +99,11 @@ function phaseOnlySignal(data)
 
 		var n = real.length;
 		if (n == 0)
-			return;
-		else if ((n & (n - 1)) == 0)  // Is power of 2
-			transformRadix2(real, imag);
-		else  // More complicated algorithm for arbitrary sizes
-			transformBluestein(real, imag);
+			return
+		else if ((n & (n - 1)) == 0) // Is power of 2
+			{ transformRadix2(real, imag) }
+		else // More complicated algorithm for arbitrary sizes
+			{ transformBluestein(real, imag) };
 	}
 
 

@@ -20,7 +20,7 @@
 			 maximum-scale=1,
 			 minimum-scale=1,
 			 width=device-width">
-		<meta name="copyright" content="I.T. Young & R. Ligteringen, 1984, 2010–2020">
+		<meta name="copyright" content="I.T. Young & R. Ligteringen, 1984, 2010–2022">
 		
 		<link rel="stylesheet" type="text/css" href="../css/myHTML_1.css" media="screen" />
 		<link rel='stylesheet' type='text/css' href='../css/myControls.css' media='screen' />
@@ -221,8 +221,8 @@
 			<tr>
 				<td style="text-align:right;">Samples:</td>
 				<td><input
-						type='range'
-						oninput="sliderChoices(this.value, 'N')"
+						type="range"
+						onchange="sliderChoices(this.value, 'N')"
 						min='0'
 						max='7'
 						step='1'
@@ -231,7 +231,7 @@
 				</td>
 				<td style="text-align:right;">SNR:</td>
 				<td><input
-						type='range'
+						type="range"
 						oninput="moveSlider(this.value)"
 						onchange="getSNR(this.value)"
 						min='0'
@@ -265,8 +265,8 @@
 			<tr>
 				<td style="text-align:right;">Zoom (t):</td>
 				<td><input
-						type='range'
-						oninput="sliderChoices(this.value, 'Zt')"
+						type="range"
+						onchange="sliderChoices(this.value, 'Zt')"
 						min='0'
 						max='5'
 						step='1'
@@ -275,8 +275,8 @@
 				</td>
 				<td style="text-align:right;">Zoom (f):</td>
 				<td><input
-						type='range'
-						oninput="sliderChoices(this.value, 'Zf')"
+						type="range"
+						onchange="sliderChoices(this.value, 'Zf')"
 						min='0'
 						max='4'
 						step='1'

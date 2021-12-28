@@ -1,5 +1,5 @@
 // ****************************************************************
-// Copyright I.T. Young & R. Ligteringen, 1984, 2010–2020
+// Copyright I.T. Young & R. Ligteringen, 1984, 2010–2022
 // Licensed under the MIT license.
 // ****************************************************************
 // Probability and statistical procedures to be used in the SSP package
@@ -441,7 +441,7 @@ function gser(a,x)
 			return [gamser, gln];
 			};
 		};
-	throw("gser: a too large, iTMAX too small");
+	alert("Computational error in gser(): Sorry, please restart this laboratory exercise");
 	};
 
 function gcf(a,x)
@@ -468,7 +468,7 @@ function gcf(a,x)
 		h *= del;
 		if (Math.abs(del-1) < ePS) break;
 		};
-	if (i > iTMAX) throw("gcf: a too large, iTMAX too small");
+	if (i > iTMAX) alert("Computational error in gcf(): Sorry, please restart this laboratory exercise");
 	var gammcf = Math.exp(-x + (a*Math.log(x)) - gln)*h;
 	return [gammcf, gln];
 	
@@ -840,7 +840,7 @@ function betacf(a, b, x)
 		if (Math.abs(del-1) < ePS) break; // are we done?
 		};
 
-	if (m > iTMAX) throw("betacf: m or b too large or iTMAX too small");
+	if (m > iTMAX) alert("Computational error in betacf(): Sorry, please restart this laboratory exercise");
 	return h;
 	};
 
@@ -848,7 +848,7 @@ function betai(a, b, x)
 	{
 	'use strict';
 
-	if ( (x < 0.0) || (x > 1) ) throw("routine betai: bad x");
+	if ( (x < 0.0) || (x > 1) ) alert("Computational error in betai(): Sorry, please restart this laboratory exercise");
 	var bt = 0.0;
 	if ( (x == 0.0) || (x == 1.0) )
 		bt = 0.0;
