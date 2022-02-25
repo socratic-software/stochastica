@@ -2,6 +2,14 @@
 
 All notable changes to **<font color="steelblue">StochasticA</font>** will be documented in this file.
 
+## [2.4.2] - 2022-02-225
+
+### Updated
+
+- The text describing the Schrödinger’s cat problem (4.2) has been improved.
+- Maintenance updates of various libraries. Nothing to see here folks.
+- README file.
+
 ## [2.4.1] - 2021-12-28
 
 ### Added
